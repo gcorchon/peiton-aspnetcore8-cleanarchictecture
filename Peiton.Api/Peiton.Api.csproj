@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>   
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Peiton.Contracts\Peiton.Contracts.csproj" />
+    <ProjectReference Include="..\Peiton.Core\Peiton.Core.csproj" />
+    <ProjectReference Include="..\Peiton.Infrastructure\Peiton.Infrastructure.csproj" />
+    <ProjectReference Include="..\Peiton.ModelBinders\Peiton.ModelBinders.csproj" />
+    <ProjectReference Include="..\Peiton.Authorization\Peiton.Authorization.csproj" />
+  </ItemGroup>
+
+</Project>

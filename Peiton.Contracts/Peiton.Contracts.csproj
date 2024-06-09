@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Peiton.ModelBinders\Peiton.ModelBinders.csproj" />
+    <ProjectReference Include="..\PeitonSerialization\Peiton.Serialization.csproj" />
+    <ProjectReference Include="..\Peiton.Authorization\Peiton.Authorization.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
