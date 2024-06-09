@@ -27,4 +27,9 @@ public class EntityService : IEntityService
     {
         return this.dbContext.FindAsync<T>([id]);
     }
+
+    public void Remove<T>(T entity) where T : class
+    {
+        this.dbContext.Remove<T>(entity);
+    }
 }

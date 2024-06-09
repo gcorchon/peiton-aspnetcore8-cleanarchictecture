@@ -32,26 +32,26 @@ namespace Peiton.Infrastructure.Repositories
 
             if (!string.IsNullOrWhiteSpace(filter.Capitulo))
             {
-                conditions.Add("capitulo like {" + paramValues.Count + "} + '%'");
-                paramValues.Add(filter.Capitulo);
+                conditions.Add("capitulo like {" + paramValues.Count + "}");
+                paramValues.Add(filter.Capitulo + "%");
             }
 
             if (!string.IsNullOrEmpty(filter.Partida))
             {
-                conditions.Add("(Pk_Partida is not null and Partida like {" + paramValues.Count + "} + '%')");
-                paramValues.Add(filter.Partida);
+                conditions.Add("(Pk_Partida is not null and Partida like {" + paramValues.Count + "})");
+                paramValues.Add(filter.Partida + "%");
             }
 
             if (!string.IsNullOrEmpty(filter.Descripcion))
             {
-                conditions.Add("Descripcion like '%' + {" + paramValues.Count + "} + '%'");
-                paramValues.Add(filter.Descripcion);
+                conditions.Add("Descripcion like {" + paramValues.Count + "}");
+                paramValues.Add("%" + filter.Descripcion + "%");
             }
 
             if (!string.IsNullOrEmpty(filter.SaldoInicial))
             {
-                conditions.Add("replace(convert(varchar, SaldoInicial, 2),'.',',') like {" + paramValues.Count + "} + '%'");
-                paramValues.Add(filter.SaldoInicial.Replace('.', ','));
+                conditions.Add("replace(convert(varchar, SaldoInicial, 2),'.',',') like {" + paramValues.Count + "}");
+                paramValues.Add(filter.SaldoInicial.Replace('.', ',') + "%");
             }
 
             var whereCondition = "";
