@@ -1,4 +1,5 @@
 using Peiton.Contracts.Asientos;
+using Peiton.Contracts.Facturas;
 using Peiton.Core.Entities;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
@@ -52,6 +53,8 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
                     {
                         throw new ArgumentException($"La factura {facturaId} no existe");
                     }
+                    factura.NumeroMovimiento = asiento.Numero.ToString();
+                    factura.FechaPago = cajaAMTA.Fecha;
                     asiento.Facturas.Add(factura);
                 }
             }
@@ -67,6 +70,8 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
                         if (!item.FacturaIds.Contains(factura.Id))
                         {
                             factura.AsientoId = null;
+                            factura.NumeroMovimiento = null;
+                            factura.FechaPago = null;
                         }
                     }
 
@@ -80,6 +85,8 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
 
                         if (factura.AsientoId != asiento.Id)
                         {
+                            factura.FechaPago = cajaAMTA.Fecha;
+                            factura.NumeroMovimiento = asiento.Numero.ToString();
                             asiento.Facturas.Add(factura);
                         }
                     }
@@ -93,7 +100,7 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
             asiento.PartidaId = item.PartidaId;
             asiento.FechaAutorizacion = item.FechaAutorizacion;
             asiento.FechaPago = cajaAMTA.Fecha;
-            asiento.Importe = multiplicador * Math.Abs(item.Importe!.Value);
+            asiento.Importe = multiplicador * Math.Abs(item.Importe);
             asiento.TipoPago = item.TipoPago;
             asiento.TipoMovimiento = item.TipoMovimiento;
             asiento.FormaPagoId = item.FormaPagoId;

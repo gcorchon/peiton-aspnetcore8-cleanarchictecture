@@ -7,7 +7,7 @@ namespace Peiton.Core.UseCases.Contabilidad.Asientos;
 
 [Injectable]
 public class CrearAsientoHandler(IAsientoRepository asientoRepository, IFacturaRepository facturaRepository, IUnityOfWork unityOfWork)
-{    
+{
     public async Task HandleAsync(AsientoSaveRequest item)
     {
         int multiplicador = item.TipoMovimiento!.Value == 1 ? -1 : 1;
@@ -19,7 +19,7 @@ public class CrearAsientoHandler(IAsientoRepository asientoRepository, IFacturaR
             PartidaId = item.PartidaId,
             FechaAutorizacion = item.FechaAutorizacion,
             FechaPago = null,
-            Importe = multiplicador * Math.Abs(item.Importe!.Value),
+            Importe = multiplicador * Math.Abs(item.Importe),
             TipoPago = item.TipoPago,
             TipoMovimiento = item.TipoMovimiento,
             FormaPagoId = item.FormaPagoId,
@@ -27,11 +27,20 @@ public class CrearAsientoHandler(IAsientoRepository asientoRepository, IFacturaR
             ClienteId = item.ClienteId
         };
 
-        foreach (int facturaId in item.FacturaIds) {
+        foreach (int facturaId in item.FacturaIds)
+        {
             var factura = await facturaRepository.GetByIdAsync(facturaId);
-            if (factura == null) {
+            if (factura == null)
+            {
                 throw new ArgumentException($"La factura {facturaId} no existe");
             }
+
+            /* 
+                No me queda claro por qué está hecho así en la versión original de Peiton, 
+                los datos se podrían sacar del asiento asociado en el caso de que existiese 
+            */
+            factura.FechaPago = null;
+            factura.NumeroMovimiento = asiento.Numero.ToString();
             asiento.Facturas.Add(factura);
         }
 

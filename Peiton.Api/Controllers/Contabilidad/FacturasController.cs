@@ -6,6 +6,9 @@ using Peiton.Api.RouterConstraints;
 using Peiton.Authorization;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.Facturas;
+using Peiton.Core.Entities;
+using Peiton.Core.Exceptions;
+using Peiton.Core.UseCases.Common;
 using Peiton.Core.UseCases.Contabilidad.Facturas;
 using Peiton.ModelBinders;
 
@@ -25,12 +28,62 @@ public class FacturasController(IMapper mapper) : ControllerBase
         return Ok(viewModel);
     }
 
-    [HttpGet("")]  
+    [HttpGet("")]
     public async Task<IActionResult> Facturas([FromQuery] FacturasFilter filter, [FromQuery] Pagination pagination, FacturasHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var viewModel = mapper.Map<IEnumerable<FacturaListItem>>(data.Items);
         return this.PaginatedResult(viewModel, data.Total);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> Factura(int id, EntityHandler<Factura> handler)
+    {
+        try
+        {
+            var data = await handler.HandleAsync(id);
+            var viewModel = mapper.Map<FacturaViewModel>(data);
+            return Ok(viewModel);
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
+    }
+
+    [HttpPost("")]
+    public async Task<IActionResult> CrearFactura(int id, [FromBody] GuardarFacturaRequest request, CrearFacturaHandler handler)
+    {
+        await handler.HandleAsync(request);
+        return Accepted();
+    }
+
+    [HttpPatch("{id:int}")]
+    public async Task<IActionResult> ActualizarFactura(int id, [FromBody] GuardarFacturaRequest request, ActualizarFacturaHandler handler)
+    {
+        try
+        {
+            await handler.HandleAsync(id, request);
+            return Accepted();
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> BorrarFactura(int id, DeleteEntityHandler<Factura> handler)
+    {
+        try
+        {
+            await handler.HandleAsync(id);
+            return Accepted();
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
     }
 
     [HttpGet("pendientes")]

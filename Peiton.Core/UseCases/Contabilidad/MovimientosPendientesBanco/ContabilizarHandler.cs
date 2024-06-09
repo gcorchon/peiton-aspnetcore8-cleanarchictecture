@@ -9,7 +9,7 @@ namespace Peiton.Core.UseCases.Contabilidad.MovimientosPendientesBanco;
 
 [Injectable]
 public class ContabilizarHandler(IEntityService entityService, IAsientoRepository asientoRepository, IUnityOfWork unitOfWork)
-{    
+{
     public async Task HandleAsync(int id, AsientoSaveRequest[] request)
     {
         var accountTransactionCP = await entityService.GetEntityAsync<AccountTransactionCP>(id);
@@ -27,12 +27,12 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
 
         var dictNumeroAsiento = new Dictionary<int, int>();
 
-        foreach(var item in request)
+        foreach (var item in request)
         {
             int multiplicador = item.TipoMovimiento!.Value == 1 ? -1 : 1;
 
             Asiento asiento = null!;
-            if(!item.Id.HasValue)
+            if (!item.Id.HasValue)
             {
                 asiento = new Asiento();
 
@@ -45,14 +45,19 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
                 asiento.Numero = dictNumeroAsiento[year];
                 accountTransactionCP.Asientos.Add(asiento);
 
-                foreach (int facturaId in item.FacturaIds) {
+                foreach (int facturaId in item.FacturaIds)
+                {
                     var factura = await entityService.GetEntityAsync<Factura>(facturaId);
-                    if (factura == null) {
+                    if (factura == null)
+                    {
                         throw new ArgumentException($"La factura {facturaId} no existe");
                     }
+
+                    factura.NumeroMovimiento = asiento.Numero.ToString();
+                    factura.FechaPago = accountTransactionCP.OperationDate;
                     asiento.Facturas.Add(factura);
                 }
-            } 
+            }
             else
             {
                 int itemId = item.Id!.Value;
@@ -65,6 +70,8 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
                         if (!item.FacturaIds.Contains(factura.Id))
                         {
                             factura.AsientoId = null;
+                            factura.NumeroMovimiento = null;
+                            factura.FechaPago = null;
                         }
                     }
 
@@ -78,19 +85,21 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
 
                         if (factura.AsientoId != asiento.Id)
                         {
+                            factura.NumeroMovimiento = asiento.Numero.ToString();
+                            factura.FechaPago = accountTransactionCP.OperationDate;
                             asiento.Facturas.Add(factura);
                         }
                     }
                 }
                 else
-                        throw new ArgumentException($"El asiento {itemId} no existe");
+                    throw new ArgumentException($"El asiento {itemId} no existe");
             }
-            
+
             asiento.Concepto = item.Concepto;
             asiento.PartidaId = item.PartidaId;
             asiento.FechaAutorizacion = item.FechaAutorizacion;
             asiento.FechaPago = accountTransactionCP.OperationDate;
-            asiento.Importe = multiplicador * Math.Abs(item.Importe!.Value);
+            asiento.Importe = multiplicador * Math.Abs(item.Importe);
             asiento.TipoPago = item.TipoPago;
             asiento.TipoMovimiento = item.TipoMovimiento;
             asiento.FormaPagoId = item.FormaPagoId;
@@ -99,6 +108,6 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
         }
 
         await unitOfWork.SaveChangesAsync();
-        
+
     }
 }

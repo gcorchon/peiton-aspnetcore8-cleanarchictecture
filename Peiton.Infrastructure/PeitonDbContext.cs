@@ -10,14 +10,18 @@ public class PeitonDbContext : DbContext
 {
     public PeitonDbContext(DbContextOptions<PeitonDbContext> options) : base(options)
     {
-            
+
     }
-   
+
     public string DateAsString(DateTime date) => throw new NotSupportedException();
     public string IntAsString(int value) => throw new NotSupportedException();
     public string DecimalAsString(decimal value) => throw new NotSupportedException();
-    
+
+    public DbSet<Capitulo> Capitulo => Set<Capitulo>();
+    public DbSet<Partida> Partida => Set<Partida>();
+    public DbSet<Tutelado> Tutelado => Set<Tutelado>();
     public DbSet<Usuario> Usuario => Set<Usuario>();
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -54,7 +58,7 @@ public class PeitonDbContext : DbContext
         modelBuilder.HasDbFunction(this.GetType().GetMethod("DecimalAsString", new[] { typeof(decimal) })!)
         .HasTranslation(args =>
         {
-            
+
             var convertExpression = new SqlFunctionExpression(
                         "CONVERT",
                         new SqlExpression[]
@@ -83,6 +87,6 @@ public class PeitonDbContext : DbContext
 
             return replaceExpression;
         });
-        
+
     }
 }
