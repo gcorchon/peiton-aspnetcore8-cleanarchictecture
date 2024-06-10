@@ -9,7 +9,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Contabilidad.Asientos;
 
 [Injectable]
-public class AsientosHuerfanosHandler(IMapper mapper, IAsientoRepository asientoRepository)
+public class AsientosHuerfanosHandler(IAsientoRepository asientoRepository)
 {    
     public async Task<PaginatedData<Asiento>> HandleAsync(AsientosHuerfanosFilter filter, Pagination pagination)
     {

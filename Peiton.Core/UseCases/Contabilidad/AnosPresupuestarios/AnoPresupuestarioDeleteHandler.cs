@@ -10,10 +10,10 @@ public class AnoPresupuestarioDeleteHandler(IAnoPresupuestarioRepository anoPres
     public async Task HandleAsync(int id)
     {
         var anoPresupuestario = await anoPresupuestarioRepository.GetByIdAsync(id);
-        if(anoPresupuestario == null) throw new NotFoundException();
+        if (anoPresupuestario == null) throw new NotFoundException($"No existe el año presupuestario con Id {id}");
 
         anoPresupuestarioRepository.Remove(anoPresupuestario);
-        
+
         await unitOfWork.SaveChangesAsync();
     }
 }

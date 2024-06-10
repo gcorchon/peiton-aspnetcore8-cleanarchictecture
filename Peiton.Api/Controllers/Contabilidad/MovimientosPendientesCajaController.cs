@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Peiton.Contracts.Common;
 using Peiton.Api.Extensions;
-using Peiton.Core.Exceptions;
 using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Contracts.MovimientosPendientesCaja;
@@ -15,7 +14,7 @@ namespace Peiton.Api.Contabilidad;
 
 [Route("api/[controller]")]
 [ApiController]
-[PeitonAuthorization(PeitonPermission.ContabilidadNuevosMovimientosMovimientosPendientesCaja)]
+[PeitonAuthorization(PeitonPermission.Contapeiton)]
 public class MovimientosPendientesCajaController(IMapper mapper) : ControllerBase
 {
     [HttpGet()]
@@ -29,30 +28,15 @@ public class MovimientosPendientesCajaController(IMapper mapper) : ControllerBas
     [HttpGet("{id:int}")]
     public async Task<IActionResult> MovimientoPendienteCaja(int id, EntityHandler<CajaAMTA> handler)
     {
-        try
-        {
-            var entity = await handler.HandleAsync(id);
-            var vm = mapper.Map<MovimientoPendienteCajaViewModel>(entity);
-            return Ok(vm);
-        }
-        catch (NotFoundException)
-        {
-            return NotFound();
-        }
+        var entity = await handler.HandleAsync(id);
+        var vm = mapper.Map<MovimientoPendienteCajaViewModel>(entity);
+        return Ok(vm);
     }
 
     [HttpPost("{id:int}/asientos")]
     public async Task<IActionResult> Contabilizar(int id, [FromBody] AsientoSaveRequest[] request, ContabilizarHandler handler)
     {
-        try
-        {
-            await handler.HandleAsync(id, request);
-            return Ok();
-        }
-        catch (NotFoundException)
-        {
-            return NotFound();
-        }
-
+        await handler.HandleAsync(id, request);
+        return Ok();
     }
 }

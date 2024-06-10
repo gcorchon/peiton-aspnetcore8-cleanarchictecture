@@ -14,7 +14,7 @@ public class ContabilizarHandler(IEntityService entityService, IAsientoRepositor
     public async Task HandleAsync(int id, AsientoSaveRequest[] request)
     {
         var cajaAMTA = await entityService.GetEntityAsync<CajaAMTA>(id);
-        if (cajaAMTA == null) throw new NotFoundException();
+        if (cajaAMTA == null) throw new NotFoundException($"No existe la entrada de CajaAMTA con el Id {id}");
 
         var asientoList = cajaAMTA.Asientos;
         IEnumerable<int> asientosYaSeleccionados = request.Where(a => a.Id.HasValue).Select(a => a.Id!.Value);

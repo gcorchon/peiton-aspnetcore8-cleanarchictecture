@@ -7,7 +7,6 @@ using Peiton.Authorization;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.Facturas;
 using Peiton.Core.Entities;
-using Peiton.Core.Exceptions;
 using Peiton.Core.UseCases.Common;
 using Peiton.Core.UseCases.Contabilidad.Facturas;
 using Peiton.ModelBinders;
@@ -39,16 +38,9 @@ public class FacturasController(IMapper mapper) : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Factura(int id, EntityHandler<Factura> handler)
     {
-        try
-        {
-            var data = await handler.HandleAsync(id);
-            var viewModel = mapper.Map<FacturaViewModel>(data);
-            return Ok(viewModel);
-        }
-        catch (NotFoundException)
-        {
-            return NotFound();
-        }
+        var data = await handler.HandleAsync(id);
+        var viewModel = mapper.Map<FacturaViewModel>(data);
+        return Ok(viewModel);
     }
 
     [HttpPost("")]
@@ -61,29 +53,15 @@ public class FacturasController(IMapper mapper) : ControllerBase
     [HttpPatch("{id:int}")]
     public async Task<IActionResult> ActualizarFactura(int id, [FromBody] GuardarFacturaRequest request, ActualizarFacturaHandler handler)
     {
-        try
-        {
-            await handler.HandleAsync(id, request);
-            return Accepted();
-        }
-        catch (NotFoundException)
-        {
-            return NotFound();
-        }
+        await handler.HandleAsync(id, request);
+        return Accepted();
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> BorrarFactura(int id, DeleteEntityHandler<Factura> handler)
     {
-        try
-        {
-            await handler.HandleAsync(id);
-            return Accepted();
-        }
-        catch (NotFoundException)
-        {
-            return NotFound();
-        }
+        await handler.HandleAsync(id);
+        return Accepted();
     }
 
     [HttpGet("pendientes")]

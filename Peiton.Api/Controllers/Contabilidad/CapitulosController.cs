@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Peiton.Contracts.Capitulo;
 using Peiton.Contracts.Partida;
-using Peiton.Core.Exceptions;
 using Peiton.Core.UseCases.Partidas;
 
 namespace Peiton.Api.Contabilidad;
@@ -34,10 +33,6 @@ public class CapitulosController : ControllerBase
                 return ValidationProblem(detail: ex.GetType().FullName, statusCode: 500);
             }
         }
-        catch (Exception ex)
-        {
-            return ValidationProblem(detail: ex.GetType().FullName, statusCode: 500);
-        }
 
         return Ok();
     }
@@ -49,10 +44,6 @@ public class CapitulosController : ControllerBase
         {
             await handler.HandleAsync(id, data);
         }
-        catch (NotFoundException)
-        {
-            return NotFound();
-        }
         catch (DbUpdateException ex)
         {
             if (ex.InnerException != null && ex.InnerException.Message.Contains("IX_Partida"))
@@ -63,10 +54,6 @@ public class CapitulosController : ControllerBase
             {
                 return ValidationProblem(detail: ex.GetType().FullName, statusCode: 500);
             }
-        }
-        catch (Exception ex)
-        {
-            return ValidationProblem(detail: ex.GetType().FullName, statusCode: 500);
         }
 
         return Ok();

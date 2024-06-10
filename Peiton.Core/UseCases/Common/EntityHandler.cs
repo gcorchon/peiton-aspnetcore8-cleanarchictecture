@@ -5,12 +5,12 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Common;
 
 [Injectable]
-public class EntityHandler<T>(IEntityService entityService) where T:class
-{    
+public class EntityHandler<T>(IEntityService entityService) where T : class
+{
     public async Task<T> HandleAsync(int id)
     {
         var entity = await entityService.GetEntityAsync<T>(id);
-        if (entity == null) throw new NotFoundException();
-        return entity;       
+        if (entity == null) throw new NotFoundException($"{typeof(T).Name} Id {id} not found");
+        return entity;
     }
 }

@@ -13,7 +13,7 @@ public class ActualizarAsientoHandler(IAsientoRepository asientoRepository, IFac
         var asiento = await asientoRepository.GetByIdAsync(id);
         if (asiento is null)
         {
-            throw new NotFoundException();
+            throw new NotFoundException($"No existe el asiento con Id {id}");
         }
 
         int multiplicador = item.TipoMovimiento!.Value == 1 ? -1 : 1;
@@ -41,7 +41,7 @@ public class ActualizarAsientoHandler(IAsientoRepository asientoRepository, IFac
             var factura = await facturaRepository.GetByIdAsync(facturaId);
             if (factura == null)
             {
-                throw new ArgumentException($"La factura {facturaId} no existe");
+                throw new ArgumentException($"La factura {facturaId} no existe", "facturaIds");
             }
 
             if (factura.AsientoId != asiento.Id)
