@@ -1,5 +1,4 @@
 using Peiton.Contracts.Asientos;
-using Peiton.Contracts.Common;
 using Peiton.Core.Entities;
 
 namespace Peiton.Core.Repositories
@@ -14,5 +13,7 @@ namespace Peiton.Core.Repositories
         Task<List<FondoListItem>> ObtenerFondoAsync(int page, int total, FondosFilter filter, IEnumerable<CapituloPartidaFilter> partidas);
         Task<int> ContarFondoAsync(FondosFilter filter, IEnumerable<CapituloPartidaFilter> partidas);
         Task<decimal> ObtenerDiferenciaFondoAsync(FondosFilter filter, IEnumerable<CapituloPartidaFilter> partidas);
+        Task<IEnumerable<Saldo>> ObtenerSaldosAsync(int page, int total, int ano, SaldosFilter filter);
+        Task<int> ContarSaldosAsync(int ano, SaldosFilter filter);
     }
 }

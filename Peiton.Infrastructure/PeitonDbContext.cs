@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
+using Peiton.Contracts.Asientos;
 using Peiton.Core.Entities;
 
 namespace Peiton.Infrastructure;
@@ -17,6 +18,8 @@ public class PeitonDbContext : DbContext
     public string IntAsString(int value) => throw new NotSupportedException();
     public string DecimalAsString(decimal value) => throw new NotSupportedException();
 
+    public IQueryable<Saldo> ContabilidadObtenerSaldos(int ano) => FromExpression(() => ContabilidadObtenerSaldos(ano));
+
     public DbSet<Capitulo> Capitulo => Set<Capitulo>();
     public DbSet<Partida> Partida => Set<Partida>();
     public DbSet<Tutelado> Tutelado => Set<Tutelado>();
@@ -27,16 +30,18 @@ public class PeitonDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+        modelBuilder.Entity<Saldo>().HasNoKey();
+
         modelBuilder.HasDbFunction(this.GetType().GetMethod("DateAsString", new[] { typeof(DateTime) })!)
                     .HasTranslation(args =>
                         new SqlFunctionExpression("CONVERT",
-                            new[] {
+                            [
                                 new SqlFragmentExpression("varchar"),
                                 args.First(),
                                 new SqlFragmentExpression("103")
-                            },
+                            ],
                             false,
-                            new[] { false },
+                            [false],
                             typeof(string),
                             null
                         ));
@@ -44,12 +49,12 @@ public class PeitonDbContext : DbContext
         modelBuilder.HasDbFunction(this.GetType().GetMethod("IntAsString", new[] { typeof(int) })!)
                     .HasTranslation(args =>
                         new SqlFunctionExpression("CONVERT",
-                            new[] {
+                            [
                                 new SqlFragmentExpression("varchar"),
                                 args.First()
-                            },
+                            ],
                             false,
-                            new[] { false },
+                            [false],
                             typeof(string),
                             new StringTypeMapping("varchar", System.Data.DbType.String)
                         ));
@@ -61,32 +66,32 @@ public class PeitonDbContext : DbContext
 
             var convertExpression = new SqlFunctionExpression(
                         "CONVERT",
-                        new SqlExpression[]
-                        {
+                        [
                             new SqlFragmentExpression("varchar"),
                             args.First(),
                             new SqlFragmentExpression("2")
-                        },
+                        ],
                         false,
-                        new[] { false },
+                        [false],
                         typeof(string),
                         new StringTypeMapping("varchar", System.Data.DbType.String));
 
             var replaceExpression = new SqlFunctionExpression(
                         "REPLACE",
-                        new SqlExpression[]
-                        {
+                        [
                             convertExpression,
                             new SqlFragmentExpression("'.'"),
                             new SqlFragmentExpression("','")
-                        },
+                        ],
                         false,
-                        new[] { false },
+                        [false],
                         typeof(string),
                         new StringTypeMapping("varchar", System.Data.DbType.String));
 
             return replaceExpression;
         });
+
+        modelBuilder.HasDbFunction(this.GetType().GetMethod("ContabilidadObtenerSaldos", [typeof(int)])!);
 
     }
 }

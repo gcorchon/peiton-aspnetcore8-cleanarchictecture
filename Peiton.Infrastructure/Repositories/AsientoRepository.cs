@@ -3,8 +3,6 @@ using Peiton.Core.Repositories;
 using Peiton.Contracts.Asientos;
 using Peiton.Core.Entities;
 using Peiton.DependencyInjection;
-using Peiton.Contracts.Common;
-using System.Security.Cryptography;
 using System.Linq.Expressions;
 
 namespace Peiton.Infrastructure.Repositories
@@ -51,7 +49,7 @@ namespace Peiton.Infrastructure.Repositories
 
         public Task<int> ObtenerUltimoNumeroAsientoAsync(int ano)
         {
-            return this.DbContext.Database.SqlQuery<int>($"select coalesce(max(Numero), 0) as Value from Asiento where YEAR(FechaAutorizacion) = {ano}").FirstAsync();
+            return DbContext.Database.SqlQuery<int>($"select coalesce(max(Numero), 0) as Value from Asiento where YEAR(FechaAutorizacion) = {ano}").FirstAsync();
         }
 
         private IQueryable<Asiento> ApplyFilters(IQueryable<Asiento> query, AsientosFilter filter)
@@ -70,7 +68,7 @@ namespace Peiton.Infrastructure.Repositories
 
             if (!string.IsNullOrWhiteSpace(filter.Numero))
             {
-                query = query.Where(asiento => asiento.Numero != null && this.DbContext.IntAsString(asiento.Numero.Value).StartsWith(filter.Numero));
+                query = query.Where(asiento => asiento.Numero != null && DbContext.IntAsString(asiento.Numero.Value).StartsWith(filter.Numero));
             }
 
             if (!string.IsNullOrWhiteSpace(filter.Tipo))
@@ -112,14 +110,14 @@ namespace Peiton.Infrastructure.Repositories
 
             if (!string.IsNullOrEmpty(filter.Importe))
             {
-                query = query.Where(asiento => this.DbContext.DecimalAsString(asiento.Importe).StartsWith(filter.Importe));
+                query = query.Where(asiento => DbContext.DecimalAsString(asiento.Importe).StartsWith(filter.Importe));
             }
 
             if (!string.IsNullOrWhiteSpace(filter.FechaAutorizacion))
             {
                 if (filter.FechaAutorizacion != "^$")
                 {
-                    query = query.Where(asiento => this.DbContext.DateAsString(asiento.FechaAutorizacion!.Value).Contains(filter.FechaAutorizacion));
+                    query = query.Where(asiento => DbContext.DateAsString(asiento.FechaAutorizacion!.Value).Contains(filter.FechaAutorizacion));
                 }
                 else
                 {
@@ -131,7 +129,7 @@ namespace Peiton.Infrastructure.Repositories
             {
                 if (filter.FechaPago != "^$")
                 {
-                    query = query.Where(asiento => asiento.FechaPago != null && this.DbContext.DateAsString(asiento.FechaPago.Value).Contains(filter.FechaPago));
+                    query = query.Where(asiento => asiento.FechaPago != null && DbContext.DateAsString(asiento.FechaPago.Value).Contains(filter.FechaPago));
                 }
                 else
                 {
@@ -196,7 +194,7 @@ namespace Peiton.Infrastructure.Repositories
 
             if (!string.IsNullOrEmpty(filter.Numero))
             {
-                query = query.Where(asiento => asiento.Numero != null && this.DbContext.IntAsString(asiento.Numero.Value).StartsWith(filter.Numero));
+                query = query.Where(asiento => asiento.Numero != null && DbContext.IntAsString(asiento.Numero.Value).StartsWith(filter.Numero));
             }
 
             if (!string.IsNullOrWhiteSpace(filter.Partida))
@@ -216,12 +214,12 @@ namespace Peiton.Infrastructure.Repositories
 
             if (!string.IsNullOrEmpty(filter.Importe))
             {
-                query = query.Where(asiento => this.DbContext.DecimalAsString(asiento.Importe).StartsWith(filter.Importe));
+                query = query.Where(asiento => DbContext.DecimalAsString(asiento.Importe).StartsWith(filter.Importe));
             }
 
             if (!string.IsNullOrWhiteSpace(filter.FechaAutorizacion))
             {
-                query = query.Where(asiento => this.DbContext.DateAsString(asiento.FechaAutorizacion!.Value).Contains(filter.FechaAutorizacion));
+                query = query.Where(asiento => DbContext.DateAsString(asiento.FechaAutorizacion!.Value).Contains(filter.FechaAutorizacion));
             }
 
 
@@ -230,10 +228,8 @@ namespace Peiton.Infrastructure.Repositories
 
         public Task<List<FondoListItem>> ObtenerFondoAsync(int page, int total, FondosFilter filter, IEnumerable<CapituloPartidaFilter> partidas)
         {
-
-
             var query = from asiento in ApplyFiltersFondos(this.DbSet, partidas)
-                        join tutelado in this.DbContext.Tutelado on asiento.TuteladoId equals tutelado.Id
+                        join tutelado in DbContext.Tutelado on asiento.TuteladoId equals tutelado.Id
                         group asiento by new { tutelado.Id, tutelado.NombreCompleto, tutelado.DNI } into g
                         select new FondoListItem()
                         {
@@ -259,7 +255,7 @@ namespace Peiton.Infrastructure.Repositories
         {
 
             var query = from asiento in ApplyFiltersFondos(this.DbSet, partidas)
-                        join tutelado in this.DbContext.Tutelado on asiento.TuteladoId equals tutelado.Id
+                        join tutelado in DbContext.Tutelado on asiento.TuteladoId equals tutelado.Id
                         group asiento by new { tutelado.Id, tutelado.NombreCompleto, tutelado.DNI } into g
                         select new FondoListItem()
                         {
@@ -278,7 +274,22 @@ namespace Peiton.Infrastructure.Repositories
 
         public Task<decimal> ObtenerDiferenciaFondoAsync(FondosFilter filter, IEnumerable<CapituloPartidaFilter> partidas)
         {
-            throw new NotImplementedException();
+            var query = from asiento in ApplyFiltersFondos(this.DbSet, partidas)
+                        join tutelado in DbContext.Tutelado on asiento.TuteladoId equals tutelado.Id
+                        group asiento by new { tutelado.Id, tutelado.NombreCompleto, tutelado.DNI } into g
+                        select new FondoListItem()
+                        {
+                            Id = g.Key.Id,
+                            Tutelado = g.Key.NombreCompleto,
+                            Dni = g.Key.DNI,
+                            Ingresos = g.Where(t => t.Importe > 0).Sum(t => t.Importe),
+                            Gastos = g.Where(t => t.Importe < 0).Sum(t => t.Importe),
+                            Diferencia = g.Sum(t => t.Importe)
+                        };
+
+            query = ApplyFiltersFondos(query, filter);
+
+            return query.SumAsync(a => a.Diferencia);
         }
 
 
@@ -336,17 +347,78 @@ namespace Peiton.Infrastructure.Repositories
 
             if (!string.IsNullOrEmpty(filter.Ingresos))
             {
-                query = query.Where(asiento => this.DbContext.DecimalAsString(asiento.Ingresos).StartsWith(filter.Ingresos));
+                query = query.Where(asiento => DbContext.DecimalAsString(asiento.Ingresos).StartsWith(filter.Ingresos));
             }
 
             if (!string.IsNullOrEmpty(filter.Gastos))
             {
-                query = query.Where(asiento => this.DbContext.DecimalAsString(asiento.Gastos).StartsWith(filter.Gastos));
+                query = query.Where(asiento => DbContext.DecimalAsString(asiento.Gastos).StartsWith(filter.Gastos));
             }
 
             if (!string.IsNullOrEmpty(filter.Diferencia))
             {
-                query = query.Where(asiento => this.DbContext.DecimalAsString(asiento.Gastos).StartsWith(filter.Diferencia));
+                query = query.Where(asiento => DbContext.DecimalAsString(asiento.Gastos).StartsWith(filter.Diferencia));
+            }
+
+            return query;
+        }
+
+        public Task<IEnumerable<Saldo>> ObtenerSaldosAsync(int page, int total, int ano, SaldosFilter filter)
+        {
+            var query = ApplyFilters(DbContext.ContabilidadObtenerSaldos(ano), filter);
+            return Task.FromResult(query
+                    .OrderBy(s => s.Tipo).ThenBy(s => s.NumeroCapitulo).ThenBy(s => s.NumeroPartida)
+                    .Skip((page - 1) * total)
+                    .Take(total).AsEnumerable());
+        }
+
+        public Task<int> ContarSaldosAsync(int ano, SaldosFilter filter)
+        {
+            return ApplyFilters(DbContext.ContabilidadObtenerSaldos(ano), filter).CountAsync();
+        }
+
+        private IQueryable<Saldo> ApplyFilters(IQueryable<Saldo> query, SaldosFilter filter)
+        {
+            if (filter == null) return query;
+
+            if (!string.IsNullOrWhiteSpace(filter.Descripcion))
+            {
+                query = query.Where(s => s.Descripcion.Contains(filter.Descripcion));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.NumeroCapitulo))
+            {
+                query = query.Where(s => s.NumeroCapitulo.StartsWith(filter.NumeroCapitulo));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.NumeroPartida))
+            {
+                query = query.Where(s => s.NumeroPartida != null && s.NumeroPartida.StartsWith(filter.NumeroPartida));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Tipo))
+            {
+                query = query.Where(s => s.Tipo == filter.Tipo);
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Presupuesto))
+            {
+                query = query.Where(s => DbContext.DecimalAsString(s.Presupuesto).StartsWith(filter.Presupuesto));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Ejecutado))
+            {
+                query = query.Where(s => s.Ejecutado != null && DbContext.DecimalAsString(s.Ejecutado.Value).StartsWith(filter.Ejecutado));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Pendiente))
+            {
+                query = query.Where(s => s.Pendiente != null && DbContext.DecimalAsString(s.Pendiente.Value).StartsWith(filter.Pendiente));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.PorcEjecutado))
+            {
+                query = query.Where(s => s.PorcEjecutado != null && DbContext.DecimalAsString(s.PorcEjecutado.Value).StartsWith(filter.PorcEjecutado));
             }
 
             return query;
