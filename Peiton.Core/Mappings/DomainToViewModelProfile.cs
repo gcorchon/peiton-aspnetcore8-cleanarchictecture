@@ -61,6 +61,8 @@ namespace Peiton.Core.Mappings
                .ForMember(vm => vm.Revisor, m => m.MapFrom(t => t.Revisor != null ? t.Revisor.NombreCompleto : null))
                .ForMember(vm => vm.Autorizador, m => m.MapFrom(t => t.Autorizador != null ? t.Autorizador.NombreCompleto : null))
                .ForMember(vm => vm.Archivos, m => m.MapFrom(t => t.Archivos != null ? t.Archivos.Deserialize<string[]>() : new string[] { }));
+
+            CreateMap<Ent.Cliente, VM.Clientes.ClienteListItem>();
         }
     }
 }
