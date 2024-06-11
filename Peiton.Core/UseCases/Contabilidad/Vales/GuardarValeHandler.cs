@@ -1,5 +1,4 @@
-﻿using Peiton.Contracts.Common;
-using Peiton.Contracts.Vales;
+﻿using Peiton.Contracts.Vales;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;

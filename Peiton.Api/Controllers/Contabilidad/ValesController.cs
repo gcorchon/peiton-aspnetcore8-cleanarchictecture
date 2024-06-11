@@ -12,11 +12,11 @@ using Peiton.Core.UseCases.Contabilidad.Vales;
 namespace Peiton.Api.Contabilidad;
 
 [ApiController]
-[PeitonAuthorization(PeitonPermission.Contapeiton)]
 [Route("api/[controller]")]
 public class ValesController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
+    [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
     public async Task<IActionResult> Vales([FromQuery] ValesFilter filter, [FromQuery] Pagination pagination, ValesHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
@@ -25,6 +25,7 @@ public class ValesController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
     public async Task<IActionResult> Vale(int id, EntityHandler<Vale> handler)
     {
         var data = await handler.HandleAsync(id);
@@ -33,6 +34,7 @@ public class ValesController(IMapper mapper) : ControllerBase
     }
 
     [HttpPost("")]
+    [PeitonAuthorization(PeitonPermission.HomeVales)]
     public async Task<IActionResult> GuardarVale([FromBody] GuardarValeRequest data, GuardarValeHandler handler)
     {
         await handler.HandleAsync(data);
@@ -40,6 +42,7 @@ public class ValesController(IMapper mapper) : ControllerBase
     }
 
     [HttpPatch("{id:int}")]
+    [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
     public async Task<IActionResult> ActualizarVale(int id, [FromBody] ActualizarValeRequest data, ActualizarValeHandler handler)
     {
         await handler.HandleAsync(id, data);
@@ -47,9 +50,26 @@ public class ValesController(IMapper mapper) : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
     public async Task<IActionResult> BorrarVale(int id, DeleteEntityHandler<Vale> handler)
     {
         await handler.HandleAsync(id);
         return Accepted();
+    }
+
+    [HttpPost("files")]
+    [PeitonAuthorization(PeitonPermission.HomeVales)]
+    public async Task<IActionResult> UploadFile(IFormFile file, UploadValeHandler handler)
+    {
+        var data = await handler.HandleAsync(file);
+        return Ok(data);
+    }
+
+    [HttpGet("{id:int}/files")]
+    [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
+    public async Task<IActionResult> DownloadFile(int id, DownloadValeHandler handler)
+    {
+        var data = await handler.HandleAsync(id);
+        return File(data, "application/zip", "vale.zip");
     }
 }

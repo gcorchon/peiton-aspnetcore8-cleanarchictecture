@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Peiton.Api.Authorization;
 using Peiton.Api;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 ConfigurationManager configuration = builder.Configuration!;
