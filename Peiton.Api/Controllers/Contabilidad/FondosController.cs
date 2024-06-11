@@ -13,7 +13,7 @@ namespace Peiton.Api.Contabilidad;
 [ApiController]
 [PeitonAuthorization(PeitonPermission.Contapeiton)]
 [Route("api/[controller]")]
-public class FondosController(IMapper mapper, ILogger<FondosController> logger) : ControllerBase
+public class FondosController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
     public async Task<IActionResult> Fondos([FromQuery] FondosFilter filter, [FromQuery] Pagination pagination, [FromQuery] TipoFondo tipoFondo, FondosHandler handler)

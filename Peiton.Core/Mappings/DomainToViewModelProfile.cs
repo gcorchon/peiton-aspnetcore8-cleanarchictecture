@@ -2,6 +2,7 @@
 
 using Ent = Peiton.Core.Entities;
 using VM = Peiton.Contracts;
+using Peiton.Serialization;
 
 namespace Peiton.Core.Mappings
 {
@@ -31,7 +32,7 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.FacturaIds, opt => opt.MapFrom(obj => obj.Facturas.Select(f => f.Id)));
 
             CreateMap<Ent.Factura, VM.Facturas.FacturaViewModel>();
-            
+
             CreateMap<Ent.Factura, VM.Facturas.FacturaListItem>()
                 .ForMember(vm => vm.EstadoInicial, opt => opt.MapFrom(obj => obj.EstadoInicial.HasValue ? VM.Facturas.EstadoFactura.GetText(obj.EstadoInicial.Value) : null))
                 .ForMember(vm => vm.EstadoContable, opt => opt.MapFrom(obj => obj.EstadoContable.HasValue ? VM.Facturas.EstadoFactura.GetText(obj.EstadoContable.Value) : null));
@@ -50,6 +51,16 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Persona, opt => opt.MapFrom(obj => !string.IsNullOrWhiteSpace(obj.Persona) ? obj.Persona : (obj.Tutelado != null ? obj.Tutelado.NombreCompleto : "")));
 
             CreateMap<Ent.CajaAMTA, VM.MovimientosPendientesCaja.MovimientoPendienteCajaViewModel>();
+
+            CreateMap<Ent.Vale, VM.Vales.ValeViewModel>();
+            CreateMap<Ent.Vale, VM.Vales.ValeListItem>()
+                    .ForMember(vm => vm.Solicitante, m => m.MapFrom(t => t.Solicitante.NombreCompleto));
+
+            CreateMap<Ent.Vale, VM.Vales.ValeViewModel>()
+               .ForMember(vm => vm.Solicitante, m => m.MapFrom(t => t.Solicitante.NombreCompleto))
+               .ForMember(vm => vm.Revisor, m => m.MapFrom(t => t.Revisor != null ? t.Revisor.NombreCompleto : null))
+               .ForMember(vm => vm.Autorizador, m => m.MapFrom(t => t.Autorizador != null ? t.Autorizador.NombreCompleto : null))
+               .ForMember(vm => vm.Archivos, m => m.MapFrom(t => t.Archivos != null ? t.Archivos.Deserialize<string[]>() : new string[] { }));
         }
     }
 }

@@ -30,9 +30,14 @@ public class PeitonDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        modelBuilder.Entity<Saldo>().HasNoKey();
+        var saldo = modelBuilder.Entity<Saldo>();
+        saldo.HasNoKey();
+        saldo.Property(s => s.Ejecutado).HasColumnType("money");
+        saldo.Property(s => s.Pendiente).HasColumnType("money");
+        saldo.Property(s => s.PorcEjecutado).HasColumnType("money");
+        saldo.Property(s => s.Presupuesto).HasColumnType("money");
 
-        modelBuilder.HasDbFunction(this.GetType().GetMethod("DateAsString", new[] { typeof(DateTime) })!)
+        modelBuilder.HasDbFunction(this.GetType().GetMethod("DateAsString", [typeof(DateTime)])!)
                     .HasTranslation(args =>
                         new SqlFunctionExpression("CONVERT",
                             [
@@ -46,7 +51,7 @@ public class PeitonDbContext : DbContext
                             null
                         ));
 
-        modelBuilder.HasDbFunction(this.GetType().GetMethod("IntAsString", new[] { typeof(int) })!)
+        modelBuilder.HasDbFunction(this.GetType().GetMethod("IntAsString", [typeof(int)])!)
                     .HasTranslation(args =>
                         new SqlFunctionExpression("CONVERT",
                             [

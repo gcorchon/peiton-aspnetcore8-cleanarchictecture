@@ -18,7 +18,7 @@ public class IdentityService : IIdentityService
     public int? GetUserId()
     {
         var claim = claimsPrincipal.FindFirst(JwtRegisteredClaimNames.Sid);
-        if(claim is null) return null;
+        if (claim is null) return null;
         return Convert.ToInt32(claim.Value);
     }
 }
