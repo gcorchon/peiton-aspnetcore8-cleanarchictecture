@@ -64,6 +64,9 @@ namespace Peiton.Core.Mappings
 
             CreateMap<Ent.Cliente, VM.Clientes.ClienteListItem>();
 
+            CreateMap<Ent.Caja, VM.Caja.CajaViewModel>()
+                .ForMember(vm => vm.Autorizador, opt => opt.MapFrom(obj => obj.Usuario.NombreCompleto));
+
             CreateMap<Ent.Caja, VM.Caja.CajaListItem>()
                 .ForMember(vm => vm.Nombre, opt => opt.MapFrom(obj => obj.Tutelado.NombreCompleto))
                 .ForMember(vm => vm.Tipo, opt => opt.MapFrom(obj => obj.TipoPago != null ? obj.TipoPago.Descripcion : ""))

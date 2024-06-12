@@ -23,4 +23,12 @@ public class CajaController(IMapper mapper) : ControllerBase
         return this.PaginatedResult(vm, data.Total);
     }
 
+    [HttpGet("{id:int}")]
+    [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
+    public async Task<IActionResult> MovimientoCaja(int id, MovimientoCajaHandler handler)
+    {
+        var vm = await handler.HandleAsync(id);
+        return Ok(vm);
+    }
+
 }
