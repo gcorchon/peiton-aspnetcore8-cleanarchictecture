@@ -63,6 +63,12 @@ namespace Peiton.Core.Mappings
                .ForMember(vm => vm.Archivos, m => m.MapFrom(t => t.Archivos != null ? t.Archivos.Deserialize<string[]>() : new string[] { }));
 
             CreateMap<Ent.Cliente, VM.Clientes.ClienteListItem>();
+
+            CreateMap<Ent.Caja, VM.Caja.CajaListItem>()
+                .ForMember(vm => vm.Nombre, opt => opt.MapFrom(obj => obj.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.Tipo, opt => opt.MapFrom(obj => obj.TipoPago != null ? obj.TipoPago.Descripcion : ""))
+                .ForMember(vm => vm.TuteladoMuerto, opt => opt.MapFrom(obj => obj.Tutelado.Muerto))
+                .ForMember(vm => vm.Estado, opt => opt.MapFrom(obj => obj.Pendiente ? "Pendiente" : "Pagado"));
         }
     }
 }

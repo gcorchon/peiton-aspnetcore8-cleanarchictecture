@@ -1,6 +1,6 @@
 namespace Peiton.Core.Entities
 {
-    public class Caja
+	public class Caja
 	{
 		public int Id { get; set; }
 		public int TuteladoId { get; set; }
@@ -24,11 +24,12 @@ namespace Peiton.Core.Entities
 		public string? RecepcionOtro { get; set; }
 		public int? ParentescoId { get; set; }
 		public int? PagadorId { get; set; }
+		public virtual Tutelado Tutelado { get; set; } = null!;
 		public virtual MetodoPago? MetodoPago { get; set; }
 		public virtual Parentesco? Parentesco { get; set; }
 		public virtual Periodicidad? Periodicidad { get; set; }
 		public virtual TipoPago? TipoPago { get; set; }
-		public virtual Usuario Usuario { get; set; }= null!;
+		public virtual Usuario Usuario { get; set; } = null!;
 		public virtual Usuario? Pagador { get; set; }
 		public virtual ICollection<CajaAMTA> CajaAMTA { get; } = new List<CajaAMTA>();
 
