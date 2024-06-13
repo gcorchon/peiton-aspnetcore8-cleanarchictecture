@@ -30,6 +30,7 @@ namespace Peiton.Infrastructure.Repositories
 				.ToListAsync();
 		}
 
+
 		private IQueryable<Caja> ApplyFilters(IQueryable<Caja> query, TipoMovimiento tipo, CajaFilter filter)
 		{
 
@@ -68,6 +69,53 @@ namespace Peiton.Infrastructure.Repositories
 			if (filter.Pendiente.HasValue)
 			{
 				query = query.Where(c => c.Pendiente == filter.Pendiente.Value);
+			}
+
+			return query;
+		}
+
+		public Task<int> ContarHistoricoMovimientosAsync(int tuteladoId, HistoricoMovimientosFilter filter)
+		{
+			return ApplyFilters(DbSet.Include(c => c.MetodoPago).Include(c => c.TipoPago), tuteladoId, filter).CountAsync();
+		}
+
+		public Task<List<Caja>> ObtenerHistoricoMovimientosAsync(int page, int total, int tuteladoId, HistoricoMovimientosFilter filter)
+		{
+			return ApplyFilters(DbSet.Include(c => c.MetodoPago).Include(c => c.TipoPago), tuteladoId, filter)
+				.OrderByDescending(c => c.FechaPago)
+				.Skip((page - 1) * total)
+				.Take(total)
+				.AsNoTracking()
+				.ToListAsync();
+		}
+
+		private IQueryable<Caja> ApplyFilters(IQueryable<Caja> query, int tuteladoId, HistoricoMovimientosFilter filter)
+		{
+			query = query.Where(c => c.TuteladoId == tuteladoId && !c.Pendiente);
+
+			if (!string.IsNullOrWhiteSpace(filter.Concepto))
+			{
+				query = query.Where(c => c.Concepto.Contains(filter.Concepto));
+			}
+
+			if (!string.IsNullOrWhiteSpace(filter.FechaAutorizacion))
+			{
+				query = query.Where(c => DbContext.DateAsString(c.FechaAutorizacion).Contains(filter.FechaAutorizacion));
+			}
+
+			if (filter.Metodo.HasValue)
+			{
+				query = query.Where(c => c.MetodoPagoId == filter.Metodo);
+			}
+
+			if (!string.IsNullOrWhiteSpace(filter.Importe))
+			{
+				query = query.Where(c => DbContext.DecimalAsString(c.Importe).StartsWith(filter.Importe));
+			}
+
+			if (filter.Anticipo.HasValue)
+			{
+				query = query.Where(c => c.Anticipo == filter.Anticipo.Value);
 			}
 
 			return query;

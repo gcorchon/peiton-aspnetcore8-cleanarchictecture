@@ -9,5 +9,8 @@ namespace Peiton.Core.Repositories
 		Task<List<Caja>> ObtenerMovimientosAsync(int page, int total, TipoMovimiento tipo, CajaFilter filter);
 		Task<int> ContarMovimientosAsync(TipoMovimiento tipo, CajaFilter filter);
 		Task<decimal> ObtenerSaldoCajaAsync(int tuteladoId);
+
+		Task<List<Caja>> ObtenerHistoricoMovimientosAsync(int page, int total, int tuteladoId, HistoricoMovimientosFilter filter);
+		Task<int> ContarHistoricoMovimientosAsync(int tuteladoId, HistoricoMovimientosFilter filter);
 	}
 }
