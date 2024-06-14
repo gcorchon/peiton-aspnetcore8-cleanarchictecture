@@ -122,6 +122,8 @@ namespace Peiton.Core.Entities
 		/* public virtual ICollection<Autorizacion> Autorizaciones { get; } = new List<Autorizacion>(); */
 		/* public virtual ICollection<AvisoTributario> AvisosTributarios { get; } = new List<AvisoTributario>(); */
 		public virtual ICollection<CajaAMTA> CajaAMTA { get; } = new List<CajaAMTA>();
+
+		public virtual ICollection<CajaIncidencia> CajaIncidencias { get; } = new List<CajaIncidencia>();
 		/* public virtual ICollection<Cita> Citas { get; } = new List<Cita>(); */
 		/* public virtual ICollection<Contacto> Contactos { get; } = new List<Contacto>(); */
 		/* public virtual ICollection<ControlCuentaGeneral> ControlesCuentasGenerales { get; } = new List<ControlCuentaGeneral>(); */

@@ -85,6 +85,12 @@ namespace Peiton.Core.Mappings
             CreateMap<Ent.EntidadFinanciera, VM.EntidadFinanciera.EntidadFinancieraViewModel>()
                 .ForMember(vm => vm.Accounts, opt => opt.MapFrom(e => e.Credenciales.SelectMany(c => c.Accounts)));*/
 
+            CreateMap<Ent.CajaIncidencia, VM.Caja.IncidenciaListItem>()
+                .ForMember(vm => vm.Nombre, opt => opt.MapFrom(obj => obj.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.RazonIncidencia, opt => opt.MapFrom(obj => obj.RazonIncidenciaCaja.Descripcion));
+
+            CreateMap<Ent.CajaIncidencia, VM.Caja.IncidenciaViewModel>()
+                .ForMember(vm => vm.Autorizador, opt => opt.MapFrom(obj => obj.Usuario.NombreCompleto));
         }
     }
 }

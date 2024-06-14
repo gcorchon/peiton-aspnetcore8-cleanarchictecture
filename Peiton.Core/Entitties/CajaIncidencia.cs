@@ -1,8 +1,9 @@
 namespace Peiton.Core.Entities
 {
-    public class CajaIncidencia
+	public class CajaIncidencia
 	{
 		public int Id { get; set; }
+		public int CajaId { get; set; }
 		public DateTime FechaIncidencia { get; set; }
 		public int RazonIncidenciaCajaId { get; set; }
 		public string? ExplicacionIncidencia { get; set; }
@@ -26,12 +27,15 @@ namespace Peiton.Core.Entities
 		public int? Recepcion { get; set; }
 		public string? RecepcionOtro { get; set; }
 		public int? ParentescoId { get; set; }
+
+		public virtual Caja Caja { get; set; } = null!;
+		public virtual Tutelado Tutelado { get; set; } = null!;
 		public virtual MetodoPago? MetodoPago { get; set; }
 		public virtual Parentesco? Parentesco { get; set; }
 		public virtual Periodicidad? Periodicidad { get; set; }
 		public virtual TipoPago? TipoPago { get; set; }
-		public virtual Usuario Usuario { get; set; }= null!;
-		public virtual RazonIncidenciaCaja RazonIncidenciaCaja { get; set; }= null!;
+		public virtual Usuario Usuario { get; set; } = null!;
+		public virtual RazonIncidenciaCaja RazonIncidenciaCaja { get; set; } = null!;
 
 	}
 }

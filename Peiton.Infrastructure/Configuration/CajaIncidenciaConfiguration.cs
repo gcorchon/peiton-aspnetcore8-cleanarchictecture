@@ -4,13 +4,14 @@ using Peiton.Core.Entities;
 
 namespace Peiton.Data.Configuration
 {
-    public class CajaIncidenciaConfiguration : IEntityTypeConfiguration<CajaIncidencia>
+	public class CajaIncidenciaConfiguration : IEntityTypeConfiguration<CajaIncidencia>
 	{
 		public void Configure(EntityTypeBuilder<CajaIncidencia> builder)
 		{
-			builder.HasKey(t => new { t.Id, t.FechaIncidencia});
+			builder.HasKey(t => t.Id);
 
 			builder.Property(p => p.Id).HasColumnName("Pk_CajaIncidencia");
+			builder.Property(p => p.CajaId).HasColumnName("Fk_Caja");
 			builder.Property(p => p.FechaIncidencia).HasDefaultValueSql("(getdate())");
 			builder.Property(p => p.RazonIncidenciaCajaId).HasColumnName("Fk_RazonIncidenciaCaja");
 			builder.Property(p => p.TuteladoId).HasColumnName("Fk_Tutelado");
@@ -22,6 +23,11 @@ namespace Peiton.Data.Configuration
 			builder.Property(p => p.RecepcionOtro).HasMaxLength(100);
 			builder.Property(p => p.ParentescoId).HasColumnName("Fk_Parentesco");
 			builder.Property(p => p.Importe).HasColumnType("money");
+
+			builder.HasOne(d => d.Tutelado)
+				.WithMany(p => p.CajaIncidencias)
+				.HasForeignKey(d => d.TuteladoId);
+
 			/*builder.HasOne(d => d.MetodoPago)
 				.WithMany(p => p.CajaIncidencias)
 				.HasForeignKey(d => d.MetodoPagoId);*/
