@@ -1,6 +1,6 @@
 namespace Peiton.Core.Entities
 {
-    public class EntidadFinanciera
+	public class EntidadFinanciera
 	{
 		public int Id { get; set; }
 		public string Descripcion { get; set; } = null!;
@@ -16,7 +16,7 @@ namespace Peiton.Core.Entities
 		public string? AfterbanksID { get; set; }
 		public string? AfterbanksFieldsMapping { get; set; }
 
-		/* public virtual ICollection<Credencial> Credenciales { get; } = new List<Credencial>(); */
+		public virtual ICollection<Credencial> Credenciales { get; } = new List<Credencial>();
 		/* public virtual ICollection<CredencialCP> CredencialesCP { get; } = new List<CredencialCP>(); */
 		/* public virtual ICollection<CredencialMasiva> CredencialesMasivas { get; } = new List<CredencialMasiva>(); */
 		/* public virtual ICollection<EfectoPublico> EfectosPublicos { get; } = new List<EfectoPublico>(); */

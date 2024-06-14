@@ -77,6 +77,11 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Tipo, opt => opt.MapFrom(obj => obj.TipoPago != null ? obj.TipoPago.Descripcion : null))
                 .ForMember(vm => vm.Metodo, opt => opt.MapFrom(obj => obj.MetodoPago != null ? obj.MetodoPago.Descripcion : null));
 
+
+            /*CreateMap<Ent.Account, VM.Account.AccountViewModel>();
+            CreateMap<Ent.EntidadFinanciera, VM.EntidadFinanciera.EntidadFinancieraViewModel>()
+                .ForMember(vm => vm.Accounts, opt => opt.MapFrom(e => e.Credenciales.SelectMany(c => c.Accounts)));*/
+
         }
     }
 }

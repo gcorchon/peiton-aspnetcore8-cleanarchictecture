@@ -1,6 +1,6 @@
 namespace Peiton.Core.Entities
 {
-    public class Credencial
+	public class Credencial
 	{
 		public int Id { get; set; }
 		public int TuteladoId { get; set; }
@@ -16,9 +16,9 @@ namespace Peiton.Core.Entities
 		public string? UltimoXml { get; set; }
 		public bool RequiereSMS { get; set; }
 		public string? EBLog { get; set; }
-		public virtual EntidadFinanciera EntidadFinanciera { get; set; }= null!;
-		public virtual Tutelado Tutelado { get; set; }= null!;
-		/* public virtual ICollection<Account> Accounts { get; } = new List<Account>(); */
+		public virtual EntidadFinanciera EntidadFinanciera { get; set; } = null!;
+		public virtual Tutelado Tutelado { get; set; } = null!;
+		public virtual ICollection<Account> Accounts { get; } = new List<Account>();
 		/* public virtual ICollection<CuentaCaixabank> CuentasCaixabank { get; } = new List<CuentaCaixabank>(); */
 		/* public virtual ICollection<Deposit> Deposit { get; } = new List<Deposit>(); */
 		/* public virtual ICollection<Fund> Fundes { get; } = new List<Fund>(); */

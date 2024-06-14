@@ -4,7 +4,7 @@ using Peiton.Core.Entities;
 
 namespace Peiton.Data.Configuration
 {
-    public class CredencialConfiguration : IEntityTypeConfiguration<Credencial>
+	public class CredencialConfiguration : IEntityTypeConfiguration<Credencial>
 	{
 		public void Configure(EntityTypeBuilder<Credencial> builder)
 		{
@@ -18,9 +18,9 @@ namespace Peiton.Data.Configuration
 			builder.Property(p => p.DetenerRobot).IsRequired();
 			builder.Property(p => p.RequiereSMS).IsRequired();
 
-			/*builder.HasOne(d => d.EntidadFinanciera)
+			builder.HasOne(d => d.EntidadFinanciera)
 				.WithMany(p => p.Credenciales)
-				.HasForeignKey(d => d.EntidadFinancieraId);*/
+				.HasForeignKey(d => d.EntidadFinancieraId);
 
 			/*builder.HasOne(d => d.Tutelado)
 				.WithMany(p => p.Credenciales)

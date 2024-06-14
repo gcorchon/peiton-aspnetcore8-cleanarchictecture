@@ -20,7 +20,10 @@ public class PeitonDbContext : DbContext
 
     public IQueryable<Saldo> ContabilidadObtenerSaldos(int ano) => FromExpression(() => ContabilidadObtenerSaldos(ano));
 
+    public DbSet<Account> Account => Set<Account>();
     public DbSet<Capitulo> Capitulo => Set<Capitulo>();
+    public DbSet<Credencial> Credencial => Set<Credencial>();
+    public DbSet<EntidadFinanciera> EntidadFinanciera => Set<EntidadFinanciera>();
     public DbSet<Partida> Partida => Set<Partida>();
     public DbSet<Tutelado> Tutelado => Set<Tutelado>();
     public DbSet<Usuario> Usuario => Set<Usuario>();

@@ -4,7 +4,7 @@ using Peiton.Core.Entities;
 
 namespace Peiton.Data.Configuration
 {
-    public class AccountConfiguration : IEntityTypeConfiguration<Account>
+	public class AccountConfiguration : IEntityTypeConfiguration<Account>
 	{
 		public void Configure(EntityTypeBuilder<Account> builder)
 		{
@@ -21,9 +21,10 @@ namespace Peiton.Data.Configuration
 			builder.Property(p => p.Iban).HasMaxLength(12);
 			builder.Property(p => p.Origen).HasMaxLength(1).IsRequired().HasDefaultValueSql("('AB')");
 			builder.Property(p => p.Saldo).HasColumnType("money");
-			/*builder.HasOne(d => d.Credencial)
+
+			builder.HasOne(d => d.Credencial)
 				.WithMany(p => p.Accounts)
-				.HasForeignKey(d => d.CredencialId);*/
+				.HasForeignKey(d => d.CredencialId);
 
 		}
 	}

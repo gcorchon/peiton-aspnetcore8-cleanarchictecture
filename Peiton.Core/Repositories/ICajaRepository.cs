@@ -1,6 +1,6 @@
-using Peiton.Contracts.Caja;
 using Peiton.Core.Entities;
 using Peiton.Core.Enums;
+using Peiton.Contracts.Caja;
 
 namespace Peiton.Core.Repositories
 {
