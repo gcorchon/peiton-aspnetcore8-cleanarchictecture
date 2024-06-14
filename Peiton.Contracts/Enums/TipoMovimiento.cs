@@ -1,4 +1,4 @@
-namespace Peiton.Core.Enums;
+namespace Peiton.Contracts.Enums;
 public enum TipoMovimiento : int
 {
     Caja = 1,

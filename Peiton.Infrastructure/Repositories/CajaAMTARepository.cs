@@ -3,17 +3,18 @@ using Peiton.Core.Repositories;
 using Peiton.Contracts.MovimientosPendientesCaja;
 using Microsoft.EntityFrameworkCore;
 using Peiton.DependencyInjection;
+using Peiton.Contracts.Caja;
 
 namespace Peiton.Infrastructure.Repositories
 {
 
     [Injectable(typeof(ICajaAMTARepository))]
-    public class CajaAMTARepository: RepositoryBase<CajaAMTA>, ICajaAMTARepository
-	{
-        
+    public class CajaAMTARepository : RepositoryBase<CajaAMTA>, ICajaAMTARepository
+    {
+
         public CajaAMTARepository(PeitonDbContext dbContext) : base(dbContext)
         {
-            
+
         }
 
         public Task<int> ContarMovimientosPendientesCajaAsync(MovimientosPendientesCajaFilter filter)
@@ -30,7 +31,7 @@ namespace Peiton.Infrastructure.Repositories
         {
             IQueryable<CajaAMTA> query = this.DbSet
                              .Include(c => c.Tutelado);
-            
+
             query = ApplyFilters(query, filter);
 
             return query
@@ -44,7 +45,7 @@ namespace Peiton.Infrastructure.Repositories
         IQueryable<CajaAMTA> ApplyFilters(IQueryable<CajaAMTA> query, MovimientosPendientesCajaFilter filter)
         {
             var fechaDesde = new DateTime(2016, 1, 1);
-            
+
             query = query.Where(c => c.Fecha >= fechaDesde);
 
             if (!string.IsNullOrWhiteSpace(filter.Fecha))
@@ -52,17 +53,17 @@ namespace Peiton.Infrastructure.Repositories
                 query = query.Where(c => this.DbContext.DateAsString(c.Fecha).Contains(filter.Fecha));
             }
 
-            if(!string.IsNullOrWhiteSpace(filter.Importe))
+            if (!string.IsNullOrWhiteSpace(filter.Importe))
             {
                 query = query.Where(c => this.DbContext.DecimalAsString(c.Importe).StartsWith(filter.Importe));
             }
 
-            if(!string.IsNullOrWhiteSpace(filter.Concepto))
+            if (!string.IsNullOrWhiteSpace(filter.Concepto))
             {
                 query = query.Where(c => c.Concepto.Contains(filter.Concepto));
             }
 
-            if(!string.IsNullOrWhiteSpace(filter.Persona))
+            if (!string.IsNullOrWhiteSpace(filter.Persona))
             {
                 query = query.Where(c => (c.Persona ?? "").Contains(filter.Persona) || (c.Tutelado != null && (c.Tutelado.NombreCompleto ?? "").Contains(filter.Persona)));
             }
@@ -74,7 +75,7 @@ namespace Peiton.Infrastructure.Repositories
                     query = query
                         .Include(c => c.Asientos)
                         .Where(c => c.Asientos.Sum(a => a.Importe) != c.Importe);
-                } 
+                }
                 else
                 {
                     query = query
@@ -85,5 +86,53 @@ namespace Peiton.Infrastructure.Repositories
 
             return query;
         }
+
+        public Task<int> ContarCajaAMTAAsync(decimal saldoInicial, CajaAMTAFilter filter)
+        {
+            return ApplyFilter(this.DbContext.VwCajaAMTA.Include(c => c.Tutelado), filter, saldoInicial).CountAsync();
+        }
+
+        public Task<List<VwCajaAMTA>> ObtenerCajaAMTAAsync(int page, int total, decimal saldoInicial, CajaAMTAFilter filter)
+        {
+            return ApplyFilter(this.DbContext.VwCajaAMTA.Include(c => c.Tutelado), filter, saldoInicial)
+                    .OrderByDescending(c => c.Id)
+                    .Skip((page - 1) * total)
+                    .Take(total)
+                    .AsNoTracking()
+                    .ToListAsync();
+        }
+
+        private IQueryable<VwCajaAMTA> ApplyFilter(IQueryable<VwCajaAMTA> query, CajaAMTAFilter filter, decimal saldoInicial)
+        {
+            if (!string.IsNullOrWhiteSpace(filter.Concepto))
+            {
+                query = query.Where(c => c.Concepto.Contains(filter.Concepto));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Persona))
+            {
+                query = query.Where(c => (c.Persona != null && c.Persona.Contains(filter.Persona)) || (c.Tutelado != null && c.Tutelado.NombreCompleto!.Contains(filter.Persona)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Fecha))
+            {
+                query = query.Where(c => DbContext.DateAsString(c.Fecha).Contains(filter.Fecha));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Importe))
+            {
+                query = query.Where(c => DbContext.DecimalAsString(c.Importe).StartsWith(filter.Importe));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Saldo))
+            {
+                query = query.Where(c => DbContext.DecimalAsString(c.Saldo).StartsWith(filter.Saldo + saldoInicial));
+            }
+
+            return query;
+        }
     }
+
+
+
 }

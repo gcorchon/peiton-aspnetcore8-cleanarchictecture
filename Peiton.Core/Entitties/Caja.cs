@@ -32,6 +32,7 @@ namespace Peiton.Core.Entities
 		public virtual Usuario Usuario { get; set; } = null!;
 		public virtual Usuario? Pagador { get; set; }
 		public virtual ICollection<CajaAMTA> CajaAMTA { get; } = new List<CajaAMTA>();
+		public virtual ICollection<VwCajaAMTA> VwCajaAMTA { get; } = new List<VwCajaAMTA>();
 
 	}
 }

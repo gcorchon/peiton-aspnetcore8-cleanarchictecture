@@ -2,8 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;
+
+using Peiton.Contracts.Caja;
 using Peiton.Contracts.Asientos;
+
 using Peiton.Core.Entities;
+
 
 namespace Peiton.Infrastructure;
 
@@ -27,6 +31,8 @@ public class PeitonDbContext : DbContext
     public DbSet<Partida> Partida => Set<Partida>();
     public DbSet<Tutelado> Tutelado => Set<Tutelado>();
     public DbSet<Usuario> Usuario => Set<Usuario>();
+
+    public DbSet<VwCajaAMTA> VwCajaAMTA => Set<VwCajaAMTA>();
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

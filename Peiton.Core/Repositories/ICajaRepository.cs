@@ -1,5 +1,5 @@
 using Peiton.Core.Entities;
-using Peiton.Core.Enums;
+using Peiton.Contracts.Enums;
 using Peiton.Contracts.Caja;
 
 namespace Peiton.Core.Repositories

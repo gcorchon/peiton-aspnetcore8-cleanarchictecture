@@ -3,6 +3,7 @@
 using Ent = Peiton.Core.Entities;
 using VM = Peiton.Contracts;
 using Peiton.Serialization;
+using Peiton.Core.Entities;
 
 namespace Peiton.Core.Mappings
 {
@@ -77,6 +78,8 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Tipo, opt => opt.MapFrom(obj => obj.TipoPago != null ? obj.TipoPago.Descripcion : null))
                 .ForMember(vm => vm.Metodo, opt => opt.MapFrom(obj => obj.MetodoPago != null ? obj.MetodoPago.Descripcion : null));
 
+            CreateMap<Ent.VwCajaAMTA, VM.Caja.CajaAMTAListItem>()
+                .ForMember(vm => vm.PersonaReceptora, m => m.MapFrom(o => o.Persona ?? o.Tutelado!.NombreCompleto));
 
             /*CreateMap<Ent.Account, VM.Account.AccountViewModel>();
             CreateMap<Ent.EntidadFinanciera, VM.EntidadFinanciera.EntidadFinancieraViewModel>()

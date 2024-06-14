@@ -1,7 +1,7 @@
 ﻿using Peiton.Contracts.Caja;
 using Peiton.Contracts.Common;
 using Peiton.Core.Entities;
-using Peiton.Core.Enums;
+using Peiton.Contracts.Enums;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
