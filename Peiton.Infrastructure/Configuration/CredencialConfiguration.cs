@@ -22,9 +22,9 @@ namespace Peiton.Data.Configuration
 				.WithMany(p => p.Credenciales)
 				.HasForeignKey(d => d.EntidadFinancieraId);
 
-			/*builder.HasOne(d => d.Tutelado)
+			builder.HasOne(d => d.Tutelado)
 				.WithMany(p => p.Credenciales)
-				.HasForeignKey(d => d.TuteladoId);*/
+				.HasForeignKey(d => d.TuteladoId);
 
 		}
 	}

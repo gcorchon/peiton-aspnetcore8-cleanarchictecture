@@ -10,20 +10,27 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 [Route("api/[controller]")]
 public class ArqueoController : ControllerBase
 {
-    [HttpGet("")]
+    [HttpGet("{fecha:datetime}")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> Arqueo([FromQuery] DateTime fecha, ArqueoHandler handler)
+    public async Task<IActionResult> Arqueo(DateTime fecha, ArqueoHandler handler)
     {
         var data = await handler.HandleAsync(fecha);
         return Ok(data);
     }
 
-    [HttpPost("")]
+    [HttpPost("{fecha:datetime}")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> GuardarArqueo([FromQuery] DateTime fecha, [FromBody] ArqueoModel arqueo, GuardarArqueoHandler handler)
+    public async Task<IActionResult> GuardarArqueo(DateTime fecha, [FromBody] ArqueoModel arqueo, GuardarArqueoHandler handler)
     {
         await handler.HandleAsync(fecha, arqueo);
         return Accepted();
     }
 
+    [HttpGet("{fecha:datetime}/documento")]
+    [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
+    public async Task<IActionResult> DocumentoArqueo(DateTime fecha, DocumentoArqueoHandler handler)
+    {
+        await handler.HandleAsync(fecha);
+        return Accepted();
+    }
 }

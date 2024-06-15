@@ -30,7 +30,7 @@ public class CajaAMTAController(IMapper mapper) : ControllerBase
         return Accepted();
     }
 
-    [HttpPost()]
+    [HttpPost]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
     public async Task<IActionResult> GuardarMovimientoCajaAMTA(GuardarCajaAMTA request, GuardarMovimientoCajaAMTAHandler handler)
     {
@@ -38,5 +38,13 @@ public class CajaAMTAController(IMapper mapper) : ControllerBase
         return Accepted();
     }
 
+    [HttpPost("documento")]
+    [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
+    public async Task<IActionResult> GenerarDocumentoCajaAMTA(GuardarCajaAMTA request, GenerarDocumentoCajaAMTAHandler handler)
+    {
+        await handler.HandleAsync(request);
+        //Aquí falta coger la respuesta del handler, que probablemente sea un Byte[] y devolverla como archivo
+        return Ok();
+    }
 
 }

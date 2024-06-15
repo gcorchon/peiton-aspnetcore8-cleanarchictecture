@@ -129,7 +129,7 @@ namespace Peiton.Core.Entities
 		/* public virtual ICollection<ControlCuentaGeneral> ControlesCuentasGenerales { get; } = new List<ControlCuentaGeneral>(); */
 		/* public virtual ICollection<ControlInventario> ControlesInventarios { get; } = new List<ControlInventario>(); */
 		/* public virtual ICollection<ControlRendicion> ControlesRendiciones { get; } = new List<ControlRendicion>(); */
-		/* public virtual ICollection<Credencial> Credenciales { get; } = new List<Credencial>(); */
+		public virtual ICollection<Credencial> Credenciales { get; } = new List<Credencial>();
 
 
 		/* public virtual ICollection<DatosJuridicos> DatosJuridicos { get; } = new List<DatosJuridicos>(); */

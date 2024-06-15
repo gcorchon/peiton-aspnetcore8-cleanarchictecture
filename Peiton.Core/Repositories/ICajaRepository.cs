@@ -12,5 +12,6 @@ namespace Peiton.Core.Repositories
 		Task<decimal> ObtenerSaldoCajaAsync();
 		Task<List<Caja>> ObtenerHistoricoMovimientosAsync(int page, int total, int tuteladoId, HistoricoMovimientosFilter filter);
 		Task<int> ContarHistoricoMovimientosAsync(int tuteladoId, HistoricoMovimientosFilter filter);
+		Task<List<Reintegro>> ObtenerReintegrosParaDocumento(DateTime fechaDesde, DateTime fechaHasta);
 	}
 }

@@ -134,5 +134,17 @@ namespace Peiton.Infrastructure.Repositories
 			var total = await DbSet.Where(c => !c.Anticipo && !c.Pendiente).SumAsync(c => c.Importe);
 			return total + saldoInicialCaja;
 		}
+
+		public Task<List<Reintegro>> ObtenerReintegrosParaDocumento(DateTime fechaDesde, DateTime fechaHasta)
+		{
+			return DbContext.Database
+						.SqlQuery<Reintegro>(@$"SELECT Tutelado.Apellidos + ', ' + Tutelado.Nombre as ApellidosNombre, SaldoInicialCaja + coalesce(Total, 0) as SaldoCaja, Caja.Concepto, Caja.Importe, Convert(date, Caja.FechaPago) as FechaPago, Caja.Anticipo
+                                                FROM [Tutelado]
+                                                inner join Caja on Pk_Tutelado = Caja.Fk_Tutelado and Caja.FechaPago between {fechaDesde} and dateadd(d, 1, {fechaHasta}) 
+                                                left join (select Fk_Tutelado, SUM(Importe) as Total 
+                                                from Caja where Caja.Anticipo=0 and Caja.Pendiente=0 group by Fk_Tutelado) dv 
+                                                ON Pk_Tutelado = dv.Fk_Tutelado
+                                                order by 1, Caja.FechaPago desc").ToListAsync();
+		}
 	}
 }

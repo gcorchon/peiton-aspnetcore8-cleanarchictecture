@@ -96,6 +96,10 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Id, opt => opt.Ignore())
                 .ForMember(vm => vm.CajaId, opt => opt.MapFrom(c => c.Id));
 
+            CreateMap<Ent.Tutelado, VM.Caja.TuteladoReintegro>()
+                .ForMember(vm => vm.Cuentas, opt => opt.MapFrom(t => t.Credenciales.SelectMany(c => c.Accounts)));
+
+            CreateMap<Ent.Account, VM.Caja.Cuenta>();
         }
     }
 }
