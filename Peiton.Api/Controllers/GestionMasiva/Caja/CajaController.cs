@@ -16,7 +16,7 @@ public class CajaController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> Caja([FromQuery] CajaFilter filter, [FromQuery] Pagination pagination, TipoMovimiento metodo, CajaHandler handler)
+    public async Task<IActionResult> MovimientosCaja([FromQuery] CajaFilter filter, [FromQuery] Pagination pagination, TipoMovimiento metodo, MovimientosCajaHandler handler)
     {
         var data = await handler.HandleAsync(metodo, filter, pagination);
         var vm = mapper.Map<IEnumerable<CajaListItem>>(data.Items);
@@ -31,4 +31,19 @@ public class CajaController(IMapper mapper) : ControllerBase
         return Ok(vm);
     }
 
+    [HttpDelete("{id:int}")]
+    [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
+    public async Task<IActionResult> EliminarMovimientoCaja(int id, EliminarMovimientoCajaHandler handler)
+    {
+        await handler.HandleAsync(id);
+        return Accepted();
+    }
+
+    [HttpDelete("{id:int}/deshacer-pago")]
+    [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
+    public async Task<IActionResult> DeshacerMovimientoCaja(int id, DeshacerMovimientoCajaHandler handler)
+    {
+        await handler.HandleAsync(id);
+        return Accepted();
+    }
 }

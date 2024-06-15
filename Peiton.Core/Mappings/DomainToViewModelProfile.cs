@@ -91,6 +91,11 @@ namespace Peiton.Core.Mappings
 
             CreateMap<Ent.CajaIncidencia, VM.Caja.IncidenciaViewModel>()
                 .ForMember(vm => vm.Autorizador, opt => opt.MapFrom(obj => obj.Usuario.NombreCompleto));
+
+            CreateMap<Ent.Caja, Ent.CajaIncidencia>()
+                .ForMember(vm => vm.Id, opt => opt.Ignore())
+                .ForMember(vm => vm.CajaId, opt => opt.MapFrom(c => c.Id));
+
         }
     }
 }

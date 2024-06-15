@@ -16,7 +16,7 @@ public class IncidenciaController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> Caja([FromQuery] IncidenciasFilter filter, [FromQuery] Pagination pagination, IncidenciasHandler handler)
+    public async Task<IActionResult> Incidencias([FromQuery] IncidenciasFilter filter, [FromQuery] Pagination pagination, IncidenciasHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<IncidenciaListItem>>(data.Items);

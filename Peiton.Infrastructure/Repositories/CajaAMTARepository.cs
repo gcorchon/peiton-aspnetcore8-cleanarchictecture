@@ -4,6 +4,9 @@ using Peiton.Contracts.MovimientosPendientesCaja;
 using Microsoft.EntityFrameworkCore;
 using Peiton.DependencyInjection;
 using Peiton.Contracts.Caja;
+using Microsoft.Extensions.Options;
+using Peiton.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Peiton.Infrastructure.Repositories
 {
@@ -12,9 +15,12 @@ namespace Peiton.Infrastructure.Repositories
     public class CajaAMTARepository : RepositoryBase<CajaAMTA>, ICajaAMTARepository
     {
 
-        public CajaAMTARepository(PeitonDbContext dbContext) : base(dbContext)
+        private readonly CajaAMTASettings cajaAMTASettings;
+        public CajaAMTARepository(PeitonDbContext dbContext, IOptions<CajaAMTASettings> cajaAMTAConfiguration, ILogger<CajaAMTARepository> logger) : base(dbContext)
         {
+            this.cajaAMTASettings = cajaAMTAConfiguration.Value;
 
+            logger.LogInformation(cajaAMTAConfiguration.Value.SaldoInicial.ToString());
         }
 
         public Task<int> ContarMovimientosPendientesCajaAsync(MovimientosPendientesCajaFilter filter)
@@ -87,14 +93,14 @@ namespace Peiton.Infrastructure.Repositories
             return query;
         }
 
-        public Task<int> ContarCajaAMTAAsync(decimal saldoInicial, CajaAMTAFilter filter)
+        public Task<int> ContarCajaAMTAAsync(CajaAMTAFilter filter)
         {
-            return ApplyFilter(this.DbContext.VwCajaAMTA.Include(c => c.Tutelado), filter, saldoInicial).CountAsync();
+            return ApplyFilter(this.DbContext.VwCajaAMTA.Include(c => c.Tutelado), filter).CountAsync();
         }
 
-        public Task<List<VwCajaAMTA>> ObtenerCajaAMTAAsync(int page, int total, decimal saldoInicial, CajaAMTAFilter filter)
+        public Task<List<VwCajaAMTA>> ObtenerCajaAMTAAsync(int page, int total, CajaAMTAFilter filter)
         {
-            return ApplyFilter(this.DbContext.VwCajaAMTA.Include(c => c.Tutelado), filter, saldoInicial)
+            return ApplyFilter(this.DbContext.VwCajaAMTA.Include(c => c.Tutelado), filter)
                     .OrderByDescending(c => c.Id)
                     .Skip((page - 1) * total)
                     .Take(total)
@@ -102,7 +108,7 @@ namespace Peiton.Infrastructure.Repositories
                     .ToListAsync();
         }
 
-        private IQueryable<VwCajaAMTA> ApplyFilter(IQueryable<VwCajaAMTA> query, CajaAMTAFilter filter, decimal saldoInicial)
+        private IQueryable<VwCajaAMTA> ApplyFilter(IQueryable<VwCajaAMTA> query, CajaAMTAFilter filter)
         {
             if (!string.IsNullOrWhiteSpace(filter.Concepto))
             {
@@ -126,12 +132,18 @@ namespace Peiton.Infrastructure.Repositories
 
             if (!string.IsNullOrWhiteSpace(filter.Saldo))
             {
-                query = query.Where(c => DbContext.DecimalAsString(c.Saldo).StartsWith(filter.Saldo + saldoInicial));
+                query = query.Where(c => DbContext.DecimalAsString(c.Saldo).StartsWith(filter.Saldo + cajaAMTASettings.SaldoInicial));
             }
 
             return query;
         }
+
+        public async Task<decimal> ObtenerSaldoCajaAMTAAsync()
+        {
+            return await DbSet.SumAsync(c => c.Importe) + cajaAMTASettings.SaldoInicial;
+        }
     }
+
 
 
 

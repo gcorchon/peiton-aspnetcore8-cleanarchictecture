@@ -11,8 +11,8 @@ public class CajaAMTAHandler(ICajaAMTARepository cajaAMTARepository)
 {
     public async Task<PaginatedData<VwCajaAMTA>> HandleAsync(CajaAMTAFilter filter, Pagination pagination)
     {
-        var items = await cajaAMTARepository.ObtenerCajaAMTAAsync(pagination.Page, pagination.Total, 0, filter);
-        var total = await cajaAMTARepository.ContarCajaAMTAAsync(0, filter);
+        var items = await cajaAMTARepository.ObtenerCajaAMTAAsync(pagination.Page, pagination.Total, filter);
+        var total = await cajaAMTARepository.ContarCajaAMTAAsync(filter);
 
         return new PaginatedData<VwCajaAMTA>()
         {

@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.GestionMasiva.CajaMasiva;
 
 [Injectable]
-public class CajaHandler(ICajaRepository cajaRepository)
+public class MovimientosCajaHandler(ICajaRepository cajaRepository)
 {
     public async Task<PaginatedData<Caja>> HandleAsync(TipoMovimiento tipo, CajaFilter filter, Pagination pagination)
     {

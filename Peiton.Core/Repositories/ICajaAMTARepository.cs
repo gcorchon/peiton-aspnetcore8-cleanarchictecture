@@ -8,7 +8,8 @@ namespace Peiton.Core.Repositories
     {
         Task<int> ContarMovimientosPendientesCajaAsync(MovimientosPendientesCajaFilter filter);
         Task<List<CajaAMTA>> ObtenerMovimientosPendientesCajaAsync(int page, int total, MovimientosPendientesCajaFilter filter);
-        Task<int> ContarCajaAMTAAsync(decimal saldoInicial, CajaAMTAFilter filter);
-        Task<List<VwCajaAMTA>> ObtenerCajaAMTAAsync(int page, int total, decimal saldoInicial, CajaAMTAFilter filter);
+        Task<int> ContarCajaAMTAAsync(CajaAMTAFilter filter);
+        Task<List<VwCajaAMTA>> ObtenerCajaAMTAAsync(int page, int total, CajaAMTAFilter filter);
+        Task<decimal> ObtenerSaldoCajaAMTAAsync();
     }
 }

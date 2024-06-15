@@ -127,5 +127,12 @@ namespace Peiton.Infrastructure.Repositories
 			var total = await DbSet.Where(c => !c.Anticipo && !c.Pendiente && c.TuteladoId == tuteladoId).SumAsync(c => c.Importe);
 			return total + saldoInicialCaja;
 		}
+
+		public async Task<decimal> ObtenerSaldoCajaAsync()
+		{
+			var saldoInicialCaja = await DbContext.Tutelado.SumAsync(t => t.SaldoInicialCaja);
+			var total = await DbSet.Where(c => !c.Anticipo && !c.Pendiente).SumAsync(c => c.Importe);
+			return total + saldoInicialCaja;
+		}
 	}
 }

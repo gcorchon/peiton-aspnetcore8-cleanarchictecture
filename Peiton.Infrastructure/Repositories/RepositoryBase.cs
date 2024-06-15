@@ -172,12 +172,12 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
 
     public T? Get(Expression<Func<T, bool>> where)
     {
-        return DbSet.FirstOrDefault<T>(where);
+        return DbSet.SingleOrDefault<T>(where);
     }
 
     public Task<T?> GetAsync(Expression<Func<T, bool>> where)
     {
-        return DbSet.FirstOrDefaultAsync<T>(where);
+        return DbSet.SingleOrDefaultAsync<T>(where);
     }
 
 
