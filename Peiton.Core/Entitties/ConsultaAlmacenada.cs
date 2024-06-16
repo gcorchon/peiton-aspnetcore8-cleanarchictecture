@@ -10,7 +10,7 @@ namespace Peiton.Core.Entities
 		public string? Resumen { get; set; }
 		public virtual CategoriaConsulta CategoriaConsulta { get; set; }= null!;
 
-		/* public virtual ICollection<Grupo> Grupos { get; } = new List<Grupo>(); */
-		/* public virtual ICollection<Usuario> Usuarios { get; } = new List<Usuario>(); */
+		public virtual ICollection<Grupo> Grupos { get; } = new List<Grupo>();
+		public virtual ICollection<Usuario> Usuarios { get; } = new List<Usuario>();
 	}
 }

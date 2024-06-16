@@ -4,7 +4,7 @@ using Peiton.Core.Entities;
 
 namespace Peiton.Data.Configuration
 {
-    public class DatosJuridicosConfiguration : IEntityTypeConfiguration<DatosJuridicos>
+	public class DatosJuridicosConfiguration : IEntityTypeConfiguration<DatosJuridicos>
 	{
 		public void Configure(EntityTypeBuilder<DatosJuridicos> builder)
 		{
@@ -20,9 +20,9 @@ namespace Peiton.Data.Configuration
 			builder.Property(p => p.NivelIntensidadId).HasColumnName("Fk_NivelIntensidad");
 			builder.Property(p => p.PartidoJudicialId).HasColumnName("Fk_PartidoJudicial");
 			builder.Property(p => p.OrigenExpedienteId).HasColumnName("Fk_OrigenExpediente");
-			builder.Property(p => p.Archivo_DocumentoJuraId).HasColumnName("Fk_Archivo_DocumentoJura");
-			builder.Property(p => p.Archivo_ResolucionJudicialId).HasColumnName("Fk_Archivo_ResolucionJudicial");
-			builder.Property(p => p.Archivo_ResolucionJudicialAutoId).HasColumnName("Fk_Archivo_ResolucionJudicialAuto");
+			builder.Property(p => p.ArchivoDocumentoJuraId).HasColumnName("Fk_Archivo_DocumentoJura");
+			builder.Property(p => p.ArchivoResolucionJudicialId).HasColumnName("Fk_Archivo_ResolucionJudicial");
+			builder.Property(p => p.ArchivoResolucionJudicialAutoId).HasColumnName("Fk_Archivo_ResolucionJudicialAuto");
 			builder.Property(p => p.SolicitanteRevisionId).HasColumnName("Fk_SolicitanteRevision");
 			builder.Property(p => p.SentenciaRevisada).IsRequired();
 			builder.Property(p => p.GradoApoyoId).HasColumnName("Fk_GradoApoyo");

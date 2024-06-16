@@ -1,1 +1,94 @@
-[{"tutelado":{"pk_Tutelado":6,"nombreCompleto":"MILAGROS YOLANDA ABASCAL VENTURA","cuentas":[{"pk_Account":1433,"numero":"2038-1861-60-3000588231","saldo":44690.41,"fechaSaldo":"2019-04-24T23:12:45.33"}]},"cuenta":1433,"importe":600},{"tutelado":{"pk_Tutelado":5,"nombreCompleto":"CRISTINA ABASCAL ROCAMORA","cuentas":[{"pk_Account":1432,"numero":"2038-1861-67-3000307205","saldo":28871.42,"fechaSaldo":"2019-04-24T22:04:15.36"}]},"cuenta":1432,"importe":300},{"tutelado":{"pk_Tutelado":1132,"nombreCompleto":"JOSE LUIS NAVARRO FUGUET","cuentas":[{"pk_Account":2345,"numero":"2038-1861-60-3000450162","saldo":16926.67,"fechaSaldo":"2019-04-25T10:30:33.733"},{"pk_Account":3738,"numero":"0030-1162-51-0000238271","saldo":1988.09,"fechaSaldo":"2019-04-25T10:32:00.457"},{"pk_Account":29383,"numero":"0030-1006-61-0003959271","saldo":13331.39,"fechaSaldo":"2019-04-25T10:32:00.457"}]},"cuenta":2345,"importe":200},{"tutelado":{"pk_Tutelado":1,"nombreCompleto":"MILOUD AARAB","cuentas":[{"pk_Account":3380,"numero":"2038-1861-60-3000649978","saldo":12987.9,"fechaSaldo":"2019-04-24T21:36:31.013"}]},"cuenta":3380,"importe":100},{"tutelado":{"pk_Tutelado":4,"nombreCompleto":"JUAN ANTONIO ABAD SANZ","cuentas":[{"pk_Account":1436,"numero":"2038-1861-61-3000423039","saldo":33345.52,"fechaSaldo":"2019-04-24T21:55:05.537"}]},"cuenta":1436,"importe":-500}]
+[
+  {
+    "tutelado": {
+      "id": 6,
+      "nombreCompleto": "MILAGROS YOLANDA ABASCAL VENTURA",
+      "cuentas": [
+        {
+          "id": 1433,
+          "iban": "2038-1861-60-3000588231",
+          "saldo": 44690.41,
+          "fechaSaldo": "2019-04-24T23:12:45.33"
+        }
+      ]
+    },
+    "cuenta": 1433,
+    "importe": 600
+  },
+  {
+    "tutelado": {
+      "id": 5,
+      "nombreCompleto": "CRISTINA ABASCAL ROCAMORA",
+      "cuentas": [
+        {
+          "id": 1432,
+          "iban": "2038-1861-67-3000307205",
+          "saldo": 28871.42,
+          "fechaSaldo": "2019-04-24T22:04:15.36"
+        }
+      ]
+    },
+    "cuenta": 1432,
+    "importe": 300
+  },
+  {
+    "tutelado": {
+      "id": 1132,
+      "nombreCompleto": "JOSE LUIS NAVARRO FUGUET",
+      "cuentas": [
+        {
+          "id": 2345,
+          "iban": "2038-1861-60-3000450162",
+          "saldo": 16926.67,
+          "fechaSaldo": "2019-04-25T10:30:33.733"
+        },
+        {
+          "id": 3738,
+          "iban": "0030-1162-51-0000238271",
+          "saldo": 1988.09,
+          "fechaSaldo": "2019-04-25T10:32:00.457"
+        },
+        {
+          "id": 29383,
+          "iban": "0030-1006-61-0003959271",
+          "saldo": 13331.39,
+          "fechaSaldo": "2019-04-25T10:32:00.457"
+        }
+      ]
+    },
+    "cuenta": 2345,
+    "importe": 200
+  },
+  {
+    "tutelado": {
+      "id": 1,
+      "nombreCompleto": "MILOUD AARAB",
+      "cuentas": [
+        {
+          "id": 3380,
+          "iban": "2038-1861-60-3000649978",
+          "saldo": 12987.9,
+          "fechaSaldo": "2019-04-24T21:36:31.013"
+        }
+      ]
+    },
+    "cuenta": 3380,
+    "importe": 100
+  },
+  {
+    "tutelado": {
+      "id": 4,
+      "nombreCompleto": "JUAN ANTONIO ABAD SANZ",
+      "cuentas": [
+        {
+          "id": 1436,
+          "iban": "2038-1861-61-3000423039",
+          "saldo": 33345.52,
+          "fechaSaldo": "2019-04-24T21:55:05.537"
+        }
+      ]
+    },
+    "cuenta": 1436,
+    "importe": -500
+  }
+]

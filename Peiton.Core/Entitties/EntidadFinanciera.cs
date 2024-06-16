@@ -7,7 +7,7 @@ namespace Peiton.Core.Entities
 		public string Codigo { get; set; } = null!;
 		public string EurobitsID { get; set; } = null!;
 		public string Productos { get; set; } = null!;
-		public string? Campos { get; set; }
+		public string Campos { get; set; } = null!;
 		public string? FormatString { get; set; }
 		public string? CssClass { get; set; }
 		public bool Robot { get; set; }

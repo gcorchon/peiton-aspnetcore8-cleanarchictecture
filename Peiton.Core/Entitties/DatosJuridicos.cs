@@ -1,6 +1,6 @@
 namespace Peiton.Core.Entities
 {
-    public class DatosJuridicos
+	public class DatosJuridicos
 	{
 		public int TuteladoId { get; set; }
 		public int? JuzgadoId { get; set; }
@@ -23,9 +23,9 @@ namespace Peiton.Core.Entities
 		public DateTime? ComunicacionJura { get; set; }
 		public DateTime? ReconocimientoForense { get; set; }
 		public DateTime? ReconocimientoJudicial { get; set; }
-		public int? Archivo_DocumentoJuraId { get; set; }
-		public int? Archivo_ResolucionJudicialId { get; set; }
-		public int? Archivo_ResolucionJudicialAutoId { get; set; }
+		public int? ArchivoDocumentoJuraId { get; set; }
+		public int? ArchivoResolucionJudicialId { get; set; }
+		public int? ArchivoResolucionJudicialAutoId { get; set; }
 		public int? SolicitanteRevisionId { get; set; }
 		public bool SentenciaRevisada { get; set; }
 		public DateTime? FechaRevision { get; set; }
@@ -55,8 +55,8 @@ namespace Peiton.Core.Entities
 		public virtual Nombramiento? Nombramiento2 { get; set; }
 		public virtual PartidoJudicialInhibicion? PartidoJudicialInhibicion { get; set; }
 		public virtual Procedimiento? Procedimiento { get; set; }
-		public virtual Tutelado Tutelado { get; set; }= null!;
-		public virtual LeyNombramiento LeyNombramiento { get; set; }= null!;
+		public virtual Tutelado Tutelado { get; set; } = null!;
+		public virtual LeyNombramiento LeyNombramiento { get; set; } = null!;
 		public virtual OrigenExpediente? OrigenExpediente { get; set; }
 		public virtual PartidoJudicial? PartidoJudicial { get; set; }
 		public virtual SolicitanteRevision? SolicitanteRevision { get; set; }

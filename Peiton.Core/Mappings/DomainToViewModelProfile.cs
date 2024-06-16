@@ -100,6 +100,20 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Cuentas, opt => opt.MapFrom(t => t.Credenciales.SelectMany(c => c.Accounts)));
 
             CreateMap<Ent.Account, VM.Caja.Cuenta>();
+
+            CreateMap<Ent.Credencial, VM.Bancos.CredencialBloquedaListItem>()
+                .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(c => c.EntidadFinanciera.Descripcion))
+                .ForMember(vm => vm.Tutelado, opt => opt.MapFrom(c => c.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.Dni, opt => opt.MapFrom(c => c.Tutelado.DNI))
+                .ForMember(vm => vm.NumeroExpediente, opt => opt.MapFrom(c => c.Tutelado.NumeroExpediente))
+                .ForMember(vm => vm.Nombramiento, opt => opt.MapFrom(c => c.Tutelado.DatosJuridicos != null && c.Tutelado.DatosJuridicos.Nombramiento != null ? c.Tutelado.DatosJuridicos.Nombramiento.Descripcion : null));
+
+            CreateMap<Ent.ConsultaAlmacenada, VM.Consultas.ConsultaViewModel>()
+                .ForMember(vm => vm.CategoriaId, opt => opt.MapFrom(c => c.CategoriaConsultaId))
+                .ForMember(vm => vm.Usuarios, opt => opt.MapFrom(c => c.Grupos.Select(g => new VM.Consultas.Permiso() { Tipo = 2, Id = g.Id, Nombre = g.Descripcion })
+                                                                       .Concat(c.Usuarios.Select(u => new VM.Consultas.Permiso() { Tipo = 1, Id = u.Id, Nombre = u.NombreCompleto }))
+                    
+                ));
         }
     }
 }

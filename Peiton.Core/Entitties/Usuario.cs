@@ -70,9 +70,9 @@ namespace Peiton.Core.Entities
 		/* public virtual ICollection<VehiculoEntidadReserva> VehiculosEntidadesReservas { get; } = new List<VehiculoEntidadReserva>(); */
 		/* public virtual ICollection<Voluntariado> VoluntariadosUsuario { get; } = new List<Voluntariado>(); */
 		/* public virtual ICollection<Voluntariado> VoluntariadosVoluntario { get; } = new List<Voluntariado>(); */
-		/* public virtual ICollection<ConsultaAlmacenada> ConsultasAlmacenadas { get; } = new List<ConsultaAlmacenada>(); */
+		public virtual ICollection<ConsultaAlmacenada> ConsultasAlmacenadas { get; } = new List<ConsultaAlmacenada>(); 
 		/* public virtual ICollection<Evento> Eventos { get; } = new List<Evento>(); */
-		/* public virtual ICollection<Grupo> Grupos { get; } = new List<Grupo>(); */
+		public virtual ICollection<Grupo> Grupos { get; } = new List<Grupo>();
 		/* public virtual ICollection<Felicitacion> Felicitaciones { get; } = new List<Felicitacion>(); */
 		/* public virtual ICollection<Permiso> Permisos { get; } = new List<Permiso>(); */
 	}

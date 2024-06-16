@@ -40,6 +40,13 @@ public class ReintegrosController(IMapper mapper) : ControllerBase
         return Ok();
     }
 
+    [HttpGet("exportar")]
+    public async Task<IActionResult> ExportarReintegros(ExportarReintegrosHandler handler)
+    {
+        var data = await handler.HandleAsync();
+        return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "reintegros.xlsx");
+    }
+
     [HttpGet("tutelados")]
     public async Task<IActionResult> Tutelados([FromQuery] string text, TuteladosReintegrosHandler handler)
     {

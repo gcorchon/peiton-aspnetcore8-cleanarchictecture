@@ -7,6 +7,7 @@ using Peiton.Contracts.Caja;
 using Peiton.Contracts.Asientos;
 
 using Peiton.Core.Entities;
+using Peiton.Contracts.Consultas;
 
 
 namespace Peiton.Infrastructure;
@@ -23,6 +24,7 @@ public class PeitonDbContext : DbContext
     public string DecimalAsString(decimal value) => throw new NotSupportedException();
 
     public IQueryable<Saldo> ContabilidadObtenerSaldos(int ano) => FromExpression(() => ContabilidadObtenerSaldos(ano));
+    public IQueryable<ConsultaListItem> ObtenerConsultasAlmacenadas(int usuarioId) => FromExpression(() => ObtenerConsultasAlmacenadas(usuarioId));
 
     public DbSet<Account> Account => Set<Account>();
     public DbSet<Capitulo> Capitulo => Set<Capitulo>();
@@ -106,6 +108,7 @@ public class PeitonDbContext : DbContext
         });
 
         modelBuilder.HasDbFunction(this.GetType().GetMethod("ContabilidadObtenerSaldos", [typeof(int)])!);
+        modelBuilder.HasDbFunction(this.GetType().GetMethod("ObtenerConsultasAlmacenadas", [typeof(int)])!);
 
     }
 }
