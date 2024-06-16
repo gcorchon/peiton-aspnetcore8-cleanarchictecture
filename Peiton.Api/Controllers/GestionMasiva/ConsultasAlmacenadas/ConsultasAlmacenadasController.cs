@@ -35,4 +35,25 @@ public class ConsultasAlmacenadasController(IMapper mapper) : ControllerBase
         await handler.HandleAsync(id, request);
         return Accepted();
     }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> BorrarConsultaAlmacenada(int id, DeleteEntityHandler<ConsultaAlmacenada> handler)
+    {
+        await handler.HandleAsync(id);
+        return Accepted();
+    }
+
+    [HttpGet("{id:int}/query")]
+    public async Task<IActionResult> QueryConsultaAlmacenada(int id, EntityHandler<ConsultaAlmacenada> handler)
+    {
+        var data = await handler.HandleAsync(id);
+        return Ok(data.Query);
+    }
+
+    [HttpPatch("{id:int}/query")]
+    public async Task<IActionResult> ActualizarQueryConsultaAlmacenada(int id, [FromBody] string query, ActualizarQueryConsultaAlmacenadaHandler handler)
+    {
+        var data = await handler.HandleAsync(id, query);
+        return Ok(data.Query);
+    }
 }
