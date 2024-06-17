@@ -16,12 +16,21 @@ namespace Peiton.Infrastructure.Repositories
 
 		}
 
-        public Task<List<ConsultaListItem>> ObtenerConsultas(int usuarioId, ConsultasFilter filter)
+        public Task<List<ConsultaListItem>> ObtenerConsultasAsync(int usuarioId, ConsultasFilter filter)
         {
             return ApplyFilters(DbContext.ObtenerConsultasAlmacenadas(usuarioId), filter)
                     .OrderBy(c => c.Descripcion)
                     .AsNoTracking()
                     .ToListAsync();
+        }
+
+        public Task<bool> PuedeEjecutarConsultaAsync(int id, int usuarioId)
+        {
+            return this.DbSet.Include(c => c.Usuarios)
+                             .Include(c => c.Grupos)
+                             .ThenInclude(g => g.Usuarios)
+                             .Where(c => c.Id == id && (c.Usuarios.Any(u => u.Id == usuarioId) || c.Grupos.SelectMany(g => g.Usuarios).Any(u => u.Id == usuarioId)))
+                             .AnyAsync();
         }
 
         private IQueryable<ConsultaListItem> ApplyFilters(IQueryable<ConsultaListItem> query, ConsultasFilter filter) {

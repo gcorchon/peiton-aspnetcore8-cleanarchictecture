@@ -58,10 +58,33 @@ public class ConsultasAlmacenadasController(IMapper mapper) : ControllerBase
         return Ok();
     }
 
-    [HttpPost("sql")]
-    public async Task<IActionResult> EjecutarSql([FromQuery] Pagination pagination, [FromBody] EjecutarSQLRequest request, EjecutarSQLHandler handler)
+    [HttpPost("{id:int}/execute")]
+    public async Task<IActionResult> EjecutarConsultaAlmacenada(int id, [FromBody] IEnumerable<ParametroConsulta> parametros, EjecutarConsultaAlmacenadaHandler handler)
     {
-        var data = await handler.HandleAsync(request, pagination);
+        var data = await handler.HandleAsync(id, parametros);
         return Ok(data);
     }
+
+    [HttpGet("{id:int}/params")]
+    public async Task<IActionResult> ObtenerParametrosConsultaAlmacenada(int id, ObtenerParametrosConsultaHandler handler)
+    {
+        var data = await handler.HandleAsync(id);
+        return Ok(data);
+    }
+
+    [HttpPost("sql")]
+    public async Task<IActionResult> EjecutarSql([FromBody] EjecutarSQLRequest request, EjecutarSQLHandler handler)
+    {
+        var data = await handler.HandleAsync(request);
+        return Ok(data);
+    }
+
+    [HttpPost("sql/params")]
+    public async Task<IActionResult> ObtenerParametrosSQL([FromBody] string query, ObtenerParametrosSQLHandler handler)
+    {
+        var data = await handler.HandleAsync(query);
+        return Ok(data);
+    }
+
+
 }

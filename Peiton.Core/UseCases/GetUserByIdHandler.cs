@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Peiton.Contracts.Usuario;
+using Peiton.Contracts.Usuarios;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 

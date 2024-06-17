@@ -7,9 +7,9 @@ namespace Peiton.Core.UseCases.GestionMasiva.Consultas;
 [Injectable]
 public class ConsultasAlmacenadasHandler(IConsultaAlmacenadaRepository consultaAlmacenadaRepository, IIdentityService identityService)
 {
-    public async Task<List<ConsultaListItem>> HandleAsync(ConsultasFilter filter)
+    public Task<List<ConsultaListItem>> HandleAsync(ConsultasFilter filter)
     {
-        return await consultaAlmacenadaRepository.ObtenerConsultas(identityService.GetUserId()!.Value, filter);
+        return consultaAlmacenadaRepository.ObtenerConsultasAsync(identityService.GetUserId()!.Value, filter);
     }
 
 }

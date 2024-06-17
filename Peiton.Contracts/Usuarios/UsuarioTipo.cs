@@ -1,6 +1,6 @@
-﻿namespace Peiton.Contracts.Consultas
+﻿namespace Peiton.Contracts.Usuarios
 {
-    public class Permiso
+    public class UsuarioTipo
     {
         public int Tipo { get; set; }
         public int Id { get; set; }

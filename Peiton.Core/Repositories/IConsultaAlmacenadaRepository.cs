@@ -5,6 +5,8 @@ namespace Peiton.Core.Repositories
 {
     public interface IConsultaAlmacenadaRepository : IRepository<ConsultaAlmacenada>
     {
-        Task<List<ConsultaListItem>> ObtenerConsultas(int usuarioId, ConsultasFilter filter);
+        Task<List<ConsultaListItem>> ObtenerConsultasAsync(int usuarioId, ConsultasFilter filter);
+
+        Task<bool> PuedeEjecutarConsultaAsync(int id, int usuarioId);
     }
 }

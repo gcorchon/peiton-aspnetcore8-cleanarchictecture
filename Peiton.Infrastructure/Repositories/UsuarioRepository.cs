@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
+using Peiton.Contracts.Usuarios;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -57,6 +58,22 @@ namespace Peiton.Infrastructure.Repositories
         public bool CanViewTutelado(int usuarioId, int tuteladoId)
         {
             return true;
+        }
+
+        public Task<List<UsuarioTipo>> ObtenerUsuariosGruposAsync(string q, int v)
+        {
+            var search = "%" + q + "%";
+
+            return this.DbContext.Database.SqlQuery<UsuarioTipo>(@$"select * from 
+                                            (
+                                                select Pk_Usuario as Id, NombreCompleto as Nombre, 1 as Tipo
+                                                from Usuario where borrado=0
+                                                union all 
+                                                select Pk_Grupo as Id, Descripcion as Nombre, 2 as Tipo
+                                                from Grupo
+                                            ) dv where Nombre like {search} order by case when Nombre={q} then 1 when Nombre like {q + "%"} then 2 else 3 end, Nombre
+                                            offset 0 rows fetch next {v} rows only
+                                            ").ToListAsync();
         }
     }
 }

@@ -7,11 +7,30 @@ using Peiton.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Peiton.Api.Authorization;
 using Peiton.Api;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 ConfigurationManager configuration = builder.Configuration!;
+
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<BrotliCompressionProvider>();
+    options.Providers.Add<GzipCompressionProvider>();
+});
+
+builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Fastest;
+});
+
+builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.SmallestSize;
+});
 
 builder.Services.AddProblemDetails()
                 .AddExceptionHandler<GlobalExceptionHandler>();
@@ -62,6 +81,7 @@ builder.Services.AddControllersWithViews(/*options =>
 
 var app = builder.Build();
 
+app.UseResponseCompression();
 app.UseStatusCodePages();
 app.UseExceptionHandler();
 

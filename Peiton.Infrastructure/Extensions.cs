@@ -32,7 +32,7 @@ public static class Extensions
         DataTable dataTable = new DataTable();
         DbConnection connection = context.Database.GetDbConnection();
         DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection)!;
-        using (var cmd = dbFactory.CreateCommand())
+        using (var cmd = dbFactory.CreateCommand()!)
         {
             cmd.Connection = connection;
             cmd.CommandType = CommandType.Text;
@@ -51,5 +51,34 @@ public static class Extensions
             }
         }
         return dataTable;
+    }
+
+    public static T ExecuteScalar<T>(this DbContext context,
+           string sqlQuery, params DbParameter[] parameters)
+    {
+        DbConnection connection = context.Database.GetDbConnection();
+        DbProviderFactory dbFactory = DbProviderFactories.GetFactory(connection)!;
+        using (var cmd = dbFactory.CreateCommand()!)
+        {
+            cmd.Connection = connection;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sqlQuery;
+
+            var shouldClose = false;
+            if(connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+                shouldClose = true;
+            }
+            var result = (T)cmd.ExecuteScalar()!;
+
+            if(shouldClose)
+            {
+                connection.Close();
+            }
+
+            return result;
+        }
+        
     }
 }

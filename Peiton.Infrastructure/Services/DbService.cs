@@ -13,5 +13,10 @@ namespace Peiton.Infrastructure.Services
         {
             return context.DataTable(sqlQuery, parametros.Select(p => new SqlParameter(p.Nombre, p.Valor)).ToArray());
         }
+
+        public T ExecuteScalar<T>(string sqlQuery, params ParametroConsulta[] parametros)
+        {
+            return context.ExecuteScalar<T>(sqlQuery, parametros.Select(p => new SqlParameter(p.Nombre, p.Valor)).ToArray());
+        }
     }
 }

@@ -110,8 +110,8 @@ namespace Peiton.Core.Mappings
 
             CreateMap<Ent.ConsultaAlmacenada, VM.Consultas.ConsultaViewModel>()
                 .ForMember(vm => vm.CategoriaId, opt => opt.MapFrom(c => c.CategoriaConsultaId))
-                .ForMember(vm => vm.Usuarios, opt => opt.MapFrom(c => c.Grupos.Select(g => new VM.Consultas.Permiso() { Tipo = 2, Id = g.Id, Nombre = g.Descripcion })
-                                                                       .Concat(c.Usuarios.Select(u => new VM.Consultas.Permiso() { Tipo = 1, Id = u.Id, Nombre = u.NombreCompleto }))
+                .ForMember(vm => vm.Usuarios, opt => opt.MapFrom(c => c.Grupos.Select(g => new VM.Usuarios.UsuarioTipo() { Tipo = 2, Id = g.Id, Nombre = g.Descripcion })
+                                                                       .Concat(c.Usuarios.Select(u => new VM.Usuarios.UsuarioTipo() { Tipo = 1, Id = u.Id, Nombre = u.NombreCompleto }))
                     
                 ));
         }
