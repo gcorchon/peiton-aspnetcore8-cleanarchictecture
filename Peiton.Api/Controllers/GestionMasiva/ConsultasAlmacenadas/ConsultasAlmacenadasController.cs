@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Peiton.Api.Authorization;
 using Peiton.Authorization;
+using Peiton.Contracts.Common;
 using Peiton.Contracts.Consultas;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
@@ -53,7 +54,14 @@ public class ConsultasAlmacenadasController(IMapper mapper) : ControllerBase
     [HttpPatch("{id:int}/query")]
     public async Task<IActionResult> ActualizarQueryConsultaAlmacenada(int id, [FromBody] string query, ActualizarQueryConsultaAlmacenadaHandler handler)
     {
-        var data = await handler.HandleAsync(id, query);
-        return Ok(data.Query);
+        await handler.HandleAsync(id, query);
+        return Ok();
+    }
+
+    [HttpPost("sql")]
+    public async Task<IActionResult> EjecutarSql([FromQuery] Pagination pagination, [FromBody] EjecutarSQLRequest request, EjecutarSQLHandler handler)
+    {
+        var data = await handler.HandleAsync(request, pagination);
+        return Ok(data);
     }
 }

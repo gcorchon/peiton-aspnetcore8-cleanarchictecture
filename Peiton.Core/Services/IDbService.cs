@@ -1,0 +1,10 @@
+﻿using Peiton.Contracts.Consultas;
+using System.Data;
+
+namespace Peiton.Core.Services
+{
+    public interface IDbService
+    {
+        DataTable DataTable(string sqlQuery, params ParametroConsulta[] parametros);
+    }
+}
