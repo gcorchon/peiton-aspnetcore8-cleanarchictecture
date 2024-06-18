@@ -13,6 +13,8 @@ namespace Peiton.Core.Mappings
             CreateMap<VM.Capitulo.CreateCapituloRequest, Ent.Capitulo>();
             CreateMap<VM.Partida.CreatePartidaRequest, Ent.Partida>();
             CreateMap<VM.Facturas.GuardarFacturaRequest, Ent.Factura>();
+            CreateMap<VM.AvisosTributarios.ActualizarAvisoTributarioRequest, Ent.AvisoTributario>();
+            CreateMap<VM.AvisosTributarios.GuardarAvisoTributarioRequest, Ent.AvisoTributario>();
         }
     }
 }

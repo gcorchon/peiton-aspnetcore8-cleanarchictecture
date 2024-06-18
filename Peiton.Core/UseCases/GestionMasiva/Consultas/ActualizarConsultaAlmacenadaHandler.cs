@@ -3,7 +3,6 @@ using Peiton.Core.Entities;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Services;
 using Peiton.DependencyInjection;
-using System.Text.RegularExpressions;
 
 namespace Peiton.Core.UseCases.GestionMasiva.Consultas;
 
