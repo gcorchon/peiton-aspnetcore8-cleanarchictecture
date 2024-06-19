@@ -157,7 +157,7 @@ namespace Peiton.Core.Entities
 		/* public virtual ICollection<Queja> Quejas { get; } = new List<Queja>(); */
 
 		/* public virtual ICollection<SeguroAhorro> SegurosAhorros { get; } = new List<SeguroAhorro>(); */
-		/* public virtual ICollection<SeguroContratado> SegurosContratados { get; } = new List<SeguroContratado>(); */
+		public virtual ICollection<SeguroContratado> SegurosContratados { get; } = new List<SeguroContratado>();
 		/* public virtual ICollection<Senalamiento> Senalamientos { get; } = new List<Senalamiento>(); */
 		/* public virtual ICollection<Sucesion> Sucesiones { get; } = new List<Sucesion>(); */
 		/* public virtual ICollection<SueldoPension> SueldosPensiones { get; } = new List<SueldoPension>(); */

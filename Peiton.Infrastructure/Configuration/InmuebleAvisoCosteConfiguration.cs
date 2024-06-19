@@ -18,9 +18,9 @@ namespace Peiton.Data.Configuration
 				.WithMany(p => p.InmueblesAvisosCostes)
 				.HasForeignKey(d => d.EmpresaId);*/
 
-			/*builder.HasOne(d => d.InmuebleAviso)
-				.WithMany(p => p.InmueblesAvisosCostes)
-				.HasForeignKey(d => d.InmuebleAvisoId);*/
+			builder.HasOne(d => d.InmuebleAviso)
+				.WithMany(p => p.InmuebleAvisosCostes)
+				.HasForeignKey(d => d.InmuebleAvisoId);
 
 		}
 	}

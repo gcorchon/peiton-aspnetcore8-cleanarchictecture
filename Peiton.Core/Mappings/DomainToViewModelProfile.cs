@@ -124,6 +124,32 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Tutelado, opt => opt.MapFrom(c => c.Tutelado.NombreCompleto))
                 .ForMember(vm => vm.Usuario, opt => opt.MapFrom(c => c.Usuario.NombreCompleto))
                 .ForMember(vm => vm.Estado, opt => opt.MapFrom(c => c.Resuelto ? "Resuelto" : (c.EnTramite ? "En trámite" : "Pendiente")));
+
+
+            CreateMap<Ent.InmuebleAviso, VM.Inmuebles.InmuebleAvisoViewModel>()
+                .ForMember(vm => vm.Usuario, opt => opt.MapFrom(c => c.Usuario.NombreCompleto))
+                .ForMember(vm => vm.Ocupacion, opt => opt.MapFrom(c => c.Ocupacion != null ? c.Ocupacion.Descripcion : null))
+                .ForMember(vm => vm.TiposAviso, opt => opt.MapFrom(c => c.InmuebleTiposAvisos))
+                .ForMember(vm => vm.Costes, opt => opt.MapFrom(c => c.InmuebleAvisosCostes));
+
+            CreateMap<Ent.Inmueble, VM.Inmuebles.InmuebleInfo>();
+
+            CreateMap<Ent.Tutelado, VM.Inmuebles.TuteladoAvisoInmueble>()
+                .ForMember(vm => vm.Nombramiento, opt => opt.MapFrom(c => c.DatosJuridicos != null && c.DatosJuridicos.Nombramiento != null ? c.DatosJuridicos.Nombramiento.Descripcion : null))
+                .ForMember(vm => vm.SegurosHogar, opt => opt.MapFrom(c => c.SegurosContratados.Where(s => s.TipoSeguroId == 2)));
+
+            CreateMap<Ent.SeguroContratado, VM.Inmuebles.SeguroHogar>()
+                .ForMember(vm => vm.TipoSeguro, opt => opt.MapFrom(c => c.TipoSeguro != null ? c.TipoSeguro.Descripcion : null))
+                .ForMember(vm => vm.Seguro, opt => opt.MapFrom(c => c.Seguro != null ? c.Seguro.Descripcion : null));
+
+
+            CreateMap<Ent.InmuebleTipoAviso, VM.Inmuebles.TipoAviso>()
+                .ForMember(vm => vm.Descripcion, opt => opt.MapFrom(c => c.TipoAviso.Descripcion))
+                .ForMember(vm => vm.Importe, opt => opt.MapFrom(c => c.Importe ?? c.TipoAviso.Importe));
+
+            CreateMap<Ent.InmuebleAvisoCoste, VM.Inmuebles.Coste>();
+
+
         }
     }
 }

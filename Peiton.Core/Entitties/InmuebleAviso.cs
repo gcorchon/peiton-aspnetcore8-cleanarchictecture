@@ -27,9 +27,9 @@ namespace Peiton.Core.Entities
 		public bool EnTramite { get; set; }
 		public virtual Inmueble Inmueble { get; set; }= null!;
 		public virtual Ocupacion? Ocupacion { get; set; }
-		public virtual Usuario? Usuario { get; set; }
-		/* public virtual ICollection<InmuebleAvisoCoste> InmueblesAvisosCostes { get; } = new List<InmuebleAvisoCoste>(); */
-		/* public virtual ICollection<InmuebleTipoAviso> InmueblesTiposAvisos { get; } = new List<InmuebleTipoAviso>(); */
+		public virtual Usuario Usuario { get; set; } = null!;
+		public virtual ICollection<InmuebleAvisoCoste> InmuebleAvisosCostes { get; } = new List<InmuebleAvisoCoste>();
+		public virtual ICollection<InmuebleTipoAviso> InmuebleTiposAvisos { get; } = new List<InmuebleTipoAviso>();
 
 	}
 }
