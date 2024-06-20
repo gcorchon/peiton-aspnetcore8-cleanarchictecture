@@ -4,6 +4,7 @@ using Ent = Peiton.Core.Entities;
 using VM = Peiton.Contracts;
 using Peiton.Serialization;
 using Peiton.Core.Entities;
+using System.Runtime.InteropServices;
 
 namespace Peiton.Core.Mappings
 {
@@ -112,12 +113,12 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.CategoriaId, opt => opt.MapFrom(c => c.CategoriaConsultaId))
                 .ForMember(vm => vm.Usuarios, opt => opt.MapFrom(c => c.Grupos.Select(g => new VM.Usuarios.UsuarioTipo() { Tipo = 2, Id = g.Id, Nombre = g.Descripcion })
                                                                        .Concat(c.Usuarios.Select(u => new VM.Usuarios.UsuarioTipo() { Tipo = 1, Id = u.Id, Nombre = u.NombreCompleto }))
-                    
+
                 ));
 
             CreateMap<Ent.AvisoTributario, VM.AvisosTributarios.AvisoTributarioViewModel>()
                 .ForMember(vm => vm.TipoAvisoTributario, opt => opt.MapFrom(c => c.TipoAvisoTributario.Descripcion))
-                .ForMember(vm => vm.Inmueble, opt => opt.MapFrom(c => c.Inmueble != null ? c.Inmueble.DireccionCompleta : null ));
+                .ForMember(vm => vm.Inmueble, opt => opt.MapFrom(c => c.Inmueble != null ? c.Inmueble.DireccionCompleta : null));
 
             CreateMap<Ent.AvisoTributario, VM.AvisosTributarios.AvisoTributarioListItem>()
                 .ForMember(vm => vm.TipoAvisoTributario, opt => opt.MapFrom(c => c.TipoAvisoTributario.Descripcion))
@@ -125,6 +126,12 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Usuario, opt => opt.MapFrom(c => c.Usuario.NombreCompleto))
                 .ForMember(vm => vm.Estado, opt => opt.MapFrom(c => c.Resuelto ? "Resuelto" : (c.EnTramite ? "En trámite" : "Pendiente")));
 
+            CreateMap<Ent.InmuebleAviso, VM.Inmuebles.InmuebleAvisoListItem>()
+                .ForMember(vm => vm.Nombre, opt => opt.MapFrom(c => c.Inmueble.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.DireccionCompleta, opt => opt.MapFrom(c => c.Inmueble.DireccionCompleta))
+                .ForMember(vm => vm.Trabajador, opt => opt.MapFrom(c => c.Usuario.NombreCompleto))
+                .ForMember(vm => vm.TipoAviso, opt => opt.MapFrom(a => a.InmuebleTiposAvisos.Any() ? a.InmuebleTiposAvisos.First().TipoAviso.Descripcion : null))
+                .ForMember(vm => vm.Estado, opt => opt.MapFrom(a => a.Resuelto ? "Finalizado" : a.FechaFinalizacion.HasValue ? "Pendiente de pago" : a.EnTramite ? "En trámite" : "Pendiente"));
 
             CreateMap<Ent.InmuebleAviso, VM.Inmuebles.InmuebleAvisoViewModel>()
                 .ForMember(vm => vm.Usuario, opt => opt.MapFrom(c => c.Usuario.NombreCompleto))
@@ -148,7 +155,6 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Importe, opt => opt.MapFrom(c => c.Importe ?? c.TipoAviso.Importe));
 
             CreateMap<Ent.InmuebleAvisoCoste, VM.Inmuebles.Coste>();
-
 
         }
     }
