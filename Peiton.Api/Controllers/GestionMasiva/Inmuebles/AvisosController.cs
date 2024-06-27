@@ -32,5 +32,18 @@ public class AvisosController(IMapper mapper) : ControllerBase
         return Ok(vm);
     }
 
-    
+
+    [HttpPost("{id:int}/resolver")]
+    public async Task<IActionResult> ResolverAviso(int id, ResolverInmuebleAvisoHandler handler)
+    {
+        await handler.HandleAsync(id);
+        return Accepted();
+    }
+
+    [HttpPatch("{id:int}")]
+    public async Task<IActionResult> ActualizarAviso(int id, [FromBody]GuardarInmuebleAvisoRequest request, ActualizarInmuebleAvisoHandler handler)
+    {
+        await handler.HandleAsync(id, request);
+        return Accepted();
+    }
 }

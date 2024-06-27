@@ -63,9 +63,5 @@
         public decimal? Importe { get; set; } //
     }
 
-    public class Coste
-    {
-        public int? EmpresaId { get; set; }
-        public decimal? Importe { get; set; }
-    }
+
 }
