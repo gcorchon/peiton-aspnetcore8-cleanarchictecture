@@ -19,9 +19,9 @@ namespace Peiton.Data.Configuration
 			builder.Property(p => p.Fecha).HasDefaultValueSql("(getdate())");
 			builder.Property(p => p.Archivo).IsRequired();
 
-			/*builder.HasOne(d => d.Inmueble)
+			builder.HasOne(d => d.Inmueble)
 				.WithMany(p => p.InmueblesAutorizaciones)
-				.HasForeignKey(d => d.InmuebleId);*/
+				.HasForeignKey(d => d.InmuebleId);
 
 			/*builder.HasOne(d => d.InmuebleMotivoAutorizacion)
 				.WithMany(p => p.InmueblesAutorizaciones)

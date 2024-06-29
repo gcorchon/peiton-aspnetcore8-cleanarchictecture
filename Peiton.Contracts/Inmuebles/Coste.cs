@@ -2,8 +2,8 @@
 {
     public class Coste
     {
-        public int? EmpresaId { get; set; }
-        public decimal? Importe { get; set; }
+        public int EmpresaId { get; set; }
+        public decimal Importe { get; set; }
         public string? CosteId { get; set; }
     }
 }

@@ -1,10 +1,7 @@
-﻿﻿using AutoMapper;
-
+﻿using AutoMapper;
+using Peiton.Serialization;
 using Ent = Peiton.Core.Entities;
 using VM = Peiton.Contracts;
-using Peiton.Serialization;
-using Peiton.Core.Entities;
-using System.Runtime.InteropServices;
 
 namespace Peiton.Core.Mappings
 {
@@ -139,6 +136,13 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.TiposAviso, opt => opt.MapFrom(c => c.InmuebleTiposAvisos))
                 .ForMember(vm => vm.Costes, opt => opt.MapFrom(c => c.InmuebleAvisosCostes));
 
+            CreateMap<Ent.InmuebleAviso, VM.Inmuebles.InmuebleAvisoListItem>()
+                .ForMember(vm => vm.Tutelado, opt => opt.MapFrom(a => a.Inmueble.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.DireccionCompleta, opt => opt.MapFrom(a => a.Inmueble.DireccionCompleta))
+                .ForMember(vm => vm.Trabajador, opt => opt.MapFrom(a => a.Usuario.Firma))
+                .ForMember(vm => vm.TipoAviso, opt => opt.MapFrom(a => a.InmuebleTiposAvisos.Any() ? a.InmuebleTiposAvisos.First().TipoAviso.Descripcion : null))
+                .ForMember(vm => vm.Estado, opt => opt.MapFrom(a => a.Resuelto ? "Finalizado" : a.FechaFinalizacion.HasValue ? "Pendiente de pago" : a.EnTramite ? "En trámite" : "Pendiente"));
+
             CreateMap<Ent.Inmueble, VM.Inmuebles.InmuebleInfo>();
 
             CreateMap<Ent.Tutelado, VM.Inmuebles.TuteladoAvisoInmueble>()
@@ -155,6 +159,22 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Importe, opt => opt.MapFrom(c => c.Importe ?? c.TipoAviso.Importe));
 
             CreateMap<Ent.InmuebleAvisoCoste, VM.Inmuebles.Coste>();
+
+            CreateMap<Ent.InmuebleAutorizacion, VM.Inmuebles.InmuebleAutorizacionListItem>()
+                .ForMember(vm => vm.Id, opt => opt.MapFrom(a => a.Id))
+                .ForMember(vm => vm.TipoAviso, opt => opt.MapFrom(a => a.InmuebleMotivoAutorizacion.InmuebleTipoAutorizacion.Descripcion))
+                .ForMember(vm => vm.Trabajador, opt => opt.MapFrom(a => a.Usuario.Firma))
+                .ForMember(vm => vm.DireccionCompleta, opt => opt.MapFrom(a => a.Inmueble.DireccionCompleta))
+                .ForMember(vm => vm.Tutelado, opt => opt.MapFrom(a => a.Inmueble.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.Estado, opt => opt.MapFrom(a => a.Firme ? "Firme" : (a.Presentado ? "Presentado" : (a.Autorizado ? "Autorizado" : "Pendiente"))));
+
+            CreateMap<Ent.InmuebleAutorizacion, VM.Inmuebles.InmuebleAutorizacionViewModel>()
+                .ForMember(vm => vm.Tipo, opt => opt.MapFrom(a => a.InmuebleMotivoAutorizacion.InmuebleTipoAutorizacion.Descripcion))
+                .ForMember(vm => vm.Motivo, opt => opt.MapFrom(a => a.InmuebleMotivoAutorizacion.Descripcion))
+                .ForMember(vm => vm.Trabajador, opt => opt.MapFrom(a => a.Usuario.NombreCompleto))
+                .ForMember(vm => vm.DireccionCompleta, opt => opt.MapFrom(a => a.Inmueble.DireccionCompleta))
+                .ForMember(vm => vm.Tutelado, opt => opt.MapFrom(a => a.Inmueble.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.Dni, opt => opt.MapFrom(a => a.Inmueble.Tutelado.DNI));
 
         }
     }

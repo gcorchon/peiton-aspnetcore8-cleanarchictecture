@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Peiton.Contracts.Inmuebles;
-using Peiton.Core.Entities;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.GestionMasiva;
@@ -19,39 +19,15 @@ public class ActualizarInmuebleAvisoHandler(IInmuebleAvisoRepository inmuebleAvi
 
         mapper.Map(request, inmuebleAviso);
 
-        int ordenCoste = 1;
-        foreach (var coste in request.Costes)
+        inmuebleAviso.InmuebleAvisosCostes.Merge(request.Costes, e => e.CosteId, c => c.CosteId, (entity, item, index, isNew) =>
         {
-            if (coste.EmpresaId == null || coste.Importe == null) continue;
-
-            if(coste.CosteId == null)
-            {
-                var costeEntity = new InmuebleAvisoCoste()
-                {
-                    EmpresaId = coste.EmpresaId.Value,
-                    Importe = coste.Importe.Value,
-                    Orden = ordenCoste++,
-                    CosteId = Guid.NewGuid().ToString()
-                };
-                inmuebleAviso.InmuebleAvisosCostes.Add(costeEntity);
+            entity.EmpresaId = item.EmpresaId;
+            entity.Importe = item.Importe;
+            entity.Orden = ++index;
+            if (isNew) {
+                entity.CosteId = Guid.NewGuid().ToString();
             }
-            else 
-            {
-                var costeEntity = inmuebleAviso.InmuebleAvisosCostes.SingleOrDefault(ic => ic.CosteId == coste.CosteId);
-                if (costeEntity == null) throw new ArgumentException("CosteId no válido");
-                costeEntity.EmpresaId = coste.EmpresaId.Value;
-                costeEntity.Importe = coste.Importe.Value;
-                costeEntity.Orden = ordenCoste++;
-            }
-        }
-
-        var costesPrevios = request.Costes.Where(c => c.CosteId != null).ToList();
-        var costesAEliminar = inmuebleAviso.InmuebleAvisosCostes.Where(ic => !costesPrevios.Any(c => c.CosteId == ic.CosteId)).ToList();
-
-        foreach (var coste in costesAEliminar)
-        {
-            inmuebleAviso.InmuebleAvisosCostes.Remove(coste);
-        }
+        });
 
         await unityOfWork.SaveChangesAsync();
     }

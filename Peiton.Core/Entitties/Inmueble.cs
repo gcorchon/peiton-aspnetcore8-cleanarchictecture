@@ -64,9 +64,9 @@ namespace Peiton.Core.Entities
 		public virtual Tutelado Tutelado { get; set; }= null!;
 		public virtual Utilizacion Utilizacion { get; set; }= null!;
 		public virtual Valoracion? Valoracion { get; set; }
-		/* public virtual ICollection<AvisoTributario> AvisosTributarios { get; } = new List<AvisoTributario>(); */
+		public virtual ICollection<AvisoTributario> AvisosTributarios { get; } = new List<AvisoTributario>();
 		/* public virtual ICollection<InmuebleAnejo> InmueblesAnejos { get; } = new List<InmuebleAnejo>(); */
-		/* public virtual ICollection<InmuebleAutorizacion> InmueblesAutorizaciones { get; } = new List<InmuebleAutorizacion>(); */
+		public virtual ICollection<InmuebleAutorizacion> InmueblesAutorizaciones { get; } = new List<InmuebleAutorizacion>();
 		/* public virtual ICollection<InmuebleAviso> InmueblesAvisos { get; } = new List<InmuebleAviso>(); */
 		/* public virtual ICollection<InmuebleSolicitudAlquilerVenta> InmueblesSolicitudesAlquileresVentas { get; } = new List<InmuebleSolicitudAlquilerVenta>(); */
 		/* public virtual ICollection<InmuebleTasacion> InmueblesTasaciones { get; } = new List<InmuebleTasacion>(); */

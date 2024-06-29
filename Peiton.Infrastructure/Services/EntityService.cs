@@ -18,14 +18,19 @@ public class EntityService : IEntityService
         return this.dbContext.Find(type, [id]);
     }
 
-    public ValueTask<object?> GetEntityAsync(Type type, int id)
+    public Task<object?> GetEntityAsync(Type type, int id)
     {
-        return this.dbContext.FindAsync(type, [id]);
+        return this.dbContext.FindAsync(type, [id]).AsTask();
     }
 
-    public ValueTask<T?> GetEntityAsync<T>(int id) where T : class
+    public T? GetEntity<T>(int id) where T : class
     {
-        return this.dbContext.FindAsync<T>([id]);
+        return this.dbContext.Find<T>([id]);
+    }
+
+    public Task<T?> GetEntityAsync<T>(int id) where T : class
+    {
+        return this.dbContext.FindAsync<T>([id]).AsTask();
     }
 
     public void Remove<T>(T entity) where T : class

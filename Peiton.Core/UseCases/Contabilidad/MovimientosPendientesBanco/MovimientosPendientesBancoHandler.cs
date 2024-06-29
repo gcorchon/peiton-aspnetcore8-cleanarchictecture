@@ -11,11 +11,11 @@ public class MovimientosPendientesBancoHandler(IAccountTransactionCPRepository a
 {    
     public async Task<PaginatedData<AccountTransactionCP>> HandleAsync(MovimientosPendientesBancoFilter filter, Pagination pagination)
     {
-        var movimeintos = await accountTransactionCPRepository.ObtenerMovimientosPendientesBancoAsync(pagination.Page, pagination.Total, filter);
+        var movimientos = await accountTransactionCPRepository.ObtenerMovimientosPendientesBancoAsync(pagination.Page, pagination.Total, filter);
         var total = await accountTransactionCPRepository.ContarMovimientosPendientesBancoAsync(filter);
 
         return new PaginatedData<AccountTransactionCP>() {
-            Items = movimeintos,
+            Items = movimientos,
             Total = total
         };
     }
