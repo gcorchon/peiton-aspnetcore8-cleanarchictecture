@@ -1,14 +1,10 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Peiton.Api.Authorization;
 using Peiton.Api.Extensions;
-using Peiton.Authorization;
-using Peiton.Contracts.AvisosTributarios;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.Inmuebles;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.InmuebleAutorizaciones;
 using Peiton.Core.UseCases.InmuebleSolicitudesAlquilerVenta;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
