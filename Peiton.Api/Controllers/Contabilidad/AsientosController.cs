@@ -7,8 +7,8 @@ using Peiton.Contracts.Asientos;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.Facturas;
 using Peiton.Core.Entities;
+using Peiton.Core.UseCases.Asientos;
 using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.Contabilidad.Asientos;
 
 
 namespace Peiton.Api.Contabilidad;

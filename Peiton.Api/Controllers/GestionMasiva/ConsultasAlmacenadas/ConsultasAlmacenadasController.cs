@@ -6,7 +6,7 @@ using Peiton.Contracts.Common;
 using Peiton.Contracts.Consultas;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.GestionMasiva.Consultas;
+using Peiton.Core.UseCases.ConsultasAlmacenadas;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
 

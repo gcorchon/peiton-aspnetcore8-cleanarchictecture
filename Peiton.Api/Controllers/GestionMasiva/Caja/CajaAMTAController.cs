@@ -5,7 +5,7 @@ using Peiton.Api.Extensions;
 using Peiton.Authorization;
 using Peiton.Contracts.Caja;
 using Peiton.Contracts.Common;
-using Peiton.Core.UseCases.GestionMasiva;
+using Peiton.Core.UseCases.CajasAMTA;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
 

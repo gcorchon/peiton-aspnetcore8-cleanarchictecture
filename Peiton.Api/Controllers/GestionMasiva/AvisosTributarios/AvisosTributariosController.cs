@@ -6,8 +6,8 @@ using Peiton.Authorization;
 using Peiton.Contracts.AvisosTributarios;
 using Peiton.Contracts.Common;
 using Peiton.Core.Entities;
+using Peiton.Core.UseCases.AvisosTributarios;
 using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.GestionMasiva;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
 

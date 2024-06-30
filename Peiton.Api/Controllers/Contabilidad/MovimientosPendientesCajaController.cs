@@ -5,10 +5,10 @@ using Peiton.Api.Extensions;
 using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Contracts.MovimientosPendientesCaja;
-using Peiton.Core.UseCases.Contabilidad.MovimientosPendientesCaja;
 using Peiton.Core.UseCases.Common;
 using Peiton.Core.Entities;
 using Peiton.Contracts.Asientos;
+using Peiton.Core.UseCases.CajasAMTA;
 
 namespace Peiton.Api.Contabilidad;
 
@@ -34,7 +34,7 @@ public class MovimientosPendientesCajaController(IMapper mapper) : ControllerBas
     }
 
     [HttpPost("{id:int}/asientos")]
-    public async Task<IActionResult> Contabilizar(int id, [FromBody] AsientoSaveRequest[] request, ContabilizarHandler handler)
+    public async Task<IActionResult> Contabilizar(int id, [FromBody] AsientoSaveRequest[] request, ContabilizarMovimientoPendienteCajaHandler handler)
     {
         await handler.HandleAsync(id, request);
         return Ok();

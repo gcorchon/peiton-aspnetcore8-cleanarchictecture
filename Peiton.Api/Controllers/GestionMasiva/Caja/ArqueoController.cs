@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Contracts.Caja;
-using Peiton.Core.UseCases.GestionMasiva;
+using Peiton.Core.UseCases.Arqueos;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
 

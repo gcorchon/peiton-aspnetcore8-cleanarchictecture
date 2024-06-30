@@ -6,6 +6,7 @@ using Peiton.Authorization;
 using Peiton.Contracts.Caja;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.EntidadFinanciera;
+using Peiton.Core.UseCases.Cajas;
 using Peiton.Core.UseCases.GestionIndividual;
 
 namespace Peiton.Api.Controllers.GestionIndividual;

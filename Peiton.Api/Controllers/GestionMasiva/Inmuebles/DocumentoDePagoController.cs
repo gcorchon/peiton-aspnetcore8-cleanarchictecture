@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Peiton.Core.UseCases.GestionMasiva;
+using Peiton.Core.UseCases.InmuebleAvisos;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
 

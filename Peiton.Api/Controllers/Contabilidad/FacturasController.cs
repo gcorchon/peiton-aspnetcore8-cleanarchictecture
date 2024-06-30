@@ -8,7 +8,7 @@ using Peiton.Contracts.Common;
 using Peiton.Contracts.Facturas;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.Contabilidad.Facturas;
+using Peiton.Core.UseCases.Facturas;
 using Peiton.ModelBinders;
 
 namespace Peiton.Api.Contabilidad;

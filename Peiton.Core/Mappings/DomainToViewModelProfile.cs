@@ -137,7 +137,7 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.Costes, opt => opt.MapFrom(c => c.InmuebleAvisosCostes));
 
             CreateMap<Ent.InmuebleAviso, VM.Inmuebles.InmuebleAvisoListItem>()
-                .ForMember(vm => vm.Tutelado, opt => opt.MapFrom(a => a.Inmueble.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.Nombre, opt => opt.MapFrom(a => a.Inmueble.Tutelado.NombreCompleto))
                 .ForMember(vm => vm.DireccionCompleta, opt => opt.MapFrom(a => a.Inmueble.DireccionCompleta))
                 .ForMember(vm => vm.Trabajador, opt => opt.MapFrom(a => a.Usuario.Firma))
                 .ForMember(vm => vm.TipoAviso, opt => opt.MapFrom(a => a.InmuebleTiposAvisos.Any() ? a.InmuebleTiposAvisos.First().TipoAviso.Descripcion : null))

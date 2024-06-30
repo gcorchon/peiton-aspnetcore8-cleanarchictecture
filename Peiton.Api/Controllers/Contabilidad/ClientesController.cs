@@ -7,8 +7,8 @@ using Peiton.Contracts.Clientes;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.Vales;
 using Peiton.Core.Entities;
+using Peiton.Core.UseCases.Clientes;
 using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.Contabilidad.Clientes;
 
 namespace Peiton.Api.Contabilidad;
 

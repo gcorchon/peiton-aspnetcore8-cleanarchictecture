@@ -5,7 +5,7 @@ using Peiton.Api.Extensions;
 using Peiton.Authorization;
 using Peiton.Contracts.Bancos;
 using Peiton.Contracts.Common;
-using Peiton.Core.UseCases.GestionMasiva.Bancos;
+using Peiton.Core.UseCases.Credenciales;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
 

@@ -8,7 +8,7 @@ using Peiton.Contracts.Common;
 using Peiton.Contracts.Inmuebles;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.GestionMasiva;
+using Peiton.Core.UseCases.InmuebleAutorizaciones;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
 

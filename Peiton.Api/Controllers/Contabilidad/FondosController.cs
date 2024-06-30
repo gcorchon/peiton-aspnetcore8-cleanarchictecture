@@ -6,7 +6,7 @@ using Peiton.Authorization;
 using Peiton.Contracts.Asientos;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.Enums;
-using Peiton.Core.UseCases.Contabilidad.Fondos;
+using Peiton.Core.UseCases.Partidas;
 
 namespace Peiton.Api.Contabilidad;
 

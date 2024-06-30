@@ -4,7 +4,7 @@ using Peiton.Api.Extensions;
 using Peiton.Authorization;
 using Peiton.Contracts.Asientos;
 using Peiton.Contracts.Common;
-using Peiton.Core.UseCases.Contabilidad.Fondos;
+using Peiton.Core.UseCases.Asientos;
 
 namespace Peiton.Api.Contabilidad;
 

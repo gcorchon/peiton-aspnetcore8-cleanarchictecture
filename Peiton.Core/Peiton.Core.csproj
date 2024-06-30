@@ -20,10 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Contabilidad\Asientos\" />
-    <Folder Include="UseCases\Contabilidad\Facturas\" />
-    <Folder Include="UseCases\Contabilidad\MovimientosPendientesBanco\" />
-    <Folder Include="UseCases\Contabilidad\MovimientosPendientesCaja\" />
+    <Folder Include="UseCases\Facturas\" />
   </ItemGroup>
 
 </Project>
