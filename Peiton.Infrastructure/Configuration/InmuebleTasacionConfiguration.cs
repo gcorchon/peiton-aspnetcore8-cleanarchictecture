@@ -20,9 +20,10 @@ namespace Peiton.Data.Configuration
 			builder.Property(p => p.InmuebleTasadorId).HasColumnName("Fk_InmuebleTasador");
 			builder.Property(p => p.ValorTasacion).HasColumnType("money");
 			builder.Property(p => p.PrecioVenta).HasColumnType("money");
-			/*builder.HasOne(d => d.Inmueble)
+			
+			builder.HasOne(d => d.Inmueble)
 				.WithMany(p => p.InmueblesTasaciones)
-				.HasForeignKey(d => d.InmuebleId);*/
+				.HasForeignKey(d => d.InmuebleId);
 
 			/*builder.HasOne(d => d.InmuebleTipoTasacion)
 				.WithMany(p => p.InmueblesTasaciones)

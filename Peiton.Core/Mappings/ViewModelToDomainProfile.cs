@@ -20,6 +20,8 @@ namespace Peiton.Core.Mappings
             CreateMap<VM.Inmuebles.ActualizarInmuebleSolicitudAlquilerVentaRequest, Ent.InmuebleSolicitudAlquilerVenta>();
             CreateMap<VM.Inmuebles.ActualizarSucesionRequest, Ent.Sucesion>();
             CreateMap<VM.Inmuebles.CrearSucesionRequest, Ent.Sucesion>();
+            CreateMap<VM.Inmuebles.ActualizarInmuebleTasacionRequest, Ent.InmuebleTasacion>();
+            CreateMap<VM.Inmuebles.CrearInmuebleTasacionRequest, Ent.InmuebleTasacion>();
         }
     }
 }

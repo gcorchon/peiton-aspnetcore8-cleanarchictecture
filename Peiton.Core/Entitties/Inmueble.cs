@@ -69,7 +69,7 @@ namespace Peiton.Core.Entities
 		public virtual ICollection<InmuebleAutorizacion> InmueblesAutorizaciones { get; } = new List<InmuebleAutorizacion>();
 		/* public virtual ICollection<InmuebleAviso> InmueblesAvisos { get; } = new List<InmuebleAviso>(); */
 		/* public virtual ICollection<InmuebleSolicitudAlquilerVenta> InmueblesSolicitudesAlquileresVentas { get; } = new List<InmuebleSolicitudAlquilerVenta>(); */
-		/* public virtual ICollection<InmuebleTasacion> InmueblesTasaciones { get; } = new List<InmuebleTasacion>(); */
+		public virtual ICollection<InmuebleTasacion> InmueblesTasaciones { get; } = new List<InmuebleTasacion>();
 		/* public virtual ICollection<InmuebleTipoTitularidad> InmueblesTiposTitularidades { get; } = new List<InmuebleTipoTitularidad>(); */
 		/* public virtual ICollection<NotaSimple> NotasSimples { get; } = new List<NotaSimple>(); */
 		/* public virtual ICollection<SeguroContratado> SegurosContratados { get; } = new List<SeguroContratado>(); */
