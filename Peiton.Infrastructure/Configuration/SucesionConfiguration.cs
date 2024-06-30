@@ -19,7 +19,7 @@ namespace Peiton.Data.Configuration
 			builder.Property(p => p.Firme).IsRequired();
 			builder.Property(p => p.Fecha).IsRequired().HasDefaultValueSql("(getdate())");
 
-			/*builder.HasOne(d => d.FKSucesionTipo)
+			/*builder.HasOne(d => d.SucesionTipo)
 				.WithMany(p => p.Sucesiones)
 				.HasForeignKey(d => d.SucesionTipoId);*/
 

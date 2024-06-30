@@ -21,7 +21,7 @@ namespace Peiton.Api.Authorization
                 var userRepository = scopedServiceProvider.GetRequiredService<IUsuarioRepository>();
                 var identityService = scopedServiceProvider.GetRequiredService<IIdentityService>();
                 
-                int userId = identityService.GetUserId()!.Value;
+                int userId = identityService.GetUserId();
 
                 if (await userRepository.HasPermissionAsync(userId, requirement.Permission))
                 {

@@ -16,7 +16,7 @@ namespace Peiton.Core.Entities
 		public DateTime? FechaFirmeza { get; set; }
 		public string? Observaciones { get; set; }
 		public DateTime Fecha { get; set; }
-		public virtual SucesionTipo FKSucesionTipo { get; set; }= null!;
+		public virtual SucesionTipo SucesionTipo { get; set; }= null!;
 		public virtual Tutelado Tutelado { get; set; }= null!;
 		public virtual Usuario Usuario { get; set; }= null!;
 

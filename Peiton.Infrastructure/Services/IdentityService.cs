@@ -15,10 +15,10 @@ public class IdentityService : IIdentityService
         this.claimsPrincipal = claimsPrincipal;
     }
 
-    public int? GetUserId()
+    public int GetUserId()
     {
         var claim = claimsPrincipal.FindFirst(JwtRegisteredClaimNames.Sid);
-        if (claim is null) return null;
+        if (claim is null) throw new UnauthorizedAccessException();
         return Convert.ToInt32(claim.Value);
     }
 }

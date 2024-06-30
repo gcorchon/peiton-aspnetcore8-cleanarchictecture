@@ -15,7 +15,7 @@ public class ActualizarValeHandler(IValeRepository valeRepository, IUsuarioRepos
         var vale = await valeRepository.GetByIdAsync(id);
         if (vale == null) throw new NotFoundException();
         vale.ObservacionesAutorizacion = request.ObservacionesAutorizacion;
-        var userId = identityService.GetUserId()!.Value;
+        var userId = identityService.GetUserId();
 
         if (await usuarioRepository.HasPermissionAsync(userId, PeitonPermission.ContabilidadValesRevisar))
         {

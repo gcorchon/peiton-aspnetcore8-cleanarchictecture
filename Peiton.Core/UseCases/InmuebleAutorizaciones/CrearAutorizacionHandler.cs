@@ -16,7 +16,7 @@ public class CrearAutorizacionHandler(IInmuebleRepository inmuebleRepository, IU
 
         inmueble.InmueblesAutorizaciones.Add(new InmuebleAutorizacion()
         {
-            UsuarioId = identityService.GetUserId()!.Value,
+            UsuarioId = identityService.GetUserId(),
             InmuebleId = inmuebleId,
             InmuebleMotivoAutorizacionId = request.MotivoId,
             Descripcion = request.Descripcion,

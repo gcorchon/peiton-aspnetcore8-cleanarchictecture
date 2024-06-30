@@ -9,7 +9,7 @@ public class ConsultasAlmacenadasHandler(IConsultaAlmacenadaRepository consultaA
 {
     public Task<List<ConsultaListItem>> HandleAsync(ConsultasFilter filter)
     {
-        return consultaAlmacenadaRepository.ObtenerConsultasAsync(identityService.GetUserId()!.Value, filter);
+        return consultaAlmacenadaRepository.ObtenerConsultasAsync(identityService.GetUserId(), filter);
     }
 
 }

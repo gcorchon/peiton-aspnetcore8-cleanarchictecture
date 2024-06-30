@@ -13,7 +13,7 @@ public class GuardarAvisoTributarioHandler(IMapper mapper, IAvisoTributarioRepos
     {
         var avisoTributario = new AvisoTributario()
         {
-            UsuarioId = identityService.GetUserId()!.Value,
+            UsuarioId = identityService.GetUserId(),
             TuteladoId = request.TuteladoId,
             EnTramite = false,
             Resuelto = false,

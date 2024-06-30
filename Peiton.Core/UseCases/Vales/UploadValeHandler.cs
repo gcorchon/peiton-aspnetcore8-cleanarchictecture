@@ -13,7 +13,7 @@ public class UploadValeHandler(IIdentityService identityService)
         if (file == null || file.Length == 0) throw new ArgumentException("Archivo no válido");
 
         var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + file.FileName;
-        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "App_Data\\Vales", identityService.GetUserId()!.Value.ToString());
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "App_Data\\Vales", identityService.GetUserId().ToString());
 
         if (!Directory.Exists(filePath))
         {

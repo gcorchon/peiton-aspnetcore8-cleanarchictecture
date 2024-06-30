@@ -16,7 +16,7 @@ public class GuardarValeHandler(IValeRepository valeRepository, IUnityOfWork uni
             Importe = request.Importe,
             ObservacionesSolicitud = request.Observaciones,
             Archivos = request.Archivos.ToXDocument()!.ToString(),
-            SolicitanteId = identityService.GetUserId()!.Value,
+            SolicitanteId = identityService.GetUserId(),
             FechaSolicitud = DateTime.Now.Date
         };
 

@@ -13,7 +13,7 @@ public class ObtenerParametrosConsultaHandler(IConsultaAlmacenadaRepository cons
 
         if (consultaAlmacenada == null) throw new NotFoundException();
 
-        var usuarioId = identityService.GetUserId()!.Value;
+        var usuarioId = identityService.GetUserId();
         if (!await consultaAlmacenadaRepository.PuedeEjecutarConsultaAsync(id, usuarioId))
         {
             throw new UnauthorizedAccessException("No tienes permisos para ejecutar esta consulta");

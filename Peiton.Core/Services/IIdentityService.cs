@@ -2,5 +2,5 @@
 
 public interface IIdentityService
 {
-    int? GetUserId();
+    int GetUserId();
 }

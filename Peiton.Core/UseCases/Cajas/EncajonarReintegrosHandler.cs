@@ -22,7 +22,7 @@ public class EncajonarReintegrosHandler(ICajaRepository cajaRepository, IUnityOf
                                     {
                                         TuteladoId = element.Tutelado.Id,
                                         Importe = element.Importe,
-                                        UsuarioId = identityService.GetUserId()!.Value,
+                                        UsuarioId = identityService.GetUserId(),
                                         Tipo = 2,
                                         FechaAutorizacion = now,
                                         FechaPago = now,
