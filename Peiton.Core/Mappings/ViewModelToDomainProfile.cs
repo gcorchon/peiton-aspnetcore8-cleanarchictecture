@@ -17,6 +17,7 @@ namespace Peiton.Core.Mappings
             CreateMap<VM.AvisosTributarios.GuardarAvisoTributarioRequest, Ent.AvisoTributario>();
             CreateMap<VM.Inmuebles.GuardarInmuebleAvisoRequest, Ent.InmuebleAviso>();
             CreateMap<VM.Inmuebles.ActualizarInmuebleAutorizacionRequest, Ent.InmuebleAutorizacion>();
+            CreateMap<VM.Inmuebles.ActualizarInmuebleSolicitudAlquilerVentaRequest, Ent.InmuebleSolicitudAlquilerVenta>();
         }
     }
 }

@@ -9,31 +9,32 @@ using Peiton.Contracts.Inmuebles;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
 using Peiton.Core.UseCases.InmuebleAutorizaciones;
+using Peiton.Core.UseCases.InmuebleSolicitudesAlquilerVenta;
 
 namespace Peiton.Api.Controllers.GestionMasiva;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AutorizacionesController(IMapper mapper) : ControllerBase
+public class SolicitudesAlquilerVentaController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> Autorizaciones([FromQuery] InmuebleAutorizacionesFilter filter, [FromQuery] Pagination pagination, AutorizacionesHandler handler)
+    public async Task<IActionResult> SolicitudesAlquilerVenta([FromQuery] InmuebleSolicitudesAlquilerVentaFilter filter, [FromQuery] Pagination pagination, SolicitudesAlquilerVentaHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
-        var vm = mapper.Map<IEnumerable<InmuebleAutorizacionListItem>>(data.Items);
+        var vm = mapper.Map<IEnumerable<InmuebleSolicitudAlquilerVentaListItem>>(data.Items);
         return this.PaginatedResult(vm, data.Total);
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> Autorizacion(int id, EntityHandler<InmuebleAutorizacion> handler)
+    public async Task<IActionResult> SolicitudAlquilerVenta(int id, EntityHandler<InmuebleSolicitudAlquilerVenta> handler)
     {
         var data = await handler.HandleAsync(id);
-        var vm = mapper.Map<InmuebleAutorizacionViewModel>(data);
+        var vm = mapper.Map<InmuebleSolicitudAlquilerVentaViewModel>(data);
         return Ok(vm);
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarAutorizacion(int id, ActualizarInmuebleAutorizacionRequest request, ActualizarEntityHandler<InmuebleAutorizacion> handler)
+    public async Task<IActionResult> ActualizarSolicitudAlquilerVenta(int id, ActualizarInmuebleSolicitudAlquilerVentaRequest request, ActualizarEntityHandler<InmuebleSolicitudAlquilerVenta> handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();
