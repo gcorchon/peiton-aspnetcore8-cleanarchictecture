@@ -11,7 +11,7 @@ public class ActualizarQueryConsultaAlmacenadaHandler(IUnityOfWork unityOfWork, 
     public async Task HandleAsync(int id, string query)
     {
         var consultaAlmacenada = await entityService.GetEntityAsync<ConsultaAlmacenada>(id);
-        if (consultaAlmacenada == null) throw new NotFoundException();
+        if (consultaAlmacenada == null) throw new EntityNotFoundException();
 
         consultaAlmacenada.Query = query;
 

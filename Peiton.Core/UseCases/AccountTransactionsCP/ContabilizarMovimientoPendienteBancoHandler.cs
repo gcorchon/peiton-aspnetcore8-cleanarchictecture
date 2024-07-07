@@ -13,7 +13,7 @@ public class ContabilizarMovimientoPendienteBancoHandler(IEntityService entitySe
     public async Task HandleAsync(int id, AsientoSaveRequest[] request)
     {
         var accountTransactionCP = await entityService.GetEntityAsync<AccountTransactionCP>(id);
-        if (accountTransactionCP == null) throw new NotFoundException($"No existe el AccountTransactionCP con Id {id}");
+        if (accountTransactionCP == null) throw new EntityNotFoundException($"No existe el AccountTransactionCP con Id {id}");
 
         var asientoList = accountTransactionCP.Asientos;
         IEnumerable<int> asientosYaSeleccionados = request.Where(a => a.Id.HasValue).Select(a => a.Id!.Value);

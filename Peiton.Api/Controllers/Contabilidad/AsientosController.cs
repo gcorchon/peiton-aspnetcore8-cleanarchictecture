@@ -20,7 +20,7 @@ public class AsientosController(IMapper mapper) : ControllerBase
 {
     [HttpGet()]
     [PeitonAuthorization(PeitonPermission.ContabilidadAsientosYSaldosAsientos)]
-    public async Task<IActionResult> Asientos([FromQuery] AsientosFilter filter, [FromQuery] Pagination pagination, AsientosHandler handler)
+    public async Task<IActionResult> AsientosAsync([FromQuery] AsientosFilter filter, [FromQuery] Pagination pagination, AsientosHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<AsientoListItem>>(data.Items);
@@ -28,7 +28,7 @@ public class AsientosController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> Asiento(int id, EntityHandler<Asiento> handler)
+    public async Task<IActionResult> AsientoAsync(int id, EntityHandler<Asiento> handler)
     {
         var entity = await handler.HandleAsync(id);
         var vm = mapper.Map<AsientoViewModel>(entity);
@@ -36,14 +36,14 @@ public class AsientosController(IMapper mapper) : ControllerBase
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CrearAsiento(AsientoSaveRequest data, CrearAsientoHandler handler)
+    public async Task<IActionResult> CrearAsientoAsync(AsientoSaveRequest data, CrearAsientoHandler handler)
     {
         await handler.HandleAsync(data);
         return Accepted();
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarAsiento(int id, AsientoSaveRequest data, ActualizarAsientoHandler handler)
+    public async Task<IActionResult> ActualizarAsientoAsync(int id, AsientoSaveRequest data, ActualizarAsientoHandler handler)
     {
         await handler.HandleAsync(id, data);
         return Accepted();
@@ -51,7 +51,7 @@ public class AsientosController(IMapper mapper) : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> BorrarAsiento(int id, DeleteEntityHandler<Asiento> handler)
+    public async Task<IActionResult> BorrarAsientoAsync(int id, DeleteEntityHandler<Asiento> handler)
     {
         await handler.HandleAsync(id);
         return Accepted();
@@ -59,7 +59,7 @@ public class AsientosController(IMapper mapper) : ControllerBase
 
     [HttpGet("{id:int}/facturas")]
     [PeitonAuthorization(PeitonPermission.ContabilidadNuevosMovimientos)]
-    public async Task<IActionResult> Facturas(int id, FacturasHandler handler)
+    public async Task<IActionResult> FacturasAsync(int id, FacturasHandler handler)
     {
         var asiento = await handler.HandleAsync(id);
         var vm = mapper.Map<IEnumerable<FacturaListItem>>(asiento.Facturas);
@@ -68,7 +68,7 @@ public class AsientosController(IMapper mapper) : ControllerBase
 
     [HttpGet("huerfanos")]
     [PeitonAuthorization(PeitonPermission.ContabilidadNuevosMovimientos)]
-    public async Task<IActionResult> AsientosHuerfanos([FromQuery] AsientosHuerfanosFilter filter, [FromQuery] Pagination pagination, AsientosHuerfanosHandler handler)
+    public async Task<IActionResult> AsientosHuerfanosAsync([FromQuery] AsientosHuerfanosFilter filter, [FromQuery] Pagination pagination, AsientosHuerfanosHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<AsientoHuerfanoListItem>>(data.Items);

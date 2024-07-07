@@ -10,7 +10,7 @@ namespace Peiton.Core.UseCases.Categorias
         public async Task HandleAsync(int id)
         {
             var categoria = await categoriaRepository.GetByIdAsync(id);
-            if(categoria == null) { throw new NotFoundException($"La categoría {id} no existe"); }
+            if(categoria == null) { throw new EntityNotFoundException($"La categoría {id} no existe"); }
             await categoriaRepository.BorrarCategoriaAsync(id);
         }
 

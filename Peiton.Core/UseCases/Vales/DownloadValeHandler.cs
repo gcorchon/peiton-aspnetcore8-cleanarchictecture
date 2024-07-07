@@ -14,13 +14,13 @@ public class DownloadValeHandler(IValeRepository valeRepository)
     {
         var vale = await valeRepository.GetByIdAsync(id);
 
-        if (vale == null) throw new NotFoundException($"El vale con Id {id} no existe");
+        if (vale == null) throw new EntityNotFoundException($"El vale con Id {id} no existe");
 
-        if (vale.Archivos == null) throw new NotFoundException($"El vale con Id {id} no tiene archivos asociados");
+        if (vale.Archivos == null) throw new EntityNotFoundException($"El vale con Id {id} no tiene archivos asociados");
 
         var archivos = vale.Archivos.Deserialize<string[]>();
 
-        if (archivos!.Length == 0) throw new NotFoundException($"El vale con Id {id} no tiene archivos asociados");
+        if (archivos!.Length == 0) throw new EntityNotFoundException($"El vale con Id {id} no tiene archivos asociados");
 
         using (var memoryStream = new MemoryStream())
         {

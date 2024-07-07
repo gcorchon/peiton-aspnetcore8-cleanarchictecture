@@ -8,7 +8,7 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 public class DocumentoDePagoController : ControllerBase
 {
     [HttpGet("{costeId}")]
-    public async Task<IActionResult> DocumentoDePago(string costeId, ObtenerDocumentoDePagoHandler handler)
+    public async Task<IActionResult> DocumentoDePagoAsync(string costeId, ObtenerDocumentoDePagoHandler handler)
     {
         var data = await handler.HandleAsync(costeId);
         return Ok(data);

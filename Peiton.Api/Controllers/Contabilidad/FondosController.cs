@@ -16,7 +16,7 @@ namespace Peiton.Api.Contabilidad;
 public class FondosController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> Fondos([FromQuery] FondosFilter filter, [FromQuery] Pagination pagination, [FromQuery] TipoFondo tipoFondo, FondosHandler handler)
+    public async Task<IActionResult> FondosAsync([FromQuery] FondosFilter filter, [FromQuery] Pagination pagination, [FromQuery] TipoFondo tipoFondo, FondosHandler handler)
     {
         var data = await handler.HandleAsync(filter, tipoFondo, pagination);
 

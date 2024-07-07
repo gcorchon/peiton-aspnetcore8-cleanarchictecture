@@ -12,7 +12,7 @@ public class ArqueoController : ControllerBase
 {
     [HttpGet("{fecha:datetime}")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> Arqueo(DateTime fecha, ArqueoHandler handler)
+    public async Task<IActionResult> ArqueoAsync(DateTime fecha, ArqueoHandler handler)
     {
         var data = await handler.HandleAsync(fecha);
         return Ok(data);
@@ -20,7 +20,7 @@ public class ArqueoController : ControllerBase
 
     [HttpPost("{fecha:datetime}")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> GuardarArqueo(DateTime fecha, [FromBody] ArqueoModel arqueo, GuardarArqueoHandler handler)
+    public async Task<IActionResult> GuardarArqueoAsync(DateTime fecha, [FromBody] ArqueoModel arqueo, GuardarArqueoHandler handler)
     {
         await handler.HandleAsync(fecha, arqueo);
         return Accepted();
@@ -28,7 +28,7 @@ public class ArqueoController : ControllerBase
 
     [HttpGet("{fecha:datetime}/documento")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> DocumentoArqueo(DateTime fecha, DocumentoArqueoHandler handler)
+    public async Task<IActionResult> DocumentoArqueoAsync(DateTime fecha, DocumentoArqueoHandler handler)
     {
         await handler.HandleAsync(fecha);
         return Accepted();

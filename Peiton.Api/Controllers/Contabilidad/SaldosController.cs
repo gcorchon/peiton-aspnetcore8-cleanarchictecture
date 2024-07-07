@@ -14,7 +14,7 @@ namespace Peiton.Api.Contabilidad;
 public class SaldosController : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> Saldos([FromQuery] SaldosFilter filter, [FromQuery] Pagination pagination, [FromQuery] int ano, SaldosHandler handler)
+    public async Task<IActionResult> SaldosAsync([FromQuery] SaldosFilter filter, [FromQuery] Pagination pagination, [FromQuery] int ano, SaldosHandler handler)
     {
         var data = await handler.HandleAsync(ano, filter, pagination);
         return this.PaginatedResult(data.Items, data.Total);

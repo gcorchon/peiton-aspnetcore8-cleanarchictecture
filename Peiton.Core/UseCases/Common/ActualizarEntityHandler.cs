@@ -11,7 +11,7 @@ public class ActualizarEntityHandler<T>(IMapper mapper, IEntityService entitySer
     public async Task HandleAsync<U>(int id, U data)
     {
         var entity = await entityService.GetEntityAsync<T>(id);
-        if (entity == null) throw new NotFoundException($"{typeof(T).Name} Id {id} not found");
+        if (entity == null) throw new EntityNotFoundException($"{typeof(T).Name} Id {id} not found");
         
         mapper.Map(data, entity);
 

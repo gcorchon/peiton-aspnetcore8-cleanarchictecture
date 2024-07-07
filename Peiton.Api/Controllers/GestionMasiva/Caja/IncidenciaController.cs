@@ -15,7 +15,7 @@ public class IncidenciaController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> Incidencias([FromQuery] IncidenciasFilter filter, [FromQuery] Pagination pagination, IncidenciasHandler handler)
+    public async Task<IActionResult> IncidenciasAsync([FromQuery] IncidenciasFilter filter, [FromQuery] Pagination pagination, IncidenciasHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<IncidenciaListItem>>(data.Items);
@@ -24,7 +24,7 @@ public class IncidenciaController(IMapper mapper) : ControllerBase
 
     [HttpGet("{id:int}")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> Incidencia(int id, IncidenciaHandler handler)
+    public async Task<IActionResult> IncidenciaAsync(int id, IncidenciaHandler handler)
     {
         var vm = await handler.HandleAsync(id);
         return Ok(vm);

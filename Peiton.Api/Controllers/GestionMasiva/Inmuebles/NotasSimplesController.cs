@@ -12,7 +12,7 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 public class NotasSimplesController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> NotasSimplesVenta([FromQuery] NotasSimplesFilter filter, [FromQuery] Pagination pagination, NotasSimplesHandler handler)
+    public async Task<IActionResult> NotasSimplesVentaAsync([FromQuery] NotasSimplesFilter filter, [FromQuery] Pagination pagination, NotasSimplesHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<NotaSimpleListItem>>(data.Items);
@@ -21,7 +21,7 @@ public class NotasSimplesController(IMapper mapper) : ControllerBase
 
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> FinalizarNotaSimple(int id, FinalizarNotaSimpleHandler handler)
+    public async Task<IActionResult> FinalizarNotaSimpleAsync(int id, FinalizarNotaSimpleHandler handler)
     {
         await handler.HandleAsync(id);
         return Accepted();

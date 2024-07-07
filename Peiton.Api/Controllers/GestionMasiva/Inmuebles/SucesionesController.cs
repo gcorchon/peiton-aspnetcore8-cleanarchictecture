@@ -14,7 +14,7 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 public class SucesionesController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> Sucesiones([FromQuery] SucesionesFilter filter, [FromQuery] Pagination pagination, SucesionesHandler handler)
+    public async Task<IActionResult> SucesionesAsync([FromQuery] SucesionesFilter filter, [FromQuery] Pagination pagination, SucesionesHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<SucesionListItem>>(data.Items);
@@ -22,7 +22,7 @@ public class SucesionesController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> Sucesion(int id, EntityHandler<Sucesion> handler)
+    public async Task<IActionResult> SucesionAsync(int id, EntityHandler<Sucesion> handler)
     {
         var data = await handler.HandleAsync(id);
         var vm = mapper.Map<SucesionViewModel>(data);
@@ -30,14 +30,14 @@ public class SucesionesController(IMapper mapper) : ControllerBase
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarSucesion(int id, ActualizarSucesionRequest request, ActualizarEntityHandler<Sucesion> handler)
+    public async Task<IActionResult> ActualizarSucesionAsync(int id, ActualizarSucesionRequest request, ActualizarEntityHandler<Sucesion> handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CrearSucesion(int id, CrearSucesionRequest request, CrearSucesionHandler handler)
+    public async Task<IActionResult> CrearSucesionAsync(int id, CrearSucesionRequest request, CrearSucesionHandler handler)
     {
         await handler.HandleAsync(request);
         return Accepted();

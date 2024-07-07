@@ -12,7 +12,7 @@ public class IncidenciaHandler(IMapper mapper, ICajaRepository cajaRepository, I
     public async Task<IncidenciaViewModel> HandleAsync(int id)
     {
         var incidencia = await cajaIncidenciaRepository.GetByIdAsync(id);
-        if (incidencia == null) throw new NotFoundException();
+        if (incidencia == null) throw new EntityNotFoundException();
         var saldoCaja = await cajaRepository.ObtenerSaldoCajaAsync(incidencia.TuteladoId);
         var vm = mapper.Map(incidencia, new IncidenciaViewModel());
         vm.SaldoCaja = saldoCaja;

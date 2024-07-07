@@ -11,12 +11,12 @@ namespace Peiton.Api.Contabilidad;
 public class CapitulosController : ControllerBase
 {
     [HttpGet()]
-    public IAsyncEnumerable<CapituloViewModel> CapitulosYPartidas([FromQuery] CapituloFilter filter, CapitulosYPartidasHandler handler) =>
+    public IAsyncEnumerable<CapituloViewModel> CapitulosYPartidasAsync([FromQuery] CapituloFilter filter, CapitulosYPartidasHandler handler) =>
             handler.HandleAsync(filter);
 
 
     [HttpPost()]
-    public async Task<IActionResult> CreateCapitulo(CreateCapituloRequest data, CreateCapituloHandler handler)
+    public async Task<IActionResult> CreateCapituloAsync(CreateCapituloRequest data, CreateCapituloHandler handler)
     {
         try
         {
@@ -38,7 +38,7 @@ public class CapitulosController : ControllerBase
     }
 
     [HttpPost("{id:int}/partidas")]
-    public async Task<IActionResult> CreatePartida(int id, [FromBody] CreatePartidaRequest data, CreatePartidaHandler handler)
+    public async Task<IActionResult> CreatePartidaAsync(int id, [FromBody] CreatePartidaRequest data, CreatePartidaHandler handler)
     {
         try
         {

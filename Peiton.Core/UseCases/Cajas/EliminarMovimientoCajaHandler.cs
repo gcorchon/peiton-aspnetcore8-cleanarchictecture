@@ -13,7 +13,7 @@ public class EliminarMovimientoCajaHandler(IMapper mapper, ICajaRepository cajaR
     {
         var movimiento = await cajaRepository.GetByIdAsync(id);
 
-        if (movimiento == null) throw new NotFoundException();
+        if (movimiento == null) throw new EntityNotFoundException();
 
         if (movimiento.Pendiente) throw new ArgumentException("Sólo se pueden eliminar movimientos pagados");
 

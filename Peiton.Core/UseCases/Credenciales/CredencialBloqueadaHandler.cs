@@ -26,7 +26,7 @@ namespace Peiton.Core.UseCases.Credenciales
             });*/
 
             var credencial = await credencialRepository.GetByIdAsync(id);
-            if (credencial == null) throw new NotFoundException();
+            if (credencial == null) throw new EntityNotFoundException();
 
             string campos = credencial.EntidadFinanciera.Campos;
             string credenciales = credencial.DatosConexion;

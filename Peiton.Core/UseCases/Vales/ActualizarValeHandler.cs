@@ -13,7 +13,7 @@ public class ActualizarValeHandler(IValeRepository valeRepository, IUsuarioRepos
     public async Task HandleAsync(int id, ActualizarValeRequest request)
     {
         var vale = await valeRepository.GetByIdAsync(id);
-        if (vale == null) throw new NotFoundException();
+        if (vale == null) throw new EntityNotFoundException();
         vale.ObservacionesAutorizacion = request.ObservacionesAutorizacion;
         var userId = identityService.GetUserId();
 

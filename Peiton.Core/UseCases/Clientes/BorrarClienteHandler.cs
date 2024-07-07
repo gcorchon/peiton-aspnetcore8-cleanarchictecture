@@ -10,7 +10,7 @@ public class BorrarClienteHandler(IClienteRepository clienteRepository, IUnityOf
     public async Task HandleAsync(int id)
     {
         var cliente = await clienteRepository.GetByIdAsync(id);
-        if (cliente == null) throw new NotFoundException($"El cliente con Id {id} no existe");
+        if (cliente == null) throw new EntityNotFoundException($"El cliente con Id {id} no existe");
         cliente.Activo = false;
 
         await unityOfWork.SaveChangesAsync();

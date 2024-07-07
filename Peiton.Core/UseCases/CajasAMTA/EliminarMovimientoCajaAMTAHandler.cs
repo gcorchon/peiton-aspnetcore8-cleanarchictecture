@@ -11,7 +11,7 @@ public class EliminarMovimientoCajaAMTAHandler(ICajaAMTARepository cajaAMTARepos
     {
         var cajaAMTA = await cajaAMTARepository.GetByIdAsync(id);
 
-        if (cajaAMTA == null) throw new NotFoundException();
+        if (cajaAMTA == null) throw new EntityNotFoundException();
 
         if (cajaAMTA.Caja != null)
         {

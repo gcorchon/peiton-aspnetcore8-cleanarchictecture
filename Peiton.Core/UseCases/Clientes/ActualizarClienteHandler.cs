@@ -11,7 +11,7 @@ public class ActualizarClienteHandler(IClienteRepository clienteRepository, IUni
     public async Task HandleAsync(int id, GuardarClienteRequest request)
     {
         var cliente = await clienteRepository.GetByIdAsync(id);
-        if (cliente == null) throw new NotFoundException($"El cliente con Id {id} no existe");
+        if (cliente == null) throw new EntityNotFoundException($"El cliente con Id {id} no existe");
         cliente.Nombre = request.Nombre;
         cliente.CIF = request.CIF;
         cliente.CodCliente = request.CodCliente;

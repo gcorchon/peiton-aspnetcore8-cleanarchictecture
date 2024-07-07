@@ -17,7 +17,7 @@ public class ValesController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
     [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
-    public async Task<IActionResult> Vales([FromQuery] ValesFilter filter, [FromQuery] Pagination pagination, ValesHandler handler)
+    public async Task<IActionResult> ValesAsync([FromQuery] ValesFilter filter, [FromQuery] Pagination pagination, ValesHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<ValeListItem>>(data.Items);
@@ -26,7 +26,7 @@ public class ValesController(IMapper mapper) : ControllerBase
 
     [HttpGet("{id:int}")]
     [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
-    public async Task<IActionResult> Vale(int id, EntityHandler<Vale> handler)
+    public async Task<IActionResult> ValeAsync(int id, EntityHandler<Vale> handler)
     {
         var data = await handler.HandleAsync(id);
         var vm = mapper.Map<ValeViewModel>(data);
@@ -35,7 +35,7 @@ public class ValesController(IMapper mapper) : ControllerBase
 
     [HttpPost("")]
     [PeitonAuthorization(PeitonPermission.HomeVales)]
-    public async Task<IActionResult> GuardarVale([FromBody] GuardarValeRequest data, GuardarValeHandler handler)
+    public async Task<IActionResult> GuardarValeAsync([FromBody] GuardarValeRequest data, GuardarValeHandler handler)
     {
         await handler.HandleAsync(data);
         return Accepted();
@@ -43,7 +43,7 @@ public class ValesController(IMapper mapper) : ControllerBase
 
     [HttpPatch("{id:int}")]
     [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
-    public async Task<IActionResult> ActualizarVale(int id, [FromBody] ActualizarValeRequest data, ActualizarValeHandler handler)
+    public async Task<IActionResult> ActualizarValeAsync(int id, [FromBody] ActualizarValeRequest data, ActualizarValeHandler handler)
     {
         await handler.HandleAsync(id, data);
         return Accepted();
@@ -51,7 +51,7 @@ public class ValesController(IMapper mapper) : ControllerBase
 
     [HttpDelete("{id:int}")]
     [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
-    public async Task<IActionResult> BorrarVale(int id, DeleteEntityHandler<Vale> handler)
+    public async Task<IActionResult> BorrarValeAsync(int id, DeleteEntityHandler<Vale> handler)
     {
         await handler.HandleAsync(id);
         return Accepted();
@@ -59,7 +59,7 @@ public class ValesController(IMapper mapper) : ControllerBase
 
     [HttpPost("files")]
     [PeitonAuthorization(PeitonPermission.HomeVales)]
-    public async Task<IActionResult> UploadFile(IFormFile file, UploadValeHandler handler)
+    public async Task<IActionResult> UploadFileAsync(IFormFile file, UploadValeHandler handler)
     {
         var data = await handler.HandleAsync(file);
         return Ok(data);
@@ -67,7 +67,7 @@ public class ValesController(IMapper mapper) : ControllerBase
 
     [HttpGet("{id:int}/files")]
     [PeitonAuthorization(PeitonPermission.ContabilidadVales)]
-    public async Task<IActionResult> DownloadFile(int id, DownloadValeHandler handler)
+    public async Task<IActionResult> DownloadFileAsync(int id, DownloadValeHandler handler)
     {
         var data = await handler.HandleAsync(id);
         return File(data, "application/zip", "vale.zip");

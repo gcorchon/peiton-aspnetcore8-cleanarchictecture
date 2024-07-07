@@ -23,6 +23,7 @@ namespace Peiton.Core.Mappings
             CreateMap<VM.Inmuebles.ActualizarInmuebleTasacionRequest, Ent.InmuebleTasacion>();
             CreateMap<VM.Inmuebles.CrearInmuebleTasacionRequest, Ent.InmuebleTasacion>();
             CreateMap<VM.Categorias.ActualizarCategoriaRequest, Ent.Categoria>();
+            CreateMap<VM.CNAEs.ActualizarCNAERequest, Ent.CNAE>();
         }
     }
 }

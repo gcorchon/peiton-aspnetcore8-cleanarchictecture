@@ -10,7 +10,7 @@ public class FinalizarNotaSimpleHandler(INotaSimpleRepository notaSimpleReposito
     public async Task HandleAsync(int id)
     {
         var notaSimple = await notaSimpleRepository.GetByIdAsync(id);
-        if (notaSimple == null) throw new NotFoundException();
+        if (notaSimple == null) throw new EntityNotFoundException();
         notaSimple.Finalizado = true;
         await unityOfWork.SaveChangesAsync();        
     }

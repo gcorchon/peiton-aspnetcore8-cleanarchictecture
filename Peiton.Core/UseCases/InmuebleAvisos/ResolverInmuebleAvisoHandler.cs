@@ -10,7 +10,7 @@ public class ResolverInmuebleAvisoHandler(IInmuebleAvisoRepository inmuebleAviso
     public async Task HandleAsync(int id)
     {
         var inmuebleAviso = await inmuebleAvisoRepository.GetByIdAsync(id);
-        if (inmuebleAviso == null) throw new NotFoundException();
+        if (inmuebleAviso == null) throw new EntityNotFoundException();
 
         if (inmuebleAviso.Resuelto) throw new ArgumentException("El aviso ya se encuentra resuelto");
 

@@ -11,7 +11,7 @@ public class FacturasHandler(IAsientoRepository asientoRepository)
     public async Task<Asiento> HandleAsync(int id)
     {
         var asiento = await asientoRepository.GetByIdAsync(id);
-        if (asiento == null) throw new NotFoundException($"No existe el asiento con Id {id}");
+        if (asiento == null) throw new EntityNotFoundException($"No existe el asiento con Id {id}");
         return asiento;
     }
 }

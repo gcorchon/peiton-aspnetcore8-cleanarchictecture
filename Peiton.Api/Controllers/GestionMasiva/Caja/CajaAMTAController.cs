@@ -15,7 +15,7 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 public class CajaAMTAController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> Caja([FromQuery] CajaAMTAFilter filter, [FromQuery] Pagination pagination, CajaAMTAHandler handler)
+    public async Task<IActionResult> CajaAsync([FromQuery] CajaAMTAFilter filter, [FromQuery] Pagination pagination, CajaAMTAHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<CajaAMTAListItem>>(data.Items);
@@ -24,7 +24,7 @@ public class CajaAMTAController(IMapper mapper) : ControllerBase
 
     [HttpDelete("{id:int}")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCajaBorrarCajaAMTA)]
-    public async Task<IActionResult> EliminarMovimientoCajaAMTA(int id, EliminarMovimientoCajaAMTAHandler handler)
+    public async Task<IActionResult> EliminarMovimientoCajaAMTAAsync(int id, EliminarMovimientoCajaAMTAHandler handler)
     {
         await handler.HandleAsync(id);
         return Accepted();
@@ -32,7 +32,7 @@ public class CajaAMTAController(IMapper mapper) : ControllerBase
 
     [HttpPost]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> GuardarMovimientoCajaAMTA(GuardarCajaAMTA request, GuardarMovimientoCajaAMTAHandler handler)
+    public async Task<IActionResult> GuardarMovimientoCajaAMTAAsync(GuardarCajaAMTA request, GuardarMovimientoCajaAMTAHandler handler)
     {
         await handler.HandleAsync(request);
         return Accepted();
@@ -40,7 +40,7 @@ public class CajaAMTAController(IMapper mapper) : ControllerBase
 
     [HttpPost("documento")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> GenerarDocumentoCajaAMTA(GuardarCajaAMTA request, GenerarDocumentoCajaAMTAHandler handler)
+    public async Task<IActionResult> GenerarDocumentoCajaAMTAAsync(GuardarCajaAMTA request, GenerarDocumentoCajaAMTAHandler handler)
     {
         await handler.HandleAsync(request);
         //Aquí falta coger la respuesta del handler, que probablemente sea un Byte[] y devolverla como archivo

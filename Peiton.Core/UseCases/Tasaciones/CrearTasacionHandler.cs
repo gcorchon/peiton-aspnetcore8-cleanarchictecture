@@ -14,7 +14,7 @@ public class CrearTasacionHandler(IInmuebleRepository inmuebleRepository, IMappe
     {
         var inmueble = await inmuebleRepository.GetByIdAsync(id);
 
-        if (inmueble == null) throw new NotFoundException("Inmueble no encontrado");
+        if (inmueble == null) throw new EntityNotFoundException("Inmueble no encontrado");
 
         var tasacion = new InmuebleTasacion();
         mapper.Map(request, tasacion);

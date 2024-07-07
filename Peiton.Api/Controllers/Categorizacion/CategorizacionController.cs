@@ -12,7 +12,7 @@ namespace Peiton.Api.Contabilidad;
 public class CategorizacionController : ControllerBase
 {
     [HttpPost()]
-    public async Task<IActionResult> ProbarRegla([FromBody]TestRuleRequest data, TestRuleHandler handler)
+    public async Task<IActionResult> ProbarReglaAsync([FromBody]TestRuleRequest data, TestRuleHandler handler)
     {
         await handler.HandleAsync(data);
         

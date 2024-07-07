@@ -15,7 +15,7 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 public class TasacionesController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> Tasaciones([FromQuery] InmuebleTasacionesFilter filter, [FromQuery] Pagination pagination, InmuebleTasacionesHandler handler)
+    public async Task<IActionResult> TasacionesAsync([FromQuery] InmuebleTasacionesFilter filter, [FromQuery] Pagination pagination, InmuebleTasacionesHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<InmuebleTasacionListItem>>(data.Items);
@@ -23,7 +23,7 @@ public class TasacionesController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> Tasacion(int id, EntityHandler<InmuebleTasacion> handler)
+    public async Task<IActionResult> TasacionAsync(int id, EntityHandler<InmuebleTasacion> handler)
     {
         var data = await handler.HandleAsync(id);
         var vm = mapper.Map<InmuebleTasacionViewModel>(data);
@@ -31,14 +31,14 @@ public class TasacionesController(IMapper mapper) : ControllerBase
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarTasacion(int id, ActualizarInmuebleTasacionRequest request, ActualizarEntityHandler<InmuebleTasacion> handler)
+    public async Task<IActionResult> ActualizarTasacionAsync(int id, ActualizarInmuebleTasacionRequest request, ActualizarEntityHandler<InmuebleTasacion> handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> CrearTasacion(int inmuebleId, CrearInmuebleTasacionRequest request, CrearTasacionHandler handler)
+    public async Task<IActionResult> CrearTasacionAsync(int inmuebleId, CrearInmuebleTasacionRequest request, CrearTasacionHandler handler)
     {
         await handler.HandleAsync(inmuebleId, request);
         return Accepted();

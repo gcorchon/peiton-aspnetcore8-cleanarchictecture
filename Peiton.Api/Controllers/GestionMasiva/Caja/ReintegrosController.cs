@@ -13,42 +13,42 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 public class ReintegrosController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> Reintegros(ReintegrosHandler handler)
+    public async Task<IActionResult> ReintegrosAsync(ReintegrosHandler handler)
     {
         var data = await handler.HandleAsync();
         return Ok(data);
     }
 
     [HttpPost("")]
-    public async Task<IActionResult> GuardarReintegros([FromBody] TuteladoReintegroSerializado[] data, GuardarReintegrosHandler handler)
+    public async Task<IActionResult> GuardarReintegrosAsync([FromBody] TuteladoReintegroSerializado[] data, GuardarReintegrosHandler handler)
     {
         await handler.HandleAsync(data);
         return Accepted();
     }
 
     [HttpPost("encajonar")]
-    public async Task<IActionResult> EncajonarReintegros(EncajonarReintegrosHandler handler)
+    public async Task<IActionResult> EncajonarReintegrosAsync(EncajonarReintegrosHandler handler)
     {
         await handler.HandleAsync();
         return Accepted();
     }
 
     [HttpPost("documento")]
-    public async Task<IActionResult> DocumentoReintegros([FromQuery] DateTime fechaDesde, [FromQuery] DateTime fechaHasta, GenerarListadoReintegrosHandler handler)
+    public async Task<IActionResult> DocumentoReintegrosAsync([FromQuery] DateTime fechaDesde, [FromQuery] DateTime fechaHasta, GenerarListadoReintegrosHandler handler)
     {
         await handler.HandleAsync(fechaDesde, fechaHasta);
         return Ok();
     }
 
     [HttpGet("exportar")]
-    public async Task<IActionResult> ExportarReintegros(ExportarReintegrosHandler handler)
+    public async Task<IActionResult> ExportarReintegrosAsync(ExportarReintegrosHandler handler)
     {
         var data = await handler.HandleAsync();
         return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "reintegros.xlsx");
     }
 
     [HttpGet("tutelados")]
-    public async Task<IActionResult> Tutelados([FromQuery] string text, TuteladosReintegrosHandler handler)
+    public async Task<IActionResult> TuteladosAsync([FromQuery] string text, TuteladosReintegrosHandler handler)
     {
         var data = await handler.HandleAsync(text);
         var vm = mapper.Map<IEnumerable<TuteladoReintegro>>(data);

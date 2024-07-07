@@ -14,7 +14,7 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 public class SolicitudesAlquilerVentaController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> SolicitudesAlquilerVenta([FromQuery] InmuebleSolicitudesAlquilerVentaFilter filter, [FromQuery] Pagination pagination, SolicitudesAlquilerVentaHandler handler)
+    public async Task<IActionResult> SolicitudesAlquilerVentaAsync([FromQuery] InmuebleSolicitudesAlquilerVentaFilter filter, [FromQuery] Pagination pagination, SolicitudesAlquilerVentaHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<InmuebleSolicitudAlquilerVentaListItem>>(data.Items);
@@ -22,7 +22,7 @@ public class SolicitudesAlquilerVentaController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> SolicitudAlquilerVenta(int id, EntityHandler<InmuebleSolicitudAlquilerVenta> handler)
+    public async Task<IActionResult> SolicitudAlquilerVentaAsync(int id, EntityHandler<InmuebleSolicitudAlquilerVenta> handler)
     {
         var data = await handler.HandleAsync(id);
         var vm = mapper.Map<InmuebleSolicitudAlquilerVentaViewModel>(data);
@@ -30,7 +30,7 @@ public class SolicitudesAlquilerVentaController(IMapper mapper) : ControllerBase
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarSolicitudAlquilerVenta(int id, ActualizarInmuebleSolicitudAlquilerVentaRequest request, ActualizarEntityHandler<InmuebleSolicitudAlquilerVenta> handler)
+    public async Task<IActionResult> ActualizarSolicitudAlquilerVentaAsync(int id, ActualizarInmuebleSolicitudAlquilerVentaRequest request, ActualizarEntityHandler<InmuebleSolicitudAlquilerVenta> handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();

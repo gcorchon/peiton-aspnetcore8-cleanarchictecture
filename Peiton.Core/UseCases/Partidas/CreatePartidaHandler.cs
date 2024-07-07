@@ -13,7 +13,7 @@ public class CreatePartidaHandler(IMapper mapper, IUnityOfWork unityOfWork, ICap
     public async Task HandleAsync(int id, CreatePartidaRequest data)
     {
         var capitulo = await capituloRepository.GetByIdAsync(id);
-        if (capitulo is null) throw new NotFoundException($"No existe el capítulo con Id {id}");
+        if (capitulo is null) throw new EntityNotFoundException($"No existe el capítulo con Id {id}");
         var partida = mapper.Map(data, new Partida());
         capitulo.Partidas.Add(partida);
         await unityOfWork.SaveChangesAsync();

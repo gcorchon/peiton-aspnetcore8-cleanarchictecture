@@ -17,7 +17,7 @@ public class AvisosTributariosController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaAvisosTributarios)]
-    public async Task<IActionResult> AvisosTributarios([FromQuery] AvisosTributariosFilter filter, [FromQuery] Pagination pagination, AvisosTributariosHandler handler)
+    public async Task<IActionResult> AvisosTributariosAsync([FromQuery] AvisosTributariosFilter filter, [FromQuery] Pagination pagination, AvisosTributariosHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<AvisoTributarioListItem>>(data.Items);
@@ -26,7 +26,7 @@ public class AvisosTributariosController(IMapper mapper) : ControllerBase
 
     [HttpGet("{id:int}")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaAvisosTributarios)]
-    public async Task<IActionResult> AvisoTributario(int id, EntityHandler<AvisoTributario> handler)
+    public async Task<IActionResult> AvisoTributarioAsync(int id, EntityHandler<AvisoTributario> handler)
     {
         var data = await handler.HandleAsync(id);
         var vm = mapper.Map<AvisoTributarioViewModel>(data);
@@ -35,7 +35,7 @@ public class AvisosTributariosController(IMapper mapper) : ControllerBase
 
     [HttpPatch("{id:int}")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaAvisosTributarios)]
-    public async Task<IActionResult> ActualizarAvisoTributario(int id, ActualizarAvisoTributarioRequest request, ActualizarEntityHandler<AvisoTributario> handler)
+    public async Task<IActionResult> ActualizarAvisoTributarioAsync(int id, ActualizarAvisoTributarioRequest request, ActualizarEntityHandler<AvisoTributario> handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();
@@ -43,7 +43,7 @@ public class AvisosTributariosController(IMapper mapper) : ControllerBase
 
     [HttpPatch("{id:int}/resolver")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaAvisosTributarios)]
-    public async Task<IActionResult> ResolverAvisoTributario(int id, ActualizarAvisoTributarioRequest request, ResolverAvisoTributarioHandler handler)
+    public async Task<IActionResult> ResolverAvisoTributarioAsync(int id, ActualizarAvisoTributarioRequest request, ResolverAvisoTributarioHandler handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();
@@ -51,7 +51,7 @@ public class AvisosTributariosController(IMapper mapper) : ControllerBase
 
     [HttpPost("")]
     [PeitonAuthorization(PeitonPermission.GestionIndividualDatosEconomicosTributos)]
-    public async Task<IActionResult> GuardarAvisoTributario(GuardarAvisoTributarioRequest request, GuardarAvisoTributarioHandler handler)
+    public async Task<IActionResult> GuardarAvisoTributarioAsync(GuardarAvisoTributarioRequest request, GuardarAvisoTributarioHandler handler)
     {
         await handler.HandleAsync(request);
         return Accepted();

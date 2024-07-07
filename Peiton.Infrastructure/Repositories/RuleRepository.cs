@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Peiton.Contracts.Rules;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -13,5 +15,32 @@ namespace Peiton.Infrastructure.Repositories
 		{
 
 		}
-	}
+
+        public Task<List<RuleViewModel>> ObtenerRulesAsync()
+        {
+            return DbContext.Database.SqlQuery<RuleViewModel>(@$"select pk_rule as Id, Description, categoria.descripcion as Categoria, CssClass as BankCssClass 
+                                            from [Rule] left Join Categoria on Pk_Categoria=formData.value('(/RuleFormData/Category/Id/text())[1]','int') 
+                                            left join EntidadFinanciera on Pk_EntidadFinanciera=formData.value('(/RuleFormData/Bank/text())[1]','int') 
+                                            order by SortOrder").ToListAsync();
+        }
+
+        public Task ReordenarReglaAsync(int ruleId, int newPosition)
+        {
+            return DbContext.Database.ExecuteSqlAsync($@"
+                begin tran
+                declare @currentSortOrder int
+                select @currentSortOrder = SortOrder from [Rule] where Pk_Rule={ruleId}
+                if @currentSortOrder < {newPosition}
+                begin
+                    update [Rule] set SortOrder = SortOrder - 1 where SortOrder > @currentSortOrder and SortOrder <= {newPosition}
+                end
+                if @currentSortOrder > {newPosition}
+                begin
+                    update [Rule] set SortOrder = SortOrder + 1 where SortOrder < @currentSortOrder and SortOrder >= {newPosition}
+                end
+                update [Rule] set SortOrder = {newPosition} where Pk_Rule={ruleId}
+                commit tran
+            ");
+        }
+    }
 }

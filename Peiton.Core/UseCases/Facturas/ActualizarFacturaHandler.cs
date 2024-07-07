@@ -15,7 +15,7 @@ public class ActualizarFacturaHandler(IMapper mapper, IFacturaRepository factura
 
         if (factura == null)
         {
-            throw new NotFoundException($"No existe la factura con Id {id}");
+            throw new EntityNotFoundException($"No existe la factura con Id {id}");
         }
 
         mapper.Map(request, factura);

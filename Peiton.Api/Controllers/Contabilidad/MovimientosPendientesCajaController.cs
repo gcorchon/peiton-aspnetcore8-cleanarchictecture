@@ -18,7 +18,7 @@ namespace Peiton.Api.Contabilidad;
 public class MovimientosPendientesCajaController(IMapper mapper) : ControllerBase
 {
     [HttpGet()]
-    public async Task<IActionResult> MovimientosPendientesCaja([FromQuery] MovimientosPendientesCajaFilter filter, [FromQuery] Pagination pagination, MovimientosPendientesCajaHandler handler)
+    public async Task<IActionResult> MovimientosPendientesCajaAsync([FromQuery] MovimientosPendientesCajaFilter filter, [FromQuery] Pagination pagination, MovimientosPendientesCajaHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var viewModel = mapper.Map<IEnumerable<MovimientoPendienteCajaListItem>>(data.Items);
@@ -26,7 +26,7 @@ public class MovimientosPendientesCajaController(IMapper mapper) : ControllerBas
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> MovimientoPendienteCaja(int id, EntityHandler<CajaAMTA> handler)
+    public async Task<IActionResult> MovimientoPendienteCajaAsync(int id, EntityHandler<CajaAMTA> handler)
     {
         var entity = await handler.HandleAsync(id);
         var vm = mapper.Map<MovimientoPendienteCajaViewModel>(entity);
@@ -34,7 +34,7 @@ public class MovimientosPendientesCajaController(IMapper mapper) : ControllerBas
     }
 
     [HttpPost("{id:int}/asientos")]
-    public async Task<IActionResult> Contabilizar(int id, [FromBody] AsientoSaveRequest[] request, ContabilizarMovimientoPendienteCajaHandler handler)
+    public async Task<IActionResult> ContabilizarAsync(int id, [FromBody] AsientoSaveRequest[] request, ContabilizarMovimientoPendienteCajaHandler handler)
     {
         await handler.HandleAsync(id, request);
         return Ok();

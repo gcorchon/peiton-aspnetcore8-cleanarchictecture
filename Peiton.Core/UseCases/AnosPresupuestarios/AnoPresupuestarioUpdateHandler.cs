@@ -12,7 +12,7 @@ public class AnoPresupuestarioUpdateHandler(IEntityService entityService, IUnity
     public async Task HandleAsync(int id, AnoPrespuestarioUpdateRequest data)
     {
         var anoPresupuestario = await entityService.GetEntityAsync<AnoPresupuestario>(id);
-        if (anoPresupuestario == null) throw new NotFoundException($"No existe el año presupuestario con Id {id}");
+        if (anoPresupuestario == null) throw new EntityNotFoundException($"No existe el año presupuestario con Id {id}");
 
         anoPresupuestario.Descripcion = data.Descripcion;
         anoPresupuestario.FechaModificacion = DateTime.Today;

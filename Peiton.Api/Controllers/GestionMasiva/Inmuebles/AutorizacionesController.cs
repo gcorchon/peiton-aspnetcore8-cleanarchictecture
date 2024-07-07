@@ -17,7 +17,7 @@ namespace Peiton.Api.Controllers.GestionMasiva;
 public class AutorizacionesController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> Autorizaciones([FromQuery] InmuebleAutorizacionesFilter filter, [FromQuery] Pagination pagination, AutorizacionesHandler handler)
+    public async Task<IActionResult> AutorizacionesAsync([FromQuery] InmuebleAutorizacionesFilter filter, [FromQuery] Pagination pagination, AutorizacionesHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<InmuebleAutorizacionListItem>>(data.Items);
@@ -25,7 +25,7 @@ public class AutorizacionesController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> Autorizacion(int id, EntityHandler<InmuebleAutorizacion> handler)
+    public async Task<IActionResult> AutorizacionAsync(int id, EntityHandler<InmuebleAutorizacion> handler)
     {
         var data = await handler.HandleAsync(id);
         var vm = mapper.Map<InmuebleAutorizacionViewModel>(data);
@@ -33,7 +33,7 @@ public class AutorizacionesController(IMapper mapper) : ControllerBase
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarAutorizacion(int id, ActualizarInmuebleAutorizacionRequest request, ActualizarEntityHandler<InmuebleAutorizacion> handler)
+    public async Task<IActionResult> ActualizarAutorizacionAsync(int id, ActualizarInmuebleAutorizacionRequest request, ActualizarEntityHandler<InmuebleAutorizacion> handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();
