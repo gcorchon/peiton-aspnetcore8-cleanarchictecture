@@ -1,5 +1,0 @@
-CajaIncidencia
-- Renombrar Pk_CajaIncidencia por Fk_Caja
-- Quitar clave primaria doble
-- Añadir unique constraint doble sobre Fk_Caja y Fecha
-- Añadir columna autonumérica Pk_CajaIncidencia con Primary key.

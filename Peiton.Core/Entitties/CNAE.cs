@@ -5,7 +5,9 @@ namespace Peiton.Core.Entities
 		public string Cnae2009 { get; set; } = null!;
 		public string Description { get; set; } = null!;
 
-		/* public virtual ICollection<Company> Company { get; } = new List<Company>(); */
-		/* public virtual ICollection<Categoria> Categorias { get; } = new List<Categoria>(); */
+		public int? CategoriaId { get; set; }
+        public virtual Categoria? Categoria { get; set; }
+        public virtual ICollection<Company> Companies { get; } = new List<Company>(); 
+		
 	}
 }

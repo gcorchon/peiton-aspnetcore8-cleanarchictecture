@@ -229,6 +229,16 @@ namespace Peiton.Core.Mappings
                 .ForMember(vm => vm.DireccionCompleta, opt => opt.MapFrom(a => a.Inmueble.DireccionCompleta))
                 .ForMember(vm => vm.Tutelado, opt => opt.MapFrom(a => a.Inmueble.Tutelado.NombreCompleto))
                 .ForMember(vm => vm.Dni, opt => opt.MapFrom(a => a.Inmueble.Tutelado.DNI));
+
+            CreateMap<Ent.Categoria, VM.Categorias.CategoriaViewModel>();
+
+            CreateMap<Ent.VwCategoria, VM.Common.ListItem>()
+                .ForMember(vm => vm.Value, opt => opt.MapFrom(o => o.Id))
+                .ForMember(vm => vm.Text, opt => opt.MapFrom(o => o.BreadCrumb));
+
+            CreateMap<Ent.Company, VM.Companies.CompanyViewModel>()
+                .ForMember(vm => vm.DescripcionCnae2009, opt => opt.MapFrom(o => o.Cnae2009Navigation.Description))
+                .ForMember(vm => vm.Categoria, opt => opt.MapFrom(o => o.Cnae2009Navigation.Categoria != null ? o.Cnae2009Navigation.Categoria.Descripcion : null));
         }
     }
 }

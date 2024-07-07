@@ -1,0 +1,16 @@
+CajaIncidencia
+- Renombrar Pk_CajaIncidencia por Fk_Caja
+- Quitar clave primaria doble
+- Añadir unique constraint doble sobre Fk_Caja y Fecha
+- Añadir columna autonumérica Pk_CajaIncidencia con Primary key.
+
+
+CNAE
+
+alter table CNAE add Fk_Categoria int null
+GO
+update CNAE set Fk_Categoria = CNAECategoria.Fk_Categoria
+from CNAE inner join CNAECategoria on CNAECategoria.Cnae2009 = CNAE.Cnae2009
+GO
+ALTER TABLE [dbo].[CNAE]  WITH CHECK ADD  CONSTRAINT [FK_CNAE_Categoria] FOREIGN KEY([Fk_Categoria])
+REFERENCES [dbo].[Categoria] ([Pk_Categoria])

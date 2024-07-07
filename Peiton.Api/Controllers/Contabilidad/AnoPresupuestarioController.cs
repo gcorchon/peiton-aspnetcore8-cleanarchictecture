@@ -15,7 +15,7 @@ namespace Peiton.Api.Contabilidad;
 public class AnoPresupuestarioController(IMapper mapper) : ControllerBase
 {
     [HttpGet()]
-    public async Task<IActionResult> AnosPresupuestarios([FromQuery] AnoPresupuestarioFilter filter, [FromQuery] Pagination pagination, AnosPresupuestariosHandler handler)
+    public async Task<IActionResult> AnosPresupuestariosAsync([FromQuery] AnoPresupuestarioFilter filter, [FromQuery] Pagination pagination, AnosPresupuestariosHandler handler)
     {
         var data = await handler.HandleAsync(filter, pagination);
         var viewModel = mapper.Map<IEnumerable<AnoPresupuestarioViewModel>>(data.Items);
@@ -23,14 +23,14 @@ public class AnoPresupuestarioController(IMapper mapper) : ControllerBase
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> AnoPrespuestarioUpdate(int id, [FromBody] AnoPrespuestarioUpdateRequest data, AnoPresupuestarioUpdateHandler handler)
+    public async Task<IActionResult> AnoPrespuestarioUpdateAsync(int id, [FromBody] AnoPrespuestarioUpdateRequest data, AnoPresupuestarioUpdateHandler handler)
     {
         await handler.HandleAsync(id, data);
         return Accepted();
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> AnoPrespuestarioDelete(int id, AnoPresupuestarioDeleteHandler handler)
+    public async Task<IActionResult> AnoPrespuestarioDeleteAsync(int id, AnoPresupuestarioDeleteHandler handler)
     {
         await handler.HandleAsync(id);
         return Accepted();

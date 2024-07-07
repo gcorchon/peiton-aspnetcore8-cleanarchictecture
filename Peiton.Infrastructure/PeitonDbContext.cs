@@ -36,6 +36,10 @@ public class PeitonDbContext : DbContext
 
     public DbSet<VwCajaAMTA> VwCajaAMTA => Set<VwCajaAMTA>();
 
+    public DbSet<VwCategoria> VwCategoria => Set<VwCategoria>();
+
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

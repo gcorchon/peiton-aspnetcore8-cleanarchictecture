@@ -1,15 +1,14 @@
-using Peiton.Infrastructure;
-using Peiton.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Peiton.Configuration;
 using Microsoft.AspNetCore.Authorization;
-using Peiton.Api.Authorization;
-using Peiton.Api;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.IdentityModel.Tokens;
+using Peiton.Api;
+using Peiton.Api.Authorization;
+using Peiton.Configuration;
+using Peiton.Core;
+using Peiton.Infrastructure;
 using System.IO.Compression;
-
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 

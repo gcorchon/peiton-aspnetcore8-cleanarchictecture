@@ -16,13 +16,13 @@ namespace Peiton.Data.Configuration
 			builder.Property(p => p.Cnae2009).HasMaxLength(2);
 			builder.Property(p => p.CodSchober).HasMaxLength(2);
 
-			/*builder.HasOne(d => d.Cnae2009Navigation)
-				.WithMany(p => p.Company)
-				.HasForeignKey(d => d.Cnae2009);*/
+			builder.HasOne(d => d.Cnae2009Navigation)
+				.WithMany(p => p.Companies)
+				.HasForeignKey(d => d.Cnae2009);
 
-			/*builder.HasOne(d => d.CodSchoberNavigation)
-				.WithMany(p => p.Company)
-				.HasForeignKey(d => d.CodSchober);*/
+			builder.HasOne(d => d.CodSchoberNavigation)
+				.WithMany(p => p.Companies)
+				.HasForeignKey(d => d.CodSchober);
 
 		}
 	}

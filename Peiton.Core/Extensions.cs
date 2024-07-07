@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Peiton.Core.Mappings;
 using Peiton.DependencyInjection;
+using System.Reflection;
 
 namespace Peiton.Core;
 public static class Extensions
@@ -10,6 +10,8 @@ public static class Extensions
         
         services.AddAutoMapper(typeof(DomainToViewModelProfile));
         services.AddInjectable(Assembly.GetExecutingAssembly());
+        
+
         return services;
     }
 }
