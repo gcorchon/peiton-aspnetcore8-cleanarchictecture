@@ -21,6 +21,13 @@ namespace Peiton.Api.Controllers
             await handler.HandleAsync(id, request.NewPosition);
             return Accepted();
         }
-            
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> BorrarRuleAsync(int id, BorrarRuleHandler handler)
+        {
+            await handler.HandleAsync(id);
+            return Accepted();
+        }
+
     }
 }

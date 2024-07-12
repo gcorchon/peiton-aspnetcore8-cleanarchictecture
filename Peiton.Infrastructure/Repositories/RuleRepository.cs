@@ -1,3 +1,4 @@
+using Azure.Core.GeoJson;
 using Microsoft.EntityFrameworkCore;
 using Peiton.Contracts.Rules;
 using Peiton.Core.Entities;
@@ -15,6 +16,22 @@ namespace Peiton.Infrastructure.Repositories
 		{
 
 		}
+
+        public Task BorrarReglaAsync(int ruleId)
+        {
+            return DbContext.Database.ExecuteSqlAsync($@"
+                BEGIN TRAN
+                    update AccountTransaction set Fk_Rule=null where Fk_Rule={ruleId}
+                    delete from [Rule] where Pk_Rule={ruleId}
+                    update [Rule] set SortOrder=nuevoOrden
+                    from [Rule] inner join (
+                    select pk_rule, ROW_NUMBER() over(order by SortOrder) as nuevoOrden
+                    from [Rule]
+                    ) dv on [Rule].pk_rule = dv.pk_rule
+                    where [Rule].SortOrder <> nuevoOrden
+                COMMIT TRAN
+            ");
+        }
 
         public Task<List<RuleViewModel>> ObtenerRulesAsync()
         {
