@@ -181,7 +181,7 @@ namespace Peiton.Core.Mappings
             CreateMap<Ent.InmuebleSolicitudAlquilerVenta, VM.Inmuebles.InmuebleSolicitudAlquilerVentaListItem>()
                 .ForMember(vm => vm.Direccion, opt => opt.MapFrom(s => s.Inmueble.DireccionCompleta))
                 .ForMember(vm => vm.Tutelado, opt => opt.MapFrom(s => s.Inmueble.Tutelado.NombreCompleto))
-                .ForMember(vm => vm.Estado, opt => opt.MapFrom(s => s.Estado == 1 ? "Pendiente" : (s.Estado == 2 ? "En trámite" : s.Estado == 3 ? "Finalizado": null)));
+                .ForMember(vm => vm.Estado, opt => opt.MapFrom(s => s.Estado == 1 ? "Pendiente" : (s.Estado == 2 ? "En trámite" : s.Estado == 3 ? "Finalizado" : null)));
 
             CreateMap<Ent.InmuebleSolicitudAlquilerVenta, VM.Inmuebles.InmuebleSolicitudAlquilerVentaViewModel>()
                 .ForMember(vm => vm.Ocupacion, opt => opt.MapFrom(a => a.Ocupacion != null ? a.Ocupacion.Descripcion : null))
@@ -239,6 +239,35 @@ namespace Peiton.Core.Mappings
             CreateMap<Ent.Company, VM.Companies.CompanyViewModel>()
                 .ForMember(vm => vm.DescripcionCnae2009, opt => opt.MapFrom(o => o.Cnae2009Navigation.Description))
                 .ForMember(vm => vm.Categoria, opt => opt.MapFrom(o => o.Cnae2009Navigation.Categoria != null ? o.Cnae2009Navigation.Categoria.Descripcion : null));
+
+            CreateMap<GestionAdministrativa, VM.GestoresAdministrativos.GestionAdministrativaListItem>()
+                .ForMember(vm => vm.Tutelado, m => m.MapFrom(o => o.Tutelado.NombreCompleto))
+                .ForMember(vm => vm.Trabajador, m => m.MapFrom(o => o.Usuario.NombreCompleto))
+                .ForMember(vm => vm.Tipo, m => m.MapFrom(o => o.GestionAdministrativaTipo.Descripcion))
+                .ForMember(vm => vm.Estado, m => m.MapFrom(o => this.GetDescripcionEstadoGestionAdministrativa(o.Estado)));
+
+            CreateMap<GestionAdministrativa, VM.GestoresAdministrativos.GestionAdministrativaViewModel>()
+                .ForMember(vm => vm.Solicitada, m => m.MapFrom(o => (o.Estado & 2) > 0))
+                .ForMember(vm => vm.Designada, m => m.MapFrom(o => (o.Estado & 4) > 0))
+                .ForMember(vm => vm.Finalizada, m => m.MapFrom(o => (o.Estado & 8) > 0));
+
+            CreateMap<GestionAdministrativaTipo, VM.Common.ListItem>()
+                .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
+                .ForMember(vm => vm.Text, m => m.MapFrom(o => o.Descripcion));
+
+            CreateMap<GestorAdministrativo, VM.Common.ListItem>()
+                .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
+                .ForMember(vm => vm.Text, m => m.MapFrom(o => o.Nombre + " " + o.Apellidos));
         }
+
+        private string GetDescripcionEstadoGestionAdministrativa(int estado)
+        {
+            if ((estado & 8) > 0) return "Finalizada";
+            if ((estado & 4) > 0) return "Designada";
+            if ((estado & 2) > 0) return "Solicitada";
+            if ((estado & 1) > 0) return "Pendiente";
+            return "Pendiente";
+        }
+
     }
 }

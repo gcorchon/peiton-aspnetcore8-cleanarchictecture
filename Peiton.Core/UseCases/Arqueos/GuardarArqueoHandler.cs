@@ -11,7 +11,7 @@ public class GuardarArqueoHandler(IArqueoRepository arqueoRepository, IUnityOfWo
 {
     public async Task HandleAsync(DateTime fecha, ArqueoModel request)
     {
-        var arqueo = arqueoRepository.Get(a => a.Fecha == fecha.Date);
+        var arqueo = await arqueoRepository.GetAsync(a => a.Fecha == fecha.Date);
         if (arqueo == null)
         {
             arqueo = new Arqueo()

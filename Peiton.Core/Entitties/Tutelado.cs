@@ -143,6 +143,7 @@ namespace Peiton.Core.Entities
 		/* public virtual ICollection<Evento> Eventos { get; } = new List<Evento>(); */
 		/* public virtual ICollection<FondoSolidario> FondosSolidarios { get; } = new List<FondoSolidario>(); */
 		/* public virtual ICollection<GastoEstimacionFinanciera> GastosEstimacionesFinancieras { get; } = new List<GastoEstimacionFinanciera>(); */
+		public virtual ICollection<GestionAdministrativa> GestionesAdministrativas { get; } = new List<GestionAdministrativa>();
 		/* public virtual ICollection<InformePersonal> InformesPersonales { get; } = new List<InformePersonal>(); */
 		/* public virtual ICollection<InformePersonalPIA> InformesPersonalesPIA { get; } = new List<InformePersonalPIA>(); */
 		/* public virtual ICollection<IngresoEstimacionFinanciera> IngresosEstimacionesFinancieras { get; } = new List<IngresoEstimacionFinanciera>(); */

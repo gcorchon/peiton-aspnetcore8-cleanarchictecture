@@ -50,6 +50,7 @@ public struct PeitonPermission
     public const int Comunicaciones = 32;
     public const int ComunicacionesLlamadas = 149;
     public const int ComunicacionesMensajes = 116;
+    public const int ComunicacionesMensajesTuAppoyo = 341;
     public const int ComunicacionesNotificaciones = 117;
     public const int ComunicacionesRecibirMensajesPorEmail = 121;
 
@@ -105,6 +106,7 @@ public struct PeitonPermission
     public const int GestionIndividualDatosEconomicosCredenciales = 102;
     public const int GestionIndividualDatosEconomicosCredencialesEditar = 103;
     public const int GestionIndividualDatosEconomicosCredencialesVerLogEjecucion = 253;
+    public const int GestionIndividualDatosEconomicosCredencialesForzarCredencial = 344;
     public const int GestionIndividualDatosEconomicosCuentas = 86;
     public const int GestionIndividualDatosEconomicosCuentasEditar = 87;
     public const int GestionIndividualDatosEconomicosDerechos = 94;
@@ -140,6 +142,7 @@ public struct PeitonPermission
     public const int GestionIndividualDatosEconomicosSueldosYPensiones = 84;
     public const int GestionIndividualDatosEconomicosSueldosYPensionesEditar = 85;
     public const int GestionIndividualDatosEconomicosTributos = 154;
+    public const int GestionIndividualDatosEconomicosTributosModificarIRPF = 332;
     public const int GestionIndividualDatosEconomicosTributosEditar = 155;
     public const int GestionIndividualDatosEconomicosVehiculos = 164;
     public const int GestionIndividualDatosEconomicosVehiculosEditar = 165;
@@ -149,8 +152,24 @@ public struct PeitonPermission
     public const int GestionIndividualDatosJuridicosEstado = 188;
     public const int GestionIndividualDatosJuridicosEstadoEditar = 194;
     public const int GestionIndividualDatosJuridicosFechasComunicacion = 199;
+    public const int GestionIndividualDatosJuridicosFechasComunicacionFechaComunicacionBajaJuzgado = 343;
     public const int GestionIndividualDatosJuridicosFechasReconocimiento = 207;
+    public const int GestionIndividualDatosJuridicosGestoresAdministrativos = 359;
+    public const int GestionIndividualDatosJuridicosLeyNueva = 346;
+    public const int GestionIndividualDatosJuridicosLeyNuevaCuratelaAsistencial = 347;
+    public const int GestionIndividualDatosJuridicosLeyNuevaCuratelaRepresentativa = 348;
+    public const int GestionIndividualDatosJuridicosLeyNuevaDefensaJudicialImpropia = 349;
+    public const int GestionIndividualDatosJuridicosLeyNuevaAdministracionProvisional = 350;
+    public const int GestionIndividualDatosJuridicosLeyNuevaInformeDeApoyos = 351;
+    public const int GestionIndividualDatosJuridicosLeyNuevaInterviniente = 352;
+    public const int GestionIndividualDatosJuridicosLeyNuevaUrgencia253 = 353;
+    public const int GestionIndividualDatosJuridicosLeyNuevaDefensorJudicial = 354;
+    public const int GestionIndividualDatosJuridicosLeyNuevaDefensorJudicialConAdministracionDeBienes = 355;
+    public const int GestionIndividualDatosJuridicosLeyNuevaDefensorJudicialConIngresoInvoluntario = 356;
+    public const int GestionIndividualDatosJuridicosLeyNuevaCuradorProvisional = 357;
+
     public const int GestionIndividualDatosJuridicosModificarDocumentos = 210;
+
     public const int GestionIndividualDatosPersonales = 2;
     public const int GestionIndividualDatosPersonalesAmbito = 174;
     public const int GestionIndividualDatosPersonalesAmbitoEditar = 175;
@@ -202,6 +221,7 @@ public struct PeitonPermission
     public const int GestionIndividualDatosSocialesEstimacionFinancera = 185;
     public const int GestionIndividualDatosSocialesEstimacionFinanceraEditar = 186;
     public const int GestionIndividualDocumentos = 13;
+    public const int GestionIndividualDocumentosAcogida = 335;
     public const int GestionIndividualDocumentosAutorizaciones = 160;
     public const int GestionIndividualDocumentosCajaFisica = 147;
     public const int GestionIndividualDocumentosEconomicos = 139;
@@ -226,23 +246,31 @@ public struct PeitonPermission
     public const int GestionIndividualInformesFichadebaja = 169;
     public const int GestionIndividualInformesHistoricoDeValidaciones = 20;
     public const int GestionIndividualInformesHistoricoDeValidacionesPia = 244;
+    public const int GestionIndividualInformesInformeSituacion = 327;
     public const int GestionIndividualInformesInformePersonal = 21;
     public const int GestionIndividualInformesInventarioJudicial = 15;
     public const int GestionIndividualInformesPia = 243;
     public const int GestionIndividualInformesGeneradorDocumentos = 275;
     public const int GestionIndividualInformesRendicionAnualDeCuentas = 17;
     public const int GestionIndividualLlamadas = 150;
+    public const int GestionIndividualTareas = 336;
+    public const int GestionIndividualTareasEditar = 337;
+    public const int GestionIndividualTareasCrear = 338;
+    public const int GestionIndividualTareasEliminar = 339;
+    public const int GestionIndividualTeAppoyo = 340;
 
     public const int GestionMasiva = 22;
     public const int GestionMasivaAvisosTributarios = 168;
     public const int GestionMasivaBancos = 23;
+    public const int GestionMasivaBancosCredenciales = 158;
+    public const int GestionMasivaBancosDesbloquearCredenciales = 358;
     public const int GestionMasivaCaja = 24;
     public const int GestionMasivaCajaBorrarCajaAMTA = 115;
     public const int GestionMasivaConsultas = 25;
     public const int GestionMasivaConsultasAlmacenadas = 26;
     public const int GestionMasivaConsultasAlmacenadasEditar = 69;
     public const int GestionMasivaConsultasManuales = 27;
-    public const int GestionMasivaCredenciales = 158;
+
     public const int GestionMasivaFondos = 324;
     public const int GestionMasivaFondoSolidario = 268;
     public const int GestionMasivaFondoSolidarioAutorizarTodo = 269;
@@ -250,7 +278,10 @@ public struct PeitonPermission
     public const int GestionMasivaFondoSolidarioRevisar = 271;
     public const int GestionMasivaFondoSolidarioPagar = 272;
     public const int GestionMasivaFondoSolidarioVerificar = 273;
+
     public const int GestionMasivaGeolocalizacion = 254;
+    public const int GestionMasivaGestoresAdministrativos = 360;
+    public const int GestionMasivaImportacionArchivos = 345;
     public const int GestionMasivaInformes = 28;
     public const int GestionMasivaInformesControlDeEscritos = 29;
     public const int GestionMasivaInformesRendicionAnualDeCuentas = 30;
@@ -281,6 +312,8 @@ public struct PeitonPermission
     public const int IncidenciasVerTodas = 193;
 
     public const int Institucional = 247;
+    public const int InstitucionalAusencias = 330;
+    public const int InstitucionalAusenciasBorrar = 331;
     public const int InstitucionalDocumentos = 248;
     public const int InstitucionalDocumentosEditar = 251;
     public const int InstitucionalDocumentosEliminar = 249;
@@ -290,6 +323,8 @@ public struct PeitonPermission
     public const int InstitucionalProcesosEliminar = 123;
     public const int InstitucionalProcesosNuevo = 124;
     public const int InstitucionalPuntoInformacion = 274;
+    public const int InstitucionalQuejas = 328;
+    public const int InstitucionalQuejasBorrar = 329;
     public const int InstitucionalSalas = 257;
     public const int InstitucionalSenalamientos = 131;
     public const int InstitucionalSenalamientosEditar = 133;
@@ -297,6 +332,9 @@ public struct PeitonPermission
     public const int InstitucionalSenalamientosNuevo = 132;
     public const int InstitucionalVehiculos = 236;
     public const int InstitucionalVisitas = 127;
+
+
+
 
 
     public const int Urgencias = 276;
@@ -311,6 +349,8 @@ public struct PeitonPermission
     public const int UrgenciasDatosPersonales = 277;
     public const int UrgenciasDatosPersonalesArchivo = 282;
     public const int UrgenciasDatosPersonalesArchivoEditar = 283;
+    public const int UrgenciasDatosPersonalesBaja = 333;
+    public const int UrgenciasDatosPersonalesBajaEditar = 334;
     public const int UrgenciasDatosPersonalesDatosGenerales = 280;
     public const int UrgenciasDatosPersonalesDatosGeneralesEditar = 281;
     public const int UrgenciasDatosPersonalesDatosJuridicos = 308;
