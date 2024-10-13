@@ -1,7 +1,7 @@
-﻿namespace Peiton.Contracts.Categorias
+﻿namespace Peiton.Contracts.Categorias;
+
+public class ActualizarCategoriaRequest
 {
-    public class ActualizarCategoriaRequest
-    {
-        public string Descripcion { get; set; } = null!;
-    }
+    public string Descripcion { get; set; } = null!;
 }
+

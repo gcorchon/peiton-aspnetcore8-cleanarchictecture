@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Peiton.Api.Authorization
-{
-    internal class PeitonPermissionRequirement : IAuthorizationRequirement
-    {
-        public int Permission { get; private set; }
+namespace Peiton.Api.Authorization;
 
-        public PeitonPermissionRequirement(int permission) { Permission = permission; }
-    }
+internal class PeitonPermissionRequirement : IAuthorizationRequirement
+{
+    public int Permission { get; private set; }
+
+    public PeitonPermissionRequirement(int permission) { Permission = permission; }
 }
+

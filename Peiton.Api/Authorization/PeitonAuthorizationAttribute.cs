@@ -1,28 +1,28 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Peiton.Api.Authorization
+namespace Peiton.Api.Authorization;
+
+internal class PeitonAuthorizationAttribute : AuthorizeAttribute
 {
-    internal class PeitonAuthorizationAttribute : AuthorizeAttribute
+    const string POLICY_PREFIX = "PeitonPermission";
+
+    public PeitonAuthorizationAttribute(int permission) => Permission = permission;
+
+    public int Permission
     {
-        const string POLICY_PREFIX = "PeitonPermission";
-
-        public PeitonAuthorizationAttribute(int permission) => Permission = permission;
-
-        public int Permission
+        get
         {
-            get
+            if (int.TryParse(Policy?.Substring(POLICY_PREFIX.Length), out var permission))
             {
-                if (int.TryParse(Policy?.Substring(POLICY_PREFIX.Length), out var permission))
-                {
-                    return permission;
-                }
-                return default(int);
+                return permission;
             }
-            
-            set
-            {
-                Policy = $"{POLICY_PREFIX}{value.ToString()}";
-            }
+            return default(int);
+        }
+
+        set
+        {
+            Policy = $"{POLICY_PREFIX}{value.ToString()}";
         }
     }
 }
+

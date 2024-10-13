@@ -6,25 +6,25 @@ using Peiton.Contracts.Common;
 using Peiton.Core.UseCases.CNAEs;
 
 
-namespace Peiton.Api.Controllers
+namespace Peiton.Api.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CNAEsController(IMapper mapper) : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CNAEsController(IMapper mapper) : ControllerBase
+    [HttpGet()]
+    public async Task<IActionResult> CNAEsAsync([FromQuery] ObtenerCNAEsFilter filter, [FromQuery] Pagination pagination, CNAEsHandler handler)
     {
-        [HttpGet()]
-        public async Task<IActionResult> CNAEsAsync([FromQuery] ObtenerCNAEsFilter filter, [FromQuery] Pagination pagination, CNAEsHandler handler)
-        {
-            var data = await handler.HandleAsync(filter, pagination);
-            return this.PaginatedResult(data.Items, data.Total);
-        }
-
-        [HttpPatch("{cnae}")]
-        public async Task<IActionResult> ActualizarCNAEAsync(string cnae, [FromBody] ActualizarCNAERequest request, ActualizarCNAEHandler handler)
-        {
-            await handler.HandleAsync(cnae, request);
-            return Accepted();
-        }
-
+        var data = await handler.HandleAsync(filter, pagination);
+        return this.PaginatedResult(data.Items, data.Total);
     }
+
+    [HttpPatch("{cnae}")]
+    public async Task<IActionResult> ActualizarCNAEAsync(string cnae, [FromBody] ActualizarCNAERequest request, ActualizarCNAEHandler handler)
+    {
+        await handler.HandleAsync(cnae, request);
+        return Accepted();
+    }
+
 }
+

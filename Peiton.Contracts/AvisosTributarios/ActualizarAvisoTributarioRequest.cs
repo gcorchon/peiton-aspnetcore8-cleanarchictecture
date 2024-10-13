@@ -1,8 +1,7 @@
-﻿namespace Peiton.Contracts.AvisosTributarios
+﻿namespace Peiton.Contracts.AvisosTributarios;
+
+public class ActualizarAvisoTributarioRequest
 {
-    public class ActualizarAvisoTributarioRequest
-    {
-        public string? ComentariosDepartamentoTributario { get; set; }
-        public bool EnTramite { get; set; }
-    }
+    public string? ComentariosDepartamentoTributario { get; set; }
+    public bool EnTramite { get; set; }
 }

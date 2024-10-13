@@ -1,8 +1,8 @@
-﻿namespace Peiton.Contracts.Common
+﻿namespace Peiton.Contracts.Common;
+
+public class Pagination
 {
-    public class Pagination
-    {
-        public int Page { get; set; }
-        public int Total { get; set; }
-    }
+    public int Page { get; set; }
+    public int Total { get; set; }
 }
+

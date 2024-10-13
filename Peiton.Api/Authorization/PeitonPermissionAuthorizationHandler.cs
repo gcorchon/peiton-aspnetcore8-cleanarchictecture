@@ -2,43 +2,42 @@
 using Peiton.Core;
 using Peiton.Core.Repositories;
 
-namespace Peiton.Api.Authorization
+namespace Peiton.Api.Authorization;
+
+internal class PeitonPermissionAuthorizationHandler : AuthorizationHandler<PeitonPermissionRequirement>
 {
-    internal class PeitonPermissionAuthorizationHandler : AuthorizationHandler<PeitonPermissionRequirement>
+    private readonly IServiceProvider serviceProvider;
+
+    public PeitonPermissionAuthorizationHandler(IServiceProvider serviceProvider)
     {
-        private readonly IServiceProvider serviceProvider;
+        this.serviceProvider = serviceProvider;
+    }
 
-        public PeitonPermissionAuthorizationHandler(IServiceProvider serviceProvider)
+    protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PeitonPermissionRequirement requirement)
+    {
+        if (context.User.Identity != null && context.User.Identity.IsAuthenticated)
         {
-            this.serviceProvider = serviceProvider;
-        }
+            var scopedServiceProvider = serviceProvider.CreateScope().ServiceProvider;
+            var userRepository = scopedServiceProvider.GetRequiredService<IUsuarioRepository>();
+            var identityService = scopedServiceProvider.GetRequiredService<IIdentityService>();
 
-        protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PeitonPermissionRequirement requirement)
-        {
-            if (context.User.Identity != null && context.User.Identity.IsAuthenticated)
+            int userId = identityService.GetUserId();
+
+            if (await userRepository.HasPermissionAsync(userId, requirement.Permission))
             {
-                var scopedServiceProvider = serviceProvider.CreateScope().ServiceProvider;
-                var userRepository = scopedServiceProvider.GetRequiredService<IUsuarioRepository>();
-                var identityService = scopedServiceProvider.GetRequiredService<IIdentityService>();
-                
-                int userId = identityService.GetUserId();
-
-                if (await userRepository.HasPermissionAsync(userId, requirement.Permission))
-                {
-                    context.Succeed(requirement);
-                } 
-                else
-                {
-                    context.Fail(new AuthorizationFailureReason(this, "Falta el permiso " + requirement.Permission));
-                }
-            } 
+                context.Succeed(requirement);
+            }
             else
             {
-                context.Fail(new AuthorizationFailureReason(this, "Usuario no autenticado"));
+                context.Fail(new AuthorizationFailureReason(this, "Falta el permiso " + requirement.Permission));
             }
-
-
-            return; //Task.CompletedTask;
         }
+        else
+        {
+            context.Fail(new AuthorizationFailureReason(this, "Usuario no autenticado"));
+        }
+
+
+        return; //Task.CompletedTask;
     }
 }

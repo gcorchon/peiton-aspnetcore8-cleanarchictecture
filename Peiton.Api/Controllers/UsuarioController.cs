@@ -2,16 +2,17 @@
 using Peiton.Core;
 using Peiton.Core.UseCases.Usuarios;
 
-namespace Peiton.Api;
+namespace Peiton.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class UsuarioController : ControllerBase
 {
     [Route("{id:int}")]
-    public async Task<IActionResult> GetUserById(int id, GetUserByIdHandler handler){
+    public async Task<IActionResult> GetUserById(int id, GetUserByIdHandler handler)
+    {
         var usuario = await handler.HandleAsync(id);
-        if(usuario is null) return NotFound();
+        if (usuario is null) return NotFound();
         return Ok(usuario);
     }
 

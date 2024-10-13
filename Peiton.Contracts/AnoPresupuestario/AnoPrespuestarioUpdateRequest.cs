@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Peiton.Contracts.AnoPresupuestario
+namespace Peiton.Contracts.AnoPresupuestario;
+
+public class AnoPrespuestarioUpdateRequest
 {
-    public class AnoPrespuestarioUpdateRequest
-    {
-        [Required]
-        [MaxLength(255)]
-        public string Descripcion { get; set; } = string.Empty;
-    }
+    [Required]
+    [MaxLength(255)]
+    public string Descripcion { get; set; } = string.Empty;
 }
+

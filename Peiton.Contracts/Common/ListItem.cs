@@ -1,8 +1,7 @@
-﻿namespace Peiton.Contracts.Common
+﻿namespace Peiton.Contracts.Common;
+
+public class ListItem
 {
-    public class ListItem
-    {
-        public string Text { get; set; } = null!;
-        public int Value { get; set; }
-    }
+    public string Text { get; set; } = null!;
+    public int Value { get; set; }
 }

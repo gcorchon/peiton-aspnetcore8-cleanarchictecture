@@ -1,8 +1,8 @@
-namespace Peiton.Contracts.GestoresAdministrativos
+namespace Peiton.Contracts.GestoresAdministrativos;
+
+public class GuardarGestionAdministrativaRequest
 {
-    public class GuardarGestionAdministrativaRequest
-    {
-        public int GestionAdministrativaTipoId { get; set; }
-        public string? Observaciones { get; set; }
-    }
+    public int GestionAdministrativaTipoId { get; set; }
+    public string? Observaciones { get; set; }
 }
+

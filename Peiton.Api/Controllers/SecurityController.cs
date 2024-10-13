@@ -3,18 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using Peiton.Contracts.Security;
 using Peiton.Core.UseCases.Security;
 
-namespace Peiton.Api;  
+namespace Peiton.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class SecurityController : ControllerBase
 {
     [HttpPost("token")]
-    public async Task<IActionResult> GetToken(TokenRequest request, GetTokenHandler handler){
-        try{
+    public async Task<IActionResult> GetToken(TokenRequest request, GetTokenHandler handler)
+    {
+        try
+        {
             var token = await handler.HandleAsync(request);
             return Ok(token);
-        } catch (UnauthorizedAccessException ex){
+        }
+        catch (UnauthorizedAccessException ex)
+        {
             return Unauthorized(ex.Message);
         }
     }
@@ -23,10 +27,13 @@ public class SecurityController : ControllerBase
     [Authorize()]
     public async Task<ActionResult<MeViewModel>> Me(MeHandler handler)
     {
-        try{
+        try
+        {
             var me = await handler.HandleAsync();
             return Ok(me);
-        } catch (UnauthorizedAccessException){
+        }
+        catch (UnauthorizedAccessException)
+        {
             return Unauthorized("Usuario no autorizado");
         }
     }

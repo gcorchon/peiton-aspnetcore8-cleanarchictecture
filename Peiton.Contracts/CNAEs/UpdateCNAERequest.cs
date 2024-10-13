@@ -1,7 +1,7 @@
-﻿namespace Peiton.Contracts.CNAEs
+﻿namespace Peiton.Contracts.CNAEs;
+
+public class ActualizarCNAERequest
 {
-    public class ActualizarCNAERequest
-    {
-        public int? CategoriaId { get; set; }
-    }
+    public int? CategoriaId { get; set; }
 }
+
