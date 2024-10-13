@@ -1,8 +1,6 @@
-﻿namespace Peiton.Contracts.Partida
+﻿namespace Peiton.Contracts.Partida;
+public class PartidaUpdateRequest
 {
-    public class PartidaUpdateRequest
-    {
-        public string Descripcion { get; set; } = null!;
-        public decimal SaldoInicial { get; set; } = 0;
-    }
+    public string Descripcion { get; set; } = null!;
+    public decimal SaldoInicial { get; set; } = 0;
 }

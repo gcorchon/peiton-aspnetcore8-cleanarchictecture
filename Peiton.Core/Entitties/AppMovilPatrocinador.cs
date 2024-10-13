@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class AppMovilPatrocinador
 {
-    public class AppMovilPatrocinador
-	{
-		public int Id { get; set; }
-		public string Nombre { get; set; } = null!;
-		public string Imagen { get; set; } = null!;
-		public int Orden { get; set; }
+	public int Id { get; set; }
+	public string Nombre { get; set; } = null!;
+	public string Imagen { get; set; } = null!;
+	public int Orden { get; set; }
 
-	}
 }

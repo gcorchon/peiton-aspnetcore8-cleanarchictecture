@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Sala
 {
-    public class Sala
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<SalaReserva> SalasReservas { get; } = new List<SalaReserva>(); */
+	/* public virtual ICollection<SalaReserva> SalasReservas { get; } = new List<SalaReserva>(); */
 
-	}
 }

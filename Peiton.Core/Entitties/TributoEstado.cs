@@ -1,13 +1,11 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TributoEstado
 {
-    public class TributoEstado
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
-		public int Orden { get; set; }
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
+	public int Orden { get; set; }
 
-		/* public virtual ICollection<TributoSubestado> TributosSubestados { get; } = new List<TributoSubestado>(); */
-		/* public virtual ICollection<TributoTutelado> TributosTutelados { get; } = new List<TributoTutelado>(); */
+	/* public virtual ICollection<TributoSubestado> TributosSubestados { get; } = new List<TributoSubestado>(); */
+	/* public virtual ICollection<TributoTutelado> TributosTutelados { get; } = new List<TributoTutelado>(); */
 
-	}
 }

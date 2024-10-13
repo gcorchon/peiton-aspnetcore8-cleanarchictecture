@@ -1,10 +1,8 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Comunicado
 {
-    public class Comunicado
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
-		public string FileName { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
+	public string FileName { get; set; } = null!;
 
-	}
 }

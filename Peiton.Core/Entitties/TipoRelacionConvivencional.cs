@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TipoRelacionConvivencional
 {
-    public class TipoRelacionConvivencional
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<TuteladoRelacionConvivencional> TuteladosRelacionesConvivencionales { get; } = new List<TuteladoRelacionConvivencional>(); */
+	/* public virtual ICollection<TuteladoRelacionConvivencional> TuteladosRelacionesConvivencionales { get; } = new List<TuteladoRelacionConvivencional>(); */
 
-	}
 }

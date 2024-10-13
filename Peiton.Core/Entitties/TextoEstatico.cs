@@ -1,10 +1,8 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TextoEstatico
 {
-    public class TextoEstatico
-	{
-		public int Id { get; set; }
-		public string Identificador { get; set; } = null!;
-		public string Valor { get; set; } = null!;
+	public int Id { get; set; }
+	public string Identificador { get; set; } = null!;
+	public string Valor { get; set; } = null!;
 
-	}
 }

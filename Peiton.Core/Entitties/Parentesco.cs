@@ -1,12 +1,10 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Parentesco
 {
-    public class Parentesco
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<Caja> Caja { get; } = new List<Caja>(); */
-		/* public virtual ICollection<CajaIncidencia> CajaIncidencias { get; } = new List<CajaIncidencia>(); */
+	/* public virtual ICollection<Caja> Caja { get; } = new List<Caja>(); */
+	/* public virtual ICollection<CajaIncidencia> CajaIncidencias { get; } = new List<CajaIncidencia>(); */
 
-	}
 }

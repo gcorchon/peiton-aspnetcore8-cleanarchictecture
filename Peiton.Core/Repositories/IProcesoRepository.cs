@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IProcesoRepository : IRepository<Proceso>
 {
-    public interface IProcesoRepository : IRepository<Proceso>
-	{
 
-	}
 }

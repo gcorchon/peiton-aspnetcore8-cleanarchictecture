@@ -2,17 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Peiton.Core.Entities;
 
-namespace Peiton.Data.Configuration
+namespace Peiton.Data.Configuration;
+public class TipoCentroConfiguration : IEntityTypeConfiguration<TipoCentro>
 {
-    public class TipoCentroConfiguration : IEntityTypeConfiguration<TipoCentro>
+	public void Configure(EntityTypeBuilder<TipoCentro> builder)
 	{
-		public void Configure(EntityTypeBuilder<TipoCentro> builder)
-		{
-			builder.HasKey(t => t.Id);
+		builder.HasKey(t => t.Id);
 
-			builder.Property(p => p.Id).ValueGeneratedNever().HasColumnName("Pk_TipoCentro");
-			builder.Property(p => p.Descripcion).HasMaxLength(50);
+		builder.Property(p => p.Id).ValueGeneratedNever().HasColumnName("Pk_TipoCentro");
+		builder.Property(p => p.Descripcion).HasMaxLength(50);
 
-		}
 	}
 }

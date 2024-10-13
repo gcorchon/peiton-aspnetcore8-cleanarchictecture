@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(ITipoPrestamoRepository))]
+public class TipoPrestamoRepository : RepositoryBase<TipoPrestamo>, ITipoPrestamoRepository
 {
-
-
-    [Injectable(typeof(ITipoPrestamoRepository))]
-	public class TipoPrestamoRepository: RepositoryBase<TipoPrestamo>, ITipoPrestamoRepository
+	public TipoPrestamoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public TipoPrestamoRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

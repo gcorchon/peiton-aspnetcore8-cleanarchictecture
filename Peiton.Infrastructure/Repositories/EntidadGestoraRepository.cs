@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IEntidadGestoraRepository))]
+public class EntidadGestoraRepository : RepositoryBase<EntidadGestora>, IEntidadGestoraRepository
 {
-
-
-    [Injectable(typeof(IEntidadGestoraRepository))]
-	public class EntidadGestoraRepository: RepositoryBase<EntidadGestora>, IEntidadGestoraRepository
+	public EntidadGestoraRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public EntidadGestoraRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

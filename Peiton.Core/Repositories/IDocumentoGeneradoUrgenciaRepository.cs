@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IDocumentoGeneradoUrgenciaRepository : IRepository<DocumentoGeneradoUrgencia>
 {
-    public interface IDocumentoGeneradoUrgenciaRepository : IRepository<DocumentoGeneradoUrgencia>
-	{
 
-	}
 }

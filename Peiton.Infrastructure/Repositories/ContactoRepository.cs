@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IContactoRepository))]
+public class ContactoRepository : RepositoryBase<Contacto>, IContactoRepository
 {
-
-
-    [Injectable(typeof(IContactoRepository))]
-	public class ContactoRepository: RepositoryBase<Contacto>, IContactoRepository
+	public ContactoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public ContactoRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

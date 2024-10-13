@@ -2,18 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Peiton.Core.Entities;
 
-namespace Peiton.Data.Configuration
+namespace Peiton.Data.Configuration;
+public class LogAccesoFiscaliaConfiguration : IEntityTypeConfiguration<LogAccesoFiscalia>
 {
-    public class LogAccesoFiscaliaConfiguration : IEntityTypeConfiguration<LogAccesoFiscalia>
+	public void Configure(EntityTypeBuilder<LogAccesoFiscalia> builder)
 	{
-		public void Configure(EntityTypeBuilder<LogAccesoFiscalia> builder)
-		{
-			builder.HasKey(t => new { t.Usuario, t.Fecha});
+		builder.HasKey(t => new { t.Usuario, t.Fecha });
 
-			builder.Property(p => p.Usuario).HasMaxLength(50);
-			builder.Property(p => p.Fecha).HasDefaultValueSql("(getdate())");
-			builder.Property(p => p.IP).HasMaxLength(7);
+		builder.Property(p => p.Usuario).HasMaxLength(50);
+		builder.Property(p => p.Fecha).HasDefaultValueSql("(getdate())");
+		builder.Property(p => p.IP).HasMaxLength(7);
 
-		}
 	}
 }

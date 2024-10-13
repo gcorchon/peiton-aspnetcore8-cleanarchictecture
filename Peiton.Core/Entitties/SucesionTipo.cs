@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class SucesionTipo
 {
-    public class SucesionTipo
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<Sucesion> Sucesiones { get; } = new List<Sucesion>(); */
+	/* public virtual ICollection<Sucesion> Sucesiones { get; } = new List<Sucesion>(); */
 
-	}
 }

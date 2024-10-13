@@ -3,21 +3,20 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(ICategoriaRepository))]
+public class CategoriaRepository : RepositoryBase<Categoria>, ICategoriaRepository
 {
-
-
-    [Injectable(typeof(ICategoriaRepository))]
-	public class CategoriaRepository: RepositoryBase<Categoria>, ICategoriaRepository
+	public CategoriaRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public CategoriaRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
+	}
 
-        public Task BorrarCategoriaAsync(int id)
-        {
-			return this.DbContext.Database.ExecuteSqlAsync(@$"declare @Categoriatree table (Pk_Categoria int, Descripcion nvarchar(255), Fk_CategoriaPadre int, Level int, BreadCrumb nvarchar(max));
+	public Task BorrarCategoriaAsync(int id)
+	{
+		return this.DbContext.Database.ExecuteSqlAsync(@$"declare @Categoriatree table (Pk_Categoria int, Descripcion nvarchar(255), Fk_CategoriaPadre int, Level int, BreadCrumb nvarchar(max));
 	
 	                        with data  (Pk_Categoria, Descripcion, Fk_CategoriaPadre, Level, BreadCrumb) as
 	                        (
@@ -72,6 +71,5 @@ namespace Peiton.Infrastructure.Repositories
 	                        end
 	                        close c
 	                        deallocate c");
-        }
-    }
+	}
 }

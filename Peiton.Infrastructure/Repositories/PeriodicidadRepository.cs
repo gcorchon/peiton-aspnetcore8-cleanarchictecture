@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IPeriodicidadRepository))]
+public class PeriodicidadRepository : RepositoryBase<Periodicidad>, IPeriodicidadRepository
 {
-
-
-    [Injectable(typeof(IPeriodicidadRepository))]
-	public class PeriodicidadRepository: RepositoryBase<Periodicidad>, IPeriodicidadRepository
+	public PeriodicidadRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public PeriodicidadRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

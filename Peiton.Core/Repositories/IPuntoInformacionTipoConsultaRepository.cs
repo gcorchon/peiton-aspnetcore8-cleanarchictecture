@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IPuntoInformacionTipoConsultaRepository : IRepository<PuntoInformacionTipoConsulta>
 {
-    public interface IPuntoInformacionTipoConsultaRepository : IRepository<PuntoInformacionTipoConsulta>
-	{
 
-	}
 }

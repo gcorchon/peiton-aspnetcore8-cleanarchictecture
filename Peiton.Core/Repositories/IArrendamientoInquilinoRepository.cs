@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IArrendamientoInquilinoRepository : IRepository<ArrendamientoInquilino>
 {
-    public interface IArrendamientoInquilinoRepository : IRepository<ArrendamientoInquilino>
-	{
 
-	}
 }

@@ -1,14 +1,12 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class RelacionAMTAContacto
 {
-    public class RelacionAMTAContacto
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
-		public int Orden { get; set; }
-		public string? TextoInformeSocial { get; set; }
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
+	public int Orden { get; set; }
+	public string? TextoInformeSocial { get; set; }
 
-		/* public virtual ICollection<ApoyoFormal> ApoyosFormales { get; } = new List<ApoyoFormal>(); */
-		/* public virtual ICollection<DatosSociales> DatosSociales { get; } = new List<DatosSociales>(); */
+	/* public virtual ICollection<ApoyoFormal> ApoyosFormales { get; } = new List<ApoyoFormal>(); */
+	/* public virtual ICollection<DatosSociales> DatosSociales { get; } = new List<DatosSociales>(); */
 
-	}
 }

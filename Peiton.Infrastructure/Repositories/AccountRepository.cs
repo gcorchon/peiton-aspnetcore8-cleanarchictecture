@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IAccountRepository))]
+public class AccountRepository : RepositoryBase<Account>, IAccountRepository
 {
-
-
-    [Injectable(typeof(IAccountRepository))]
-	public class AccountRepository: RepositoryBase<Account>, IAccountRepository
+	public AccountRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public AccountRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

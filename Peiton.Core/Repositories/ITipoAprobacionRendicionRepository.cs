@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface ITipoAprobacionRendicionRepository : IRepository<TipoAprobacionRendicion>
 {
-    public interface ITipoAprobacionRendicionRepository : IRepository<TipoAprobacionRendicion>
-	{
 
-	}
 }

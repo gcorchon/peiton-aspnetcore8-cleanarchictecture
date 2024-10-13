@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IOrigenExpedienteRepository : IRepository<OrigenExpediente>
 {
-    public interface IOrigenExpedienteRepository : IRepository<OrigenExpediente>
-	{
 
-	}
 }

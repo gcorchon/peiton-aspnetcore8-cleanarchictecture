@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class MedidaPIA
 {
-    public class MedidaPIA
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<InformePersonalPIA> InformesPersonalesPIA { get; } = new List<InformePersonalPIA>(); */
+	/* public virtual ICollection<InformePersonalPIA> InformesPersonalesPIA { get; } = new List<InformePersonalPIA>(); */
 
-	}
 }

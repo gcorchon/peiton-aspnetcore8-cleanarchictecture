@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IVehiculoRepository))]
+public class VehiculoRepository : RepositoryBase<Vehiculo>, IVehiculoRepository
 {
-
-
-    [Injectable(typeof(IVehiculoRepository))]
-	public class VehiculoRepository: RepositoryBase<Vehiculo>, IVehiculoRepository
+	public VehiculoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public VehiculoRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TipoPrestamo
 {
-    public class TipoPrestamo
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<Prestamo> Prestamos { get; } = new List<Prestamo>(); */
+	/* public virtual ICollection<Prestamo> Prestamos { get; } = new List<Prestamo>(); */
 
-	}
 }

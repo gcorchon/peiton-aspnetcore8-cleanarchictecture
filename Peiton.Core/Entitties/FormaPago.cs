@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class FormaPago
 {
-    public class FormaPago
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<Asiento> Asientos { get; } = new List<Asiento>(); */
+	/* public virtual ICollection<Asiento> Asientos { get; } = new List<Asiento>(); */
 
-	}
 }

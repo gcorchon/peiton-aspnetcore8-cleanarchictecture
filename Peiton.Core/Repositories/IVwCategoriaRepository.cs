@@ -5,11 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IVwCategoriaRepository
 {
-    public interface IVwCategoriaRepository
-    {
-        Task<List<VwCategoria>> BuscarCategoriasAsync(string text, int total);
-        Task<List<VwCategoria>> ObtenerCategoriasAsync();
-    }
+    Task<List<VwCategoria>> BuscarCategoriasAsync(string text, int total);
+    Task<List<VwCategoria>> ObtenerCategoriasAsync();
 }

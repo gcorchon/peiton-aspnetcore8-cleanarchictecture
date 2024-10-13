@@ -1,13 +1,11 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TareaCategoria
 {
-    public class TareaCategoria
-	{
-		public int Id { get; set; }
-		public int TareaDepartamentoId { get; set; }
-		public string Descripcion { get; set; } = null!;
-		public virtual TareaDepartamento TareaDepartamento { get; set; }= null!;
-		/* public virtual ICollection<Tarea> Tareas { get; } = new List<Tarea>(); */
-		/* public virtual ICollection<TareaSubcategoria> TareasSubcategorias { get; } = new List<TareaSubcategoria>(); */
+	public int Id { get; set; }
+	public int TareaDepartamentoId { get; set; }
+	public string Descripcion { get; set; } = null!;
+	public virtual TareaDepartamento TareaDepartamento { get; set; } = null!;
+	/* public virtual ICollection<Tarea> Tareas { get; } = new List<Tarea>(); */
+	/* public virtual ICollection<TareaSubcategoria> TareasSubcategorias { get; } = new List<TareaSubcategoria>(); */
 
-	}
 }

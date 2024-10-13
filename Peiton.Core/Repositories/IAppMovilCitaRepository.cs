@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IAppMovilCitaRepository : IRepository<AppMovilCita>
 {
-    public interface IAppMovilCitaRepository : IRepository<AppMovilCita>
-	{
 
-	}
 }

@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IEmpresaRepository))]
+public class EmpresaRepository : RepositoryBase<Empresa>, IEmpresaRepository
 {
-
-
-    [Injectable(typeof(IEmpresaRepository))]
-	public class EmpresaRepository: RepositoryBase<Empresa>, IEmpresaRepository
+	public EmpresaRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public EmpresaRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

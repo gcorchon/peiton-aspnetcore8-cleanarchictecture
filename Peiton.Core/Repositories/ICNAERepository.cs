@@ -1,11 +1,9 @@
 using Peiton.Contracts.CNAEs;
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface ICNAERepository : IRepository<CNAE>
 {
-    public interface ICNAERepository : IRepository<CNAE>
-	{
-		Task<List<CNAEViewModel>> ObtenerCNAEsAsync(int page, int total, ObtenerCNAEsFilter filter);
-        Task<int> ContarCNAEsAsync(ObtenerCNAEsFilter filter);
-    }
+    Task<List<CNAEViewModel>> ObtenerCNAEsAsync(int page, int total, ObtenerCNAEsFilter filter);
+    Task<int> ContarCNAEsAsync(ObtenerCNAEsFilter filter);
 }

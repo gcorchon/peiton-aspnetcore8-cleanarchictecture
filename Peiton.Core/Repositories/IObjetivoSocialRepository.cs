@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IObjetivoSocialRepository : IRepository<ObjetivoSocial>
 {
-    public interface IObjetivoSocialRepository : IRepository<ObjetivoSocial>
-	{
 
-	}
 }

@@ -1,11 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace Peiton.Contracts.Inmuebles
+﻿namespace Peiton.Contracts.Inmuebles;
+public class ActualizarInmuebleSolicitudAlquilerVentaRequest
 {
-    public class ActualizarInmuebleSolicitudAlquilerVentaRequest
-    {
-        public int Estado { get; set; }
-        public string? ObservacionesDepartamentoInmuebles { get; set; }
-    }
-
+    public int Estado { get; set; }
+    public string? ObservacionesDepartamentoInmuebles { get; set; }
 }
+

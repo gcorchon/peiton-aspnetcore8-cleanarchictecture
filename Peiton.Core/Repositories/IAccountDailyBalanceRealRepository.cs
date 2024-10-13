@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IAccountDailyBalanceRealRepository : IRepository<AccountDailyBalanceReal>
 {
-    public interface IAccountDailyBalanceRealRepository : IRepository<AccountDailyBalanceReal>
-	{
 
-	}
 }

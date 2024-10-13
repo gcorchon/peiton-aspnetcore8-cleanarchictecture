@@ -1,8 +1,6 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Exportacion
 {
-    public class Exportacion
-	{
-		public string DNI { get; set; } = null!;
+	public string DNI { get; set; } = null!;
 
-	}
 }

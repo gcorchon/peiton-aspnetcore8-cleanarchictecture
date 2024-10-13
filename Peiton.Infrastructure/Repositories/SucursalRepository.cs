@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(ISucursalRepository))]
+public class SucursalRepository : RepositoryBase<Sucursal>, ISucursalRepository
 {
-
-
-    [Injectable(typeof(ISucursalRepository))]
-	public class SucursalRepository: RepositoryBase<Sucursal>, ISucursalRepository
+	public SucursalRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public SucursalRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

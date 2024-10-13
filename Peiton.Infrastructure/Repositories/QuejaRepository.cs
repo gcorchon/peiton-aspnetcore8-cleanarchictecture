@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IQuejaRepository))]
+public class QuejaRepository : RepositoryBase<Queja>, IQuejaRepository
 {
-
-
-    [Injectable(typeof(IQuejaRepository))]
-	public class QuejaRepository: RepositoryBase<Queja>, IQuejaRepository
+	public QuejaRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public QuejaRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

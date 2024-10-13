@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TransferenciaBeneficiario
 {
-    public class TransferenciaBeneficiario
-	{
-		public int Id { get; set; }
-		public string Nombre { get; set; } = null!;
+	public int Id { get; set; }
+	public string Nombre { get; set; } = null!;
 
-		/* public virtual ICollection<TransferenciaBeneficiarioCuenta> TransferenciasBeneficiariosCuentas { get; } = new List<TransferenciaBeneficiarioCuenta>(); */
+	/* public virtual ICollection<TransferenciaBeneficiarioCuenta> TransferenciasBeneficiariosCuentas { get; } = new List<TransferenciaBeneficiarioCuenta>(); */
 
-	}
 }

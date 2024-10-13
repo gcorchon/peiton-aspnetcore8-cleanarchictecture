@@ -4,24 +4,22 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Core.UseCases.Credenciales
+namespace Peiton.Core.UseCases.Credenciales;
+[Injectable]
+public class CredencialesBloqueadasHandler(ICredencialRepository credencialRepository)
 {
-    [Injectable]
-    public class CredencialesBloqueadasHandler(ICredencialRepository credencialRepository)
+    public async Task<PaginatedData<Credencial>> HandleAsync(CredencialesBloqueadasFilter filter, Pagination pagination)
     {
-        public async Task<PaginatedData<Credencial>> HandleAsync(CredencialesBloqueadasFilter filter, Pagination pagination)
+        var credenciales = await credencialRepository.ObtenerCredencialesBloqueadasAsync(pagination.Page, pagination.Total, filter);
+        var total = await credencialRepository.ContarCredencialesBloqueadasAsync(filter);
+
+        return new PaginatedData<Credencial>()
         {
-            var credenciales = await credencialRepository.ObtenerCredencialesBloqueadasAsync(pagination.Page, pagination.Total, filter);
-            var total = await credencialRepository.ContarCredencialesBloqueadasAsync(filter);
-
-            return new PaginatedData<Credencial>()
-            {
-                Items = credenciales,
-                Total = total
-            };
-        }
+            Items = credenciales,
+            Total = total
+        };
     }
-
-
-
 }
+
+
+

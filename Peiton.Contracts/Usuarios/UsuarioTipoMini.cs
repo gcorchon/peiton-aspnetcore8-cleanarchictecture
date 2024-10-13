@@ -1,8 +1,6 @@
-﻿namespace Peiton.Contracts.Usuarios
+﻿namespace Peiton.Contracts.Usuarios;
+public class UsuarioTipoMini
 {
-    public class UsuarioTipoMini
-    {
-        public int Tipo { get; set; }
-        public int Id { get; set; }
-    }
+    public int Tipo { get; set; }
+    public int Id { get; set; }
 }

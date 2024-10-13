@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Recordatorio
 {
-    public class Recordatorio
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<Evento> Eventos { get; } = new List<Evento>(); */
+	/* public virtual ICollection<Evento> Eventos { get; } = new List<Evento>(); */
 
-	}
 }

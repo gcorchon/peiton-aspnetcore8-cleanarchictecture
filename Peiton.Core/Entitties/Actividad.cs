@@ -1,12 +1,10 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Actividad
 {
-    public class Actividad
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
-		public bool MostrarDesplegable { get; set; }
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
+	public bool MostrarDesplegable { get; set; }
 
-		/* public virtual ICollection<TuteladoActividad> TuteladosActividades { get; } = new List<TuteladoActividad>(); */
+	/* public virtual ICollection<TuteladoActividad> TuteladosActividades { get; } = new List<TuteladoActividad>(); */
 
-	}
 }

@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IAppMovilEstadoAnimoRepository : IRepository<AppMovilEstadoAnimo>
 {
-    public interface IAppMovilEstadoAnimoRepository : IRepository<AppMovilEstadoAnimo>
-	{
 
-	}
 }

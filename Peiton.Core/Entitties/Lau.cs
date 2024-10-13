@@ -1,9 +1,7 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Lau
 {
-    public class Lau
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-	}
 }

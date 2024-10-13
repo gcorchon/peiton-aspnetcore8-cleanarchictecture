@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Pia
 {
-    public class Pia
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<DatosSociales> DatosSociales { get; } = new List<DatosSociales>(); */
+	/* public virtual ICollection<DatosSociales> DatosSociales { get; } = new List<DatosSociales>(); */
 
-	}
 }

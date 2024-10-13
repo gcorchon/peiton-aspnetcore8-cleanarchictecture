@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface ITareaEstadoRepository : IRepository<TareaEstado>
 {
-    public interface ITareaEstadoRepository : IRepository<TareaEstado>
-	{
 
-	}
 }

@@ -1,12 +1,10 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class GradoApoyo
 {
-    public class GradoApoyo
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<DatosJuridicos> DatosJuridicos { get; } = new List<DatosJuridicos>(); */
-		/* public virtual ICollection<DatosJuridicosHistorico> DatosJuridicosHistoricos { get; } = new List<DatosJuridicosHistorico>(); */
+	/* public virtual ICollection<DatosJuridicos> DatosJuridicos { get; } = new List<DatosJuridicos>(); */
+	/* public virtual ICollection<DatosJuridicosHistorico> DatosJuridicosHistoricos { get; } = new List<DatosJuridicosHistorico>(); */
 
-	}
 }

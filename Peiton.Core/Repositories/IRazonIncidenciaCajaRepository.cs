@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IRazonIncidenciaCajaRepository : IRepository<RazonIncidenciaCaja>
 {
-    public interface IRazonIncidenciaCajaRepository : IRepository<RazonIncidenciaCaja>
-	{
 
-	}
 }

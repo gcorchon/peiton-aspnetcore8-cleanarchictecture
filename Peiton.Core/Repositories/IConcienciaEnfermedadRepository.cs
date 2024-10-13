@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IConcienciaEnfermedadRepository : IRepository<ConcienciaEnfermedad>
 {
-    public interface IConcienciaEnfermedadRepository : IRepository<ConcienciaEnfermedad>
-	{
 
-	}
 }

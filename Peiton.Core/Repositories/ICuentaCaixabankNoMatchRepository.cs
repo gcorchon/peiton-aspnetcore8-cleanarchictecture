@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface ICuentaCaixabankNoMatchRepository : IRepository<CuentaCaixabankNoMatch>
 {
-    public interface ICuentaCaixabankNoMatchRepository : IRepository<CuentaCaixabankNoMatch>
-	{
 
-	}
 }

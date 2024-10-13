@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class CoordinadorSocial
 {
-    public class CoordinadorSocial
-	{
-		public int Id { get; set; }
-		public string Nombre { get; set; } = null!;
+	public int Id { get; set; }
+	public string Nombre { get; set; } = null!;
 
-		/* public virtual ICollection<Tutelado> Tutelados { get; } = new List<Tutelado>(); */
+	/* public virtual ICollection<Tutelado> Tutelados { get; } = new List<Tutelado>(); */
 
-	}
 }

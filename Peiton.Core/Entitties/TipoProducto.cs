@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TipoProducto
 {
-    public class TipoProducto
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<ProductoManual> ProductosManuales { get; } = new List<ProductoManual>(); */
+	/* public virtual ICollection<ProductoManual> ProductosManuales { get; } = new List<ProductoManual>(); */
 
-	}
 }

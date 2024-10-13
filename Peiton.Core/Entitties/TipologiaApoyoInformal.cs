@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TipologiaApoyoInformal
 {
-    public class TipologiaApoyoInformal
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<ApoyoInformal> ApoyosInformales { get; } = new List<ApoyoInformal>(); */
+	/* public virtual ICollection<ApoyoInformal> ApoyosInformales { get; } = new List<ApoyoInformal>(); */
 
-	}
 }

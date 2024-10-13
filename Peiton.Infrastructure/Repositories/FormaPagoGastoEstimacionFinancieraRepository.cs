@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IFormaPagoGastoEstimacionFinancieraRepository))]
+public class FormaPagoGastoEstimacionFinancieraRepository : RepositoryBase<FormaPagoGastoEstimacionFinanciera>, IFormaPagoGastoEstimacionFinancieraRepository
 {
-
-
-    [Injectable(typeof(IFormaPagoGastoEstimacionFinancieraRepository))]
-	public class FormaPagoGastoEstimacionFinancieraRepository: RepositoryBase<FormaPagoGastoEstimacionFinanciera>, IFormaPagoGastoEstimacionFinancieraRepository
+	public FormaPagoGastoEstimacionFinancieraRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public FormaPagoGastoEstimacionFinancieraRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

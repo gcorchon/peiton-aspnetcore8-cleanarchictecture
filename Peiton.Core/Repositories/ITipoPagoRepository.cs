@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface ITipoPagoRepository : IRepository<TipoPago>
 {
-    public interface ITipoPagoRepository : IRepository<TipoPago>
-	{
 
-	}
 }

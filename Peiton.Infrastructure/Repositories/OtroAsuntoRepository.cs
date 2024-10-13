@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IOtroAsuntoRepository))]
+public class OtroAsuntoRepository : RepositoryBase<OtroAsunto>, IOtroAsuntoRepository
 {
-
-
-    [Injectable(typeof(IOtroAsuntoRepository))]
-	public class OtroAsuntoRepository: RepositoryBase<OtroAsunto>, IOtroAsuntoRepository
+	public OtroAsuntoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public OtroAsuntoRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

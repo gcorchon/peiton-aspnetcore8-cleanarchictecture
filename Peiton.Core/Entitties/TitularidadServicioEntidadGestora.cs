@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TitularidadServicioEntidadGestora
 {
-    public class TitularidadServicioEntidadGestora
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<EntidadGestora> EntidadesGestoras { get; } = new List<EntidadGestora>(); */
+	/* public virtual ICollection<EntidadGestora> EntidadesGestoras { get; } = new List<EntidadGestora>(); */
 
-	}
 }

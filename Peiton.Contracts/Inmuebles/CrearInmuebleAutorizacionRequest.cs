@@ -1,8 +1,6 @@
-﻿namespace Peiton.Contracts.Inmuebles
+﻿namespace Peiton.Contracts.Inmuebles;
+public class CrearInmuebleAutorizacionRequest
 {
-    public class CrearInmuebleAutorizacionRequest
-    {
-        public int MotivoId { get; set; }
-        public string Descripcion { get; set; } = null!;
-    }
+    public int MotivoId { get; set; }
+    public string Descripcion { get; set; } = null!;
 }

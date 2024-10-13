@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IControlRendicionRepository : IRepository<ControlRendicion>
 {
-    public interface IControlRendicionRepository : IRepository<ControlRendicion>
-	{
 
-	}
 }

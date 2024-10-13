@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(ITipoTitularidadRepository))]
+public class TipoTitularidadRepository : RepositoryBase<TipoTitularidad>, ITipoTitularidadRepository
 {
-
-
-    [Injectable(typeof(ITipoTitularidadRepository))]
-	public class TipoTitularidadRepository: RepositoryBase<TipoTitularidad>, ITipoTitularidadRepository
+	public TipoTitularidadRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public TipoTitularidadRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

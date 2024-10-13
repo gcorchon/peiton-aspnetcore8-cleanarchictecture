@@ -1,9 +1,7 @@
-﻿namespace Peiton.Contracts.Partida
+﻿namespace Peiton.Contracts.Partida;
+public class CreatePartidaRequest
 {
-    public class CreatePartidaRequest
-    {
-        public string Numero { get; set; } = null!;
-        public string Descripcion { get; set; } = null!;
-        public decimal SaldoInicial { get; set; }
-    }
+    public string Numero { get; set; } = null!;
+    public string Descripcion { get; set; } = null!;
+    public decimal SaldoInicial { get; set; }
 }

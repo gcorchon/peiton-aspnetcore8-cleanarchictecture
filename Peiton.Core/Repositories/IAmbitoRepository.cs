@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IAmbitoRepository : IRepository<Ambito>
 {
-    public interface IAmbitoRepository : IRepository<Ambito>
-	{
 
-	}
 }

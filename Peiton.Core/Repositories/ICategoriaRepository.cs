@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface ICategoriaRepository : IRepository<Categoria>
 {
-    public interface ICategoriaRepository : IRepository<Categoria>
-	{
-		Task BorrarCategoriaAsync(int id);
-    }
+    Task BorrarCategoriaAsync(int id);
 }

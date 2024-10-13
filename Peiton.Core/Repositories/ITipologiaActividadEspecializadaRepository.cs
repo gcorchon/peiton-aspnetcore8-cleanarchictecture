@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface ITipologiaActividadEspecializadaRepository : IRepository<TipologiaActividadEspecializada>
 {
-    public interface ITipologiaActividadEspecializadaRepository : IRepository<TipologiaActividadEspecializada>
-	{
 
-	}
 }

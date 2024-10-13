@@ -1,8 +1,6 @@
-﻿namespace Peiton.Contracts.Inmuebles
+﻿namespace Peiton.Contracts.Inmuebles;
+public class CrearInmuebleTasacionRequest
 {
-    public class CrearInmuebleTasacionRequest
-    {
-        public int TipoTasacionId { get; set; }
-        public string Descripcion { get; set; } = null!;
-    }
+    public int TipoTasacionId { get; set; }
+    public string Descripcion { get; set; } = null!;
 }

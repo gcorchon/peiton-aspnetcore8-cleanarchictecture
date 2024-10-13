@@ -1,8 +1,6 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class GestionAdministrativaTipo
 {
-    public class GestionAdministrativaTipo
-    {
-        public int Id { get; set; }
-        public string Descripcion { get; set; } = null!;
-    }
+    public int Id { get; set; }
+    public string Descripcion { get; set; } = null!;
 }

@@ -2,16 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Peiton.Core.Entities;
 
-namespace Peiton.Data.Configuration
+namespace Peiton.Data.Configuration;
+public class CalendarioFestivosConfiguration : IEntityTypeConfiguration<CalendarioFestivos>
 {
-    public class CalendarioFestivosConfiguration : IEntityTypeConfiguration<CalendarioFestivos>
+	public void Configure(EntityTypeBuilder<CalendarioFestivos> builder)
 	{
-		public void Configure(EntityTypeBuilder<CalendarioFestivos> builder)
-		{
-			builder.HasKey(t => t.Fecha);
+		builder.HasKey(t => t.Fecha);
 
-			builder.Property(p => p.Fecha).ValueGeneratedNever();
+		builder.Property(p => p.Fecha).ValueGeneratedNever();
 
-		}
 	}
 }

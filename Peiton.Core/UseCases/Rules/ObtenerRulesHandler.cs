@@ -2,14 +2,12 @@
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Core.UseCases.Rules
+namespace Peiton.Core.UseCases.Rules;
+[Injectable]
+public class ObtenerRulesHandler(IRuleRepository ruleRepository)
 {
-    [Injectable]
-    public class ObtenerRulesHandler(IRuleRepository ruleRepository)
+    public Task<List<RuleViewModel>> HandleAsync()
     {
-        public Task<List<RuleViewModel>> HandleAsync()
-        {
-            return ruleRepository.ObtenerRulesAsync();
-        }
+        return ruleRepository.ObtenerRulesAsync();
     }
 }

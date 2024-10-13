@@ -2,17 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Peiton.Core.Entities;
 
-namespace Peiton.Data.Configuration
+namespace Peiton.Data.Configuration;
+public class RelacionAMTAVisitaConfiguration : IEntityTypeConfiguration<RelacionAMTAVisita>
 {
-    public class RelacionAMTAVisitaConfiguration : IEntityTypeConfiguration<RelacionAMTAVisita>
+	public void Configure(EntityTypeBuilder<RelacionAMTAVisita> builder)
 	{
-		public void Configure(EntityTypeBuilder<RelacionAMTAVisita> builder)
-		{
-			builder.HasKey(t => t.Id);
+		builder.HasKey(t => t.Id);
 
-			builder.Property(p => p.Id).ValueGeneratedNever().HasColumnName("Pk_RelacionAMTAVisita");
-			builder.Property(p => p.Descripcion).HasMaxLength(100);
+		builder.Property(p => p.Id).ValueGeneratedNever().HasColumnName("Pk_RelacionAMTAVisita");
+		builder.Property(p => p.Descripcion).HasMaxLength(100);
 
-		}
 	}
 }

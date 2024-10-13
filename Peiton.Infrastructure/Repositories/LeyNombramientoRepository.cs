@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(ILeyNombramientoRepository))]
+public class LeyNombramientoRepository : RepositoryBase<LeyNombramiento>, ILeyNombramientoRepository
 {
-
-
-    [Injectable(typeof(ILeyNombramientoRepository))]
-	public class LeyNombramientoRepository: RepositoryBase<LeyNombramiento>, ILeyNombramientoRepository
+	public LeyNombramientoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public LeyNombramientoRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

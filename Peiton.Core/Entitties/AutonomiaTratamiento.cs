@@ -1,12 +1,10 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class AutonomiaTratamiento
 {
-    public class AutonomiaTratamiento
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<TuteladoSaludFisica> TuteladosSaludFisicas { get; } = new List<TuteladoSaludFisica>(); */
-		/* public virtual ICollection<TuteladoSaludPsiquica> TuteladosSaludPsiquicas { get; } = new List<TuteladoSaludPsiquica>(); */
+	/* public virtual ICollection<TuteladoSaludFisica> TuteladosSaludFisicas { get; } = new List<TuteladoSaludFisica>(); */
+	/* public virtual ICollection<TuteladoSaludPsiquica> TuteladosSaludPsiquicas { get; } = new List<TuteladoSaludPsiquica>(); */
 
-	}
 }

@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IMotivoMuertoRepository))]
+public class MotivoMuertoRepository : RepositoryBase<MotivoMuerto>, IMotivoMuertoRepository
 {
-
-
-    [Injectable(typeof(IMotivoMuertoRepository))]
-	public class MotivoMuertoRepository: RepositoryBase<MotivoMuerto>, IMotivoMuertoRepository
+	public MotivoMuertoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public MotivoMuertoRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

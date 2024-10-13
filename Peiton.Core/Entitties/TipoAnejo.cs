@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TipoAnejo
 {
-    public class TipoAnejo
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<InmuebleAnejo> InmueblesAnejos { get; } = new List<InmuebleAnejo>(); */
+	/* public virtual ICollection<InmuebleAnejo> InmueblesAnejos { get; } = new List<InmuebleAnejo>(); */
 
-	}
 }

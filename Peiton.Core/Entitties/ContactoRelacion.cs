@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class ContactoRelacion
 {
-    public class ContactoRelacion
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<Contacto> Contactos { get; } = new List<Contacto>(); */
+	/* public virtual ICollection<Contacto> Contactos { get; } = new List<Contacto>(); */
 
-	}
 }

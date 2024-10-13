@@ -1,8 +1,6 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class AccountCPValida
 {
-    public class AccountCPValida
-	{
-		public string Iban { get; set; } = null!;
+	public string Iban { get; set; } = null!;
 
-	}
 }

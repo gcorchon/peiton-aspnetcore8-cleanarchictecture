@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface ICausaNotaSimpleRepository : IRepository<CausaNotaSimple>
 {
-    public interface ICausaNotaSimpleRepository : IRepository<CausaNotaSimple>
-	{
 
-	}
 }

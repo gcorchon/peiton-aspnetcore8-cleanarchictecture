@@ -1,7 +1,5 @@
-﻿namespace Peiton.Contracts.Rules
+﻿namespace Peiton.Contracts.Rules;
+public class ReordenarReglaRequest
 {
-    public class ReordenarReglaRequest
-    {
-        public int NewPosition { get; set; }
-    }
+    public int NewPosition { get; set; }
 }

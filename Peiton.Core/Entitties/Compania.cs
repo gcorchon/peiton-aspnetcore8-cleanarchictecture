@@ -1,12 +1,10 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class Compania
 {
-    public class Compania
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
-		public bool MostrarCajaTexto { get; set; }
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
+	public bool MostrarCajaTexto { get; set; }
 
-		/* public virtual ICollection<TuteladoCompania> TuteladosCompanias { get; } = new List<TuteladoCompania>(); */
+	/* public virtual ICollection<TuteladoCompania> TuteladosCompanias { get; } = new List<TuteladoCompania>(); */
 
-	}
 }

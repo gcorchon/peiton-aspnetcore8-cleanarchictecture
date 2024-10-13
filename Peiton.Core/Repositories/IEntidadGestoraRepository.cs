@@ -1,9 +1,7 @@
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IEntidadGestoraRepository : IRepository<EntidadGestora>
 {
-    public interface IEntidadGestoraRepository : IRepository<EntidadGestora>
-	{
 
-	}
 }

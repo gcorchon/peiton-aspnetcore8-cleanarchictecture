@@ -3,11 +3,9 @@ using Peiton.Core.Entities;
 
 using Peiton.Contracts.MovimientosPendientesBanco;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IAccountTransactionCPRepository : IRepository<AccountTransactionCP>
 {
-    public interface IAccountTransactionCPRepository : IRepository<AccountTransactionCP>
-    {
-        Task<int> ContarMovimientosPendientesBancoAsync(MovimientosPendientesBancoFilter filter);
-        Task<List<AccountTransactionCP>> ObtenerMovimientosPendientesBancoAsync(int page, int total, MovimientosPendientesBancoFilter filter);
-    }
+    Task<int> ContarMovimientosPendientesBancoAsync(MovimientosPendientesBancoFilter filter);
+    Task<List<AccountTransactionCP>> ObtenerMovimientosPendientesBancoAsync(int page, int total, MovimientosPendientesBancoFilter filter);
 }

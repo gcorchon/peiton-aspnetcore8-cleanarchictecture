@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class TipoCategoria
 {
-    public class TipoCategoria
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<Categoria> Categorias { get; } = new List<Categoria>(); */
+	/* public virtual ICollection<Categoria> Categorias { get; } = new List<Categoria>(); */
 
-	}
 }

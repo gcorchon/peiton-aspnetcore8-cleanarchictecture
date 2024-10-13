@@ -1,12 +1,10 @@
 using Peiton.Contracts.Rules;
 using Peiton.Core.Entities;
 
-namespace Peiton.Core.Repositories
+namespace Peiton.Core.Repositories;
+public interface IRuleRepository : IRepository<Rule>
 {
-    public interface IRuleRepository : IRepository<Rule>
-	{
-        Task BorrarReglaAsync(int ruleId);
-        Task<List<RuleViewModel>> ObtenerRulesAsync();
-        Task ReordenarReglaAsync(int ruleId, int newPosition);
-    }
+    Task BorrarReglaAsync(int ruleId);
+    Task<List<RuleViewModel>> ObtenerRulesAsync();
+    Task ReordenarReglaAsync(int ruleId, int newPosition);
 }

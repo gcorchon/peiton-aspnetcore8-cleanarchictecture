@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IEfectoPublicoRepository))]
+public class EfectoPublicoRepository : RepositoryBase<EfectoPublico>, IEfectoPublicoRepository
 {
-
-
-    [Injectable(typeof(IEfectoPublicoRepository))]
-	public class EfectoPublicoRepository: RepositoryBase<EfectoPublico>, IEfectoPublicoRepository
+	public EfectoPublicoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public EfectoPublicoRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

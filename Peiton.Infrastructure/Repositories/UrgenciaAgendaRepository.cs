@@ -2,16 +2,14 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Infrastructure.Repositories
+namespace Peiton.Infrastructure.Repositories;
+
+
+[Injectable(typeof(IUrgenciaAgendaRepository))]
+public class UrgenciaAgendaRepository : RepositoryBase<UrgenciaAgenda>, IUrgenciaAgendaRepository
 {
-
-
-    [Injectable(typeof(IUrgenciaAgendaRepository))]
-	public class UrgenciaAgendaRepository: RepositoryBase<UrgenciaAgenda>, IUrgenciaAgendaRepository
+	public UrgenciaAgendaRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
-		public UrgenciaAgendaRepository(PeitonDbContext dbContext) : base(dbContext)
-		{
 
-		}
 	}
 }

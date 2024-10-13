@@ -1,11 +1,9 @@
-namespace Peiton.Core.Entities
+namespace Peiton.Core.Entities;
+public class UrgenciaConceptoCoste
 {
-    public class UrgenciaConceptoCoste
-	{
-		public int Id { get; set; }
-		public string Descripcion { get; set; } = null!;
+	public int Id { get; set; }
+	public string Descripcion { get; set; } = null!;
 
-		/* public virtual ICollection<UrgenciaCoste> UrgenciasCostes { get; } = new List<UrgenciaCoste>(); */
+	/* public virtual ICollection<UrgenciaCoste> UrgenciasCostes { get; } = new List<UrgenciaCoste>(); */
 
-	}
 }
