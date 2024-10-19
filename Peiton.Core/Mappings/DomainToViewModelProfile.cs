@@ -257,6 +257,12 @@ public class DomainToViewModelProfile : Profile
         CreateMap<GestorAdministrativo, VM.Common.ListItem>()
             .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
             .ForMember(vm => vm.Text, m => m.MapFrom(o => o.Nombre + " " + o.Apellidos));
+
+        CreateMap<Ausencia, VM.Ausencias.AusenciaViewModel>();
+
+        CreateMap<Usuario, VM.Common.ListItem>()
+            .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
+            .ForMember(vm => vm.Text, m => m.MapFrom(o => o.NombreCompleto));
     }
 
     private string GetDescripcionEstadoGestionAdministrativa(int estado)

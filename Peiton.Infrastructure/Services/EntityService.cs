@@ -14,7 +14,8 @@ public class EntityService : IEntityService
         this.dbContext = dbContext;
     }
 
-    public object? GetEntity(Type type, int id) { 
+    public object? GetEntity(Type type, int id)
+    {
         return this.dbContext.Find(type, [id]);
     }
 
@@ -36,5 +37,10 @@ public class EntityService : IEntityService
     public void Remove<T>(T entity) where T : class
     {
         this.dbContext.Remove<T>(entity);
+    }
+
+    public Task AddAsync<T>(T entity) where T : class
+    {
+        return this.dbContext.AddAsync<T>(entity).AsTask();
     }
 }

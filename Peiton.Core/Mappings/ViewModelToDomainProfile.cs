@@ -9,6 +9,7 @@ public class ViewModelToDomainProfile : Profile
 
     public ViewModelToDomainProfile()
     {
+
         CreateMap<VM.Capitulo.CreateCapituloRequest, Ent.Capitulo>();
         CreateMap<VM.Partida.CreatePartidaRequest, Ent.Partida>();
         CreateMap<VM.Facturas.GuardarFacturaRequest, Ent.Factura>();
@@ -23,5 +24,7 @@ public class ViewModelToDomainProfile : Profile
         CreateMap<VM.Inmuebles.CrearInmuebleTasacionRequest, Ent.InmuebleTasacion>();
         CreateMap<VM.Categorias.ActualizarCategoriaRequest, Ent.Categoria>();
         CreateMap<VM.CNAEs.ActualizarCNAERequest, Ent.CNAE>();
+        CreateMap<VM.Ausencias.GuardarAusenciaRequest, Ent.Ausencia>();
+    
     }
 }

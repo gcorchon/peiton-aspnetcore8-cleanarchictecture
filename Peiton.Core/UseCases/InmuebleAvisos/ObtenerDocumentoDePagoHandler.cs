@@ -1,4 +1,4 @@
-﻿using Peiton.Contracts.Inmuebles.DocumentosDePago;
+﻿using Peiton.Contracts.Inmuebles;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
