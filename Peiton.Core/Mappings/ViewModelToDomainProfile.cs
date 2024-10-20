@@ -25,6 +25,7 @@ public class ViewModelToDomainProfile : Profile
         CreateMap<VM.Categorias.ActualizarCategoriaRequest, Ent.Categoria>();
         CreateMap<VM.CNAEs.ActualizarCNAERequest, Ent.CNAE>();
         CreateMap<VM.Ausencias.GuardarAusenciaRequest, Ent.Ausencia>();
-    
+        CreateMap<VM.Quejas.GuardarQuejaRequest, Ent.Queja>()
+            .ForMember(ent => ent.QuejasMotivos, o => o.Ignore());
     }
 }

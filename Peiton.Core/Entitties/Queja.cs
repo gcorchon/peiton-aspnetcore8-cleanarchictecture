@@ -26,5 +26,5 @@ public class Queja
 	public virtual Usuario? Usuario { get; set; }
 	public virtual Usuario? UsuarioResponsable { get; set; }
 
-	/* public virtual ICollection<QuejaMotivo> QuejasMotivos { get; } = new List<QuejaMotivo>(); */
+	public virtual ICollection<QuejaMotivo> QuejasMotivos { get; } = new List<QuejaMotivo>();
 }

@@ -5,6 +5,6 @@ public class QuejaTipo
 	public string Descripcion { get; set; } = null!;
 	public string Nomenclatura { get; set; } = null!;
 
-	/* public virtual ICollection<Queja> Quejas { get; } = new List<Queja>(); */
+	public virtual ICollection<Queja> Quejas { get; } = new List<Queja>();
 
 }

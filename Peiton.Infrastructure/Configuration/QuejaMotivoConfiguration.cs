@@ -12,7 +12,7 @@ public class QuejaMotivoConfiguration : IEntityTypeConfiguration<QuejaMotivo>
 		builder.Property(p => p.Id).HasColumnName("Pk_QuejaMotivo");
 		builder.Property(p => p.Descripcion).HasMaxLength(50);
 
-		/*builder.HasMany(d => d.Quejas)
+		builder.HasMany(d => d.Quejas)
 			.WithMany(p => p.QuejasMotivos)
 			.UsingEntity<Dictionary<string, object>>(
 		"QuejaQuejaMotivo",
@@ -22,6 +22,6 @@ public class QuejaMotivoConfiguration : IEntityTypeConfiguration<QuejaMotivo>
 		{
 			j.HasKey("Fk_QuejaMotivo", "Fk_Queja");
 			j.ToTable("QuejaQuejaMotivo");
-			});*/
+			});
 	}
 }

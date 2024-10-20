@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Peiton.Contracts.Inmuebles;
+using Peiton.Contracts.Quejas;
 using Peiton.Core.Entities;
 using Peiton.Serialization;
 using Ent = Peiton.Core.Entities;
@@ -263,6 +264,14 @@ public class DomainToViewModelProfile : Profile
         CreateMap<Usuario, VM.Common.ListItem>()
             .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
             .ForMember(vm => vm.Text, m => m.MapFrom(o => o.NombreCompleto));
+
+        CreateMap<Queja, QuejaViewModel>()
+                .ForMember(vm => vm.QuejaMotivos, m => m.MapFrom(o => o.QuejasMotivos.Select(t => t.Id).ToArray()));
+
+        CreateMap<Queja, VM.Quejas.QuejaListItem>()
+            .ForMember(vm => vm.Denunciante, m => m.MapFrom(o => o.NombreDenunciante ?? o.Tutelado.NombreCompleto))
+            .ForMember(vm => vm.TipoDenunciante, m => m.MapFrom(o => o.QuejaTipoDenunciante.Descripcion));
+
     }
 
     private string GetDescripcionEstadoGestionAdministrativa(int estado)
