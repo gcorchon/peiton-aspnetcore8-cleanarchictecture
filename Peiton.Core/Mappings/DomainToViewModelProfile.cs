@@ -266,12 +266,18 @@ public class DomainToViewModelProfile : Profile
             .ForMember(vm => vm.Text, m => m.MapFrom(o => o.NombreCompleto));
 
         CreateMap<Queja, QuejaViewModel>()
-                .ForMember(vm => vm.QuejaMotivos, m => m.MapFrom(o => o.QuejasMotivos.Select(t => t.Id).ToArray()));
+            .ForMember(vm => vm.QuejaMotivos, m => m.MapFrom(o => o.QuejasMotivos.Select(t => t.Id).ToArray()));
 
         CreateMap<Queja, VM.Quejas.QuejaListItem>()
             .ForMember(vm => vm.Denunciante, m => m.MapFrom(o => o.NombreDenunciante ?? o.Tutelado.NombreCompleto))
             .ForMember(vm => vm.TipoDenunciante, m => m.MapFrom(o => o.QuejaTipoDenunciante.Descripcion));
 
+        CreateMap<VehiculoEntidad, VM.VehiculosEntidad.VehiculoEntidadViewModel>()
+            .ForMember(vm => vm.Descripcion, opt => opt.MapFrom(u => string.Format("{0} - {1} {2} - {3} - {4}", u.Matricula, u.Marca, u.Modelo, u.Color, u.Combustible)));
+
+        CreateMap<VehiculoEntidadReserva, VM.VehiculosEntidad.VehiculoEntidadReservaViewModel>()
+            .ForMember(r => r.Propia, opt => opt.MapFrom((src, dest, destMember, context) => (int)context.Items["UserId"] == src.UsuarioId))
+            .ForMember(r => r.Usuario, opt => opt.MapFrom(v => v.Usuario.NombreCompleto));
     }
 
     private string GetDescripcionEstadoGestionAdministrativa(int estado)

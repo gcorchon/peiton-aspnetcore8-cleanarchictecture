@@ -10,7 +10,7 @@ public class GenerarListadoReintegrosHandler(ICajaRepository cajaRepository)
 {
     public async Task HandleAsync(DateTime fechaDesde, DateTime fechaHasta)
     {
-        var vm = await cajaRepository.ObtenerReintegrosParaDocumento(fechaDesde, fechaHasta);
+        var vm = await cajaRepository.ObtenerReintegrosParaDocumentoAsync(fechaDesde, fechaHasta);
         throw new NotImplementedException();
     }
 

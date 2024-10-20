@@ -75,7 +75,7 @@ public class CredencialRepository : RepositoryBase<Credencial>, ICredencialRepos
         return query;
     }
 
-    public Task DesbloquearCredenciales()
+    public Task DesbloquearCredencialesAsync()
     {
         return this.DbContext.Database.ExecuteSqlAsync(@$"update credencial set DatosCorrectos=1, Reintentos=0, ProximaEjecucion=getdate()
                                                            from credencial inner join tutelado on pk_tutelado=fk_tutelado

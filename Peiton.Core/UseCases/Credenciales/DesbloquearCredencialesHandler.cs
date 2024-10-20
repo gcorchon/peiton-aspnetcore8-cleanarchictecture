@@ -7,6 +7,6 @@ public class DesbloquearCredencialesHandler(ICredencialRepository credencialRepo
 {
     public async Task HandleAsync()
     {
-        await credencialRepository.DesbloquearCredenciales();
+        await credencialRepository.DesbloquearCredencialesAsync();
     }
 }

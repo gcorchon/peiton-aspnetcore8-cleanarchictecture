@@ -73,9 +73,9 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         return DbSet.AsEnumerable();
     }
 
-    public virtual IAsyncEnumerable<T> GetAllAsync()
+    public virtual Task<List<T>> GetAllAsync()
     {
-        return DbSet.AsAsyncEnumerable();
+        return DbSet.ToListAsync();
     }
 
     public virtual IEnumerable<T> GetAll<TKey>(Expression<Func<T, TKey>> sort, string sortDirection)
@@ -90,7 +90,7 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         return query.AsEnumerable();
     }
 
-    public virtual IAsyncEnumerable<T> GetAllAsync<TKey>(Expression<Func<T, TKey>> sort, string sortDirection)
+    public virtual Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, TKey>> sort, string sortDirection)
     {
         IQueryable<T> query = DbSet;
 
@@ -99,7 +99,7 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         else
             query = query.OrderBy(sort);
 
-        return query.AsAsyncEnumerable();
+        return query.ToListAsync();
     }
 
     public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> where)
@@ -107,9 +107,9 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         return DbSet.Where(where).AsEnumerable();
     }
 
-    public virtual IAsyncEnumerable<T> GetManyAsync(Expression<Func<T, bool>> where)
+    public virtual Task<List<T>> GetManyAsync(Expression<Func<T, bool>> where)
     {
-        return DbSet.Where(where).AsAsyncEnumerable();
+        return DbSet.Where(where).ToListAsync();
 
     }
     public virtual IEnumerable<T> GetMany<TKey>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection)
@@ -124,7 +124,7 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         return query.AsEnumerable();
     }
 
-    public virtual IAsyncEnumerable<T> GetManyAsync<TKey>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection)
+    public virtual Task<List<T>> GetManyAsync<TKey>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection)
     {
         IQueryable<T> query = DbSet.Where(where);
 
@@ -133,7 +133,7 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         else
             query = query.OrderBy(sort);
 
-        return query.AsAsyncEnumerable();
+        return query.ToListAsync();
     }
 
     public virtual IEnumerable<T> GetMany<TKey>(int startRowIndex, int maximumRows, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection)
@@ -153,7 +153,7 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         return query.Skip(startRowIndex).Take(maximumRows).AsEnumerable();
     }
 
-    public virtual IAsyncEnumerable<T> GetManyAsync<TKey>(int startRowIndex, int maximumRows, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection)
+    public virtual Task<List<T>> GetManyAsync<TKey>(int startRowIndex, int maximumRows, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection)
     {
         IQueryable<T> query = DbSet;
         if (where != null)
@@ -167,7 +167,7 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
                 query = query.OrderBy(sort);
         }
 
-        return query.Skip(startRowIndex).Take(maximumRows).AsAsyncEnumerable();
+        return query.Skip(startRowIndex).Take(maximumRows).ToListAsync();
     }
 
     public T? Get(Expression<Func<T, bool>> where)

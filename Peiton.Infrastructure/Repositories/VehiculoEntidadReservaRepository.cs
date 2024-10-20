@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -12,4 +13,9 @@ public class VehiculoEntidadReservaRepository : RepositoryBase<VehiculoEntidadRe
 	{
 
 	}
+
+    public Task<List<VehiculoEntidadReserva>> ObtenerReservasAsync(DateTime fecha)
+    {
+        return this.DbSet.Include("Usuario").Where(r => r.Fecha == fecha).ToListAsync();
+    }
 }

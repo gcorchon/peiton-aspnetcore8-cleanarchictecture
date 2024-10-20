@@ -17,17 +17,17 @@ public interface IRepository<T> where T : class
     T? Get(Expression<Func<T, bool>> where);
     Task<T?> GetAsync(Expression<Func<T, bool>> where);
     IEnumerable<T> GetAll();
-    IAsyncEnumerable<T> GetAllAsync();
+    Task<List<T>> GetAllAsync();
     IEnumerable<T> GetAll<TKey>(Expression<Func<T, TKey>> sort, string sortDirection);
-    IAsyncEnumerable<T> GetAllAsync<TKey>(Expression<Func<T, TKey>> sort, string sortDirection);
+    Task<List<T>> GetAllAsync<TKey>(Expression<Func<T, TKey>> sort, string sortDirection);
     T? GetById(int id);
     Task<T?> GetByIdAsync(int id);
     IEnumerable<T> GetMany(Expression<Func<T, bool>> where);
-    IAsyncEnumerable<T> GetManyAsync(Expression<Func<T, bool>> where);
+    Task<List<T>> GetManyAsync(Expression<Func<T, bool>> where);
     IEnumerable<T> GetMany<TKey>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection);
-    IAsyncEnumerable<T> GetManyAsync<TKey>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection);
+    Task<List<T>> GetManyAsync<TKey>(Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection);
     IEnumerable<T> GetMany<TKey>(int startRowIndex, int maximumRows, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection);
-    IAsyncEnumerable<T> GetManyAsync<TKey>(int startRowIndex, int maximumRows, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection);
+    Task<List<T>> GetManyAsync<TKey>(int startRowIndex, int maximumRows, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection);
     void Remove(T entity);
     void RemoveRange(IEnumerable<T> entities);
 }

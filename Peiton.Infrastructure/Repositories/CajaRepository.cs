@@ -134,7 +134,7 @@ public class CajaRepository : RepositoryBase<Caja>, ICajaRepository
 		return total + saldoInicialCaja;
 	}
 
-	public Task<List<Reintegro>> ObtenerReintegrosParaDocumento(DateTime fechaDesde, DateTime fechaHasta)
+	public Task<List<Reintegro>> ObtenerReintegrosParaDocumentoAsync(DateTime fechaDesde, DateTime fechaHasta)
 	{
 		return DbContext.Database
 					.SqlQuery<Reintegro>(@$"SELECT Tutelado.Apellidos + ', ' + Tutelado.Nombre as ApellidosNombre, SaldoInicialCaja + coalesce(Total, 0) as SaldoCaja, Caja.Concepto, Caja.Importe, Convert(date, Caja.FechaPago) as FechaPago, Caja.Anticipo

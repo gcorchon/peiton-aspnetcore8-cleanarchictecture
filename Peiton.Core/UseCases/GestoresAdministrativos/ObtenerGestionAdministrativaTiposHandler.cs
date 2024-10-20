@@ -10,7 +10,7 @@ namespace Peiton.Core.UseCases.InmuebleAutorizaciones;
 [Injectable]
 public class ObtenerGestionAdministrativaTiposHandler(IGestionAdministrativaTipoRepository gestionAdministrativaTipoRepository)
 {
-    public IAsyncEnumerable<GestionAdministrativaTipo> HandleAsync()
+    public Task<List<GestionAdministrativaTipo>> HandleAsync()
     {
         return gestionAdministrativaTipoRepository.GetAllAsync();
     }

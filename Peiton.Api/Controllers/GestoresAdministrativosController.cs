@@ -48,7 +48,7 @@ public class GestoresAdministrativosController(IMapper mapper) : ControllerBase
     [HttpGet("tipos")]
     public async Task<IActionResult> GestionAdministrativaTiposAsync(ObtenerGestionAdministrativaTiposHandler handler)
     {
-        var data = await handler.HandleAsync().ToListAsync();
+        var data = await handler.HandleAsync();
         var vm = mapper.Map<IEnumerable<ListItem>>(data);
         return Ok(vm);
     }

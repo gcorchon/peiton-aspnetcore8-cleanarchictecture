@@ -11,5 +11,5 @@ public interface ICajaRepository : IRepository<Caja>
 	Task<decimal> ObtenerSaldoCajaAsync();
 	Task<List<Caja>> ObtenerHistoricoMovimientosAsync(int page, int total, int tuteladoId, HistoricoMovimientosFilter filter);
 	Task<int> ContarHistoricoMovimientosAsync(int tuteladoId, HistoricoMovimientosFilter filter);
-	Task<List<Reintegro>> ObtenerReintegrosParaDocumento(DateTime fechaDesde, DateTime fechaHasta);
+	Task<List<Reintegro>> ObtenerReintegrosParaDocumentoAsync(DateTime fechaDesde, DateTime fechaHasta);
 }
