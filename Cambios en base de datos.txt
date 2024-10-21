@@ -18,3 +18,5 @@ REFERENCES [dbo].[Categoria] ([Pk_Categoria])
 
 Archivos de Calidad
 - Sacar todos los archivos de las subcarpetas de App_Data/Instrucciones y dejarlos tirados directamente en esa carpeta.
+- Sacar todos los archivos de las subcarpetas de App_Data/Procesos y dejarlos tirados directamente en esa carpeta.
+- Sacar todos los archivos de las subcarpetas de App_Data/Documentos y dejarlos tirados directamente en esa carpeta.

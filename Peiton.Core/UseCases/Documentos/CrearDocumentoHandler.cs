@@ -1,17 +1,17 @@
 ﻿using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
-using Peiton.Contracts.Procesos;
+using Peiton.Contracts.Documentos;
 using Peiton.Core.Entities;
 using Peiton.Core.Utils;
 
-namespace Peiton.Core.UseCases.Procesos;
+namespace Peiton.Core.UseCases.Documentos;
 
 [Injectable]
-public class CrearProcesoHandler(IProcesoRepository ProcesoRepository, IUnityOfWork unityOfWork)
+public class CrearDocumentoHandler(IDocumentoRepository DocumentoRepository, IUnityOfWork unityOfWork)
 {
-    public async Task HandleAsync(GuardarProcesoRequest request)
+    public async Task HandleAsync(GuardarDocumentoRequest request)
     {
-        var directory = "App_Data/Procesos";
+        var directory = "App_Data/Documentos";
 
         if (!Directory.Exists(directory))
         {
@@ -26,16 +26,17 @@ public class CrearProcesoHandler(IProcesoRepository ProcesoRepository, IUnityOfW
             await request.Archivo.CopyToAsync(stream);
         }
 
-        var documento = new Proceso()
+        var documento = new Documento()
         {
-            CategoriaProcesoId = request.CategoriaProcesoId,
+            CategoriaDocumentoId = request.CategoriaDocumentoId,
             ContentType = MimeTypeHelper.GetMimeType(filePath),
             Descripcion = request.Descripcion,
             FileName = fileName,
+            Tags = request.Tags,
             Fecha = DateTime.Now
         };
 
-        await ProcesoRepository.AddAsync(documento);
+        await DocumentoRepository.AddAsync(documento);
 
         await unityOfWork.SaveChangesAsync();
     }

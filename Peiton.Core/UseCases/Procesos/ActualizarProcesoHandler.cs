@@ -7,13 +7,13 @@ using Peiton.Core.Exceptions;
 namespace Peiton.Core.UseCases.Procesos;
 
 [Injectable]
-public class ActualizarProcesoHandler(IProcesoRepository ProcesoRepository, IUnityOfWork unityOfWork)
+public class ActualizarProcesoHandler(IProcesoRepository procesoRepository, IUnityOfWork unityOfWork)
 {
     public async Task HandleAsync(int id, GuardarProcesoRequest request)
     {
-        var Proceso = await ProcesoRepository.GetByIdAsync(id);
+        var proceso = await procesoRepository.GetByIdAsync(id);
 
-        if (Proceso == null)
+        if (proceso == null)
         {
             throw new EntityNotFoundException("Instrucción no encontrada");
         }
@@ -33,11 +33,11 @@ public class ActualizarProcesoHandler(IProcesoRepository ProcesoRepository, IUni
             await request.Archivo.CopyToAsync(stream);
         }
 
-        Proceso.CategoriaProcesoId = request.CategoriaProcesoId;
-        Proceso.ContentType = MimeTypeHelper.GetMimeType(filePath);
-        Proceso.Descripcion = request.Descripcion;
-        Proceso.FileName = fileName;
-        Proceso.Fecha = DateTime.Now;
+        proceso.CategoriaProcesoId = request.CategoriaProcesoId;
+        proceso.ContentType = MimeTypeHelper.GetMimeType(filePath);
+        proceso.Descripcion = request.Descripcion;
+        proceso.FileName = fileName;
+        proceso.Fecha = DateTime.Now;
 
         await unityOfWork.SaveChangesAsync();
     }

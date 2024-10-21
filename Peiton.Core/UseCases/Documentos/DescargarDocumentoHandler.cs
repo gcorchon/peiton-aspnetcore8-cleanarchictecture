@@ -3,21 +3,21 @@ using Peiton.DependencyInjection;
 using Peiton.Core.Exceptions;
 using Peiton.Contracts.Common;
 
-namespace Peiton.Core.UseCases.Procesos;
+namespace Peiton.Core.UseCases.Documentos;
 
 [Injectable]
-public class DescargarDocumentoHandler(IProcesoRepository procesoRepository)
+public class DescargarDocumentoHandler(IDocumentoRepository DocumentoRepository)
 {
     public async Task<FileData> HandleAsync(int id)
     {
-        var proceso = await procesoRepository.GetByIdAsync(id);
+        var documento = await DocumentoRepository.GetByIdAsync(id);
 
-        if (proceso == null)
+        if (documento == null)
         {
             throw new EntityNotFoundException("Documento no encontrado");
         }
 
-        var filePath = Path.Combine("App_Data/Procesos/{0}", id.ToString(), proceso.FileName);
+        var filePath = Path.Combine("App_Data/Documentos/{0}", id.ToString(), documento.FileName);
 
         if (!File.Exists(filePath)) throw new EntityNotFoundException("Documento no encontrado");
 
