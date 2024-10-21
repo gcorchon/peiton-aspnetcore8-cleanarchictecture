@@ -14,9 +14,9 @@ public class CategoriaInstruccionConfiguration : IEntityTypeConfiguration<Catego
 		builder.Property(p => p.CategoriaInstruccionId).HasColumnName("Fk_CategoriaInstruccion");
 		builder.Property(p => p.CssClass).HasMaxLength(50);
 
-		/*builder.HasOne(d => d.CategoriaInstruccionPadre)
+		builder.HasOne(d => d.CategoriaInstruccionPadre)
 			.WithMany(p => p.CategoriasInstrucciones)
-			.HasForeignKey(d => d.CategoriaInstruccionId);*/
+			.HasForeignKey(d => d.CategoriaInstruccionId);
 
 	}
 }

@@ -16,9 +16,9 @@ public class InstruccionConfiguration : IEntityTypeConfiguration<Instruccion>
 		builder.Property(p => p.FileName).HasMaxLength(255);
 		builder.Property(p => p.Fecha).IsRequired().HasDefaultValueSql("(getdate())");
 
-		/*builder.HasOne(d => d.CategoriaInstruccion)
+		builder.HasOne(d => d.CategoriaInstruccion)
 			.WithMany(p => p.Instrucciones)
-			.HasForeignKey(d => d.CategoriaInstruccionId);*/
+			.HasForeignKey(d => d.CategoriaInstruccionId);
 
 	}
 }
