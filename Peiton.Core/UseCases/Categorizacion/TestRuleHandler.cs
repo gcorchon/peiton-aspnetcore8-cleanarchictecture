@@ -4,10 +4,11 @@ using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Categorizacion;
 [Injectable]
-public class TestRuleHandler(IBus bus)
+public class TestRuleHandler(/*IBus bus*/)
 {
-    public async Task HandleAsync(TestRuleRequest request)
+    public Task HandleAsync(TestRuleRequest request)
     {
-        await bus.Publish(request);
+        //await bus.Publish(request);
+        return Task.CompletedTask;
     }
 }

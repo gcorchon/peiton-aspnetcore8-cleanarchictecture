@@ -17,7 +17,7 @@ public class CrearSucesionHandler(ISucesionRepository sucesionRepository, IMappe
         sucesion.Fecha = DateTime.Now;
         sucesion.UsuarioId = identityService.GetUserId();
 
-        sucesionRepository.Add(sucesion); 
+        await sucesionRepository.AddAsync(sucesion);
         await unityOfWork.SaveChangesAsync();
     }
 

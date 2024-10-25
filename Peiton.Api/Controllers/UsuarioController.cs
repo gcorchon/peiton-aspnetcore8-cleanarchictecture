@@ -9,7 +9,7 @@ namespace Peiton.Api.Controllers;
 public class UsuarioController : ControllerBase
 {
     [Route("{id:int}")]
-    public async Task<IActionResult> GetUserById(int id, GetUserByIdHandler handler)
+    public async Task<IActionResult> GetUserByIdAsync(int id, GetUserByIdHandler handler)
     {
         var usuario = await handler.HandleAsync(id);
         if (usuario is null) return NotFound();
@@ -17,7 +17,7 @@ public class UsuarioController : ControllerBase
     }
 
     [Route("usuarios-y-grupos")]
-    public async Task<IActionResult> UsuariosGrupos([FromQuery] string q, ObtenerUsuariosGruposHandler handler)
+    public async Task<IActionResult> UsuariosGruposAsync([FromQuery] string q, ObtenerUsuariosGruposHandler handler)
     {
         var data = await handler.HandleAsync(q);
         return Ok(data);

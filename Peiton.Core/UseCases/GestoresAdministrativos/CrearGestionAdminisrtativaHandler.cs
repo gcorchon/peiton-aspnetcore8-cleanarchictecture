@@ -1,11 +1,10 @@
 ﻿using Peiton.Contracts.GestoresAdministrativos;
-using Peiton.Contracts.Inmuebles;
 using Peiton.Core.Entities;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Core.UseCases.InmuebleAutorizaciones;
+namespace Peiton.Core.UseCases.GestionesAdministrativas;
 
 [Injectable]
 public class CrearGestionAdminisrtativaHandler(ITuteladoRepository tuteladoRepository, IUnityOfWork unityOfWork, IIdentityService identityService)

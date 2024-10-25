@@ -20,11 +20,15 @@ public class PeitonDbContext : DbContext
     }
 
     public string DateAsString(DateTime date) => throw new NotSupportedException();
+
+
     public string IntAsString(int value) => throw new NotSupportedException();
     public string DecimalAsString(decimal value) => throw new NotSupportedException();
 
     public IQueryable<Saldo> ContabilidadObtenerSaldos(int ano) => FromExpression(() => ContabilidadObtenerSaldos(ano));
     public IQueryable<ConsultaListItem> ObtenerConsultasAlmacenadas(int usuarioId) => FromExpression(() => ObtenerConsultasAlmacenadas(usuarioId));
+
+    public bool EsVisitado(string nombre, string datos) => throw new NotSupportedException();
 
     public DbSet<Account> Account => Set<Account>();
     public DbSet<Capitulo> Capitulo => Set<Capitulo>();
@@ -80,6 +84,19 @@ public class PeitonDbContext : DbContext
                             typeof(string),
                             new StringTypeMapping("varchar", System.Data.DbType.String)
                         ));
+
+        modelBuilder.HasDbFunction(this.GetType().GetMethod("EsVisitado", [typeof(string), typeof(string)])!)
+                   .HasTranslation(args =>
+                       new SqlFunctionExpression("dbo.EsVisitado",
+                           [
+                               args.ElementAt(0),
+                                args.ElementAt(1)
+                           ],
+                           false,
+                           [false, false],
+                           typeof(bool),
+                           new BoolTypeMapping("bit", System.Data.DbType.Boolean)
+                       ));
 
         //replace(convert(varchar, Gastos, 2),'.',',')
         modelBuilder.HasDbFunction(this.GetType().GetMethod("DecimalAsString", new[] { typeof(decimal) })!)

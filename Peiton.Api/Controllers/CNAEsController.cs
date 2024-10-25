@@ -10,7 +10,7 @@ namespace Peiton.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CNAEsController(IMapper mapper) : ControllerBase
+public class CNAEsController : ControllerBase
 {
     [HttpGet()]
     public async Task<IActionResult> CNAEsAsync([FromQuery] ObtenerCNAEsFilter filter, [FromQuery] Pagination pagination, CNAEsHandler handler)

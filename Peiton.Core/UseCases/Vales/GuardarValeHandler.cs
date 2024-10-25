@@ -20,7 +20,7 @@ public class GuardarValeHandler(IValeRepository valeRepository, IUnityOfWork uni
             FechaSolicitud = DateTime.Now.Date
         };
 
-        valeRepository.Add(vale);
+        await valeRepository.AddAsync(vale);
         await unityOfWork.SaveChangesAsync();
     }
 

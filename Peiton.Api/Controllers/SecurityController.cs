@@ -10,7 +10,7 @@ namespace Peiton.Api.Controllers;
 public class SecurityController : ControllerBase
 {
     [HttpPost("token")]
-    public async Task<IActionResult> GetToken(TokenRequest request, GetTokenHandler handler)
+    public async Task<IActionResult> GetTokenAsync(TokenRequest request, GetTokenHandler handler)
     {
         try
         {
@@ -25,7 +25,7 @@ public class SecurityController : ControllerBase
 
     [HttpGet("me")]
     [Authorize()]
-    public async Task<ActionResult<MeViewModel>> Me(MeHandler handler)
+    public async Task<ActionResult<MeViewModel>> MeAsync(MeHandler handler)
     {
         try
         {

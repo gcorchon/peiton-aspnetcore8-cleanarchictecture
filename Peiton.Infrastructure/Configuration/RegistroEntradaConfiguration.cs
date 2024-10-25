@@ -7,6 +7,7 @@ public class RegistroEntradaConfiguration : IEntityTypeConfiguration<RegistroEnt
 {
 	public void Configure(EntityTypeBuilder<RegistroEntrada> builder)
 	{
+		builder.ToTable(tb => tb.UseSqlOutputClause(false));
 		builder.HasKey(t => t.Id);
 
 		builder.Property(p => p.Id).HasColumnName("Pk_RegistroEntrada");

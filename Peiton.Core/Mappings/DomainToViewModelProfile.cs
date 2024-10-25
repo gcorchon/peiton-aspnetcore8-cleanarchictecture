@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using Peiton.Contracts.Inmuebles;
-using Peiton.Contracts.Quejas;
+﻿using System.Xml.Linq;
+using AutoMapper;
 using Peiton.Core.Entities;
 using Peiton.Serialization;
 using Ent = Peiton.Core.Entities;
@@ -265,7 +264,7 @@ public class DomainToViewModelProfile : Profile
             .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
             .ForMember(vm => vm.Text, m => m.MapFrom(o => o.NombreCompleto));
 
-        CreateMap<Queja, QuejaViewModel>()
+        CreateMap<Queja, VM.Quejas.QuejaViewModel>()
             .ForMember(vm => vm.QuejaMotivos, m => m.MapFrom(o => o.QuejasMotivos.Select(t => t.Id).ToArray()));
 
         CreateMap<Queja, VM.Quejas.QuejaListItem>()
@@ -278,6 +277,14 @@ public class DomainToViewModelProfile : Profile
         CreateMap<VehiculoEntidadReserva, VM.VehiculosEntidad.VehiculoEntidadReservaViewModel>()
             .ForMember(r => r.Propia, opt => opt.MapFrom((src, dest, destMember, context) => (int)context.Items["UserId"] == src.UsuarioId))
             .ForMember(r => r.Usuario, opt => opt.MapFrom(v => v.Usuario.NombreCompleto));
+
+        CreateMap<RegistroEntrada, VM.Visitas.RegistroEntradaListItem>()
+            .ForMember(r => r.Visitante, opt => opt.MapFrom(o => o.Nombre))
+            .ForMember(r => r.Visitado, opt => opt.MapFrom(o => GetVisitantePrincipal(o.Personas)));
+
+        CreateMap<RegistroEntrada, VM.Visitas.RegistroEntradaViewModel>()
+            .ForMember(r => r.Visitante, opt => opt.MapFrom(o => new VM.Visitas.Visitante() { Dni = o.Dni, Nombre = o.Nombre, Tutelado = o.Tutelado }))
+            .ForMember(r => r.Visitadas, opt => opt.MapFrom(o => GetVisitadas(o.Personas)));
     }
 
     private string GetDescripcionEstadoGestionAdministrativa(int estado)
@@ -287,6 +294,28 @@ public class DomainToViewModelProfile : Profile
         if ((estado & 2) > 0) return "Solicitada";
         if ((estado & 1) > 0) return "Pendiente";
         return "Pendiente";
+    }
+
+    private string? GetVisitantePrincipal(string personas)
+    {
+        var doc = XDocument.Parse(personas);
+        var visitantes = doc.Root!.Elements("Visitado").Select(v => v.Element("Nombre")!.Value);
+
+        var total = visitantes.Count();
+        if (total > 0)
+        {
+            var principal = visitantes.First();
+            return total > 1 ? $"{principal} (+ {total - 1})" : principal;
+        }
+
+        return null;
+    }
+
+    private VM.Visitas.Visitado[] GetVisitadas(string personas)
+    {
+        var doc = XDocument.Parse(personas);
+        var visitantes = doc.Root!.Elements("Visitado").Select(v => new VM.Visitas.Visitado() { Nombre = v.Element("Nombre")!.Value });
+        return visitantes.ToArray();
     }
 
 }

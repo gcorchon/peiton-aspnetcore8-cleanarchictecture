@@ -21,7 +21,7 @@ public class DeshacerMovimientoCajaHandler(IMapper mapper, ICajaRepository cajaR
 
         var cajaIncidencia = mapper.Map(movimiento, new CajaIncidencia());
 
-        cajaIncidenciaRepository.Add(cajaIncidencia);
+        await cajaIncidenciaRepository.AddAsync(cajaIncidencia);
 
         cajaIncidencia.RazonIncidenciaCajaId = 2;
 

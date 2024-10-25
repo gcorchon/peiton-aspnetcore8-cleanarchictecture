@@ -37,6 +37,7 @@ public class GestionAdministrativaRepository : RepositoryBase<GestionAdministrat
         return query.OrderByDescending(a => a.Id)
                     .Skip((page - 1) * total)
                     .Take(total)
+                    .AsNoTracking()
                     .ToListAsync();
     }
 

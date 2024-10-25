@@ -15,6 +15,17 @@ GO
 ALTER TABLE [dbo].[CNAE]  WITH CHECK ADD  CONSTRAINT [FK_CNAE_Categoria] FOREIGN KEY([Fk_Categoria])
 REFERENCES [dbo].[Categoria] ([Pk_Categoria])
 
+ALTER FUNCTION [dbo].[EsVisitado](@nombre varchar(255), @datos xml)
+
+RETURNS bit
+AS
+BEGIN
+	return  case when exists(select null from
+			  @datos.nodes('/ArrayOfVisitado/Visitado/Nombre') as t(c)
+			  where c.value('(./text())[1]', 'nvarchar(255)') like '%' + @nombre + '%') then convert(bit, 1)
+			  else convert(bit, 0) end
+END
+
 
 Archivos de Calidad
 - Sacar todos los archivos de las subcarpetas de App_Data/Instrucciones y dejarlos tirados directamente en esa carpeta.

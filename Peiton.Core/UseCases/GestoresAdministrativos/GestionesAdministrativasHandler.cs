@@ -4,7 +4,7 @@ using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
 
-namespace Peiton.Core.UseCases.InmuebleAutorizaciones;
+namespace Peiton.Core.UseCases.GestionesAdministrativas;
 
 [Injectable]
 public class GestionesAdministrativasHandler(IGestionAdministrativaRepository gestionAdministrativaRepository)

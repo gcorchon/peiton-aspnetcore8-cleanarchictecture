@@ -17,7 +17,7 @@ public class TuteladoController(IMapper mapper) : ControllerBase
 {
     [HttpGet("{id}/historico-movimientos-caja")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> HistoricoMovimientosCaja([FromQuery] HistoricoMovimientosFilter filter, [FromQuery] Pagination pagination, int id, HistoricoMovimientosCajaHandler handler)
+    public async Task<IActionResult> HistoricoMovimientosCajaAsync([FromQuery] HistoricoMovimientosFilter filter, [FromQuery] Pagination pagination, int id, HistoricoMovimientosCajaHandler handler)
     {
         var data = await handler.HandleAsync(id, filter, pagination);
         var vm = mapper.Map<IEnumerable<HistoricoMovimientoListItem>>(data.Items);
@@ -26,7 +26,7 @@ public class TuteladoController(IMapper mapper) : ControllerBase
 
     [HttpGet("{id}/entidades-financieras-con-cuentas-de-robot-activas")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
-    public async Task<IActionResult> CuentasDeRobotActivas(int id, CuentasDeRobotHandler handler)
+    public async Task<IActionResult> CuentasDeRobotActivasAsync(int id, CuentasDeRobotHandler handler)
     {
         var vm = await handler.HandleAsync(id);
         return Ok(vm);

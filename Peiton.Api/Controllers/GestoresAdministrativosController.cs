@@ -1,5 +1,4 @@
 using AutoMapper;
-using MassTransit.Internals;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Peiton.Api.Authorization;
@@ -9,8 +8,7 @@ using Peiton.Contracts.Common;
 using Peiton.Contracts.GestoresAdministrativos;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.InmuebleAutorizaciones;
-
+using Peiton.Core.UseCases.GestionesAdministrativas;
 
 namespace Peiton.Api.Controllers;
 
