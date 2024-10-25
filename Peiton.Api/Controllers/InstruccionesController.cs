@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Contracts.Instrucciones;
+using Peiton.Core.Entities;
+using Peiton.Core.UseCases.Common;
 using Peiton.Core.UseCases.Instrucciones;
 using Peiton.Core.Utils;
 
@@ -33,6 +35,13 @@ public class InstruccionesController : ControllerBase
     public async Task<IActionResult> ActualizarInstruccionAsync(int id, [FromForm] GuardarInstruccionRequest request, ActualizarInstruccionHandler handler)
     {
         await handler.HandleAsync(id, request);
+        return Accepted();
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> BorrarDocumentoAsync(int id, DeleteEntityHandler<Instruccion> handler)
+    {
+        await handler.HandleAsync(id);
         return Accepted();
     }
 

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Contracts.Procesos;
+using Peiton.Core.Entities;
+using Peiton.Core.UseCases.Common;
 using Peiton.Core.UseCases.Procesos;
 using Peiton.Core.Utils;
 
@@ -32,6 +34,13 @@ public class ProcesosController : ControllerBase
     public async Task<IActionResult> ActualizarProcesoAsync(int id, [FromForm] GuardarProcesoRequest request, ActualizarProcesoHandler handler)
     {
         await handler.HandleAsync(id, request);
+        return Accepted();
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> BorrarDocumentoAsync(int id, DeleteEntityHandler<Proceso> handler)
+    {
+        await handler.HandleAsync(id);
         return Accepted();
     }
 
