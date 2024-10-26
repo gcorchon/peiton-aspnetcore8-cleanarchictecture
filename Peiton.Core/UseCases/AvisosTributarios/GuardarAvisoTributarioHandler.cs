@@ -7,7 +7,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.AvisosTributarios;
 
 [Injectable]
-public class GuardarAvisoTributarioHandler(IMapper mapper, IAvisoTributarioRepository avisoTributarioRepository, IUnityOfWork unityOfWork, IIdentityService identityService)
+public class GuardarAvisoTributarioHandler(IMapper mapper, IAvisoTributarioRepository avisoTributarioRepository, IUnitOfWork unitOfWork, IIdentityService identityService)
 {
     public async Task HandleAsync(GuardarAvisoTributarioRequest request)
     {
@@ -23,7 +23,7 @@ public class GuardarAvisoTributarioHandler(IMapper mapper, IAvisoTributarioRepos
         mapper.Map(request, avisoTributario);
 
         await avisoTributarioRepository.AddAsync(avisoTributario);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

@@ -12,7 +12,7 @@ public class SenalamientoConfiguration : IEntityTypeConfiguration<Senalamiento>
 		builder.Property(p => p.Id).HasColumnName("Pk_Senalamiento");
 		builder.Property(p => p.Procedimiento).HasMaxLength(50);
 		builder.Property(p => p.JuzgadoId).HasColumnName("Fk_Juzgado");
-		builder.Property(p => p.TuteladoId).HasColumnName("Fk_Tutelado");
+		//		builder.Property(p => p.TuteladoId).HasColumnName("Fk_Tutelado");
 		builder.Property(p => p.AbogadoAsistenteId).HasColumnName("Fk_AbogadoAsistente");
 		builder.Property(p => p.AbogadoAsignadoId).HasColumnName("Fk_AbogadoAsignado");
 		builder.Property(p => p.Tutelado).HasMaxLength(50);
@@ -21,15 +21,15 @@ public class SenalamientoConfiguration : IEntityTypeConfiguration<Senalamiento>
 
 		/*builder.HasOne(d => d.AbogadoAsistente)
 			.WithMany(p => p.Senalamientos)
-			.HasForeignKey(d => d.AbogadoAsistenteId);*/
+			.HasForeignKey(d => d.AbogadoAsistenteId);
 
-		/*builder.HasOne(d => d.Juzgado)
+		builder.HasOne(d => d.Juzgado)
 			.WithMany(p => p.Senalamientos)
-			.HasForeignKey(d => d.JuzgadoId);*/
+			.HasForeignKey(d => d.JuzgadoId);
 
-		/*builder.HasOne(d => d.TuteladoNavigation)
+		builder.HasOne(d => d.TuteladoNavigation)
 			.WithMany(p => p.Senalamientos)
-			.HasForeignKey(d => d.TuteladoId);*/
-
+			.HasForeignKey(d => d.TuteladoId);
+		*/
 	}
 }

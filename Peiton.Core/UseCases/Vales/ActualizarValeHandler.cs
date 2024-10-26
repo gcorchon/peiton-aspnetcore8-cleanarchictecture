@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Vales;
 
 [Injectable]
-public class ActualizarValeHandler(IValeRepository valeRepository, IUsuarioRepository usuarioRepository, IUnityOfWork unityOfWork, IIdentityService identityService, IComunicacionesService comunicacionesService)
+public class ActualizarValeHandler(IValeRepository valeRepository, IUsuarioRepository usuarioRepository, IUnitOfWork unitOfWork, IIdentityService identityService, IComunicacionesService comunicacionesService)
 {
     public async Task HandleAsync(int id, ActualizarValeRequest request)
     {
@@ -74,7 +74,7 @@ public class ActualizarValeHandler(IValeRepository valeRepository, IUsuarioRepos
             vale.Rechazado = false;
         }
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
         if (notificarRechazo)
         {

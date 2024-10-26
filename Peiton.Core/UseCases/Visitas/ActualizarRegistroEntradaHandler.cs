@@ -7,7 +7,7 @@ using Peiton.Serialization;
 namespace Peiton.Core.UseCases.Visitas;
 
 [Injectable]
-public class ActualizarRegistroEntradaHandler(IRegistroEntradaRepository registroEntradaRepository, IUnityOfWork unityOfWork)
+public class ActualizarRegistroEntradaHandler(IRegistroEntradaRepository registroEntradaRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, RegistroEntradaViewModel request)
     {
@@ -25,6 +25,6 @@ public class ActualizarRegistroEntradaHandler(IRegistroEntradaRepository registr
         registroEntrada.Observaciones = request.Observaciones;
         registroEntrada.Personas = request.Visitadas.ToXDocument()!.ToString();
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

@@ -7,7 +7,7 @@ using System.Text.Json;
 namespace Peiton.Core.UseCases.Cajas;
 
 [Injectable]
-public class EncajonarReintegrosHandler(ICajaRepository cajaRepository, IUnityOfWork unityOfWork, IIdentityService identityService)
+public class EncajonarReintegrosHandler(ICajaRepository cajaRepository, IUnitOfWork unitOfWork, IIdentityService identityService)
 {
     public async Task HandleAsync()
     {
@@ -34,7 +34,7 @@ public class EncajonarReintegrosHandler(ICajaRepository cajaRepository, IUnityOf
                                                }
             );
 
-            await unityOfWork.SaveChangesAsync();
+            await unitOfWork.SaveChangesAsync();
         }
     }
 }

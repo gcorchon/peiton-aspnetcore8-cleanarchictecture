@@ -5,14 +5,14 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.NotasSimples;
 
 [Injectable]
-public class FinalizarNotaSimpleHandler(INotaSimpleRepository notaSimpleRepository, IUnityOfWork unityOfWork)
+public class FinalizarNotaSimpleHandler(INotaSimpleRepository notaSimpleRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id)
     {
         var notaSimple = await notaSimpleRepository.GetByIdAsync(id);
         if (notaSimple == null) throw new EntityNotFoundException();
         notaSimple.Finalizado = true;
-        await unityOfWork.SaveChangesAsync();        
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

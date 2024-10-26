@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.ConsultasAlmacenadas;
 
 [Injectable]
-public class ActualizarConsultaAlmacenadaHandler(IUnityOfWork unityOfWork, IEntityService entityService)
+public class ActualizarConsultaAlmacenadaHandler(IUnitOfWork unitOfWork, IEntityService entityService)
 {
     public async Task HandleAsync(int id, ActualizarConsultaRequest data)
     {
@@ -25,7 +25,7 @@ public class ActualizarConsultaAlmacenadaHandler(IUnityOfWork unityOfWork, IEnti
         consultaAlmacenada.Usuarios.Merge(usuarioIds, u => u.Id, v => entityService.GetEntity<Usuario>(v));
         consultaAlmacenada.Grupos.Merge(grupoIds, g => g.Id, v => entityService.GetEntity<Grupo>(v));
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

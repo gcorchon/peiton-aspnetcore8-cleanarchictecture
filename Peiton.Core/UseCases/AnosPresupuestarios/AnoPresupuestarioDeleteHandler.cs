@@ -5,7 +5,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.AnosPresupuestarios;
 
 [Injectable]
-public class AnoPresupuestarioDeleteHandler(IAnoPresupuestarioRepository anoPresupuestarioRepository, IUnityOfWork unitOfWork)
+public class AnoPresupuestarioDeleteHandler(IAnoPresupuestarioRepository anoPresupuestarioRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id)
     {

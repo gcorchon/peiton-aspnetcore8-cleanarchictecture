@@ -7,7 +7,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.GestionesAdministrativas;
 
 [Injectable]
-public class CrearGestionAdminisrtativaHandler(ITuteladoRepository tuteladoRepository, IUnityOfWork unityOfWork, IIdentityService identityService)
+public class CrearGestionAdminisrtativaHandler(ITuteladoRepository tuteladoRepository, IUnitOfWork unitOfWork, IIdentityService identityService)
 {
     public async Task HandleAsync(int tuteladoId, GuardarGestionAdministrativaRequest request)
     {
@@ -23,7 +23,7 @@ public class CrearGestionAdminisrtativaHandler(ITuteladoRepository tuteladoRepos
             Estado = 1,
         });
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
     }
 

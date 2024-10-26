@@ -7,7 +7,7 @@ using Peiton.Serialization;
 namespace Peiton.Core.UseCases.Vales;
 
 [Injectable]
-public class GuardarValeHandler(IValeRepository valeRepository, IUnityOfWork unityOfWork, IIdentityService identityService)
+public class GuardarValeHandler(IValeRepository valeRepository, IUnitOfWork unitOfWork, IIdentityService identityService)
 {
     public async Task HandleAsync(GuardarValeRequest request)
     {
@@ -21,7 +21,7 @@ public class GuardarValeHandler(IValeRepository valeRepository, IUnityOfWork uni
         };
 
         await valeRepository.AddAsync(vale);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

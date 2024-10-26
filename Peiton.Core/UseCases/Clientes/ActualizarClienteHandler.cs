@@ -6,7 +6,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Clientes;
 
 [Injectable]
-public class ActualizarClienteHandler(IClienteRepository clienteRepository, IUnityOfWork unityOfWork)
+public class ActualizarClienteHandler(IClienteRepository clienteRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, GuardarClienteRequest request)
     {
@@ -16,7 +16,7 @@ public class ActualizarClienteHandler(IClienteRepository clienteRepository, IUni
         cliente.CIF = request.CIF;
         cliente.CodCliente = request.CodCliente;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

@@ -7,7 +7,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Cajas;
 
 [Injectable]
-public class EliminarMovimientoCajaHandler(IMapper mapper, ICajaRepository cajaRepository, ICajaIncidenciaRepository cajaIncidenciaRepository, IUnityOfWork unityOfWork)
+public class EliminarMovimientoCajaHandler(IMapper mapper, ICajaRepository cajaRepository, ICajaIncidenciaRepository cajaIncidenciaRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id)
     {
@@ -27,7 +27,7 @@ public class EliminarMovimientoCajaHandler(IMapper mapper, ICajaRepository cajaR
 
         cajaRepository.Remove(movimiento);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

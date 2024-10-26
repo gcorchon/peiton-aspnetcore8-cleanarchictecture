@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.CajasAMTA;
 
 [Injectable]
-public class ContabilizarMovimientoPendienteCajaHandler(IEntityService entityService, IAsientoRepository asientoRepository, IUnityOfWork unitOfWork)
+public class ContabilizarMovimientoPendienteCajaHandler(IEntityService entityService, IAsientoRepository asientoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, AsientoSaveRequest[] request)
     {

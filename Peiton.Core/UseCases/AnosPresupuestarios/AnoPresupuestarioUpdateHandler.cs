@@ -7,7 +7,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.AnosPresupuestarios;
 
 [Injectable]
-public class AnoPresupuestarioUpdateHandler(IEntityService entityService, IUnityOfWork unitOfWork)
+public class AnoPresupuestarioUpdateHandler(IEntityService entityService, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, AnoPrespuestarioUpdateRequest data)
     {

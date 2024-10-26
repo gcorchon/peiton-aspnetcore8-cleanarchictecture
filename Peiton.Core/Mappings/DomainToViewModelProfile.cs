@@ -264,6 +264,18 @@ public class DomainToViewModelProfile : Profile
             .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
             .ForMember(vm => vm.Text, m => m.MapFrom(o => o.NombreCompleto));
 
+        CreateMap<Juzgado, VM.Common.ListItem>()
+            .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
+            .ForMember(vm => vm.Text, m => m.MapFrom(o => o.Descripcion));
+
+        CreateMap<Abogado, VM.Common.ListItem>()
+            .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
+            .ForMember(vm => vm.Text, m => m.MapFrom(o => o.Nombre));
+
+        CreateMap<Tutelado, VM.Common.ListItem>()
+            .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
+            .ForMember(vm => vm.Text, m => m.MapFrom(o => o.NombreCompleto));
+
         CreateMap<Queja, VM.Quejas.QuejaViewModel>()
             .ForMember(vm => vm.QuejaMotivos, m => m.MapFrom(o => o.QuejasMotivos.Select(t => t.Id).ToArray()));
 
@@ -293,6 +305,13 @@ public class DomainToViewModelProfile : Profile
         CreateMap<SalaReserva, VM.Salas.ReservaViewModel>()
             .ForMember(r => r.Propia, opt => opt.MapFrom((src, dest, destMember, context) => (int)context.Items["UserId"] == src.UsuarioId))
             .ForMember(s => s.Usuario, opt => opt.MapFrom(s => s.Usuario.NombreCompleto));
+
+        CreateMap<Senalamiento, VM.Senalamientos.SenalamientoListItem>()
+            //.ForMember(s => s.Fecha, opt => opt.MapFrom(o => o.Fecha!.Value.Date))
+            //.ForMember(s => s.Hora, opt => opt.MapFrom(o => o.Fecha!.Value.ToString("HH:mm")))
+            .ForMember(s => s.Asistente, opt => opt.MapFrom(o => o.AbogadoAsistente != null ? o.AbogadoAsistente!.Nombre : o.ProfesionalAsistente));
+
+        CreateMap<Senalamiento, VM.Senalamientos.SenalamientoViewModel>();
     }
 
     private string GetDescripcionEstadoGestionAdministrativa(int estado)

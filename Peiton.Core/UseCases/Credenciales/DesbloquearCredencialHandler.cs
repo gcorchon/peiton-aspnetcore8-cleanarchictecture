@@ -4,7 +4,7 @@ using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Credenciales;
 [Injectable]
-public class DesbloquearCredencialHandler(ICredencialRepository credencialRepository, IUnityOfWork unityOfWork)
+public class DesbloquearCredencialHandler(ICredencialRepository credencialRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id)
     {
@@ -16,7 +16,7 @@ public class DesbloquearCredencialHandler(ICredencialRepository credencialReposi
         credencial.Reintentos = 0;
         credencial.ProximaEjecucion = DateTime.Now;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }
 

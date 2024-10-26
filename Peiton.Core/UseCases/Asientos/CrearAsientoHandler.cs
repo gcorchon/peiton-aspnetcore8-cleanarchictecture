@@ -6,7 +6,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Asientos;
 
 [Injectable]
-public class CrearAsientoHandler(IAsientoRepository asientoRepository, IFacturaRepository facturaRepository, IUnityOfWork unityOfWork)
+public class CrearAsientoHandler(IAsientoRepository asientoRepository, IFacturaRepository facturaRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(AsientoSaveRequest item)
     {
@@ -45,6 +45,6 @@ public class CrearAsientoHandler(IAsientoRepository asientoRepository, IFacturaR
         }
 
         await asientoRepository.AddAsync(asiento);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

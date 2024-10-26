@@ -7,11 +7,12 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Partidas;
 
 [Injectable]
-public class CreateCapituloHandler(IMapper mapper, IUnityOfWork unityOfWork, ICapituloRepository capituloRepository)
+public class CreateCapituloHandler(IMapper mapper, IUnitOfWork unitOfWork, ICapituloRepository capituloRepository)
 {
-    public async Task HandleAsync(CreateCapituloRequest data) {
+    public async Task HandleAsync(CreateCapituloRequest data)
+    {
         var capitulo = mapper.Map(data, new Capitulo());
         await capituloRepository.AddAsync(capitulo);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

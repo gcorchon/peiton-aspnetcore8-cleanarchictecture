@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Salas;
 
 [Injectable]
-public class ActualizarReservasHandler(ISalaReservaRepository salaReservaRepository, IUnityOfWork unityOfWork, IIdentityService identityService)
+public class ActualizarReservasHandler(ISalaReservaRepository salaReservaRepository, IUnitOfWork unitOfWork, IIdentityService identityService)
 {
     public async Task HandleAsync(GuardarReservasRequest request)
     {
@@ -26,6 +26,6 @@ public class ActualizarReservasHandler(ISalaReservaRepository salaReservaReposit
 
         await salaReservaRepository.AddRangeAsync(nuevas);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

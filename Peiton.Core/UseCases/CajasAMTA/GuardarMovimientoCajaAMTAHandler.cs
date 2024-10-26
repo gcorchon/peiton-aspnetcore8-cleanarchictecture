@@ -6,7 +6,7 @@ using Peiton.Contracts.Caja;
 namespace Peiton.Core.UseCases.CajasAMTA;
 
 [Injectable]
-public class GuardarMovimientoCajaAMTAHandler(ICajaAMTARepository cajaAMTARepository, IUnityOfWork unityOfWork)
+public class GuardarMovimientoCajaAMTAHandler(ICajaAMTARepository cajaAMTARepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(GuardarCajaAMTA data)
     {
@@ -24,7 +24,7 @@ public class GuardarMovimientoCajaAMTAHandler(ICajaAMTARepository cajaAMTAReposi
         };
 
         await cajaAMTARepository.AddAsync(cajaAMTA);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

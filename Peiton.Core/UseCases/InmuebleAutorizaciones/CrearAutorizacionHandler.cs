@@ -7,7 +7,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.InmuebleAutorizaciones;
 
 [Injectable]
-public class CrearAutorizacionHandler(IInmuebleRepository inmuebleRepository, IUnityOfWork unityOfWork, IIdentityService identityService)
+public class CrearAutorizacionHandler(IInmuebleRepository inmuebleRepository, IUnitOfWork unitOfWork, IIdentityService identityService)
 {
     public async Task HandleAsync(int inmuebleId, CrearInmuebleAutorizacionRequest request)
     {
@@ -27,7 +27,7 @@ public class CrearAutorizacionHandler(IInmuebleRepository inmuebleRepository, IU
             Archivo = false
         });
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
     }
 

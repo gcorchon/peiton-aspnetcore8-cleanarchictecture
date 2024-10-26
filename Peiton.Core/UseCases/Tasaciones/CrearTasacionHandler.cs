@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Tasaciones;
 
 [Injectable]
-public class CrearTasacionHandler(IInmuebleRepository inmuebleRepository, IMapper mapper, IIdentityService identityService, IUnityOfWork unityOfWork)
+public class CrearTasacionHandler(IInmuebleRepository inmuebleRepository, IMapper mapper, IIdentityService identityService, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, CrearInmuebleTasacionRequest request)
     {
@@ -27,7 +27,7 @@ public class CrearTasacionHandler(IInmuebleRepository inmuebleRepository, IMappe
 
         inmueble.InmueblesTasaciones.Add(tasacion);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

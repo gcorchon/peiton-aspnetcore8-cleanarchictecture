@@ -7,7 +7,7 @@ using Peiton.Core.Utils;
 namespace Peiton.Core.UseCases.Instrucciones;
 
 [Injectable]
-public class CrearInstruccionHandler(IInstruccionRepository instruccionRepository, IUnityOfWork unityOfWork)
+public class CrearInstruccionHandler(IInstruccionRepository instruccionRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(GuardarInstruccionRequest request)
     {
@@ -37,6 +37,6 @@ public class CrearInstruccionHandler(IInstruccionRepository instruccionRepositor
 
         await instruccionRepository.AddAsync(documento);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

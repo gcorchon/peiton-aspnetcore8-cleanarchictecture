@@ -5,7 +5,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.InmuebleAvisos;
 
 [Injectable]
-public class ResolverInmuebleAvisoHandler(IInmuebleAvisoRepository inmuebleAvisoRepository, IUnityOfWork unityOfWork)
+public class ResolverInmuebleAvisoHandler(IInmuebleAvisoRepository inmuebleAvisoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id)
     {
@@ -17,7 +17,7 @@ public class ResolverInmuebleAvisoHandler(IInmuebleAvisoRepository inmuebleAviso
         inmuebleAviso.Resuelto = true;
         inmuebleAviso.EnTramite = false;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

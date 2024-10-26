@@ -5,7 +5,7 @@ using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Categorias;
 [Injectable]
-public class CrearNuevaCategoriaHandler(ICategoriaRepository categoriaRepository, IUnityOfWork unityOfWork)
+public class CrearNuevaCategoriaHandler(ICategoriaRepository categoriaRepository, IUnitOfWork unitOfWork)
 {
     public async Task<Categoria> HandleAsync(int categoriaPadreId)
     {
@@ -19,7 +19,7 @@ public class CrearNuevaCategoriaHandler(ICategoriaRepository categoriaRepository
 
         await categoriaRepository.AddAsync(categoria);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
         return categoria;
     }

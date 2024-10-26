@@ -7,7 +7,7 @@ using Peiton.Core.Exceptions;
 namespace Peiton.Core.UseCases.Instrucciones;
 
 [Injectable]
-public class ActualizarInstruccionHandler(IInstruccionRepository instruccionRepository, IUnityOfWork unityOfWork)
+public class ActualizarInstruccionHandler(IInstruccionRepository instruccionRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, GuardarInstruccionRequest request)
     {
@@ -39,6 +39,6 @@ public class ActualizarInstruccionHandler(IInstruccionRepository instruccionRepo
         instruccion.FileName = fileName;
         instruccion.Fecha = DateTime.Now;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

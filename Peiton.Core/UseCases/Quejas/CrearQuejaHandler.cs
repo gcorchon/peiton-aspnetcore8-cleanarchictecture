@@ -8,12 +8,12 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Quejas;
 
 [Injectable]
-public class CrearrQuejaHandler(IQuejaRepository quejaRepository, IQuejaMotivoRepository quejaMotivoRepository, IUnityOfWork unityOfWork, IMapper mapper)
+public class CrearrQuejaHandler(IQuejaRepository quejaRepository, IQuejaMotivoRepository quejaMotivoRepository, IUnitOfWork unitOfWork, IMapper mapper)
 {
     public async Task HandleAsync(GuardarQuejaRequest request)
     {
         var expediente = await quejaRepository.ObtenerSiguienteNumeroExpedienteAsync(request.QuejaTipoId);
-        
+
         var queja = new Queja();
 
         mapper.Map(request, queja);
@@ -22,6 +22,6 @@ public class CrearrQuejaHandler(IQuejaRepository quejaRepository, IQuejaMotivoRe
         queja.Expediente = expediente;
 
         await quejaRepository.AddAsync(queja);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

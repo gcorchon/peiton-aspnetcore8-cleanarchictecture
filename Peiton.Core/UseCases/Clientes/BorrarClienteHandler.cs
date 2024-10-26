@@ -5,7 +5,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Clientes;
 
 [Injectable]
-public class BorrarClienteHandler(IClienteRepository clienteRepository, IUnityOfWork unityOfWork)
+public class BorrarClienteHandler(IClienteRepository clienteRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id)
     {
@@ -13,7 +13,7 @@ public class BorrarClienteHandler(IClienteRepository clienteRepository, IUnityOf
         if (cliente == null) throw new EntityNotFoundException($"El cliente con Id {id} no existe");
         cliente.Activo = false;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

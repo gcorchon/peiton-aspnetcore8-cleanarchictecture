@@ -5,7 +5,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Visitas;
 
 [Injectable]
-public class MarcarSalidasHandler(IRegistroEntradaRepository registroEntradaRepository, IUnityOfWork unityOfWork)
+public class MarcarSalidasHandler(IRegistroEntradaRepository registroEntradaRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(MarcarSalidasRequest request)
     {
@@ -17,7 +17,7 @@ public class MarcarSalidasHandler(IRegistroEntradaRepository registroEntradaRepo
             registroEntrada.HoraSalida = request.Hora;
         }
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
 
     }

@@ -6,7 +6,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.VehiculosEntidad;
 
 [Injectable]
-public class GuardarReservaHandler(IVehiculoEntidadReservaRepository vehiculoEntidadReservaRepository, IUnityOfWork unityOfWork, IIdentityService identityService)
+public class GuardarReservaHandler(IVehiculoEntidadReservaRepository vehiculoEntidadReservaRepository, IUnitOfWork unitOfWork, IIdentityService identityService)
 {
     public async Task HandleAsync(GuardarReservaRequest request)
     {
@@ -23,6 +23,6 @@ public class GuardarReservaHandler(IVehiculoEntidadReservaRepository vehiculoEnt
         });
 
         await vehiculoEntidadReservaRepository.AddRangeAsync(reservas);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

@@ -6,7 +6,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.ConsultasAlmacenadas;
 
 [Injectable]
-public class ActualizarQueryConsultaAlmacenadaHandler(IUnityOfWork unityOfWork, IEntityService entityService)
+public class ActualizarQueryConsultaAlmacenadaHandler(IUnitOfWork unitOfWork, IEntityService entityService)
 {
     public async Task HandleAsync(int id, string query)
     {
@@ -15,7 +15,7 @@ public class ActualizarQueryConsultaAlmacenadaHandler(IUnityOfWork unityOfWork, 
 
         consultaAlmacenada.Query = query;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

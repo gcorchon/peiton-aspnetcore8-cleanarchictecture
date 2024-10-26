@@ -7,7 +7,7 @@ using Peiton.Core.Utils;
 namespace Peiton.Core.UseCases.Documentos;
 
 [Injectable]
-public class CrearDocumentoHandler(IDocumentoRepository DocumentoRepository, IUnityOfWork unityOfWork)
+public class CrearDocumentoHandler(IDocumentoRepository DocumentoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(GuardarDocumentoRequest request)
     {
@@ -38,6 +38,6 @@ public class CrearDocumentoHandler(IDocumentoRepository DocumentoRepository, IUn
 
         await DocumentoRepository.AddAsync(documento);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

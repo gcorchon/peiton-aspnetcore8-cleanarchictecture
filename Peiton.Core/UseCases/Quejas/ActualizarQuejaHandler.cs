@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Quejas;
 
 [Injectable]
-public class ActualizarQuejaHandler(IQuejaRepository quejaRepository, IQuejaMotivoRepository quejaMotivoRepository, IUnityOfWork unityOfWork, IMapper mapper)
+public class ActualizarQuejaHandler(IQuejaRepository quejaRepository, IQuejaMotivoRepository quejaMotivoRepository, IUnitOfWork unitOfWork, IMapper mapper)
 {
     public async Task HandleAsync(int quejaId, GuardarQuejaRequest request)
     {
@@ -18,7 +18,7 @@ public class ActualizarQuejaHandler(IQuejaRepository quejaRepository, IQuejaMoti
         mapper.Map(request, queja);
 
         queja.QuejasMotivos.Merge(request.QuejaMotivos, c => c.Id, id => quejaMotivoRepository.GetById(id));
-        
-        await unityOfWork.SaveChangesAsync();
+
+        await unitOfWork.SaveChangesAsync();
     }
 }

@@ -7,7 +7,7 @@ using Peiton.Core.Exceptions;
 namespace Peiton.Core.UseCases.Procesos;
 
 [Injectable]
-public class ActualizarProcesoHandler(IProcesoRepository procesoRepository, IUnityOfWork unityOfWork)
+public class ActualizarProcesoHandler(IProcesoRepository procesoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, GuardarProcesoRequest request)
     {
@@ -39,6 +39,6 @@ public class ActualizarProcesoHandler(IProcesoRepository procesoRepository, IUni
         proceso.FileName = fileName;
         proceso.Fecha = DateTime.Now;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

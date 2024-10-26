@@ -7,7 +7,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Sucesiones;
 
 [Injectable]
-public class CrearSucesionHandler(ISucesionRepository sucesionRepository, IMapper mapper, IIdentityService identityService, IUnityOfWork unityOfWork)
+public class CrearSucesionHandler(ISucesionRepository sucesionRepository, IMapper mapper, IIdentityService identityService, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(CrearSucesionRequest request)
     {
@@ -18,7 +18,7 @@ public class CrearSucesionHandler(ISucesionRepository sucesionRepository, IMappe
         sucesion.UsuarioId = identityService.GetUserId();
 
         await sucesionRepository.AddAsync(sucesion);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

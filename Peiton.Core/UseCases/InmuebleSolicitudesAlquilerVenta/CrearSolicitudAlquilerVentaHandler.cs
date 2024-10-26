@@ -7,7 +7,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.InmuebleSolicitudesAlquilerVenta;
 
 [Injectable]
-public class CrearSolicitudAlquilerVentaHandler(IInmuebleRepository inmuebleRepository, IUnityOfWork unityOfWork, IIdentityService identityService)
+public class CrearSolicitudAlquilerVentaHandler(IInmuebleRepository inmuebleRepository, IUnitOfWork unitOfWork, IIdentityService identityService)
 {
     public async Task HandleAsync(int inmuebleId, CrearInmuebleAutorizacionRequest request)
     {
@@ -27,7 +27,7 @@ public class CrearSolicitudAlquilerVentaHandler(IInmuebleRepository inmuebleRepo
             Archivo = false
         });
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
     }
 

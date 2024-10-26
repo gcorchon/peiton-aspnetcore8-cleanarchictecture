@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.InmuebleAvisos;
 
 [Injectable]
-public class ActualizarInmuebleAvisoHandler(IInmuebleAvisoRepository inmuebleAvisoRepository, IMapper mapper, IUnityOfWork unityOfWork)
+public class ActualizarInmuebleAvisoHandler(IInmuebleAvisoRepository inmuebleAvisoRepository, IMapper mapper, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, GuardarInmuebleAvisoRequest request)
     {
@@ -24,12 +24,13 @@ public class ActualizarInmuebleAvisoHandler(IInmuebleAvisoRepository inmuebleAvi
             entity.EmpresaId = item.EmpresaId;
             entity.Importe = item.Importe;
             entity.Orden = ++index;
-            if (isNew) {
+            if (isNew)
+            {
                 entity.CosteId = Guid.NewGuid().ToString();
             }
         });
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

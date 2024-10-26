@@ -6,7 +6,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.AvisosTributarios;
 
 [Injectable]
-public class ResolverAvisoTributarioHandler(IAvisoTributarioRepository avisoTributarioRepository, IUnityOfWork unityOfWork)
+public class ResolverAvisoTributarioHandler(IAvisoTributarioRepository avisoTributarioRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, ActualizarAvisoTributarioRequest request)
     {
@@ -27,7 +27,7 @@ public class ResolverAvisoTributarioHandler(IAvisoTributarioRepository avisoTrib
         avisoTributario.EnTramite = false;
         avisoTributario.FechaResolucion = DateTime.Now;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

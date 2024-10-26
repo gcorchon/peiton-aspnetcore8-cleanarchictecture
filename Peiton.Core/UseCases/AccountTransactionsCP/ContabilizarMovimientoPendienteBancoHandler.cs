@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.AccountTransactionsCP;
 
 [Injectable]
-public class ContabilizarMovimientoPendienteBancoHandler(IEntityService entityService, IAsientoRepository asientoRepository, IUnityOfWork unitOfWork)
+public class ContabilizarMovimientoPendienteBancoHandler(IEntityService entityService, IAsientoRepository asientoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, AsientoSaveRequest[] request)
     {

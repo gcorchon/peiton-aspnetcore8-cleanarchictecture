@@ -21,15 +21,15 @@ public class GetTokenHandler
     private readonly IUsuarioRepository usuarioRepository;
     private readonly ILogAccesoRepository logAccesoRepository;
     private readonly IHttpContextAccessor context;
-    private readonly IUnityOfWork unityOfWork;
-    
-    public GetTokenHandler(IUsuarioRepository usuarioRepository, ICryptographyService cryptographyService, 
-                           IUnityOfWork unityOfWork, ILogAccesoRepository logAccesoRepository, IHttpContextAccessor context, 
+    private readonly IUnitOfWork unitOfWork;
+
+    public GetTokenHandler(IUsuarioRepository usuarioRepository, ICryptographyService cryptographyService,
+                           IUnitOfWork unitOfWork, ILogAccesoRepository logAccesoRepository, IHttpContextAccessor context,
                            IOptions<JwtConfig> jwtConfig)
     {
         this.usuarioRepository = usuarioRepository;
         this.cryptographyService = cryptographyService;
-        this.unityOfWork = unityOfWork;
+        this.unitOfWork = unitOfWork;
         this.logAccesoRepository = logAccesoRepository;
         this.context = context;
         this.jwtConfig = jwtConfig.Value;
@@ -38,19 +38,20 @@ public class GetTokenHandler
     public async Task<TokenViewModel> HandleAsync(TokenRequest request)
     {
         var user = await this.usuarioRepository.GetAsync(u => u.Username == request.UserName);
-        if (user == null || user.Borrado) throw new UnauthorizedAccessException(  "Usuario y/o contraseña incorrectos"  );
-        if (user.Bloqueado) throw new UnauthorizedAccessException("El usuario está bloqueado" );
+        if (user == null || user.Borrado) throw new UnauthorizedAccessException("Usuario y/o contraseña incorrectos");
+        if (user.Bloqueado) throw new UnauthorizedAccessException("El usuario está bloqueado");
 
         var hashedPassword = cryptographyService.GetMd5Hash(request.Password);
-        
-        if (user.Pwd != hashedPassword) {
+
+        if (user.Pwd != hashedPassword)
+        {
             user.Reintentos += 1;
             user.Bloqueado = user.Reintentos >= 3;
-            await unityOfWork.SaveChangesAsync();
-            throw new UnauthorizedAccessException("Usuario y/o contraseña incorrectos");           
+            await unitOfWork.SaveChangesAsync();
+            throw new UnauthorizedAccessException("Usuario y/o contraseña incorrectos");
         }
 
-        if(context.HttpContext is null) throw new Exception("HttpContext required");
+        if (context.HttpContext is null) throw new Exception("HttpContext required");
 
         var remoteIPAddress = context.HttpContext.Connection.RemoteIpAddress?.ToString() ?? "";
 
@@ -58,7 +59,7 @@ public class GetTokenHandler
         user.UserAgent = context.HttpContext.Request.Headers.UserAgent;
 
         await logAccesoRepository.AddAsync(new LogAcceso() { Fecha = DateTime.Now, Usuario = user.Username, IP = remoteIPAddress });
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
         var jwtTokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(jwtConfig.Secret!);

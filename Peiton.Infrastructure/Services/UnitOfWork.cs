@@ -3,8 +3,8 @@ using Peiton.DependencyInjection;
 
 namespace Peiton.Infrastructure;
 
-[Injectable(typeof(IUnityOfWork))]
-public class UnitOfWork : IUnityOfWork
+[Injectable(typeof(IUnitOfWork))]
+public class UnitOfWork : IUnitOfWork
 {
     private readonly PeitonDbContext dbContext;
 

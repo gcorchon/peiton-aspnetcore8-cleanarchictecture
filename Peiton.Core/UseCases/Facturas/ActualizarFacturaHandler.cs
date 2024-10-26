@@ -7,7 +7,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Facturas;
 
 [Injectable]
-public class ActualizarFacturaHandler(IMapper mapper, IFacturaRepository facturaRepository, IUnityOfWork unityOfWork)
+public class ActualizarFacturaHandler(IMapper mapper, IFacturaRepository facturaRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, GuardarFacturaRequest request)
     {
@@ -19,7 +19,7 @@ public class ActualizarFacturaHandler(IMapper mapper, IFacturaRepository factura
         }
 
         mapper.Map(request, factura);
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

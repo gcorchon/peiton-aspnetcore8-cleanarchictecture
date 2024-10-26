@@ -9,7 +9,7 @@ using Peiton.Serialization;
 namespace Peiton.Core.UseCases.Visitas;
 
 [Injectable]
-public class CrearRegistroEntradaHandler(IRegistroEntradaRepository registroEntradaRepository, IUnityOfWork unityOfWork)
+public class CrearRegistroEntradaHandler(IRegistroEntradaRepository registroEntradaRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(CrearRegistroEntradaRequest request)
     {
@@ -33,6 +33,6 @@ public class CrearRegistroEntradaHandler(IRegistroEntradaRepository registroEntr
 
 
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Peiton.Core;
 
-public interface IUnityOfWork
+public interface IUnitOfWork
 {
     Task<int> SaveChangesAsync();
 }

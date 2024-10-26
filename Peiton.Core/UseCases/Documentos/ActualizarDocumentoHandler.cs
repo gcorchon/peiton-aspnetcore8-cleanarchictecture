@@ -7,7 +7,7 @@ using Peiton.Core.Exceptions;
 namespace Peiton.Core.UseCases.Documentos;
 
 [Injectable]
-public class ActualizarDocumentoHandler(IDocumentoRepository DocumentoRepository, IUnityOfWork unityOfWork)
+public class ActualizarDocumentoHandler(IDocumentoRepository DocumentoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, GuardarDocumentoRequest request)
     {
@@ -40,6 +40,6 @@ public class ActualizarDocumentoHandler(IDocumentoRepository DocumentoRepository
         documento.Tags = request.Tags;
         documento.Fecha = DateTime.Now;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

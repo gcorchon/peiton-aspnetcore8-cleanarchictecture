@@ -7,7 +7,7 @@ using Peiton.Core.Utils;
 namespace Peiton.Core.UseCases.Procesos;
 
 [Injectable]
-public class CrearProcesoHandler(IProcesoRepository procesoRepository, IUnityOfWork unityOfWork)
+public class CrearProcesoHandler(IProcesoRepository procesoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(GuardarProcesoRequest request)
     {
@@ -37,6 +37,6 @@ public class CrearProcesoHandler(IProcesoRepository procesoRepository, IUnityOfW
 
         await procesoRepository.AddAsync(proceso);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 }

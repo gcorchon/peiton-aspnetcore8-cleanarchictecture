@@ -7,7 +7,7 @@ using Peiton.Serialization;
 namespace Peiton.Core.UseCases.Arqueos;
 
 [Injectable]
-public class GuardarArqueoHandler(IArqueoRepository arqueoRepository, IUnityOfWork unityOfWork)
+public class GuardarArqueoHandler(IArqueoRepository arqueoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(DateTime fecha, ArqueoModel request)
     {
@@ -24,7 +24,7 @@ public class GuardarArqueoHandler(IArqueoRepository arqueoRepository, IUnityOfWo
 
         arqueo.Datos = request.ToXDocument()!.ToString();
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

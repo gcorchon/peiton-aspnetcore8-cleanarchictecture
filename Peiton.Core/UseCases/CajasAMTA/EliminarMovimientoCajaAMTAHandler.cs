@@ -5,7 +5,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.CajasAMTA;
 
 [Injectable]
-public class EliminarMovimientoCajaAMTAHandler(ICajaAMTARepository cajaAMTARepository, ICajaRepository cajaRepository, IUnityOfWork unityOfWork)
+public class EliminarMovimientoCajaAMTAHandler(ICajaAMTARepository cajaAMTARepository, ICajaRepository cajaRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id)
     {
@@ -20,7 +20,7 @@ public class EliminarMovimientoCajaAMTAHandler(ICajaAMTARepository cajaAMTARepos
 
         cajaAMTARepository.Remove(cajaAMTA);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }

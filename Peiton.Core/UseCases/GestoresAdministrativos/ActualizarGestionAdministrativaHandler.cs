@@ -6,7 +6,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.GestionesAdministrativas;
 
 [Injectable]
-public class ActualizarGestionAdministrativaHandler(IGestionAdministrativaRepository gestionAdministrativaRepository, IUnityOfWork unityOfWork)
+public class ActualizarGestionAdministrativaHandler(IGestionAdministrativaRepository gestionAdministrativaRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int gestionAdministrativaId, ActualizarGestionAdministrativaRequest request)
     {
@@ -20,7 +20,7 @@ public class ActualizarGestionAdministrativaHandler(IGestionAdministrativaReposi
         gestion.Importe = request.Importe;
         gestion.Estado = request.Estado;
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
     }
 

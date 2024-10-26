@@ -6,7 +6,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Clientes;
 
 [Injectable]
-public class GuardarClienteHandler(IClienteRepository clienteRepository, IUnityOfWork unityOfWork)
+public class GuardarClienteHandler(IClienteRepository clienteRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(GuardarClienteRequest request)
     {
@@ -20,7 +20,7 @@ public class GuardarClienteHandler(IClienteRepository clienteRepository, IUnityO
 
         await clienteRepository.AddAsync(cliente);
 
-        await unityOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
     }
 
 }
