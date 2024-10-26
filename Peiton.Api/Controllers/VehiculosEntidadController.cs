@@ -41,53 +41,5 @@ public class VehiculosEntidadController(IMapper mapper) : ControllerBase
         return Accepted();
     }
 
-    /*
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> ObtenerQuejaAsync(int id, EntityHandler<Queja> handler)
-    {
-        var entity = await handler.HandleAsync(id);
-        var vm = mapper.Map<QuejaViewModel>(entity);
-        return Ok(vm);
-    }
 
-    [HttpPost()]
-    public async Task<IActionResult> CrearQuejaAsync(GuardarQuejaRequest data, CrearrQuejaHandler handler)
-    {
-        await handler.HandleAsync(data);
-        return Accepted();
-    }
-
-    [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarQuejaAsync(int id, [FromBody] GuardarQuejaRequest data, ActualizarQuejaHandler handler)
-    {
-        await handler.HandleAsync(id, data);
-        return Accepted();
-    }
-
-    [HttpDelete("{id:int}")]
-    [PeitonAuthorization(PeitonPermission.InstitucionalVehiculosEntidadBorrar)]
-    public async Task<IActionResult> BorrarQuejaAsync(int id, DeleteEntityHandler<Queja> handler)
-    {
-        await handler.HandleAsync(id);
-        return Accepted();
-    }
-
-    [HttpPost("documentos")]
-    public async Task<IActionResult> GuardarDocumentoAsync([FromForm] IFormFile file, GuardarDocumentoHandler handler)
-    {
-        var fileName = await handler.HandleAsync(file);
-        return Ok(fileName);
-    }
-
-    [HttpGet("documentos")]
-    public async Task<IActionResult> DescargarDocumentoAsync([FromQuery] string path)
-    {
-        var filePath = FilePathValidator.CombineSafe("App_Data/VehiculosEntidad", path);
-
-        if (!System.IO.File.Exists(filePath)) return NotFound();
-
-        var content = await System.IO.File.ReadAllBytesAsync(filePath);
-        return File(content, MimeTypeHelper.GetMimeType(filePath), path.Substring(path.IndexOf("_") + 1));
-    }
-    */
 }

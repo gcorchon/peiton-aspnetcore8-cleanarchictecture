@@ -22,8 +22,7 @@ public class GuardarReservaHandler(IVehiculoEntidadReservaRepository vehiculoEnt
             VehiculoEntidadId = r.VehiculoId
         });
 
-        vehiculoEntidadReservaRepository.AddRange(reservas);
-
+        await vehiculoEntidadReservaRepository.AddRangeAsync(reservas);
         await unityOfWork.SaveChangesAsync();
     }
 }

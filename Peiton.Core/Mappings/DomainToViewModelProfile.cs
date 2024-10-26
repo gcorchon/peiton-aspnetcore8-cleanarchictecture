@@ -285,6 +285,14 @@ public class DomainToViewModelProfile : Profile
         CreateMap<RegistroEntrada, VM.Visitas.RegistroEntradaViewModel>()
             .ForMember(r => r.Visitante, opt => opt.MapFrom(o => new VM.Visitas.Visitante() { Dni = o.Dni, Nombre = o.Nombre, Tutelado = o.Tutelado }))
             .ForMember(r => r.Visitadas, opt => opt.MapFrom(o => GetVisitadas(o.Personas)));
+
+        CreateMap<Sala, VM.Common.ListItem>()
+            .ForMember(s => s.Value, opt => opt.MapFrom(s => s.Id))
+            .ForMember(s => s.Text, opt => opt.MapFrom(s => s.Descripcion));
+
+        CreateMap<SalaReserva, VM.Salas.ReservaViewModel>()
+            .ForMember(r => r.Propia, opt => opt.MapFrom((src, dest, destMember, context) => (int)context.Items["UserId"] == src.UsuarioId))
+            .ForMember(s => s.Usuario, opt => opt.MapFrom(s => s.Usuario.NombreCompleto));
     }
 
     private string GetDescripcionEstadoGestionAdministrativa(int estado)
