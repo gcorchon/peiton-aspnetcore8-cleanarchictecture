@@ -34,7 +34,6 @@ public class VisitasController(IMapper mapper) : ControllerBase
         return Ok(vm);
     }
 
-
     [HttpPost("")]
     public async Task<IActionResult> CrearRegistroEntradaAsync(CrearRegistroEntradaRequest request, CrearRegistroEntradaHandler handler)
     {
@@ -56,5 +55,25 @@ public class VisitasController(IMapper mapper) : ControllerBase
         return Accepted();
     }
 
+    [HttpGet("visitantes")]
+    public async Task<IActionResult> ObtenerVisitantesAsync([FromQuery] string query, ObtenerVisitantesHandler handler)
+    {
+        var data = await handler.HandleAsync(query);
+        return Ok(data);
+    }
 
+    [HttpGet("sin-salida")]
+    public async Task<IActionResult> RegistrosEntradaSinSalidaAsync([FromQuery] Pagination pagination, RegistrosEntradaSinSalidaHandler handler)
+    {
+        var data = await handler.HandleAsync(pagination);
+        var vm = mapper.Map<IEnumerable<RegistroEntradaListItem>>(data.Items);
+        return this.PaginatedResult(vm, data.Total);
+    }
+
+    [HttpPatch("sin-salida")]
+    public async Task<IActionResult> MarcarSalidasAsync(MarcarSalidasRequest request, MarcarSalidasHandler handler)
+    {
+        await handler.HandleAsync(request);
+        return Accepted();
+    }
 }

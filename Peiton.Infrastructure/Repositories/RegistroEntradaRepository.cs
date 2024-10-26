@@ -22,11 +22,27 @@ public class RegistroEntradaRepository : RepositoryBase<RegistroEntrada>, IRegis
 		return query.CountAsync();
 	}
 
+	public Task<int> ContarVisitasSinSalidaAsync()
+	{
+		return DbSet.Where(r => r.HoraSalida == null)
+					.CountAsync();
+	}
+
 	public Task<List<RegistroEntrada>> ObtenerRegistrosEntradaAsync(int page, int total, RegistroEntradaFilter filter)
 	{
 		IQueryable<RegistroEntrada> query = ApplyFilter(DbSet, filter);
 
 		return query.OrderByDescending(a => a.Id)
+					.Skip((page - 1) * total)
+					.Take(total)
+					.AsNoTracking()
+					.ToListAsync();
+	}
+
+	public Task<List<RegistroEntrada>> ObtenerVisitasSinSalidaAsync(int page, int total)
+	{
+		return DbSet.Where(r => r.HoraSalida == null)
+					.OrderByDescending(a => a.Id)
 					.Skip((page - 1) * total)
 					.Take(total)
 					.AsNoTracking()
