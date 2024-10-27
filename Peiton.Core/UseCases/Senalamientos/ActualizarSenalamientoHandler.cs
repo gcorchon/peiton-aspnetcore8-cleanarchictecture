@@ -1,4 +1,5 @@
 using AutoMapper;
+using Peiton.Contracts.Comunicaciones;
 using Peiton.Contracts.Senalamientos;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
@@ -27,9 +28,12 @@ public class ActualizarSenalamientoHandler(ISenalamientoRepository senalamientoR
 
         if (usuario == null) return;
 
-        comunicacionesService.EnviarMensaje([usuario.Id],
-                                            null, "Nuevo señalamiento",
-                                            string.Format(@"<p>Nuevo señalamiento asignado:</p>
+
+        await comunicacionesService.EnviarMensajeAsync(new Whasapeiton()
+        {
+            UserIds = [usuario.Id],
+            Subject = "Nuevo señalamiento",
+            Body = string.Format(@"<p>Nuevo señalamiento asignado:</p>
                                         <div>
                                         <ul>
                                         <li>Tutelado: {0}</li>
@@ -40,7 +44,8 @@ public class ActualizarSenalamientoHandler(ISenalamientoRepository senalamientoR
                                         </ul>
                                         <p>{5}</p></div>
                                     ", senalamiento.Tutelado, senalamiento.Procedimiento,
-                                                senalamiento.Juzgado?.Descripcion, senalamiento.Fecha, senalamiento.Fecha,
-                                                senalamiento.Descripcion), null);
+                                        senalamiento.Juzgado?.Descripcion, senalamiento.Fecha, senalamiento.Fecha,
+                                        senalamiento.Descripcion)
+        });
     }
 }

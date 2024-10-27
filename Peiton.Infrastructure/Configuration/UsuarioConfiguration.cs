@@ -74,7 +74,7 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
 			j.ToTable("UsuarioFelicitacion");
 			});*/
 
-		/*builder.HasMany(d => d.Permisos)
+		builder.HasMany(d => d.Permisos)
 			.WithMany(p => p.Usuarios)
 			.UsingEntity<Dictionary<string, object>>(
 		"UsuarioPermiso",
@@ -84,6 +84,8 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
 		{
 			j.HasKey("Fk_Usuario", "Fk_Permiso");
 			j.ToTable("UsuarioPermiso");
-			});*/
+		});
+
+
 	}
 }

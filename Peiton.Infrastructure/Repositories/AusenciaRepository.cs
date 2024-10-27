@@ -9,10 +9,10 @@ namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IAusenciaRepository))]
 public class AusenciaRepository : RepositoryBase<Ausencia>, IAusenciaRepository
 {
-	public AusenciaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
+    public AusenciaRepository(PeitonDbContext dbContext) : base(dbContext)
+    {
 
-	}
+    }
 
     public Task<int> ContarAusenciasAsync(AusenciasFilter filter)
     {
@@ -66,11 +66,15 @@ public class AusenciaRepository : RepositoryBase<Ausencia>, IAusenciaRepository
 
     }
 
-    public Ausencia? ObtenerAusenciaActual(int userId)
+    /*public Ausencia? ObtenerAusenciaActual(int userId)
     {
         var hoy = DateTime.Now.Date;
         return this.DbSet.Where(a => a.UsuarioId == userId && a.FechaInicio <= hoy && a.FechaFin >= hoy).FirstOrDefault();
+    }*/
+
+    public async Task<Ausencia?> ObtenerAusenciaActualAsync(int userId)
+    {
+        var hoy = DateTime.Now.Date;
+        return await DbSet.Where(a => a.UsuarioId == userId && a.FechaInicio <= hoy && a.FechaFin >= hoy).FirstOrDefaultAsync();
     }
-
-
 }

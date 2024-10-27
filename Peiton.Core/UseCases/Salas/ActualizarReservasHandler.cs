@@ -24,7 +24,7 @@ public class ActualizarReservasHandler(ISalaReservaRepository salaReservaReposit
             UsuarioId = usuarioId
         });
 
-        await salaReservaRepository.AddRangeAsync(nuevas);
+        salaReservaRepository.AddRange(nuevas);
 
         await unitOfWork.SaveChangesAsync();
     }

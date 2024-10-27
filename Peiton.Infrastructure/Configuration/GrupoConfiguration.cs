@@ -14,11 +14,21 @@ public class GrupoConfiguration : IEntityTypeConfiguration<Grupo>
 
         builder.HasMany(d => d.Usuarios)
         .WithMany(u => u.Grupos)
-    .UsingEntity(
-        "GrupoUsuario",
+        .UsingEntity("GrupoUsuario",
             l => l.HasOne(typeof(Usuario)).WithMany().HasForeignKey("Fk_Usuario").HasPrincipalKey(nameof(Usuario.Id)),
             r => r.HasOne(typeof(Grupo)).WithMany().HasForeignKey("Fk_Grupo").HasPrincipalKey(nameof(Grupo.Id)),
             j => j.HasKey("Fk_Grupo", "Fk_Usuario"));
+
+        builder.HasMany(d => d.Permisos)
+            .WithMany(p => p.Grupos)
+            .UsingEntity<Dictionary<string, object>>("GrupoPermiso",
+            l => l.HasOne<Permiso>().WithMany().HasForeignKey("Fk_Permiso"),
+            r => r.HasOne<Grupo>().WithMany().HasForeignKey("Fk_Grupo"),
+            j =>
+            {
+                j.HasKey("Fk_Grupo", "Fk_Permiso");
+                j.ToTable("GrupoPermiso");
+            });
 
         /*builder.HasMany(d => d.ConsultasAlmacenadas)
             .WithMany(p => p.Grupos)

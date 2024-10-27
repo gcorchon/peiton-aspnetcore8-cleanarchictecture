@@ -12,4 +12,5 @@ public interface IUsuarioRepository : IRepository<Usuario>
     Task<List<UsuarioTipo>> ObtenerUsuariosGruposAsync(string q, int v);
 
     Task<Usuario?> ObtenerUsuarioAsync(string nombre);
+    Task<List<Usuario>> ObtenerUsuariosConPermisoAsync(int[] rcpt, int comunicacionesRecibirMensajesPorEmail);
 }

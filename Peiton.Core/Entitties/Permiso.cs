@@ -7,6 +7,6 @@ public class Permiso
 	public int? PermisoId { get; set; }
 	public bool Visible { get; set; }
 
-	/* public virtual ICollection<Grupo> Grupos { get; } = new List<Grupo>(); */
-	/* public virtual ICollection<Usuario> Usuarios { get; } = new List<Usuario>(); */
+	public virtual ICollection<Grupo> Grupos { get; } = new List<Grupo>();
+	public virtual ICollection<Usuario> Usuarios { get; } = new List<Usuario>();
 }

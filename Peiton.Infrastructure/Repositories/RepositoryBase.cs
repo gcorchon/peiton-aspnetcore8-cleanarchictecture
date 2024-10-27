@@ -31,10 +31,10 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         DbSet.AddRange(entities);
     }
 
-    public virtual Task AddRangeAsync(IEnumerable<T> entities)
+    /*public virtual Task AddRangeAsync(IEnumerable<T> entities)
     {
         return DbSet.AddRangeAsync(entities);
-    }
+    }*/
 
     public virtual void Remove(T entity)
     {

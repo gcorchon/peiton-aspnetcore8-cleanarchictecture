@@ -20,6 +20,8 @@ public class Usuario
 	public string? TelefonoMovil { get; set; }
 	public string? UserAgent { get; set; }
 
+	public virtual ICollection<Permiso> Permisos { get; set; }
+
 	/* public virtual ICollection<Agenda> Entradas { get; } = new List<Agenda>(); */
 	/* public virtual ICollection<Ausencia> AusenciasUsuario { get; } = new List<Ausencia>(); */
 	/* public virtual ICollection<Ausencia> AusenciasUsuarioSuplente { get; } = new List<Ausencia>(); */

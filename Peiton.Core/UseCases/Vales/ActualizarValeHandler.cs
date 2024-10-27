@@ -1,4 +1,5 @@
 ﻿using Peiton.Authorization;
+using Peiton.Contracts.Comunicaciones;
 using Peiton.Contracts.Vales;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
@@ -84,7 +85,7 @@ public class ActualizarValeHandler(IValeRepository valeRepository, IUsuarioRepos
                                     vale.Importe,
                                     (vale.ObservacionesAutorizacion ?? "").Replace(Environment.NewLine, "<br />"));
 
-            comunicacionesService.EnviarMensaje(userId, [vale.SolicitanteId], null, "Vale rechazado", body, null);
+            await comunicacionesService.EnviarMensajeAsync(userId, new Whasapeiton() { UserIds = [vale.SolicitanteId], Subject = "Vale rechazado", Body = body });
         }
 
     }
