@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Peiton.Contracts.Consultas;
 using Peiton.Core.Services;
 using Peiton.DependencyInjection;
@@ -17,5 +19,10 @@ public class DbService(PeitonDbContext context) : IDbService
     public T ExecuteScalar<T>(string sqlQuery, params ParametroConsulta[] parametros)
     {
         return context.ExecuteScalar<T>(sqlQuery, parametros.Select(p => new SqlParameter(p.Nombre, p.Valor)).ToArray());
+    }
+
+    public Task<IEnumerable<T>> QueryAsync<T>(string sqlQuery, object? queryParams = null)
+    {
+        return context.Database.GetDbConnection().QueryAsync<T>(sqlQuery, queryParams);
     }
 }

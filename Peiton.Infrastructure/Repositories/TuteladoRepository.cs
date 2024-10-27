@@ -25,4 +25,10 @@ public class TuteladoRepository : RepositoryBase<Tutelado>, ITuteladoRepository
 				.ToListAsync();
 
 	}
+
+	public Task<List<Tutelado>> ObtenerTuteladosPorNombreAsync(string query, int total)
+	{
+		return DbSet.Where(t => t.NombreCompleto!.Contains(query)).OrderBy(t => t.NombreCompleto).Take(total).AsNoTracking().ToListAsync();
+
+	}
 }

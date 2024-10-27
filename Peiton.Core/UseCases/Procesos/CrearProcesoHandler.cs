@@ -35,7 +35,7 @@ public class CrearProcesoHandler(IProcesoRepository procesoRepository, IUnitOfWo
             Fecha = DateTime.Now
         };
 
-        await procesoRepository.AddAsync(proceso);
+        procesoRepository.Add(proceso);
 
         await unitOfWork.SaveChangesAsync();
     }

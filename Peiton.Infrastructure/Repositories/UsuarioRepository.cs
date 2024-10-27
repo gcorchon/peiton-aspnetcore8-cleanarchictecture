@@ -74,4 +74,9 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
                                             offset 0 rows fetch next {v} rows only
                                             ").ToListAsync();
     }
+
+    public Task<Usuario?> ObtenerUsuarioAsync(string nombre)
+    {
+        return DbSet.FirstOrDefaultAsync(u => u.NombreCompleto == nombre);
+    }
 }

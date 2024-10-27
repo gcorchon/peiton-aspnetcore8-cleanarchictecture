@@ -19,7 +19,7 @@ public class GuardarArqueoHandler(IArqueoRepository arqueoRepository, IUnitOfWor
                 Fecha = fecha
             };
 
-            await arqueoRepository.AddAsync(arqueo);
+            arqueoRepository.Add(arqueo);
         }
 
         arqueo.Datos = request.ToXDocument()!.ToString();

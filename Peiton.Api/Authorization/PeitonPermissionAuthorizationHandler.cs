@@ -17,9 +17,13 @@ internal class PeitonPermissionAuthorizationHandler : AuthorizationHandler<Peito
     {
         if (context.User.Identity != null && context.User.Identity.IsAuthenticated)
         {
-            var scopedServiceProvider = serviceProvider.CreateScope().ServiceProvider;
+
+            /*var scopedServiceProvider = serviceProvider.CreateScope().ServiceProvider;
             var userRepository = scopedServiceProvider.GetRequiredService<IUsuarioRepository>();
-            var identityService = scopedServiceProvider.GetRequiredService<IIdentityService>();
+            var identityService = scopedServiceProvider.GetRequiredService<IIdentityService>();*/
+
+            var userRepository = serviceProvider.GetRequiredService<IUsuarioRepository>();
+            var identityService = serviceProvider.GetRequiredService<IIdentityService>();
 
             int userId = identityService.GetUserId();
 
@@ -31,6 +35,9 @@ internal class PeitonPermissionAuthorizationHandler : AuthorizationHandler<Peito
             {
                 context.Fail(new AuthorizationFailureReason(this, "Falta el permiso " + requirement.Permission));
             }
+
+
+            return;
         }
         else
         {

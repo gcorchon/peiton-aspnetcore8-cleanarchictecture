@@ -35,7 +35,7 @@ public class CrearInstruccionHandler(IInstruccionRepository instruccionRepositor
             Fecha = DateTime.Now
         };
 
-        await instruccionRepository.AddAsync(documento);
+        instruccionRepository.Add(documento);
 
         await unitOfWork.SaveChangesAsync();
     }

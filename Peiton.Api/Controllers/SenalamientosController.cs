@@ -8,6 +8,7 @@ using Peiton.Core.UseCases.Senalamientos;
 using Peiton.Contracts.Senalamientos;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace Peiton.Api.Controllers;
 
@@ -40,16 +41,31 @@ public class SenalamientosController(IMapper mapper) : ControllerBase
     }
 
     [HttpPost()]
-    public async Task<IActionResult> CrearSenalamientoAsync(GuardarSenalamientoRequest request, CrearEntityHandler<Senalamiento> handler)
+    public async Task<IActionResult> CrearSenalamientoAsync(GuardarSenalamientoRequest request, CrearSenalamientoHandler handler)
     {
         await handler.HandleAsync(request);
         return Accepted();
     }
 
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarSenalamientoAsync(int id, GuardarSenalamientoRequest request, ActualizarEntityHandler<Senalamiento> handler)
+    public async Task<IActionResult> ActualizarSenalamientoAsync(int id, GuardarSenalamientoRequest request, ActualizarSenalamientoHandler handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();
     }
+
+    [HttpGet("profesionales")]
+    public async Task<IActionResult> ProfesionalesAsync([FromQuery] string query, ProfesionalesHandler handler)
+    {
+        var data = await handler.HandleAsync(query);
+        return Ok(data);
+    }
+
+    [HttpGet("abogados")]
+    public async Task<IActionResult> AbogadosAsync([FromQuery][Required]int tuteladoId, [FromQuery][Required] DateTime fecha, [FromQuery][Required] int juzgadoId, [FromQuery] int? senalamientoId, ObtenerAbogadosParaSenalamientoHandler handler)
+    {
+        var data = await handler.HandleAsync(tuteladoId, fecha, juzgadoId, senalamientoId);
+        return Ok(data);
+    }
+
 }

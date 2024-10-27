@@ -9,7 +9,9 @@ public class Abogado
 
 	/* public virtual ICollection<OtroAsunto> OtrosAsuntos { get; } = new List<OtroAsunto>(); */
 	/* public virtual ICollection<PuntoInformacion> PuntosInformaciones { get; } = new List<PuntoInformacion>(); */
-	/* public virtual ICollection<Senalamiento> Senalamientos { get; } = new List<Senalamiento>(); */
+
+	public virtual ICollection<Senalamiento> SenalamientosAsignado { get; } = new List<Senalamiento>();
+	public virtual ICollection<Senalamiento> SenalamientosAsistente { get; } = new List<Senalamiento>();
 	/* public virtual ICollection<Tutelado> Tutelados { get; } = new List<Tutelado>(); */
 	/* public virtual ICollection<Urgencia> Urgencias { get; } = new List<Urgencia>(); */
 

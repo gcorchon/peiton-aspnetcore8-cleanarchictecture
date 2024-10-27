@@ -14,6 +14,7 @@ public class GestionAdministrativaConfiguration : IEntityTypeConfiguration<Gesti
 		builder.Property(c => c.GestionAdministrativaTipoId).HasColumnName("Fk_GestionAdministrativaTipo").IsRequired();
 		builder.Property(c => c.GestorAdministrativoId).HasColumnName("Fk_GestorAdministrativo");
 		builder.Property(c => c.TuteladoId).HasColumnName("Fk_Tutelado");
+		builder.Property(c => c.Importe).HasColumnType("money");
 
 	}
 }

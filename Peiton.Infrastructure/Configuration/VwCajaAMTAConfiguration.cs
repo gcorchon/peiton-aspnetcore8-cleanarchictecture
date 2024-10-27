@@ -13,6 +13,8 @@ public class VwCajaAMTAConfiguration : IEntityTypeConfiguration<VwCajaAMTA>
 		builder.Property(v => v.Id).HasColumnName("Pk_CajaAMTA");
 		builder.Property(v => v.TuteladoId).HasColumnName("Fk_Tutelado");
 		builder.Property(v => v.CajaId).HasColumnName("Fk_Caja");
+		builder.Property(v => v.Importe).HasColumnType("money");
+		builder.Property(v => v.Saldo).HasColumnType("money");
 
 		builder.HasOne(d => d.Caja)
 			.WithMany(p => p.VwCajaAMTA)

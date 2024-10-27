@@ -22,7 +22,7 @@ public class GuardarAvisoTributarioHandler(IMapper mapper, IAvisoTributarioRepos
 
         mapper.Map(request, avisoTributario);
 
-        await avisoTributarioRepository.AddAsync(avisoTributario);
+        avisoTributarioRepository.Add(avisoTributario);
         await unitOfWork.SaveChangesAsync();
     }
 

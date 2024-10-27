@@ -36,7 +36,7 @@ public class CrearDocumentoHandler(IDocumentoRepository DocumentoRepository, IUn
             Fecha = DateTime.Now
         };
 
-        await DocumentoRepository.AddAsync(documento);
+        DocumentoRepository.Add(documento);
 
         await unitOfWork.SaveChangesAsync();
     }

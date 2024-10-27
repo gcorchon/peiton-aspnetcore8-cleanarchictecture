@@ -23,7 +23,7 @@ public class GuardarMovimientoCajaAMTAHandler(ICajaAMTARepository cajaAMTAReposi
             Importe = importe
         };
 
-        await cajaAMTARepository.AddAsync(cajaAMTA);
+        cajaAMTARepository.Add(cajaAMTA);
         await unitOfWork.SaveChangesAsync();
     }
 

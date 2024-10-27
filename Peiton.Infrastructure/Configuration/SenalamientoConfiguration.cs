@@ -19,17 +19,18 @@ public class SenalamientoConfiguration : IEntityTypeConfiguration<Senalamiento>
 		builder.Property(p => p.ProfesionalAsistente).HasMaxLength(50);
 		builder.Property(p => p.MadridCapital).IsRequired();
 
-		/*builder.HasOne(d => d.AbogadoAsistente)
-			.WithMany(p => p.Senalamientos)
+		builder.HasOne(d => d.AbogadoAsistente)
+			.WithMany(p => p.SenalamientosAsistente)
 			.HasForeignKey(d => d.AbogadoAsistenteId);
+
+		builder.HasOne(d => d.AbogadoAsignado)
+			.WithMany(p => p.SenalamientosAsignado)
+			.HasForeignKey(d => d.AbogadoAsignadoId);
 
 		builder.HasOne(d => d.Juzgado)
 			.WithMany(p => p.Senalamientos)
 			.HasForeignKey(d => d.JuzgadoId);
 
-		builder.HasOne(d => d.TuteladoNavigation)
-			.WithMany(p => p.Senalamientos)
-			.HasForeignKey(d => d.TuteladoId);
-		*/
+
 	}
 }

@@ -12,7 +12,7 @@ public class CreateCapituloHandler(IMapper mapper, IUnitOfWork unitOfWork, ICapi
     public async Task HandleAsync(CreateCapituloRequest data)
     {
         var capitulo = mapper.Map(data, new Capitulo());
-        await capituloRepository.AddAsync(capitulo);
+        capituloRepository.Add(capitulo);
         await unitOfWork.SaveChangesAsync();
     }
 }

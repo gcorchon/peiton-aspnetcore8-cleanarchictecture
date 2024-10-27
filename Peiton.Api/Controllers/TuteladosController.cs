@@ -8,12 +8,13 @@ using Peiton.Contracts.Common;
 using Peiton.Contracts.EntidadFinanciera;
 using Peiton.Core.UseCases.Cajas;
 using Peiton.Core.UseCases.GestionIndividual;
+using Peiton.Core.UseCases.Tutelados;
 
 namespace Peiton.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TuteladoController(IMapper mapper) : ControllerBase
+public class TuteladosController(IMapper mapper) : ControllerBase
 {
     [HttpGet("{id}/historico-movimientos-caja")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
@@ -29,6 +30,14 @@ public class TuteladoController(IMapper mapper) : ControllerBase
     public async Task<IActionResult> CuentasDeRobotActivasAsync(int id, CuentasDeRobotHandler handler)
     {
         var vm = await handler.HandleAsync(id);
+        return Ok(vm);
+    }
+
+    [HttpGet()]
+    public async Task<IActionResult> TuteladosPorNombreAsync([FromQuery] string query, ObtenerTuteladosPorNombreHandler handler)
+    {
+        var data = await handler.HandleAsync(query);
+        var vm = mapper.Map<IEnumerable<ListItem>>(data);
         return Ok(vm);
     }
 }

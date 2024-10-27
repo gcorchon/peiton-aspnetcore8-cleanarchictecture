@@ -58,7 +58,7 @@ public class GetTokenHandler
         user.Reintentos = 0;
         user.UserAgent = context.HttpContext.Request.Headers.UserAgent;
 
-        await logAccesoRepository.AddAsync(new LogAcceso() { Fecha = DateTime.Now, Usuario = user.Username, IP = remoteIPAddress });
+        logAccesoRepository.Add(new LogAcceso() { Fecha = DateTime.Now, Usuario = user.Username, IP = remoteIPAddress });
         await unitOfWork.SaveChangesAsync();
 
         var jwtTokenHandler = new JwtSecurityTokenHandler();

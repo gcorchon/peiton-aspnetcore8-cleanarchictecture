@@ -17,7 +17,7 @@ public class CrearNuevaCategoriaHandler(ICategoriaRepository categoriaRepository
         categoria.TipoCategoriaId = categoriaPadre.TipoCategoriaId;
         categoria.CategoriaPadreId = categoriaPadreId;
 
-        await categoriaRepository.AddAsync(categoria);
+        categoriaRepository.Add(categoria);
 
         await unitOfWork.SaveChangesAsync();
 

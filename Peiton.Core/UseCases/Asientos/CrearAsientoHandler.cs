@@ -44,7 +44,7 @@ public class CrearAsientoHandler(IAsientoRepository asientoRepository, IFacturaR
             asiento.Facturas.Add(factura);
         }
 
-        await asientoRepository.AddAsync(asiento);
+        asientoRepository.Add(asiento);
         await unitOfWork.SaveChangesAsync();
     }
 }

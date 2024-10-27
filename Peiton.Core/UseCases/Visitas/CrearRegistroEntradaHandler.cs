@@ -28,7 +28,7 @@ public class CrearRegistroEntradaHandler(IRegistroEntradaRepository registroEntr
                 Personas = request.Visitadas.ToXDocument()!.ToString()
             };
 
-            await registroEntradaRepository.AddAsync(registroEntrada);
+            registroEntradaRepository.Add(registroEntrada);
         }
 
 

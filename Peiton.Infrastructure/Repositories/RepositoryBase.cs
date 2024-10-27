@@ -21,10 +21,10 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         DbSet.Add(entity);
     }
 
-    public virtual Task AddAsync(T entity)
+    /*public virtual Task AddAsync(T entity)
     {
         return DbSet.AddAsync(entity).AsTask();
-    }
+    }*/
 
     public virtual void AddRange(IEnumerable<T> entities)
     {
@@ -223,4 +223,8 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
 
     }
 
+    public virtual void Reload(T entry)
+    {
+        DbContext.Entry(entry).Reload();
+    }
 }

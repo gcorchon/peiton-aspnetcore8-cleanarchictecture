@@ -18,7 +18,7 @@ public class GuardarClienteHandler(IClienteRepository clienteRepository, IUnitOf
             Activo = true
         };
 
-        await clienteRepository.AddAsync(cliente);
+        clienteRepository.Add(cliente);
 
         await unitOfWork.SaveChangesAsync();
     }

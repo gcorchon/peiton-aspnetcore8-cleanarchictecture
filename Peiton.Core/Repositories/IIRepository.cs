@@ -5,7 +5,7 @@ namespace Peiton.Core.Repositories;
 public interface IRepository<T> where T : class
 {
     void Add(T entity);
-    Task AddAsync(T entity);
+    /*Task AddAsync(T entity);*/
     void AddRange(IEnumerable<T> entities);
     Task AddRangeAsync(IEnumerable<T> entities);
     bool Any(Expression<Func<T, bool>> where);
@@ -31,4 +31,6 @@ public interface IRepository<T> where T : class
     Task<List<T>> GetManyAsync<TKey>(int startRowIndex, int maximumRows, Expression<Func<T, bool>> where, Expression<Func<T, TKey>> sort, string sortDirection);
     void Remove(T entity);
     void RemoveRange(IEnumerable<T> entities);
+
+    void Reload(T entity);
 }

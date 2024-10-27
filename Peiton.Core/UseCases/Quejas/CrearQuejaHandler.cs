@@ -21,7 +21,7 @@ public class CrearrQuejaHandler(IQuejaRepository quejaRepository, IQuejaMotivoRe
         queja.QuejasMotivos.Merge(request.QuejaMotivos, c => c.Id, id => quejaMotivoRepository.GetById(id));
         queja.Expediente = expediente;
 
-        await quejaRepository.AddAsync(queja);
+        quejaRepository.Add(queja);
         await unitOfWork.SaveChangesAsync();
     }
 }

@@ -13,7 +13,7 @@ public class CrearFacturaHandler(IMapper mapper, IFacturaRepository facturaRepos
     {
         var factura = new Factura();
         mapper.Map(request, factura);
-        await facturaRepository.AddAsync(factura);
+        facturaRepository.Add(factura);
         await unitOfWork.SaveChangesAsync();
     }
 

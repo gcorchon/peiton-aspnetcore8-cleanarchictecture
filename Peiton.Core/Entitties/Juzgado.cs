@@ -12,7 +12,7 @@ public class Juzgado
 	/* public virtual ICollection<DatosJuridicosHistorico> DatosJuridicosHistoricos { get; } = new List<DatosJuridicosHistorico>(); */
 	/* public virtual ICollection<MedidaPenal> MedidasPenales { get; } = new List<MedidaPenal>(); */
 	/* public virtual ICollection<ProcedimientoAdicional> ProcedimientosAdicionales { get; } = new List<ProcedimientoAdicional>(); */
-	/* public virtual ICollection<Senalamiento> Senalamientos { get; } = new List<Senalamiento>(); */
+	public virtual ICollection<Senalamiento> Senalamientos { get; } = new List<Senalamiento>();
 	/* public virtual ICollection<Urgencia> Urgencias { get; } = new List<Urgencia>(); */
 
 }

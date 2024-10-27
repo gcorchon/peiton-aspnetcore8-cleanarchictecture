@@ -16,7 +16,7 @@ public class PeitonDbContext : DbContext
 {
     public PeitonDbContext(DbContextOptions<PeitonDbContext> options) : base(options)
     {
-
+        Console.WriteLine("Creado PeitonDbContext");
     }
 
     public string DateAsString(DateTime date) => throw new NotSupportedException();
@@ -38,7 +38,9 @@ public class PeitonDbContext : DbContext
 
     public DbSet<Partida> Partida => Set<Partida>();
     public DbSet<Tutelado> Tutelado => Set<Tutelado>();
+    public DbSet<Senalamiento> Senalamiento => Set<Senalamiento>();
     public DbSet<Usuario> Usuario => Set<Usuario>();
+
 
     public DbSet<VwCajaAMTA> VwCajaAMTA => Set<VwCajaAMTA>();
 
