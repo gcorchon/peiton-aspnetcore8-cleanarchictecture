@@ -1,5 +1,5 @@
 using AutoMapper;
-
+using Peiton.Core.Entities;
 using Ent = Peiton.Core.Entities;
 using VM = Peiton.Contracts;
 
@@ -29,5 +29,6 @@ public class ViewModelToDomainProfile : Profile
             .ForMember(ent => ent.QuejasMotivos, o => o.Ignore());
         CreateMap<VM.Senalamientos.GuardarSenalamientoRequest, Ent.Senalamiento>();
         CreateMap<VM.Centros.CentroViewModel, Ent.Centro>();
+        CreateMap<VM.Salas.SalaListItem, Sala>();
     }
 }
