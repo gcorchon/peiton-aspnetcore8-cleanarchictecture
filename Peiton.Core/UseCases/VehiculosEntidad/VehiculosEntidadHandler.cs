@@ -7,7 +7,7 @@ namespace Peiton.Core.UseCases.VehiculosEntidad;
 [Injectable]
 public class VehiculosEntidadHandler(IVehiculoEntidadRepository vehiculoEntidadRepository)
 {
-    public Task<List<VehiculoEntidad>> HandleAsync()
+    public Task<VehiculoEntidad[]> HandleAsync()
     {
         return vehiculoEntidadRepository.GetAllAsync(v => v.Nombre, "asc");
     }

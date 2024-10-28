@@ -26,7 +26,7 @@ public class InmuebleAutorizacionRepository : RepositoryBase<InmuebleAutorizacio
                 .CountAsync();
     }
 
-    public Task<List<InmuebleAutorizacion>> ObtenerAutorizacionesAsync(int page, int total, InmuebleAutorizacionesFilter filter)
+    public Task<InmuebleAutorizacion[]> ObtenerAutorizacionesAsync(int page, int total, InmuebleAutorizacionesFilter filter)
     {
         return ApplyFilters(DbSet.Include(a => a.Inmueble)
                                  .ThenInclude(i => i.Tutelado)
@@ -37,7 +37,7 @@ public class InmuebleAutorizacionRepository : RepositoryBase<InmuebleAutorizacio
                 .Skip((page - 1) * total)
                 .Take(total)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     private IQueryable<InmuebleAutorizacion> ApplyFilters(IQueryable<InmuebleAutorizacion> query, InmuebleAutorizacionesFilter filter)

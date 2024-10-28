@@ -5,6 +5,6 @@ namespace Peiton.Core.Repositories;
 public interface IRuleRepository : IRepository<Rule>
 {
     Task BorrarReglaAsync(int ruleId);
-    Task<List<RuleViewModel>> ObtenerRulesAsync();
+    Task<RuleViewModel[]> ObtenerRulesAsync();
     Task ReordenarReglaAsync(int ruleId, int newPosition);
 }

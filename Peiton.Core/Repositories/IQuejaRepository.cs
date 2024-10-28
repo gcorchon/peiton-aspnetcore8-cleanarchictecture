@@ -5,6 +5,6 @@ namespace Peiton.Core.Repositories;
 public interface IQuejaRepository : IRepository<Queja>
 {
     Task<int> ContarQuejasAsync(QuejasFilter filter);
-    Task<List<Queja>> ObtenerQuejasAsync(int page, int total, QuejasFilter filter);
+    Task<Queja[]> ObtenerQuejasAsync(int page, int total, QuejasFilter filter);
     Task<string> ObtenerSiguienteNumeroExpedienteAsync(int quejaTipoId);
 }

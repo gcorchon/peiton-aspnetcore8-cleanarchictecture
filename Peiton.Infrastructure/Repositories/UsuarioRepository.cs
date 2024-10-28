@@ -59,7 +59,7 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
         return true;
     }
 
-    public Task<List<UsuarioTipo>> ObtenerUsuariosGruposAsync(string q, int v)
+    public Task<UsuarioTipo[]> ObtenerUsuariosGruposAsync(string q, int v)
     {
         var search = "%" + q + "%";
 
@@ -72,7 +72,7 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
                                                 from Grupo
                                             ) dv where Nombre like {search} order by case when Nombre={q} then 1 when Nombre like {q + "%"} then 2 else 3 end, Nombre
                                             offset 0 rows fetch next {v} rows only
-                                            ").ToListAsync();
+                                            ").ToArrayAsync();
     }
 
     public Task<Usuario?> ObtenerUsuarioAsync(string nombre)
@@ -80,8 +80,8 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
         return DbSet.FirstOrDefaultAsync(u => u.NombreCompleto == nombre);
     }
 
-    public Task<List<Usuario>> ObtenerUsuariosConPermisoAsync(int[] userIds, int permisoId)
+    public Task<Usuario[]> ObtenerUsuariosConPermisoAsync(int[] userIds, int permisoId)
     {
-        return DbSet.Where(u => userIds.Contains(u.Id) && (u.Permisos.Any(p => p.Id == permisoId) || u.Grupos.Any(g => g.Permisos.Any(p2 => p2.Id == permisoId)))).ToListAsync();
+        return DbSet.Where(u => userIds.Contains(u.Id) && (u.Permisos.Any(p => p.Id == permisoId) || u.Grupos.Any(g => g.Permisos.Any(p2 => p2.Id == permisoId)))).ToArrayAsync();
     }
 }

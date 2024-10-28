@@ -9,7 +9,7 @@ namespace Peiton.Core.UseCases.Visitas;
 [Injectable]
 public class ObtenerVisitantesHandler(IRegistroEntradaVisitanteRepository registroEntradaVisitanteRepository)
 {
-    public async Task<List<Visitante>> HandleAsync(string query)
+    public async Task<Visitante[]> HandleAsync(string query)
     {
         return await registroEntradaVisitanteRepository.ObtenerVisitantesAsync(query);
     }

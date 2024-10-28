@@ -14,8 +14,8 @@ public class SalaReservaRepository : RepositoryBase<SalaReserva>, ISalaReservaRe
 
 	}
 
-	public Task<List<SalaReserva>> ObtenerReservasAsync(DateTime fecha)
+	public Task<SalaReserva[]> ObtenerReservasAsync(DateTime fecha)
 	{
-		return DbSet.Where(r => r.Fecha == fecha).Include(r => r.Usuario).AsNoTracking().ToListAsync();
+		return DbSet.Where(r => r.Fecha == fecha).Include(r => r.Usuario).AsNoTracking().ToArrayAsync();
 	}
 }

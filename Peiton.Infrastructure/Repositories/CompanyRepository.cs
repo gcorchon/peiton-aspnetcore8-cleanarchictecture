@@ -15,14 +15,14 @@ public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
 
     }
 
-    public Task<List<Company>> ObtenerCompaniesAsync(int page, int total, BuscarCompaniesFilter filter)
+    public Task<Company[]> ObtenerCompaniesAsync(int page, int total, BuscarCompaniesFilter filter)
     {
         return ApplyFilters(this.DbSet.Include(c => c.Cnae2009Navigation).ThenInclude(c => c.Categoria), filter)
             .OrderBy(c => c.RZS)
             .Skip((page - 1) * total)
             .Take(total)
             .AsNoTracking()
-            .ToListAsync();
+            .ToArrayAsync();
 
     }
 

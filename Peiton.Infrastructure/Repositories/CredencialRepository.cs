@@ -16,21 +16,21 @@ public class CredencialRepository : RepositoryBase<Credencial>, ICredencialRepos
 
     }
 
-    public Task<List<Credencial>> ObtenerCredencialesBloqueadasAsync(CredencialesBloqueadasFilter filter)
+    public Task<Credencial[]> ObtenerCredencialesBloqueadasAsync(CredencialesBloqueadasFilter filter)
     {
         return ApplyFilters(DbSet.Include(c => c.EntidadFinanciera).Include("Tutelado.DatosJuridicos.Nombramiento"), filter)
                 .OrderByDescending(c => c.UltimaEjecucionCorrecta)
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
-    public Task<List<Credencial>> ObtenerCredencialesBloqueadasAsync(int page, int total, CredencialesBloqueadasFilter filter)
+    public Task<Credencial[]> ObtenerCredencialesBloqueadasAsync(int page, int total, CredencialesBloqueadasFilter filter)
     {
         return ApplyFilters(DbSet.Include(c => c.EntidadFinanciera).Include("Tutelado.DatosJuridicos.Nombramiento"), filter)
                 .OrderByDescending(c => c.UltimaEjecucionCorrecta)
                 .Skip((page - 1) * total)
                 .Take(total)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     public Task<int> ContarCredencialesBloqueadasAsync(CredencialesBloqueadasFilter filter)

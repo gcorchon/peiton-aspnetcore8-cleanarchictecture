@@ -10,10 +10,10 @@ namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IQuejaRepository))]
 public class QuejaRepository : RepositoryBase<Queja>, IQuejaRepository
 {
-	public QuejaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
+    public QuejaRepository(PeitonDbContext dbContext) : base(dbContext)
+    {
 
-	}
+    }
 
     public Task<int> ContarQuejasAsync(QuejasFilter filter)
     {
@@ -21,7 +21,7 @@ public class QuejaRepository : RepositoryBase<Queja>, IQuejaRepository
         return query.CountAsync();
     }
 
-    public Task<List<Queja>> ObtenerQuejasAsync(int page, int total, QuejasFilter filter)
+    public Task<Queja[]> ObtenerQuejasAsync(int page, int total, QuejasFilter filter)
     {
         IQueryable<Queja> query = this.DbSet.Include("Tutelado")
                                       .Include("QuejaTipoDenunciante");
@@ -30,7 +30,7 @@ public class QuejaRepository : RepositoryBase<Queja>, IQuejaRepository
                      .Skip((page - 1) * total)
                      .Take(total)
                      .AsNoTracking()
-                     .ToListAsync();
+                     .ToArrayAsync();
     }
 
     private IQueryable<Queja> ApplySearchFilters(IQueryable<Queja> query, QuejasFilter filter)
@@ -79,7 +79,7 @@ public class QuejaRepository : RepositoryBase<Queja>, IQuejaRepository
 
     public Task<string> ObtenerSiguienteNumeroExpedienteAsync(int quejaTipoId)
     {
-        
+
         var result = this.DbContext.Database.SqlQuery<string>(@$"declare @nomenclatura nvarchar(10)
                         declare @last int
                         declare @next int

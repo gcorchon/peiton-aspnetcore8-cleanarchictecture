@@ -28,7 +28,7 @@ public class RegistroEntradaRepository : RepositoryBase<RegistroEntrada>, IRegis
 					.CountAsync();
 	}
 
-	public Task<List<RegistroEntrada>> ObtenerRegistrosEntradaAsync(int page, int total, RegistroEntradaFilter filter)
+	public Task<RegistroEntrada[]> ObtenerRegistrosEntradaAsync(int page, int total, RegistroEntradaFilter filter)
 	{
 		IQueryable<RegistroEntrada> query = ApplyFilter(DbSet, filter);
 
@@ -36,17 +36,17 @@ public class RegistroEntradaRepository : RepositoryBase<RegistroEntrada>, IRegis
 					.Skip((page - 1) * total)
 					.Take(total)
 					.AsNoTracking()
-					.ToListAsync();
+					.ToArrayAsync();
 	}
 
-	public Task<List<RegistroEntrada>> ObtenerVisitasSinSalidaAsync(int page, int total)
+	public Task<RegistroEntrada[]> ObtenerVisitasSinSalidaAsync(int page, int total)
 	{
 		return DbSet.Where(r => r.HoraSalida == null)
 					.OrderByDescending(a => a.Id)
 					.Skip((page - 1) * total)
 					.Take(total)
 					.AsNoTracking()
-					.ToListAsync();
+					.ToArrayAsync();
 	}
 
 	private IQueryable<RegistroEntrada> ApplyFilter(IQueryable<RegistroEntrada> query, RegistroEntradaFilter? filter)

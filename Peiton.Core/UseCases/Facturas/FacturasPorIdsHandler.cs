@@ -7,6 +7,6 @@ namespace Peiton.Core.UseCases.Facturas;
 [Injectable]
 public class FacturasPorIdsHandler(IFacturaRepository facturaRepository)
 {
-    public Task<List<Factura>> HandleAsync(int[] ids) =>
+    public Task<Factura[]> HandleAsync(int[] ids) =>
         facturaRepository.ObtenerFacturasAsync(ids);
 }

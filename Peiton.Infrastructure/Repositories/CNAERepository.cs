@@ -36,7 +36,7 @@ public class CNAERepository : RepositoryBase<CNAE>, ICNAERepository
                 .CountAsync();
     }
 
-    public Task<List<CNAEViewModel>> ObtenerCNAEsAsync(int page, int total, ObtenerCNAEsFilter filter)
+    public Task<CNAEViewModel[]> ObtenerCNAEsAsync(int page, int total, ObtenerCNAEsFilter filter)
     {
         var query = from cnae in DbSet
                     join vwCategoria in this.DbContext.VwCategoria on cnae.CategoriaId equals vwCategoria.Id into gj
@@ -57,7 +57,7 @@ public class CNAERepository : RepositoryBase<CNAE>, ICNAERepository
                 .Skip((page - 1) * total)
                 .Take(total)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     private IQueryable<CNAEViewModel> ApplyFilters(IQueryable<CNAEViewModel> query, ObtenerCNAEsFilter filter)

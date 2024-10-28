@@ -22,7 +22,7 @@ public class AvisoTributarioRepository : RepositoryBase<AvisoTributario>, IAviso
                             .Include(a => a.Tutelado), filter).CountAsync();
     }
 
-    public Task<List<AvisoTributario>> ObtenerAvisosTributariosAsync(int page, int total, AvisosTributariosFilter filter)
+    public Task<AvisoTributario[]> ObtenerAvisosTributariosAsync(int page, int total, AvisosTributariosFilter filter)
     {
         return ApplyFilters(this.DbSet.Include(a => a.TipoAvisoTributario)
                             .Include(a => a.Usuario)
@@ -31,7 +31,7 @@ public class AvisoTributarioRepository : RepositoryBase<AvisoTributario>, IAviso
                 .Skip((page - 1) * total)
                 .Take(total)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     private IQueryable<AvisoTributario> ApplyFilters(IQueryable<AvisoTributario> query, AvisosTributariosFilter filter)

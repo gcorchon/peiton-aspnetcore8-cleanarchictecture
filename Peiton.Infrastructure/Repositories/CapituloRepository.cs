@@ -68,7 +68,7 @@ public class CapituloRepository : RepositoryBase<Capitulo>, ICapituloRepository
 
     }
 
-    /*public Task<List<Capitulo>> ObtenerCapitulosAsync(CapituloFilter filter)
+    /*public Task<Capitulo[]> ObtenerCapitulosAsync(CapituloFilter filter)
     {
         var query = this.DbSet.Where(c => c.Ano ==  filter.Ano);
 
@@ -150,7 +150,7 @@ public class CapituloRepository : RepositoryBase<Capitulo>, ICapituloRepository
         return query
             .OrderBy(c => c.Tipo)
             .ThenBy(c => c.Numero)
-            .ToListAsync();			
+            .ToArrayAsync();			
 
     }*/
 

@@ -19,13 +19,13 @@ public class AnoPresupuestarioRepository : RepositoryBase<AnoPresupuestario>, IA
         return query.CountAsync();
     }
 
-    public Task<List<AnoPresupuestario>> ObtenerAnosPrespuestariosAsync(int page, int total, AnoPresupuestarioFilter filter)
+    public Task<AnoPresupuestario[]> ObtenerAnosPrespuestariosAsync(int page, int total, AnoPresupuestarioFilter filter)
     {
         var query = ApplyFilters(this.DbSet, filter);
         return query.OrderByDescending(a => a.Ano)
              .Skip((page - 1) * total)
              .Take(total)
-             .ToListAsync();
+             .ToArrayAsync();
     }
 
     IQueryable<AnoPresupuestario> ApplyFilters(IQueryable<AnoPresupuestario> query, AnoPresupuestarioFilter? filter)

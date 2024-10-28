@@ -25,7 +25,7 @@ public class InmuebleTasacionRepository : RepositoryBase<InmuebleTasacion>, IInm
                 .CountAsync();
     }
 
-    public Task<List<InmuebleTasacion>> ObtenerInmuebleTasacionesAsync(int page, int total, InmuebleTasacionesFilter filter)
+    public Task<InmuebleTasacion[]> ObtenerInmuebleTasacionesAsync(int page, int total, InmuebleTasacionesFilter filter)
     {
         return ApplyFilters(DbSet.Include(t => t.Inmueble)
                         .ThenInclude(i => i.Tutelado)
@@ -35,7 +35,7 @@ public class InmuebleTasacionRepository : RepositoryBase<InmuebleTasacion>, IInm
             .Skip((page - 1) * total)
             .Take(total)
             .AsNoTracking()
-            .ToListAsync();
+            .ToArrayAsync();
     }
 
     private IQueryable<InmuebleTasacion> ApplyFilters(IQueryable<InmuebleTasacion> query, InmuebleTasacionesFilter filter)

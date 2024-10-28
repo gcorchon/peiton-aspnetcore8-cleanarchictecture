@@ -18,14 +18,14 @@ public class ValeRepository : RepositoryBase<Vale>, IValeRepository
 		return ApplyFilters(DbSet.Include(v => v.Solicitante), filter).CountAsync();
 	}
 
-	public Task<List<Vale>> ObtenerValesAsync(int page, int total, ValesFilter filter)
+	public Task<Vale[]> ObtenerValesAsync(int page, int total, ValesFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(v => v.Solicitante), filter)
 					.OrderByDescending(v => v.Id)
 					.Skip((page - 1) * total)
 					.Take(total)
 					.AsNoTracking()
-					.ToListAsync();
+					.ToArrayAsync();
 	}
 
 	private IQueryable<Vale> ApplyFilters(IQueryable<Vale> query, ValesFilter filter)

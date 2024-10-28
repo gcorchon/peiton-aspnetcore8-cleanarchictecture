@@ -7,7 +7,7 @@ namespace Peiton.Core.UseCases.Tutelados;
 [Injectable]
 public class ObtenerTuteladosPorNombreHandler(ITuteladoRepository tuteladoRepository)
 {
-    public async Task<List<Tutelado>> HandleAsync(string query, int total = 10)
+    public async Task<Tutelado[]> HandleAsync(string query, int total = 10)
     {
         return await tuteladoRepository.ObtenerTuteladosPorNombreAsync(query, total);
     }

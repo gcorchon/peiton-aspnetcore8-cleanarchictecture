@@ -6,7 +6,7 @@ namespace Peiton.Core.UseCases.Rules;
 [Injectable]
 public class ObtenerRulesHandler(IRuleRepository ruleRepository)
 {
-    public Task<List<RuleViewModel>> HandleAsync()
+    public Task<RuleViewModel[]> HandleAsync()
     {
         return ruleRepository.ObtenerRulesAsync();
     }

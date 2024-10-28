@@ -19,14 +19,14 @@ public class CajaRepository : RepositoryBase<Caja>, ICajaRepository
 		return ApplyFilters(DbSet.Include(c => c.Tutelado).Include(c => c.TipoPago), tipo, filter).CountAsync();
 	}
 
-	public Task<List<Caja>> ObtenerMovimientosAsync(int page, int total, TipoMovimiento tipo, CajaFilter filter)
+	public Task<Caja[]> ObtenerMovimientosAsync(int page, int total, TipoMovimiento tipo, CajaFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(c => c.Tutelado).Include(c => c.TipoPago), tipo, filter)
 			.OrderByDescending(c => c.FechaAutorizacion)
 			.Skip((page - 1) * total)
 			.Take(total)
 			.AsNoTracking()
-			.ToListAsync();
+			.ToArrayAsync();
 	}
 
 
@@ -78,14 +78,14 @@ public class CajaRepository : RepositoryBase<Caja>, ICajaRepository
 		return ApplyFilters(DbSet.Include(c => c.MetodoPago).Include(c => c.TipoPago), tuteladoId, filter).CountAsync();
 	}
 
-	public Task<List<Caja>> ObtenerHistoricoMovimientosAsync(int page, int total, int tuteladoId, HistoricoMovimientosFilter filter)
+	public Task<Caja[]> ObtenerHistoricoMovimientosAsync(int page, int total, int tuteladoId, HistoricoMovimientosFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(c => c.MetodoPago).Include(c => c.TipoPago), tuteladoId, filter)
 			.OrderByDescending(c => c.FechaPago)
 			.Skip((page - 1) * total)
 			.Take(total)
 			.AsNoTracking()
-			.ToListAsync();
+			.ToArrayAsync();
 	}
 
 	private IQueryable<Caja> ApplyFilters(IQueryable<Caja> query, int tuteladoId, HistoricoMovimientosFilter filter)
@@ -134,7 +134,7 @@ public class CajaRepository : RepositoryBase<Caja>, ICajaRepository
 		return total + saldoInicialCaja;
 	}
 
-	public Task<List<Reintegro>> ObtenerReintegrosParaDocumentoAsync(DateTime fechaDesde, DateTime fechaHasta)
+	public Task<Reintegro[]> ObtenerReintegrosParaDocumentoAsync(DateTime fechaDesde, DateTime fechaHasta)
 	{
 		return DbContext.Database
 					.SqlQuery<Reintegro>(@$"SELECT Tutelado.Apellidos + ', ' + Tutelado.Nombre as ApellidosNombre, SaldoInicialCaja + coalesce(Total, 0) as SaldoCaja, Caja.Concepto, Caja.Importe, Convert(date, Caja.FechaPago) as FechaPago, Caja.Anticipo
@@ -143,6 +143,6 @@ public class CajaRepository : RepositoryBase<Caja>, ICajaRepository
                                                 left join (select Fk_Tutelado, SUM(Importe) as Total 
                                                 from Caja where Caja.Anticipo=0 and Caja.Pendiente=0 group by Fk_Tutelado) dv 
                                                 ON Pk_Tutelado = dv.Fk_Tutelado
-                                                order by 1, Caja.FechaPago desc").ToListAsync();
+                                                order by 1, Caja.FechaPago desc").ToArrayAsync();
 	}
 }

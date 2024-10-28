@@ -32,7 +32,7 @@ public class CajaAMTARepository : RepositoryBase<CajaAMTA>, ICajaAMTARepository
         return query.CountAsync();
     }
 
-    public Task<List<CajaAMTA>> ObtenerMovimientosPendientesCajaAsync(int page, int total, MovimientosPendientesCajaFilter filter)
+    public Task<CajaAMTA[]> ObtenerMovimientosPendientesCajaAsync(int page, int total, MovimientosPendientesCajaFilter filter)
     {
         IQueryable<CajaAMTA> query = this.DbSet
                          .Include(c => c.Tutelado);
@@ -44,7 +44,7 @@ public class CajaAMTARepository : RepositoryBase<CajaAMTA>, ICajaAMTARepository
                     .Skip((page - 1) * total)
                     .Take(total)
                     .AsNoTracking()
-                    .ToListAsync();
+                    .ToArrayAsync();
     }
 
     IQueryable<CajaAMTA> ApplyFilters(IQueryable<CajaAMTA> query, MovimientosPendientesCajaFilter filter)
@@ -97,14 +97,14 @@ public class CajaAMTARepository : RepositoryBase<CajaAMTA>, ICajaAMTARepository
         return ApplyFilter(this.DbContext.VwCajaAMTA.Include(c => c.Tutelado), filter).CountAsync();
     }
 
-    public Task<List<VwCajaAMTA>> ObtenerCajaAMTAAsync(int page, int total, CajaAMTAFilter filter)
+    public Task<VwCajaAMTA[]> ObtenerCajaAMTAAsync(int page, int total, CajaAMTAFilter filter)
     {
         return ApplyFilter(this.DbContext.VwCajaAMTA.Include(c => c.Tutelado), filter)
                 .OrderByDescending(c => c.Id)
                 .Skip((page - 1) * total)
                 .Take(total)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     private IQueryable<VwCajaAMTA> ApplyFilter(IQueryable<VwCajaAMTA> query, CajaAMTAFilter filter)

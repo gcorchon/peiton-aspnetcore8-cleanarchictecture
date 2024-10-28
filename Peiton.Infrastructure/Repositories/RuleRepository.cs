@@ -32,12 +32,12 @@ public class RuleRepository : RepositoryBase<Rule>, IRuleRepository
             ");
     }
 
-    public Task<List<RuleViewModel>> ObtenerRulesAsync()
+    public Task<RuleViewModel[]> ObtenerRulesAsync()
     {
         return DbContext.Database.SqlQuery<RuleViewModel>(@$"select pk_rule as Id, Description, categoria.descripcion as Categoria, CssClass as BankCssClass 
                                             from [Rule] left Join Categoria on Pk_Categoria=formData.value('(/RuleFormData/Category/Id/text())[1]','int') 
                                             left join EntidadFinanciera on Pk_EntidadFinanciera=formData.value('(/RuleFormData/Bank/text())[1]','int') 
-                                            order by SortOrder").ToListAsync();
+                                            order by SortOrder").ToArrayAsync();
     }
 
     public Task ReordenarReglaAsync(int ruleId, int newPosition)

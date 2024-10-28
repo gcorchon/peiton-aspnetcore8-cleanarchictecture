@@ -28,5 +28,6 @@ public class ViewModelToDomainProfile : Profile
         CreateMap<VM.Quejas.GuardarQuejaRequest, Ent.Queja>()
             .ForMember(ent => ent.QuejasMotivos, o => o.Ignore());
         CreateMap<VM.Senalamientos.GuardarSenalamientoRequest, Ent.Senalamiento>();
+        CreateMap<VM.Centros.CentroViewModel, Ent.Centro>();
     }
 }

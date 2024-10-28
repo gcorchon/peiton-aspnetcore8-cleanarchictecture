@@ -5,5 +5,5 @@ namespace Peiton.Core.Repositories;
 public interface IInmuebleSolicitudAlquilerVentaRepository : IRepository<InmuebleSolicitudAlquilerVenta>
 {
     Task<int> ContarSolicitudesAsync(InmuebleSolicitudesAlquilerVentaFilter filter);
-    Task<List<InmuebleSolicitudAlquilerVenta>> ObtenerSolicitudesAsync(int page, int total, InmuebleSolicitudesAlquilerVentaFilter filter);
+    Task<InmuebleSolicitudAlquilerVenta[]> ObtenerSolicitudesAsync(int page, int total, InmuebleSolicitudesAlquilerVentaFilter filter);
 }

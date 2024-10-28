@@ -8,8 +8,6 @@ using Peiton.Core.UseCases.Ausencias;
 using Peiton.Contracts.Ausencias;
 using Peiton.Core.UseCases.Common;
 using Peiton.Core.Entities;
-using Peiton.Contracts.Asientos;
-using SharpCompress.Common;
 
 namespace Peiton.Api.Controllers;
 

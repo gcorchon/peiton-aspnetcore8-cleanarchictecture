@@ -7,7 +7,7 @@ namespace Peiton.Core.UseCases.Cajas;
 [Injectable]
 public class TuteladosReintegrosHandler(ITuteladoRepository tuteladoRepository)
 {
-    public Task<List<Tutelado>> HandleAsync(string text)
+    public Task<Tutelado[]> HandleAsync(string text)
     {
         return tuteladoRepository.ObtenerTuteladosParaReintegrosAsync(text);
     }

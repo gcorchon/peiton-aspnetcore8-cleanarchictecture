@@ -21,14 +21,14 @@ public class InmuebleSolicitudAlquilerVentaRepository : RepositoryBase<InmuebleS
                 .CountAsync();
     }
 
-    public Task<List<InmuebleSolicitudAlquilerVenta>> ObtenerSolicitudesAsync(int page, int total, InmuebleSolicitudesAlquilerVentaFilter filter)
+    public Task<InmuebleSolicitudAlquilerVenta[]> ObtenerSolicitudesAsync(int page, int total, InmuebleSolicitudesAlquilerVentaFilter filter)
     {
         return ApplyFilters(DbSet.Include(s => s.Inmueble).ThenInclude(i => i.Tutelado), filter)
                 .OrderByDescending(s => s.Id)
                 .Skip((page - 1) * total)
                 .Take(total)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     private IQueryable<InmuebleSolicitudAlquilerVenta> ApplyFilters(IQueryable<InmuebleSolicitudAlquilerVenta> query, InmuebleSolicitudesAlquilerVentaFilter filter)

@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 namespace Peiton.Core.Repositories;
 public interface IVwCategoriaRepository
 {
-    Task<List<VwCategoria>> BuscarCategoriasAsync(string text, int total);
-    Task<List<VwCategoria>> ObtenerCategoriasAsync();
+    Task<VwCategoria[]> BuscarCategoriasAsync(string text, int total);
+    Task<VwCategoria[]> ObtenerCategoriasAsync();
 }

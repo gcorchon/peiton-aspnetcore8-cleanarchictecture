@@ -17,7 +17,7 @@ public class AccountTransactionCPRepository : RepositoryBase<AccountTransactionC
 
 
 
-    public Task<List<AccountTransactionCP>> ObtenerMovimientosPendientesBancoAsync(int page, int total, MovimientosPendientesBancoFilter filter)
+    public Task<AccountTransactionCP[]> ObtenerMovimientosPendientesBancoAsync(int page, int total, MovimientosPendientesBancoFilter filter)
     {
         IQueryable<AccountTransactionCP> query = this.DbSet
                          .Include(at => at.AccountCP);
@@ -32,7 +32,7 @@ public class AccountTransactionCPRepository : RepositoryBase<AccountTransactionC
                     .Skip((page - 1) * total)
                     .Take(total)
                     .AsNoTracking()
-                    .ToListAsync();
+                    .ToArrayAsync();
     }
 
     public Task<int> ContarMovimientosPendientesBancoAsync(MovimientosPendientesBancoFilter filter)

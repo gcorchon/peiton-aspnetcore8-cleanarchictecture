@@ -20,23 +20,23 @@ public class FacturaRepository : RepositoryBase<Factura>, IFacturaRepository
         return query.CountAsync();
     }
 
-    public Task<List<Factura>> ObtenerFacturasAsync(int page, int total, FacturasFilter filter)
+    public Task<Factura[]> ObtenerFacturasAsync(int page, int total, FacturasFilter filter)
     {
         var query = ApplyFilter(this.DbSet, filter);
         return query.OrderByDescending(f => f.Id)
                     .Skip((page - 1) * total)
                     .Take(total)
                     .AsNoTracking()
-                    .ToListAsync();
+                    .ToArrayAsync();
     }
 
-    public Task<List<Factura>> ObtenerFacturasAsync(int[] ids)
+    public Task<Factura[]> ObtenerFacturasAsync(int[] ids)
     {
         return this.DbSet
                    .Where(f => ids.Contains(f.Id))
                    .OrderByDescending(f => f.Id)
                    .AsNoTracking()
-                   .ToListAsync();
+                   .ToArrayAsync();
 
     }
 

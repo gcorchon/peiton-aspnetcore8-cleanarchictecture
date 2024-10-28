@@ -14,7 +14,7 @@ public class EntidadFinancieraRepository : RepositoryBase<EntidadFinanciera>, IE
 
 	}
 
-	public Task<List<EntidadFinancieraViewModel>> ObtenerEntidadesConCuentasActivasAsync(int tuteladoId)
+	public Task<EntidadFinancieraViewModel[]> ObtenerEntidadesConCuentasActivasAsync(int tuteladoId)
 	{
 		var query = from account in DbContext.Account
 					where account.Credencial.TuteladoId == tuteladoId && !account.Baja && !account.Credencial.Baja
@@ -35,6 +35,6 @@ public class EntidadFinancieraRepository : RepositoryBase<EntidadFinanciera>, IE
 						})
 					};
 
-		return query.OrderBy(e => e.Descripcion).AsNoTracking().ToListAsync();
+		return query.OrderBy(e => e.Descripcion).AsNoTracking().ToArrayAsync();
 	}
 }

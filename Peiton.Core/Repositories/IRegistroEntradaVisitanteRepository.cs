@@ -4,5 +4,5 @@ using Peiton.Core.Entities;
 namespace Peiton.Core.Repositories;
 public interface IRegistroEntradaVisitanteRepository : IRepository<RegistroEntradaVisitante>
 {
-    Task<List<Visitante>> ObtenerVisitantesAsync(string query);
+    Task<Visitante[]> ObtenerVisitantesAsync(string query);
 }

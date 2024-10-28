@@ -1,9 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Peiton.Contracts.Common;
-using Peiton.Api.Extensions;
-using Peiton.Api.Authorization;
-using Peiton.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Peiton.Core.UseCases.Abogados;
 

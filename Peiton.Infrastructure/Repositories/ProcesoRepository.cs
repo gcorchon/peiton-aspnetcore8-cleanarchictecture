@@ -15,7 +15,7 @@ public class ProcesoRepository : RepositoryBase<Proceso>, IProcesoRepository
 
 	}
 
-	public Task<List<ProcesoListItem>> ObtenerProcesosAsync()
+	public Task<ProcesoListItem[]> ObtenerProcesosAsync()
 	{
 		return this.DbContext.Database.SqlQuery<ProcesoListItem>(@$"select cr.Pk_CategoriaProceso as CategoriaProcesoId, cr.Descripcion as Categoria, cr.CssClass,
 								ci.Pk_CategoriaProceso as SubcategoriaProcesoId, ci.Descripcion as Subcategoria, i.Pk_Proceso as ProcesoId, i.Descripcion, i.ContentType, i.FileName, i.Fecha
@@ -23,6 +23,6 @@ public class ProcesoRepository : RepositoryBase<Proceso>, IProcesoRepository
 							inner join (
 								select Pk_CategoriaProceso, Descripcion, CssClass
 								from CategoriaProceso where Fk_CategoriaProceso is null
-							) cr on ci.Fk_CategoriaProceso = cr.Pk_CategoriaProceso").ToListAsync();
+							) cr on ci.Fk_CategoriaProceso = cr.Pk_CategoriaProceso").ToArrayAsync();
 	}
 }

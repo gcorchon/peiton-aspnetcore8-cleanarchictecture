@@ -9,7 +9,7 @@ public class Centro
 	public string? CP { get; set; }
 	public string? Poblacion { get; set; }
 	public string? Distrito { get; set; }
-	public string? Ciudad { get; set; }
+	public string? Provincia { get; set; }
 	public string? Telefono1 { get; set; }
 	public string? Telefono2 { get; set; }
 	public string? Fax { get; set; }

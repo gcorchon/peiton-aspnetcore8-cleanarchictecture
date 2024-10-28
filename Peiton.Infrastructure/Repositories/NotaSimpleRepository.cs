@@ -24,14 +24,14 @@ public class NotaSimpleRepository : RepositoryBase<NotaSimple>, INotaSimpleRepos
                .CountAsync();
     }
 
-    public Task<List<NotaSimple>> ObtenerNotasSimplesAsync(int page, int total, NotasSimplesFilter filter)
+    public Task<NotaSimple[]> ObtenerNotasSimplesAsync(int page, int total, NotasSimplesFilter filter)
     {
         return ApplyFilters(DbSet.Include(a => a.Tutelado).Include(a => a.Usuario).Include(a => a.Inmueble).Include(a => a.CausaNotaSimple), filter)
             .OrderByDescending(a => a.Id)
             .Skip((page - 1) * total)
             .Take(total)
             .AsNoTracking()
-            .ToListAsync();
+            .ToArrayAsync();
     }
 
     private IQueryable<NotaSimple> ApplyFilters(IQueryable<NotaSimple> query, NotasSimplesFilter filter)

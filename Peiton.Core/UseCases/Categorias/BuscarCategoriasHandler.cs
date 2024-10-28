@@ -6,7 +6,7 @@ namespace Peiton.Core.UseCases.Categorias;
 [Injectable]
 public class BuscarCategoriasHandler(IVwCategoriaRepository categoriaRepository)
 {
-    public Task<List<VwCategoria>> HandleAsync(string text, int total)
+    public Task<VwCategoria[]> HandleAsync(string text, int total)
     {
         return categoriaRepository.BuscarCategoriasAsync(text, total);
     }

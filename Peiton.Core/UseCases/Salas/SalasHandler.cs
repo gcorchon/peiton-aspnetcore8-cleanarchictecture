@@ -7,7 +7,7 @@ namespace Peiton.Core.UseCases.Salas;
 [Injectable]
 public class SalasHandler(ISalaRepository salaRepository)
 {
-    public async Task<List<Sala>> HandleAsync()
+    public async Task<Sala[]> HandleAsync()
     {
         return await salaRepository.GetAllAsync(s => s.Descripcion, "asc");
     }

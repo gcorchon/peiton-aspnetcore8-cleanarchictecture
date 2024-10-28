@@ -1,7 +1,5 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Peiton.Contracts.Common;
-using Peiton.Api.Extensions;
 using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Core.UseCases.Senalamientos;
@@ -62,7 +60,7 @@ public class SenalamientosController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("abogados")]
-    public async Task<IActionResult> AbogadosAsync([FromQuery][Required]int tuteladoId, [FromQuery][Required] DateTime fecha, [FromQuery][Required] int juzgadoId, [FromQuery] int? senalamientoId, ObtenerAbogadosParaSenalamientoHandler handler)
+    public async Task<IActionResult> AbogadosAsync([FromQuery][Required] int tuteladoId, [FromQuery][Required] DateTime fecha, [FromQuery][Required] int juzgadoId, [FromQuery] int? senalamientoId, ObtenerAbogadosParaSenalamientoHandler handler)
     {
         var data = await handler.HandleAsync(tuteladoId, fecha, juzgadoId, senalamientoId);
         return Ok(data);

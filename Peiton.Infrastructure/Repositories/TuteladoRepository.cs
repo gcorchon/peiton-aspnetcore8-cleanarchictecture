@@ -14,7 +14,7 @@ public class TuteladoRepository : RepositoryBase<Tutelado>, ITuteladoRepository
 
 	}
 
-	public Task<List<Tutelado>> ObtenerTuteladosParaReintegrosAsync(string text)
+	public Task<Tutelado[]> ObtenerTuteladosParaReintegrosAsync(string text)
 	{
 		return DbSet
 				.Include(t => t.Credenciales.Where(c => !c.Baja))
@@ -22,13 +22,13 @@ public class TuteladoRepository : RepositoryBase<Tutelado>, ITuteladoRepository
 				.Where(t => !t.Muerto && t.NombreCompleto!.Contains(text))
 				.OrderBy(t => t.NombreCompleto)
 				.Take(10)
-				.ToListAsync();
+				.ToArrayAsync();
 
 	}
 
-	public Task<List<Tutelado>> ObtenerTuteladosPorNombreAsync(string query, int total)
+	public Task<Tutelado[]> ObtenerTuteladosPorNombreAsync(string query, int total)
 	{
-		return DbSet.Where(t => t.NombreCompleto!.Contains(query)).OrderBy(t => t.NombreCompleto).Take(total).AsNoTracking().ToListAsync();
+		return DbSet.Where(t => t.NombreCompleto!.Contains(query)).OrderBy(t => t.NombreCompleto).Take(total).AsNoTracking().ToArrayAsync();
 
 	}
 }

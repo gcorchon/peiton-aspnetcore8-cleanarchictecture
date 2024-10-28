@@ -20,14 +20,14 @@ public class ClienteRepository : RepositoryBase<Cliente>, IClienteRepository
 		return ApplyFilters(DbSet, filter).CountAsync();
 	}
 
-	public Task<List<Cliente>> ObtenerClientesAsync(int page, int total, ClientesFilter filter)
+	public Task<Cliente[]> ObtenerClientesAsync(int page, int total, ClientesFilter filter)
 	{
 		return ApplyFilters(DbSet, filter)
 				.OrderBy(c => c.Nombre)
 				.Skip((page - 1) * total)
 				.Take(total)
 				.AsNoTracking()
-				.ToListAsync();
+				.ToArrayAsync();
 	}
 
 	private IQueryable<Cliente> ApplyFilters(IQueryable<Cliente> query, ClientesFilter filter)

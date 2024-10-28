@@ -27,7 +27,7 @@ public class InmuebleAvisoRepository : RepositoryBase<InmuebleAviso>, IInmuebleA
                                 .ThenInclude(t => t.TipoAviso), filter).CountAsync();
     }
 
-    public Task<List<InmuebleAviso>> ObtenerAvisosAsync(int page, int total, InmuebleAvisosFilter filter)
+    public Task<InmuebleAviso[]> ObtenerAvisosAsync(int page, int total, InmuebleAvisosFilter filter)
     {
         return ApplyFilters(DbSet.Include(a => a.Usuario)
                                 .Include(a => a.Inmueble)
@@ -39,7 +39,7 @@ public class InmuebleAvisoRepository : RepositoryBase<InmuebleAviso>, IInmuebleA
             .Take(total)
             .AsNoTracking()
             .AsSplitQuery()
-            .ToListAsync();
+            .ToArrayAsync();
     }
 
     private IQueryable<InmuebleAviso> ApplyFilters(IQueryable<InmuebleAviso> query, InmuebleAvisosFilter filter)

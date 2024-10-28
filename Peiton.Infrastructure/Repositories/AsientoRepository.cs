@@ -20,14 +20,14 @@ public class AsientoRepository : RepositoryBase<Asiento>, IAsientoRepository
         return query.CountAsync();
     }
 
-    public Task<List<Asiento>> ObtenerAsientosAsync(int page, int total, AsientosFilter filter)
+    public Task<Asiento[]> ObtenerAsientosAsync(int page, int total, AsientosFilter filter)
     {
         var query = ApplyFilters(this.DbSet.Include(a => a.Partida).ThenInclude(b => b!.Capitulo), filter);
         return query.OrderByDescending(asiento => asiento.Id)
              .Skip((page - 1) * total)
              .Take(total)
              .AsNoTracking()
-             .ToListAsync();
+             .ToArrayAsync();
     }
 
     public Task<int> ContarAsientosHuerfanosAsync(AsientosHuerfanosFilter filter)
@@ -36,14 +36,14 @@ public class AsientoRepository : RepositoryBase<Asiento>, IAsientoRepository
         return query.CountAsync();
     }
 
-    public Task<List<Asiento>> ObtenerAsientosHuerfanosAsync(int page, int total, AsientosHuerfanosFilter filter)
+    public Task<Asiento[]> ObtenerAsientosHuerfanosAsync(int page, int total, AsientosHuerfanosFilter filter)
     {
         var query = ApplyFiltersAsientosHuerfanos(this.DbSet.Include(a => a.Partida).ThenInclude(b => b!.Capitulo), filter);
         return query.OrderByDescending(asiento => asiento.Id)
              .Skip((page - 1) * total)
              .Take(total)
              .AsNoTracking()
-             .ToListAsync();
+             .ToArrayAsync();
     }
 
     public Task<int> ObtenerUltimoNumeroAsientoAsync(int ano)
@@ -225,7 +225,7 @@ public class AsientoRepository : RepositoryBase<Asiento>, IAsientoRepository
         return query;
     }
 
-    public Task<List<FondoListItem>> ObtenerFondoAsync(int page, int total, FondosFilter filter, IEnumerable<CapituloPartidaFilter> partidas)
+    public Task<FondoListItem[]> ObtenerFondoAsync(int page, int total, FondosFilter filter, IEnumerable<CapituloPartidaFilter> partidas)
     {
         var query = from asiento in ApplyFiltersFondos(this.DbSet, partidas)
                     join tutelado in DbContext.Tutelado on asiento.TuteladoId equals tutelado.Id
@@ -246,7 +246,7 @@ public class AsientoRepository : RepositoryBase<Asiento>, IAsientoRepository
              .Skip((page - 1) * total)
              .Take(total)
              .AsNoTracking()
-             .ToListAsync();
+             .ToArrayAsync();
 
     }
 

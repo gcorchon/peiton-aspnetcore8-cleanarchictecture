@@ -5,6 +5,6 @@ namespace Peiton.Core.Repositories;
 public interface ICajaIncidenciaRepository : IRepository<CajaIncidencia>
 {
 
-	Task<List<CajaIncidencia>> ObtenerIncidenciasAsync(int page, int total, IncidenciasFilter filter);
+	Task<CajaIncidencia[]> ObtenerIncidenciasAsync(int page, int total, IncidenciasFilter filter);
 	Task<int> ContarIncidenciasAsync(IncidenciasFilter filter);
 }

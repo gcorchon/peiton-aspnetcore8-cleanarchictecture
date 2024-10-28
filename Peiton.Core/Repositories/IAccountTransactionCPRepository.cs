@@ -7,5 +7,5 @@ namespace Peiton.Core.Repositories;
 public interface IAccountTransactionCPRepository : IRepository<AccountTransactionCP>
 {
     Task<int> ContarMovimientosPendientesBancoAsync(MovimientosPendientesBancoFilter filter);
-    Task<List<AccountTransactionCP>> ObtenerMovimientosPendientesBancoAsync(int page, int total, MovimientosPendientesBancoFilter filter);
+    Task<AccountTransactionCP[]> ObtenerMovimientosPendientesBancoAsync(int page, int total, MovimientosPendientesBancoFilter filter);
 }

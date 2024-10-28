@@ -17,7 +17,7 @@ public class CentroConfiguration : IEntityTypeConfiguration<Centro>
 		builder.Property(p => p.CP).HasMaxLength(5);
 		builder.Property(p => p.Poblacion).HasMaxLength(255);
 		builder.Property(p => p.Distrito).HasMaxLength(50);
-		builder.Property(p => p.Ciudad).HasMaxLength(255);
+		builder.Property(p => p.Provincia).HasColumnName("Ciudad").HasMaxLength(255);
 		builder.Property(p => p.Telefono1).HasMaxLength(50);
 		builder.Property(p => p.Telefono2).HasMaxLength(50);
 		builder.Property(p => p.Fax).HasMaxLength(50);

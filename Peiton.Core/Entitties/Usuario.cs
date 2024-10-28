@@ -20,7 +20,7 @@ public class Usuario
 	public string? TelefonoMovil { get; set; }
 	public string? UserAgent { get; set; }
 
-	public virtual ICollection<Permiso> Permisos { get; set; }
+	public virtual ICollection<Permiso> Permisos { get; set; } = null!;
 
 	/* public virtual ICollection<Agenda> Entradas { get; } = new List<Agenda>(); */
 	/* public virtual ICollection<Ausencia> AusenciasUsuario { get; } = new List<Ausencia>(); */

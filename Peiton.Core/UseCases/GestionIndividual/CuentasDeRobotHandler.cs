@@ -7,7 +7,7 @@ namespace Peiton.Core.UseCases.GestionIndividual;
 [Injectable]
 public class CuentasDeRobotHandler(IEntidadFinancieraRepository entidadFinancieraRepository)
 {
-    public async Task<List<EntidadFinancieraViewModel>> HandleAsync(int tuteladoId)
+    public async Task<EntidadFinancieraViewModel[]> HandleAsync(int tuteladoId)
     {
         return await entidadFinancieraRepository.ObtenerEntidadesConCuentasActivasAsync(tuteladoId);
     }

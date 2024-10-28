@@ -10,7 +10,7 @@ namespace Peiton.Core.UseCases.Abogados;
 [Injectable]
 public class AbogadosSenalamientosHandler(IAbogadoRepository abogadoRepository)
 {
-    public async Task<List<Abogado>> HandleAsync(string nombre)
+    public async Task<Abogado[]> HandleAsync(string nombre)
     {
         return await abogadoRepository.AbogadosParaSenalamientoAsync(nombre);
     }

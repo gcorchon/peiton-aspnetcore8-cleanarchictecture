@@ -22,14 +22,14 @@ public class SucesionRepository : RepositoryBase<Sucesion>, ISucesionRepository
                 .CountAsync();
     }
 
-    public Task<List<Sucesion>> ObtenerSucesionesAsync(int page, int total, SucesionesFilter filter)
+    public Task<Sucesion[]> ObtenerSucesionesAsync(int page, int total, SucesionesFilter filter)
     {
         return ApplyFilters(DbSet.Include(s => s.Tutelado).Include(s => s.Usuario).Include(s => s.SucesionTipo), filter)
                 .OrderByDescending(s => s.Id)
                 .Skip((page - 1) * total)
                 .Take(total)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     private IQueryable<Sucesion> ApplyFilters(IQueryable<Sucesion> query, SucesionesFilter filter)

@@ -8,7 +8,7 @@ namespace Peiton.Core.UseCases.Senalamientos;
 [Injectable]
 public class SenalamientosHandler(ISenalamientoRepository senalamientoRepository)
 {
-    public async Task<List<Senalamiento>> HandleAsync(SenalamientosFillter filter)
+    public async Task<Senalamiento[]> HandleAsync(SenalamientosFillter filter)
     {
         return await senalamientoRepository.ObtenerSenalamientosAsync(filter);
     }

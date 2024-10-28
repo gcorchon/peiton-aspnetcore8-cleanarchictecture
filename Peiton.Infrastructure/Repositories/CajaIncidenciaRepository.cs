@@ -21,14 +21,14 @@ public class CajaIncidenciaRepository : RepositoryBase<CajaIncidencia>, ICajaInc
 		return ApplyFilters(DbSet.Include(i => i.Tutelado), filter).CountAsync();
 	}
 
-	public Task<List<CajaIncidencia>> ObtenerIncidenciasAsync(int page, int total, IncidenciasFilter filter)
+	public Task<CajaIncidencia[]> ObtenerIncidenciasAsync(int page, int total, IncidenciasFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(i => i.Tutelado).Include(i => i.RazonIncidenciaCaja), filter)
 					.OrderByDescending(i => i.FechaIncidencia)
 					.Skip((page - 1) * total)
 					.Take(total)
 					.AsNoTracking()
-					.ToListAsync();
+					.ToArrayAsync();
 	}
 
 	IQueryable<CajaIncidencia> ApplyFilters(IQueryable<CajaIncidencia> query, IncidenciasFilter filter)

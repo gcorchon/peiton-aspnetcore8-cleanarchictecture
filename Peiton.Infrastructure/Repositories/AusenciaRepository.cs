@@ -21,7 +21,7 @@ public class AusenciaRepository : RepositoryBase<Ausencia>, IAusenciaRepository
                             , filter).CountAsync();
     }
 
-    public Task<List<Ausencia>> ObtenerAusenciasAsync(int page, int total, AusenciasFilter filter)
+    public Task<Ausencia[]> ObtenerAusenciasAsync(int page, int total, AusenciasFilter filter)
     {
         return ApplyFilters(this.DbSet
                             .Include(a => a.Usuario)
@@ -30,7 +30,7 @@ public class AusenciaRepository : RepositoryBase<Ausencia>, IAusenciaRepository
                 .Skip((page - 1) * total)
                 .Take(total)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     private IQueryable<Ausencia> ApplyFilters(IQueryable<Ausencia> query, AusenciasFilter filter)

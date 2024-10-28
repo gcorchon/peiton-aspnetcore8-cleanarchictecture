@@ -25,7 +25,7 @@ public class GestionAdministrativaRepository : RepositoryBase<GestionAdministrat
     }
 
 
-    public Task<List<GestionAdministrativa>> ObtenerGestionesAdministrativasAsync(int page, int total, GestionesAdministrativasFilter filter)
+    public Task<GestionAdministrativa[]> ObtenerGestionesAdministrativasAsync(int page, int total, GestionesAdministrativasFilter filter)
     {
         IQueryable<GestionAdministrativa> query = this.DbSet.Include(g => g.Tutelado)
                                                     .Include(g => g.Usuario)
@@ -38,7 +38,7 @@ public class GestionAdministrativaRepository : RepositoryBase<GestionAdministrat
                     .Skip((page - 1) * total)
                     .Take(total)
                     .AsNoTracking()
-                    .ToListAsync();
+                    .ToArrayAsync();
     }
 
     private IQueryable<GestionAdministrativa> ApplyFilter(IQueryable<GestionAdministrativa> query, GestionesAdministrativasFilter filter)

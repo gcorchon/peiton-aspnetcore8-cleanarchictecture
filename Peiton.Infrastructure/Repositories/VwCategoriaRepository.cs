@@ -14,13 +14,13 @@ public class VwCategoriaRepository : RepositoryBase<VwCategoria>, IVwCategoriaRe
 
     }
 
-    public Task<List<VwCategoria>> BuscarCategoriasAsync(string text, int total)
+    public Task<VwCategoria[]> BuscarCategoriasAsync(string text, int total)
     {
-        return DbSet.Where(c => c.BreadCrumb.Contains(text)).OrderBy(c => c.BreadCrumb).Take(total).ToListAsync();
+        return DbSet.Where(c => c.BreadCrumb.Contains(text)).OrderBy(c => c.BreadCrumb).Take(total).ToArrayAsync();
     }
 
-    public Task<List<VwCategoria>> ObtenerCategoriasAsync()
+    public Task<VwCategoria[]> ObtenerCategoriasAsync()
     {
-        return DbSet.OrderBy(v => v.BreadCrumb).ToListAsync();
+        return DbSet.OrderBy(v => v.BreadCrumb).ToArrayAsync();
     }
 }

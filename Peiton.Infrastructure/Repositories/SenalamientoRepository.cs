@@ -16,7 +16,7 @@ public class SenalamientoRepository : RepositoryBase<Senalamiento>, ISenalamient
 
 	}
 
-	public Task<List<Senalamiento>> ObtenerSenalamientosAsync(SenalamientosFillter filter)
+	public Task<Senalamiento[]> ObtenerSenalamientosAsync(SenalamientosFillter filter)
 	{
 		var fechaDesde = new DateTime(filter.Year, filter.Month, 1);
 		var fechaHasta = fechaDesde.AddMonths(1);
@@ -28,7 +28,7 @@ public class SenalamientoRepository : RepositoryBase<Senalamiento>, ISenalamient
 			query = query.Where(s => s.Tutelado != null && s.Tutelado.Contains(filter.Tutelado));
 		}
 
-		return query.OrderBy(s => s.Fecha).AsNoTracking().ToListAsync();
+		return query.OrderBy(s => s.Fecha).AsNoTracking().ToArrayAsync();
 	}
 
 	public Task<Abogado?> BuscarAbogadoDisponibleAsync(DateTime fecha)

@@ -312,6 +312,9 @@ public class DomainToViewModelProfile : Profile
             .ForMember(s => s.Asistente, opt => opt.MapFrom(o => o.AbogadoAsistente != null ? o.AbogadoAsistente!.Nombre : o.ProfesionalAsistente));
 
         CreateMap<Senalamiento, VM.Senalamientos.SenalamientoViewModel>();
+        CreateMap<Centro, VM.Centros.CentroListItem>();
+
+        CreateMap<Centro, VM.Centros.CentroViewModel>();
     }
 
     private string GetDescripcionEstadoGestionAdministrativa(int estado)

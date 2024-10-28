@@ -15,7 +15,7 @@ public class RegistroEntradaVisitanteRepository : RepositoryBase<RegistroEntrada
 
 	}
 
-	public Task<List<Visitante>> ObtenerVisitantesAsync(string query)
+	public Task<Visitante[]> ObtenerVisitantesAsync(string query)
 	{
 		var queryContains = "%" + query + "%";
 		return this.DbContext.Database.SqlQuery<Visitante>(@$"select top 10 * from (select top 10 Dni, Nombre, convert(bit,0) as Tutelado 
@@ -23,6 +23,6 @@ public class RegistroEntradaVisitanteRepository : RepositoryBase<RegistroEntrada
                                           like {queryContains} 
                                           union 
                                           select Dni, nombrecompleto as Nombre, convert(bit, 1) as Tutelado
-                                          from tutelado where muerto=0 and NombreCompleto like {queryContains}) dv").ToListAsync();
+                                          from tutelado where muerto=0 and NombreCompleto like {queryContains}) dv").ToArrayAsync();
 	}
 }

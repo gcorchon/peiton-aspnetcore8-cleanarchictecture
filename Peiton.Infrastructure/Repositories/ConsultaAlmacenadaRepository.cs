@@ -15,12 +15,12 @@ public class ConsultaAlmacenadaRepository : RepositoryBase<ConsultaAlmacenada>, 
 
     }
 
-    public Task<List<ConsultaListItem>> ObtenerConsultasAsync(int usuarioId, ConsultasFilter filter)
+    public Task<ConsultaListItem[]> ObtenerConsultasAsync(int usuarioId, ConsultasFilter filter)
     {
         return ApplyFilters(DbContext.ObtenerConsultasAlmacenadas(usuarioId), filter)
                 .OrderBy(c => c.Descripcion)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToArrayAsync();
     }
 
     public Task<bool> PuedeEjecutarConsultaAsync(int id, int usuarioId)

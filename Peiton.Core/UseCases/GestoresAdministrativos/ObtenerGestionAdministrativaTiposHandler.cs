@@ -7,7 +7,7 @@ namespace Peiton.Core.UseCases.GestionesAdministrativas;
 [Injectable]
 public class ObtenerGestionAdministrativaTiposHandler(IGestionAdministrativaTipoRepository gestionAdministrativaTipoRepository)
 {
-    public Task<List<GestionAdministrativaTipo>> HandleAsync()
+    public Task<GestionAdministrativaTipo[]> HandleAsync()
     {
         return gestionAdministrativaTipoRepository.GetAllAsync();
     }

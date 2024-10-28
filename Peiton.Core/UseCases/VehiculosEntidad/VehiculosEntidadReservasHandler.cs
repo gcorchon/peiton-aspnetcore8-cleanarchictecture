@@ -7,7 +7,7 @@ namespace Peiton.Core.UseCases.VehiculosEntidad;
 [Injectable]
 public class VehiculosEntidadReservasHandler(IVehiculoEntidadReservaRepository vehiculoEntidadReservaRepository)
 {
-    public Task<List<VehiculoEntidadReserva>> HandleAsync(DateTime fecha)
+    public Task<VehiculoEntidadReserva[]> HandleAsync(DateTime fecha)
     {
         return vehiculoEntidadReservaRepository.ObtenerReservasAsync(fecha);
     }

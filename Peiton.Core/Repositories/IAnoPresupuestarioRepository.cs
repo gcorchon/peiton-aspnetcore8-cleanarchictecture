@@ -6,5 +6,5 @@ namespace Peiton.Core.Repositories;
 public interface IAnoPresupuestarioRepository : IRepository<AnoPresupuestario>
 {
     Task<int> ContarAnosPrespuestariosAsync(AnoPresupuestarioFilter filter);
-    Task<List<AnoPresupuestario>> ObtenerAnosPrespuestariosAsync(int page, int total, AnoPresupuestarioFilter filter);
+    Task<AnoPresupuestario[]> ObtenerAnosPrespuestariosAsync(int page, int total, AnoPresupuestarioFilter filter);
 }
