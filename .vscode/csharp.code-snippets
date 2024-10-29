@@ -123,7 +123,7 @@
 			"namespace Peiton.Core.UseCases.${TM_DIRECTORY/^.+\\\\(.+)$/$1/};",
 			"",
 			"[Injectable]",
-			"public class ${TM_FILENAME/(.*)\\..+$/$1/}(I$1Repository $2Repository, IUnitOfWork unitOfWork)",
+			"public class ${TM_FILENAME_BASE}(I$1Repository $2Repository, IUnitOfWork unitOfWork)",
 			"{",
 			"\tpublic async Task HandleAsync()",
 			"\t{",
@@ -138,7 +138,7 @@
 		"body": [
 			"namespace Peiton.Contracts.${TM_DIRECTORY/^.+\\\\(.+)$/$1/};",
 			"",
-			"public class ${TM_FILENAME/(.*)\\..+$/$1/}",
+			"public class ${TM_FILENAME_BASE}",
 			"{",
 			"}"
 		],
@@ -159,11 +159,43 @@
 			"[ApiController]",
 			"[PeitonAuthorization(PeitonPermission.$1)]",
 			"[Route(\"api/[controller]\")]",
-			"public class ${TM_FILENAME/(.*)\\..+$/$1/}(IMapper mapper) : ControllerBase",
+			"public class ${TM_FILENAME_BASE}(IMapper mapper) : ControllerBase",
 			"{",
 			"",
 			"}",
 		],
 		"description": "Crear un controller vacío"
+	},
+	"Peiton Pagination Methods":{
+		"prefix": "peiton:repository-pagination",
+		"body": [
+		"public Task<int> Contar$1Async($1Filter filter)",
+		"{",
+		"\treturn ApplyFilters(DbSet, filter).CountAsync();",
+		"}",
+		"",
+		"public Task<${TM_FILENAME_BASE/(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter)",
+		"{",
+		"\treturn ApplyFilters(DbSet, filter)",
+		"\t\t.OrderBy(s => s.${2:Id})",
+		"\t\t.Skip((page - 1) * total)",
+		"\t\t.Take(total)",
+		"\t\t.AsNoTracking()",
+		"\t\t.ToArrayAsync();",
+		"}",
+		"",
+		"private IQueryable<${TM_FILENAME_BASE/(.*)Repository$/$1/}> ApplyFilters(IQueryable<${TM_FILENAME_BASE/(.*)Repository$/$1/}> query, $1Filter filter)",
+		"{",
+		"\tif(filter == null) return query;",
+		"\treturn query;",
+		"}"
+		]
+	},
+	"Peiton Interface Pagination Methods":{
+		"prefix": "peiton:irepository-pagination",
+		"body": [
+		"Task<int> Contar$1Async($1Filter filter);",
+		"Task<${TM_FILENAME_BASE/I(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter)",
+		]
 	}
 }
