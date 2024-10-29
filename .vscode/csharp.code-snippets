@@ -1,0 +1,169 @@
+{
+	// Place your snippets for csharp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Http Get Paginado y filtrado": {
+		"prefix": "peiton:http-get-list",
+		"body": [
+			"[HttpGet()]",
+			"public async Task<IActionResult> $1Async([FromQuery] $1Filter filter, [FromQuery] Pagination pagination, $1Handler handler)",
+			"{",
+			"\tvar data = await handler.HandleAsync(filter, pagination);",
+			"\tvar vm = mapper.Map<IEnumerable<$1ListItem>>(data.Items);",
+			"\treturn this.PaginatedResult(vm, data.Total);",
+			"}"
+		],
+		"description": "Crear un metodo de controlador API Get para obtener un listado paginado y filtrado"
+	},
+	"Http Get Listado": {
+		"prefix": "peiton:http-get-plain-list",
+		"body": [
+			"[HttpGet()]",
+			"public async Task<IActionResult> $1Async($1Handler handler)",
+			"{",
+			"\tvar data = await handler.HandleAsync();",
+			"\tvar vm = mapper.Map<IEnumerable<$1ListItem>>(data);",
+			"\treturn Ok(vm);",
+			"}"
+		],
+		"description": "Crear un metodo de controlador API Get para obtener un listado paginado y filtrado"
+	},
+	"Http Get Entity": {
+		"prefix": "peiton:http-get-entity",
+		"body": [
+			"[HttpGet(\"{id:int}\")]",
+			"public async Task<IActionResult> Obtener$1Async(int id, EntityHandler<$1> handler)",
+			"{",
+			"var data = await handler.HandleAsync(id);",
+			"var vm = mapper.Map<$1ViewModel>(data);",
+			"return Ok(vm);",
+			"}"
+		],
+		"description": "Crear un metodo de controlador API Post para crear una entidad"
+	},
+	"Http Create Entity": {
+		"prefix": "peiton:http-create-entity",
+		"body": [
+			"[HttpPost()]",
+			"public async Task<IActionResult> Crear$1Async(Crear$1Request request, CrearEntityHandler<$1> handler)",
+			"{",
+			"\tawait handler.HandleAsync(request);",
+			"\treturn Accepted();",
+			"}"
+		],
+		"description": "Crear un metodo de controlador API Post para crear una entidad"
+	},
+	"Http Update Entity": {
+		"prefix": "peiton:http-update-entity",
+		"body": [
+			"[HttpPatch(\"{id:int}\")]",
+			"public async Task<IActionResult> Actualizar$1Async(int id, Actualizar$1Request request, ActualizarEntityHandler<$1> handler)",
+			"{",
+			"\tawait handler.HandleAsync(id, request);",
+			"\treturn Accepted();",
+			"}"
+		],
+		"description": "Crear un metodo de controlador API Patch para actualizar una entidad"
+	},
+	"Http Custom Create Entity": {
+		"prefix": "peiton:http-custom-create-entity",
+		"body": [
+			"[HttpPost()]",
+			"public async Task<IActionResult> Crear$1Async(Crear$1Request request, Crear$1Handler handler)",
+			"{",
+			"\tawait handler.HandleAsync(request);",
+			"\treturn Accepted();",
+			"}"
+		],
+		"description": "Crear un metodo de controlador API Post para crear una entidad"
+	},
+	"Http Custom Update Entity": {
+		"prefix": "peiton:http-custom-update-entity",
+		"body": [
+			"[HttpPatch(\"{id:int}\")]",
+			"public async Task<IActionResult> Actualizar$1Async(int id, Actualizar$1Request request, Actualizar$1Handler handler)",
+			"{",
+			"\tawait handler.HandleAsync(id, request);",
+			"\treturn Accepted();",
+			"}"
+		],
+		"description": "Crear un metodo de controlador API Patch para actualizar una entidad"
+	},
+	"Http Delete Entity": {
+		"prefix": "peiton:http-delete-entity",
+		"body": [
+			"[HttpDelete(\"{id:int}\")]",
+			"public async Task<IActionResult> Borrar$1Async(int id, DeleteEntityHandler<$1> handler)",
+			"{",
+			"\tawait handler.HandleAsync(id);",
+			"\treturn Accepted();",
+			"}"
+		],
+		"description": "Crear un metodo de controlador API Delete para borrar una entidad"
+	},
+	"Peiton UseCase": {
+		"prefix": "peiton:use-case",
+		"body": [
+			"using Peiton.Contracts.${TM_DIRECTORY/^.+\\\\(.+)$/$1/};",
+			"using Peiton.Core.Exceptions;",
+			"using Peiton.Core.Repositories;",
+			"using Peiton.Core.Utils;",
+			"using Peiton.DependencyInjection;",
+			"",
+			"namespace Peiton.Core.UseCases.${TM_DIRECTORY/^.+\\\\(.+)$/$1/};",
+			"",
+			"[Injectable]",
+			"public class ${TM_FILENAME/(.*)\\..+$/$1/}(I$1Repository $2Repository, IUnitOfWork unitOfWork)",
+			"{",
+			"\tpublic async Task HandleAsync()",
+			"\t{",
+			"",
+			"\t}",
+			"}"
+		],
+		"description": "Crear un UseCase"
+	},
+	"Peiton Contract": {
+		"prefix": "peiton:contract",
+		"body": [
+			"namespace Peiton.Contracts.${TM_DIRECTORY/^.+\\\\(.+)$/$1/};",
+			"",
+			"public class ${TM_FILENAME/(.*)\\..+$/$1/}",
+			"{",
+			"}"
+		],
+		"description": "Crear un Contract"
+	},
+	"Peiton Controller": {
+		"prefix": "peiton:controller",
+		"body": [
+			"using AutoMapper;",
+			"using Microsoft.AspNetCore.Mvc;",
+			"using Peiton.Contracts.Common;",
+			"using Peiton.Api.Extensions;",
+			"using Peiton.Api.Authorization;",
+			"using Peiton.Authorization;",
+			"",
+			"namespace Peiton.Api.Controllers;",
+			"",
+			"[ApiController]",
+			"[PeitonAuthorization(PeitonPermission.$1)]",
+			"[Route(\"api/[controller]\")]",
+			"public class ${TM_FILENAME/(.*)\\..+$/$1/}(IMapper mapper) : ControllerBase",
+			"{",
+			"",
+			"}",
+		],
+		"description": "Crear un controller vacío"
+	}
+}
