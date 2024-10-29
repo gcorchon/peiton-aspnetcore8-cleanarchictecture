@@ -16,7 +16,7 @@
 		"prefix": "peiton:http-get-list",
 		"body": [
 			"[HttpGet()]",
-			"public async Task<IActionResult> $1Async([FromQuery] $1Filter filter, [FromQuery] Pagination pagination, $1Handler handler)",
+			"public async Task<IActionResult> ${TM_FILENAME_BASE/(.*)Controller$/$1/}Async([FromQuery] ${TM_FILENAME_BASE/(.*)Controller$/$1/}Filter filter, [FromQuery] Pagination pagination, ${TM_FILENAME_BASE/(.*)Controller$/$1/}Handler handler)",
 			"{",
 			"\tvar data = await handler.HandleAsync(filter, pagination);",
 			"\tvar vm = mapper.Map<IEnumerable<$1ListItem>>(data.Items);",
@@ -29,7 +29,7 @@
 		"prefix": "peiton:http-get-plain-list",
 		"body": [
 			"[HttpGet()]",
-			"public async Task<IActionResult> $1Async($1Handler handler)",
+			"public async Task<IActionResult> ${TM_FILENAME_BASE/(.*)Controller$/$1/}Async(${TM_FILENAME_BASE/(.*)Controller$/$1/}Handler handler)",
 			"{",
 			"\tvar data = await handler.HandleAsync();",
 			"\tvar vm = mapper.Map<IEnumerable<$1ListItem>>(data);",
