@@ -317,6 +317,10 @@ public class DomainToViewModelProfile : Profile
         CreateMap<Centro, VM.Centros.CentroViewModel>();
 
         CreateMap<Sala, VM.Salas.SalaListItem>();
+
+        CreateMap<Sucursal, VM.Sucursales.SucursalListItem>();
+        CreateMap<Sucursal, VM.Sucursales.SucursalViewModel>();
+
     }
 
     private string GetDescripcionEstadoGestionAdministrativa(int estado)

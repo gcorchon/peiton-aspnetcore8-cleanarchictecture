@@ -40,6 +40,7 @@ GO
 ALTER TABLE [dbo].[Senalamiento] CHECK CONSTRAINT [FK_Senalamiento_Abogado1]
 GO
 
+Añadir Columna Autonumérica en Sucursal Pk_Sucursal y poner índice único sobre Fk_EntidadFinanciera y Número
 
 Archivos de Calidad
 - Sacar todos los archivos de las subcarpetas de App_Data/Instrucciones y dejarlos tirados directamente en esa carpeta.

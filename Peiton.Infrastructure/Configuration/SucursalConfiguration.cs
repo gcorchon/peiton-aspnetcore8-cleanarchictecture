@@ -7,7 +7,7 @@ public class SucursalConfiguration : IEntityTypeConfiguration<Sucursal>
 {
 	public void Configure(EntityTypeBuilder<Sucursal> builder)
 	{
-		builder.HasKey(t => new { t.EntidadFinancieraId, t.Numero });
+		builder.HasKey(t => t.Id);
 
 		builder.Property(p => p.EntidadFinancieraId).HasColumnName("Fk_EntidadFinanciera");
 		builder.Property(p => p.Numero).HasMaxLength(2);

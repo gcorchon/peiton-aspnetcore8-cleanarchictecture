@@ -30,5 +30,6 @@ public class ViewModelToDomainProfile : Profile
         CreateMap<VM.Senalamientos.GuardarSenalamientoRequest, Ent.Senalamiento>();
         CreateMap<VM.Centros.CentroViewModel, Ent.Centro>();
         CreateMap<VM.Salas.SalaListItem, Sala>();
+        CreateMap<VM.Sucursales.SucursalViewModel, Sucursal>();
     }
 }

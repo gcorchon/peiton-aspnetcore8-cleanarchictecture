@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Peiton.Contracts.Consultas;
 using Peiton.Core.Services;
 using Peiton.DependencyInjection;
@@ -24,5 +25,10 @@ public class DbService(PeitonDbContext context) : IDbService
     public Task<IEnumerable<T>> QueryAsync<T>(string sqlQuery, object? queryParams = null)
     {
         return context.Database.GetDbConnection().QueryAsync<T>(sqlQuery, queryParams);
+    }
+
+    public Task ExecuteQueryAsync(string sqlQuery, object? queryParams)
+    {
+        return context.Database.GetDbConnection().ExecuteAsync(sqlQuery, queryParams);
     }
 }
