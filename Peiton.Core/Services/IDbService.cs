@@ -11,4 +11,6 @@ public interface IDbService
     Task<IEnumerable<T>> QueryAsync<T>(string sqlQuery, object? parametros = null);
 
     Task ExecuteQueryAsync(string sqlQuery, object? parametros = null);
+
+    Task<T?> ExecuteScalarAsync<T>(string sqlQuery, object? parametros = null);
 }

@@ -24,11 +24,19 @@ public class DbService(PeitonDbContext context) : IDbService
 
     public Task<IEnumerable<T>> QueryAsync<T>(string sqlQuery, object? queryParams = null)
     {
+        Console.WriteLine(sqlQuery);
         return context.Database.GetDbConnection().QueryAsync<T>(sqlQuery, queryParams);
     }
 
     public Task ExecuteQueryAsync(string sqlQuery, object? queryParams)
     {
+        Console.WriteLine(sqlQuery);
         return context.Database.GetDbConnection().ExecuteAsync(sqlQuery, queryParams);
     }
+
+    public Task<T?> ExecuteScalarAsync<T>(string sqlQuery, object? queryParams)
+    {
+        return context.Database.GetDbConnection().ExecuteScalarAsync<T>(sqlQuery, queryParams);
+    }
+
 }
