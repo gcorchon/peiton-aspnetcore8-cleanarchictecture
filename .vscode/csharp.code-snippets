@@ -166,36 +166,63 @@
 		],
 		"description": "Crear un controller vacío"
 	},
-	"Peiton Pagination Methods":{
+	"Peiton Pagination Methods": {
 		"prefix": "peiton:repository-pagination",
 		"body": [
-		"public Task<int> Contar$1Async($1Filter filter)",
-		"{",
-		"\treturn ApplyFilters(DbSet, filter).CountAsync();",
-		"}",
-		"",
-		"public Task<${TM_FILENAME_BASE/(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter)",
-		"{",
-		"\treturn ApplyFilters(DbSet, filter)",
-		"\t\t.OrderBy(s => s.${2:Id})",
-		"\t\t.Skip((page - 1) * total)",
-		"\t\t.Take(total)",
-		"\t\t.AsNoTracking()",
-		"\t\t.ToArrayAsync();",
-		"}",
-		"",
-		"private IQueryable<${TM_FILENAME_BASE/(.*)Repository$/$1/}> ApplyFilters(IQueryable<${TM_FILENAME_BASE/(.*)Repository$/$1/}> query, $1Filter filter)",
-		"{",
-		"\tif(filter == null) return query;",
-		"\treturn query;",
-		"}"
+			"public Task<int> Contar$1Async($1Filter filter)",
+			"{",
+			"\treturn ApplyFilters(DbSet, filter).CountAsync();",
+			"}",
+			"",
+			"public Task<${TM_FILENAME_BASE/(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter)",
+			"{",
+			"\treturn ApplyFilters(DbSet, filter)",
+			"\t\t.OrderBy(s => s.${2:Id})",
+			"\t\t.Skip((page - 1) * total)",
+			"\t\t.Take(total)",
+			"\t\t.AsNoTracking()",
+			"\t\t.ToArrayAsync();",
+			"}",
+			"",
+			"private IQueryable<${TM_FILENAME_BASE/(.*)Repository$/$1/}> ApplyFilters(IQueryable<${TM_FILENAME_BASE/(.*)Repository$/$1/}> query, $1Filter filter)",
+			"{",
+			"\tif(filter == null) return query;",
+			"\treturn query;",
+			"}"
 		]
 	},
-	"Peiton Interface Pagination Methods":{
+	"Peiton Interface Pagination Methods": {
 		"prefix": "peiton:irepository-pagination",
 		"body": [
-		"Task<int> Contar$1Async($1Filter filter);",
-		"Task<${TM_FILENAME_BASE/I(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter)",
+			"Task<int> Contar$1Async($1Filter filter);",
+			"Task<${TM_FILENAME_BASE/I(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter)",
 		]
-	}
+	},
+	"Peiton String Filter": {
+		"prefix": "peiton:string-filter",
+		"body": [
+			"if(!string.IsNullOrWhiteSpace(filter.$1))",
+			"{",
+			"\tquery = query.Where(s => s.$1 == filter.$1);",
+			"}",
+		]
+	},
+	"Peiton Automapper Profile": {
+		"prefix": "peiton:automapper-profile",
+		"body": [
+			"using AutoMapper;",
+			"using Ent = Peiton.Core.Entities;",
+			"using VM = Peiton.Contracts;",
+			"",
+			"namespace Peiton.Core.Mappings;",
+			"public class ${TM_FILENAME_BASE} : Profile",
+			"{",
+			"\tpublic ${TM_FILENAME_BASE}()",
+			"\t{",
+			"",
+			"\t}",
+			"}",
+		],
+		"description": "Crear un profile de automapper vacío"
+	},
 }
