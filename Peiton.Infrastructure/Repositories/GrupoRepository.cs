@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -11,5 +12,13 @@ public class GrupoRepository : RepositoryBase<Grupo>, IGrupoRepository
 	public GrupoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
 
+	}
+
+	public Task<Grupo[]> ObtenerGruposConUsuariosAsync()
+	{
+		return DbSet.Include(g => g.Usuarios.Where(u => !u.Borrado)
+				.OrderBy(u => u.NombreCompleto))
+				.AsNoTracking()
+				.ToArrayAsync();
 	}
 }
