@@ -9,6 +9,7 @@ public class SucursalConfiguration : IEntityTypeConfiguration<Sucursal>
 	{
 		builder.HasKey(t => t.Id);
 
+		builder.Property(p => p.Id).HasColumnName("Pk_Sucursal");
 		builder.Property(p => p.EntidadFinancieraId).HasColumnName("Fk_EntidadFinanciera");
 		builder.Property(p => p.Numero).HasMaxLength(2);
 		builder.Property(p => p.CodigoPostal).HasMaxLength(2);

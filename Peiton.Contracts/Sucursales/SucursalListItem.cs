@@ -1,6 +1,7 @@
 ﻿namespace Peiton.Contracts.Sucursales;
 public class SucursalListItem
 {
+    public int Id { get; set; }
     public int EntidadFinancieraId { get; set; }
     public string Numero { get; set; } = null!;
     public string CodigoPostal { get; set; } = null!;
