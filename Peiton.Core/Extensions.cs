@@ -6,11 +6,11 @@ using System.Reflection;
 namespace Peiton.Core;
 public static class Extensions
 {
-    public static IServiceCollection AddCore(this IServiceCollection services){
-        
-        services.AddAutoMapper(typeof(DomainToViewModelProfile), typeof(ViewModelToDomainProfile));
+    public static IServiceCollection AddCore(this IServiceCollection services)
+    {
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddInjectable(Assembly.GetExecutingAssembly());
-        
+
         return services;
     }
 }
