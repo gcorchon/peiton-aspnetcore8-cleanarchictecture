@@ -84,4 +84,13 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
     {
         return DbSet.Where(u => userIds.Contains(u.Id) && (u.Permisos.Any(p => p.Id == permisoId) || u.Grupos.Any(g => g.Permisos.Any(p2 => p2.Id == permisoId)))).ToArrayAsync();
     }
+
+    public Task<Usuario[]> ObtenerUsuariosConGruposAsync()
+    {
+        return DbSet.Include(u => u.Grupos.OrderBy(g => g.Descripcion))
+                    .Where(u => !u.Borrado)
+                    .OrderBy(u => u.NombreCompleto)
+                    .AsNoTracking()
+                    .ToArrayAsync();
+    }
 }

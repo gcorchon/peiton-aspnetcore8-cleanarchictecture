@@ -10,7 +10,7 @@ public interface IUsuarioRepository : IRepository<Usuario>
     bool HasPermission(int userId, int permisoId);
     Task<bool> HasPermissionAsync(int userId, int permisoId);
     Task<UsuarioTipo[]> ObtenerUsuariosGruposAsync(string q, int v);
-
     Task<Usuario?> ObtenerUsuarioAsync(string nombre);
     Task<Usuario[]> ObtenerUsuariosConPermisoAsync(int[] rcpt, int comunicacionesRecibirMensajesPorEmail);
+    Task<Usuario[]> ObtenerUsuariosConGruposAsync();
 }
