@@ -1,7 +1,6 @@
 namespace Peiton.Contracts.Grupos;
 
-public class GrupoViewModel
+public class GrupoViewModel : GrupoConUsuaios
 {
-    public int Id { get; set; }
-    public string Descripcion { get; set; } = null!;
+    public IEnumerable<int> Permisos { get; set; } = null!;
 }

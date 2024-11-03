@@ -13,5 +13,8 @@ public class GrupoProfile : Profile
 
 
         CreateMap<Ent.Grupo, VM.Grupos.GrupoConUsuaios>();
+
+        CreateMap<Ent.Grupo, VM.Grupos.GrupoViewModel>()
+            .ForMember(v => v.Permisos, opt => opt.MapFrom(g => g.Permisos.Select(p => p.Id)));
     }
 }
