@@ -8,6 +8,9 @@ public interface IRepository<T> where T : class
     /*Task AddAsync(T entity);*/
     void AddRange(IEnumerable<T> entities);
     /*Task AddRangeAsync(IEnumerable<T> entities);*/
+
+    T Attach(T entity);
+    IEnumerable<T> AttachRange(IEnumerable<T> entities);
     bool Any(Expression<Func<T, bool>> where);
     Task<bool> AnyAsync(Expression<Func<T, bool>> where);
     int Count();

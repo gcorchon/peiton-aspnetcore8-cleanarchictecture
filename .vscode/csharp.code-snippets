@@ -13,7 +13,7 @@
 	// 	"description": "Log output to console"
 	// }
 	"Http Get Paginado y filtrado": {
-		"prefix": "peiton:http-get-list",
+		"prefix": "peiton-http-get-list",
 		"body": [
 			"[HttpGet()]",
 			"public async Task<IActionResult> ${TM_FILENAME_BASE/(.*)Controller$/$1/}Async([FromQuery] ${TM_FILENAME_BASE/(.*)Controller$/$1/}Filter filter, [FromQuery] Pagination pagination, ${TM_FILENAME_BASE/(.*)Controller$/$1/}Handler handler)",
@@ -26,7 +26,7 @@
 		"description": "Crear un metodo de controlador API Get para obtener un listado paginado y filtrado"
 	},
 	"Http Get Listado": {
-		"prefix": "peiton:http-get-plain-list",
+		"prefix": "peiton-http-get-plain-list",
 		"body": [
 			"[HttpGet()]",
 			"public async Task<IActionResult> ${TM_FILENAME_BASE/(.*)Controller$/$1/}Async(${TM_FILENAME_BASE/(.*)Controller$/$1/}Handler handler)",
@@ -39,7 +39,7 @@
 		"description": "Crear un metodo de controlador API Get para obtener un listado paginado y filtrado"
 	},
 	"Http Get Entity": {
-		"prefix": "peiton:http-get-entity",
+		"prefix": "peiton-http-get-entity",
 		"body": [
 			"[HttpGet(\"{id:int}\")]",
 			"public async Task<IActionResult> Obtener$1Async(int id, EntityHandler<$1> handler)",
@@ -52,7 +52,7 @@
 		"description": "Crear un metodo de controlador API Post para crear una entidad"
 	},
 	"Http Create Entity": {
-		"prefix": "peiton:http-create-entity",
+		"prefix": "peiton-http-create-entity",
 		"body": [
 			"[HttpPost()]",
 			"public async Task<IActionResult> Crear$1Async(Crear$1Request request, CrearEntityHandler<$1> handler)",
@@ -64,7 +64,7 @@
 		"description": "Crear un metodo de controlador API Post para crear una entidad"
 	},
 	"Http Update Entity": {
-		"prefix": "peiton:http-update-entity",
+		"prefix": "peiton-http-update-entity",
 		"body": [
 			"[HttpPatch(\"{id:int}\")]",
 			"public async Task<IActionResult> Actualizar$1Async(int id, Actualizar$1Request request, ActualizarEntityHandler<$1> handler)",
@@ -76,7 +76,7 @@
 		"description": "Crear un metodo de controlador API Patch para actualizar una entidad"
 	},
 	"Http Custom Create Entity": {
-		"prefix": "peiton:http-custom-create-entity",
+		"prefix": "peiton-http-custom-create-entity",
 		"body": [
 			"[HttpPost()]",
 			"public async Task<IActionResult> Crear$1Async(Crear$1Request request, Crear$1Handler handler)",
@@ -88,7 +88,7 @@
 		"description": "Crear un metodo de controlador API Post para crear una entidad"
 	},
 	"Http Custom Update Entity": {
-		"prefix": "peiton:http-custom-update-entity",
+		"prefix": "peiton-http-custom-update-entity",
 		"body": [
 			"[HttpPatch(\"{id:int}\")]",
 			"public async Task<IActionResult> Actualizar$1Async(int id, Actualizar$1Request request, Actualizar$1Handler handler)",
@@ -100,7 +100,7 @@
 		"description": "Crear un metodo de controlador API Patch para actualizar una entidad"
 	},
 	"Http Delete Entity": {
-		"prefix": "peiton:http-delete-entity",
+		"prefix": "peiton-http-delete-entity",
 		"body": [
 			"[HttpDelete(\"{id:int}\")]",
 			"public async Task<IActionResult> Borrar$1Async(int id, DeleteEntityHandler<$1> handler)",
@@ -112,7 +112,7 @@
 		"description": "Crear un metodo de controlador API Delete para borrar una entidad"
 	},
 	"Peiton UseCase": {
-		"prefix": "peiton:use-case",
+		"prefix": "peiton-use-case",
 		"body": [
 			"using Peiton.Contracts.${TM_DIRECTORY/^.+\\\\(.+)$/$1/};",
 			"using Peiton.Core.Exceptions;",
@@ -134,7 +134,7 @@
 		"description": "Crear un UseCase"
 	},
 	"Peiton Contract": {
-		"prefix": "peiton:contract",
+		"prefix": "peiton-contract",
 		"body": [
 			"namespace Peiton.Contracts.${TM_DIRECTORY/^.+\\\\(.+)$/$1/};",
 			"",
@@ -145,7 +145,7 @@
 		"description": "Crear un Contract"
 	},
 	"Peiton Controller": {
-		"prefix": "peiton:controller",
+		"prefix": "peiton-controller",
 		"body": [
 			"using AutoMapper;",
 			"using Microsoft.AspNetCore.Mvc;",
@@ -167,7 +167,7 @@
 		"description": "Crear un controller vacío"
 	},
 	"Peiton Pagination Methods": {
-		"prefix": "peiton:repository-pagination",
+		"prefix": "peiton-repository-pagination",
 		"body": [
 			"public Task<int> Contar$1Async($1Filter filter)",
 			"{",
@@ -192,14 +192,14 @@
 		]
 	},
 	"Peiton Interface Pagination Methods": {
-		"prefix": "peiton:irepository-pagination",
+		"prefix": "peiton-irepository-pagination",
 		"body": [
 			"Task<int> Contar$1Async($1Filter filter);",
 			"Task<${TM_FILENAME_BASE/I(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter)",
 		]
 	},
 	"Peiton String Filter": {
-		"prefix": "peiton:string-filter",
+		"prefix": "peiton-string-filter",
 		"body": [
 			"if(!string.IsNullOrWhiteSpace(filter.$1))",
 			"{",
@@ -208,7 +208,7 @@
 		]
 	},
 	"Peiton Automapper Profile": {
-		"prefix": "peiton:automapper-profile",
+		"prefix": "peiton-automapper-profile",
 		"body": [
 			"using AutoMapper;",
 			"using Ent = Peiton.Core.Entities;",

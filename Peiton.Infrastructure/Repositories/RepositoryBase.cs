@@ -31,6 +31,18 @@ public abstract class RepositoryBase<T> : IRepository<T> where T : class
         DbSet.AddRange(entities);
     }
 
+    public virtual T Attach(T entity)
+    {
+        DbSet.Attach(entity);
+        return entity;
+    }
+
+    public virtual IEnumerable<T> AttachRange(IEnumerable<T> entities)
+    {
+        DbSet.AttachRange(entities);
+        return entities;
+    }
+
     /*public virtual Task AddRangeAsync(IEnumerable<T> entities)
     {
         return DbSet.AddRangeAsync(entities);
