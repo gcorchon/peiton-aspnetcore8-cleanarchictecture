@@ -25,10 +25,26 @@ public class MensajesController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> ObtenerMensajeAsync(int id, EntityHandler<Mensaje> handler)
+    public async Task<IActionResult> ObtenerMensajeAsync(int id, MensajeHandler handler) //Hace falta un handler especial en lugar del genérico para comprobar que el usuario que lee el mensaje es el destinatario
     {
         var data = await handler.HandleAsync(id);
         var vm = mapper.Map<MensajeViewModel>(data);
         return Ok(vm);
     }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> BorrarMensajeAsync(int id, BorrarMensajeHandler handler)
+    {
+        await handler.HandleAsync(id);
+        return Accepted();
+    }
+
+    [HttpPatch("{id:int}/archivar")]
+    public async Task<IActionResult> ArchivarMensajeAsync(int id, ArchivarMensajeHandler handler)
+    {
+        await handler.HandleAsync(id);
+        return Accepted();
+    }
+
+
 }

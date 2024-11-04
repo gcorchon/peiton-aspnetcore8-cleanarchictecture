@@ -6,4 +6,5 @@ public interface IMensajeRepository : IRepository<Mensaje>
 {
     Task<int> ContarMensajesAsync(MensajesFilter filter);
     Task<Mensaje[]> ObtenerMensajesAsync(int page, int total, MensajesFilter filter);
+
 }

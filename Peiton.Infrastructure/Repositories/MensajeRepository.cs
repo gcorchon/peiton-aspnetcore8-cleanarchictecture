@@ -17,6 +17,11 @@ public class MensajeRepository : RepositoryBase<Mensaje>, IMensajeRepository
 		this.identityService = identityService;
 	}
 
+	public override Task<Mensaje?> GetByIdAsync(int id)
+	{
+		return DbSet.FirstOrDefaultAsync(m => m.Id == id && m.Usuario_ParaId == identityService.GetUserId());
+	}
+
 	public Task<int> ContarMensajesAsync(MensajesFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(m => m.UsuarioDe).Where(m => m.Usuario_ParaId == identityService.GetUserId()), filter).CountAsync();
