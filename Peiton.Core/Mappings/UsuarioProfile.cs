@@ -1,4 +1,5 @@
 using AutoMapper;
+using Newtonsoft.Json;
 using Ent = Peiton.Core.Entities;
 using VM = Peiton.Contracts;
 
@@ -12,5 +13,12 @@ public class UsuarioProfile : Profile
             .ForMember(v => v.Value, opt => opt.MapFrom(u => u.Id));
 
         CreateMap<Ent.Usuario, VM.Usuarios.UsuarioConGrupos>();
+
+        CreateMap<Ent.Usuario, VM.Usuarios.UsuarioViewModel>()
+            .ForMember(v => v.Permisos, opt => opt.MapFrom(u => u.Permisos.Select(p => p.Id)))
+            .ForMember(v => v.PermisosGrupo, opt => opt.MapFrom(u => u.Grupos.SelectMany(g => g.Permisos.Select(p => p.Id)).Distinct()))
+            .ForMember(v => v.Info, opt => opt.MapFrom(u => JsonConvert.DeserializeObject<VM.Usuarios.Info>(u.Info)));
+
+        CreateMap<Ent.Usuario, VM.Usuarios.UsuarioBloqueado>();
     }
 }

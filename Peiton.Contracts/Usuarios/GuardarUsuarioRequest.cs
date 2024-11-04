@@ -1,10 +1,8 @@
-﻿using Peiton.Contracts.Common;
-
 namespace Peiton.Contracts.Usuarios;
 
-public class UsuarioViewModel
+public class GuardarUsuarioRequest
 {
-    public int Id { get; set; }
+    public string? Pwd { get; set; }
     public string Username { get; set; } = null!;
     public string Firma { get; set; } = null!;
     public string Nombre { get; set; } = null!;
@@ -19,6 +17,5 @@ public class UsuarioViewModel
     public string? TelefonoMovil { get; set; }
 
     public IEnumerable<int> Permisos { get; set; } = null!;
-    public IEnumerable<int> PermisosGrupo { get; set; } = null!;
-    public IEnumerable<ListItem> Grupos { get; set; } = null!;
+    public IEnumerable<int> Grupos { get; set; } = null!;
 }

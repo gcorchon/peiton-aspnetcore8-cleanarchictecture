@@ -1,4 +1,5 @@
 using AutoMapper;
+using Newtonsoft.Json;
 using Peiton.Core.Entities;
 using Ent = Peiton.Core.Entities;
 using VM = Peiton.Contracts;
@@ -31,5 +32,10 @@ public class ViewModelToDomainProfile : Profile
         CreateMap<VM.Centros.CentroViewModel, Ent.Centro>();
         CreateMap<VM.Salas.SalaListItem, Sala>();
         CreateMap<VM.Sucursales.SucursalViewModel, Sucursal>();
+        CreateMap<VM.Usuarios.GuardarUsuarioRequest, Usuario>()
+            .ForMember(ent => ent.Pwd, opt => opt.Ignore())
+            .ForMember(ent => ent.Grupos, opt => opt.Ignore())
+            .ForMember(ent => ent.Permisos, opt => opt.Ignore())
+            .ForMember(ent => ent.Info, opt => opt.MapFrom(v => JsonConvert.SerializeObject(v.Info)));
     }
 }

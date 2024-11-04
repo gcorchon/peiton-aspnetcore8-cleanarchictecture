@@ -93,4 +93,40 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
                     .AsNoTracking()
                     .ToArrayAsync();
     }
+
+    public Task<int> ContarUsuariosBloqueadosAsync(UsuariosBloqueadosFilter filter)
+    {
+        return ApplyFilters(DbSet.Where(u => u.Bloqueado), filter).CountAsync();
+    }
+
+    public Task<Usuario[]> ObtenerUsuariosBloqueadosAsync(int page, int total, UsuariosBloqueadosFilter filter)
+    {
+        return ApplyFilters(DbSet.Where(u => u.Bloqueado), filter)
+            .OrderBy(s => s.Id)
+            .Skip((page - 1) * total)
+            .Take(total)
+            .AsNoTracking()
+            .ToArrayAsync();
+    }
+
+    private IQueryable<Usuario> ApplyFilters(IQueryable<Usuario> query, UsuariosBloqueadosFilter filter)
+    {
+        if (filter == null) return query;
+        if (!string.IsNullOrWhiteSpace(filter.Username))
+        {
+            query = query.Where(s => s.Username.Contains(filter.Username));
+        }
+
+        if (!string.IsNullOrWhiteSpace(filter.Email))
+        {
+            query = query.Where(s => s.Email.Contains(filter.Email));
+        }
+
+        if (!string.IsNullOrWhiteSpace(filter.NombreCompleto))
+        {
+            query = query.Where(s => s.NombreCompleto.Contains(filter.NombreCompleto));
+        }
+
+        return query;
+    }
 }

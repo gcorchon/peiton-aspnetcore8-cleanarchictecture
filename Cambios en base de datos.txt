@@ -46,3 +46,8 @@ Archivos de Calidad
 - Sacar todos los archivos de las subcarpetas de App_Data/Instrucciones y dejarlos tirados directamente en esa carpeta.
 - Sacar todos los archivos de las subcarpetas de App_Data/Procesos y dejarlos tirados directamente en esa carpeta.
 - Sacar todos los archivos de las subcarpetas de App_Data/Documentos y dejarlos tirados directamente en esa carpeta.
+
+
+update Usuario set Username = Username + '* borrado *', Email=Email + '* borrado *' where Borrado=1
+
+Cambiar en la tabla usuario los indices IX_Usuario y IX_Usuario_1 a UNIQUE. IX_Usuario_1 hay que cambiarlo a IX_Email

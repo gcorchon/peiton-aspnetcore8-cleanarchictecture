@@ -13,4 +13,6 @@ public interface IUsuarioRepository : IRepository<Usuario>
     Task<Usuario?> ObtenerUsuarioAsync(string nombre);
     Task<Usuario[]> ObtenerUsuariosConPermisoAsync(int[] rcpt, int comunicacionesRecibirMensajesPorEmail);
     Task<Usuario[]> ObtenerUsuariosConGruposAsync();
+    Task<Usuario[]> ObtenerUsuariosBloqueadosAsync(int page, int total, UsuariosBloqueadosFilter filter);
+    Task<int> ContarUsuariosBloqueadosAsync(UsuariosBloqueadosFilter filter);
 }
