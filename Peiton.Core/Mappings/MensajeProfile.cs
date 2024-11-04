@@ -15,6 +15,7 @@ public class MensajeProfile : Profile
             .ForMember(vm => vm.Estado, opt => opt.MapFrom(m => ObtenerEstado(m)));
 
         CreateMap<Ent.Mensaje, VM.Mensajes.MensajeViewModel>()
+            .ForMember(vm => vm.Remitente, opt => opt.MapFrom(m => m.UsuarioDe.NombreCompleto))
             .ForMember(vm => vm.Para, opt => opt.MapFrom(m => JsonConvert.DeserializeObject<IEnumerable<DestinatarioMensaje>>(m.Para).Select(u => u.Nombre)))
             .ForMember(vm => vm.ConCopia, opt => opt.MapFrom(m => JsonConvert.DeserializeObject<IEnumerable<DestinatarioMensaje>>(m.ConCopia).Select(u => u.Nombre)));
     }

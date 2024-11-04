@@ -1,0 +1,35 @@
+@using RazorLight;
+@inherits TemplatePage<Peiton.Contracts.Mensajes.MensajeViewModel>
+
+@using System;
+@using System.Linq;
+
+<!doctype html>
+<html>
+
+<head>
+    <title>Mensaje</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <p><strong>Remitente: </strong>@Model.Remitente</p>
+    <p><strong>Asunto: </strong>@Model.Asunto</p>
+    <p><strong>Fecha: </strong>@Model.Fecha.ToString("dd 'de' MMMM 'de' yyyy 'a las' HH:mm").ToLower()</p>
+
+    @if (Model.Para != null && Model.Para.Any())
+    {
+        <p><strong>Para: </strong> @string.Join(", ", Model.Para)</p>
+    }
+    @if (Model.ConCopia != null && Model.ConCopia.Any())
+    {
+        <p><strong>Cc:</strong> @string.Join(", ", Model.ConCopia)</p>
+    }
+    <hr />
+    <div>
+        
+        @Raw(Model.Cuerpo)
+    </div>
+</body>
+
+</html>

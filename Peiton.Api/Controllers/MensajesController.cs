@@ -6,8 +6,6 @@ using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Contracts.Mensajes;
 using Peiton.Core.UseCases.Mensajes;
-using Peiton.Core.UseCases.Common;
-using Peiton.Core.Entities;
 
 namespace Peiton.Api.Controllers;
 
@@ -46,5 +44,10 @@ public class MensajesController(IMapper mapper) : ControllerBase
         return Accepted();
     }
 
-
+    [HttpGet("{id:int}/exportar")]
+    public async Task<IActionResult> ExportarMensajeAsync(int id, ExportarMensajeHandler handler)
+    {
+        var data = await handler.HandleAsync(id);
+        return File(data, "application/pdf");
+    }
 }

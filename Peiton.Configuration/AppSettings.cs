@@ -3,4 +3,5 @@
 public class AppSettings
 {
     public string PathArchivos { get; set; } = null!;
+    public string WkhtmlToPdf { get; set; } = null!;
 }
