@@ -203,7 +203,7 @@
 		"body": [
 			"if(!string.IsNullOrWhiteSpace(filter.$1))",
 			"{",
-			"\tquery = query.Where(s => s.$1 == filter.$1);",
+			"\tquery = query.Where(s => s.$1.Contains(filter.$1));",
 			"}",
 		]
 	},
@@ -225,4 +225,32 @@
 		],
 		"description": "Crear un profile de automapper vacío"
 	},
+	"Peiton Pagination Handler": {
+		"prefix": "peiton-pagination-handler",
+		"body": [
+			"using Peiton.Contracts.Common;",
+			"using Peiton.Core.Entities;",
+			"using Peiton.Core.Repositories;",
+			"using Peiton.DependencyInjection;",
+			"",
+			"namespace Peiton.Core.UseCases.${TM_DIRECTORY/^.+\\\\(.+)$/$1/};",
+			"",
+			"[Injectable]",
+			"public class Obtener$1Handler(I$2Repository $3Repository)",
+			"{",
+			"\tpublic async Task<PaginatedData<$2>> HandleAsync($1Filter filter, Pagination pagination)",
+			"\t{",
+			"\t\tvar items = await $3Repository.Obtener$1Async(pagination.Page, pagination.Total, filter);",
+			"\t\tvar total = await $3Repository.Contar$1Async(filter);",
+			"",
+			"\t\treturn new PaginatedData<$2>()",
+			"\t\t{",
+			"\t\t\tItems = items,",
+			"\t\t\tTotal = total",
+			"\t\t};",
+			"\t}",
+			"}",
+		],
+		"description": "Crear el Use Case para una paginación"
+	}
 }
