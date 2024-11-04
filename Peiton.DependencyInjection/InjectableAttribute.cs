@@ -1,13 +1,21 @@
-﻿namespace Peiton.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Peiton.DependencyInjection;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class InjectableAttribute: Attribute
+public class InjectableAttribute : Attribute
 {
-    public Type? InterfaceType {get; init;}
-    
-    public InjectableAttribute(){ }
-    public InjectableAttribute(Type interfaceType )
+    public Type? InterfaceType { get; init; }
+    public ServiceLifetime? Lifetime { get; init; }
+    public InjectableAttribute() : this(null) { }
+
+    public InjectableAttribute(Type? interfaceType) : this(interfaceType, ServiceLifetime.Scoped)
     {
-        this.InterfaceType = interfaceType;    
+    }
+
+    public InjectableAttribute(Type? interfaceType, ServiceLifetime serviceLifetime)
+    {
+        this.InterfaceType = interfaceType;
+        this.Lifetime = serviceLifetime;
     }
 }
