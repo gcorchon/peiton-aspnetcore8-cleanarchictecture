@@ -46,8 +46,8 @@ public class Usuario
 	/* public virtual ICollection<InmuebleAviso> InmueblesAvisos { get; } = new List<InmuebleAviso>(); */
 	/* public virtual ICollection<InmuebleSolicitudAlquilerVenta> InmueblesSolicitudesAlquileresVentas { get; } = new List<InmuebleSolicitudAlquilerVenta>(); */
 	/* public virtual ICollection<InmuebleTasacion> InmueblesTasaciones { get; } = new List<InmuebleTasacion>(); */
-	/* public virtual ICollection<Mensaje> MensajesUsuarioDe { get; } = new List<Mensaje>(); */
-	/* public virtual ICollection<Mensaje> MensajesUsuarioPara { get; } = new List<Mensaje>(); */
+	public virtual ICollection<Mensaje> MensajesEnviados { get; } = new List<Mensaje>();
+	public virtual ICollection<Mensaje> MensajesRecibidos { get; } = new List<Mensaje>();
 	/* public virtual ICollection<MensajeEnviado> MensajesEnviados { get; } = new List<MensajeEnviado>(); */
 	/* public virtual ICollection<NotaSimple> NotasSimples { get; } = new List<NotaSimple>(); */
 	/* public virtual ICollection<Queja> QuejasUsuario { get; } = new List<Queja>(); */

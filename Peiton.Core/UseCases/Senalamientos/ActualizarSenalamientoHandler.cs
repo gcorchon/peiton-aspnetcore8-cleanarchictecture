@@ -1,5 +1,5 @@
 using AutoMapper;
-using Peiton.Contracts.Comunicaciones;
+using Peiton.Contracts.Mensajes;
 using Peiton.Contracts.Senalamientos;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;

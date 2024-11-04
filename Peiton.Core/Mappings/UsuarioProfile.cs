@@ -20,5 +20,7 @@ public class UsuarioProfile : Profile
             .ForMember(v => v.Info, opt => opt.MapFrom(u => JsonConvert.DeserializeObject<VM.Usuarios.Info>(u.Info)));
 
         CreateMap<Ent.Usuario, VM.Usuarios.UsuarioBloqueado>();
+
+        CreateMap<Ent.Usuario, VM.Mensajes.Remitente>();
     }
 }

@@ -18,7 +18,7 @@ public class Mensaje
 	public virtual Mensaje? MensajePadre { get; set; }
 	public virtual Usuario UsuarioDe { get; set; } = null!;
 	public virtual Usuario UsuarioPara { get; set; } = null!;
-	/* public virtual ICollection<Mensaje> Mensajes { get; } = new List<Mensaje>(); */
+	public virtual ICollection<Mensaje> Mensajes { get; } = new List<Mensaje>();
 	/* public virtual ICollection<MensajeEnviado> MensajesEnviados { get; } = new List<MensajeEnviado>(); */
 
 }

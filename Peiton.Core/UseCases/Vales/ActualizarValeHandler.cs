@@ -1,5 +1,5 @@
 ﻿using Peiton.Authorization;
-using Peiton.Contracts.Comunicaciones;
+using Peiton.Contracts.Mensajes;
 using Peiton.Contracts.Vales;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;

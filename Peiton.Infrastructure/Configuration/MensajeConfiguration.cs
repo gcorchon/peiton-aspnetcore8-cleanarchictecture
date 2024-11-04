@@ -19,17 +19,17 @@ public class MensajeConfiguration : IEntityTypeConfiguration<Mensaje>
 		builder.Property(p => p.Dias).HasComputedColumnSql("(case when [archivado]=(1) then datediff(day,getdate(),dateadd(day,(90),[FechaLectura])) when [leido]=(1) then datediff(day,getdate(),dateadd(day,(30),[FechaLectura])) else (30) end)", false);
 		builder.Property(p => p.CssClass).HasMaxLength(50);
 
-		/*builder.HasOne(d => d.MensajePadre)
+		builder.HasOne(d => d.MensajePadre)
 			.WithMany(p => p.Mensajes)
-			.HasForeignKey(d => d.MensajeId);*/
+			.HasForeignKey(d => d.MensajeId);
 
-		/*builder.HasOne(d => d.UsuarioDe)
-			.WithMany(p => p.MensajesUsuarioDe)
-			.HasForeignKey(d => d.Usuario_DeId);*/
+		builder.HasOne(d => d.UsuarioDe)
+			.WithMany(p => p.MensajesEnviados)
+			.HasForeignKey(d => d.Usuario_DeId);
 
-		/*builder.HasOne(d => d.UsuarioPara)
-			.WithMany(p => p.MensajesUsuarioPara)
-			.HasForeignKey(d => d.Usuario_ParaId);*/
+		builder.HasOne(d => d.UsuarioPara)
+			.WithMany(p => p.MensajesRecibidos)
+			.HasForeignKey(d => d.Usuario_ParaId);
 
 	}
 }

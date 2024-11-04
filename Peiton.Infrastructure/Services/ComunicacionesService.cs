@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Peiton.Authorization;
-using Peiton.Contracts.Comunicaciones;
+using Peiton.Contracts.Mensajes;
 using Peiton.Core;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;

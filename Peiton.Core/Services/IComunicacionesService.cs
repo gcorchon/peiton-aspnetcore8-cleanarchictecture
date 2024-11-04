@@ -1,4 +1,4 @@
-using Peiton.Contracts.Comunicaciones;
+using Peiton.Contracts.Mensajes;
 
 namespace Peiton.Core.Services;
 
