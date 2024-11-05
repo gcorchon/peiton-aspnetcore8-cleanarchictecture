@@ -124,7 +124,7 @@ public class Tutelado
 
 	public virtual ICollection<CajaIncidencia> CajaIncidencias { get; } = new List<CajaIncidencia>();
 	/* public virtual ICollection<Cita> Citas { get; } = new List<Cita>(); */
-	/* public virtual ICollection<Contacto> Contactos { get; } = new List<Contacto>(); */
+	public virtual ICollection<Contacto> Contactos { get; } = new List<Contacto>();
 	/* public virtual ICollection<ControlCuentaGeneral> ControlesCuentasGenerales { get; } = new List<ControlCuentaGeneral>(); */
 	/* public virtual ICollection<ControlInventario> ControlesInventarios { get; } = new List<ControlInventario>(); */
 	/* public virtual ICollection<ControlRendicion> ControlesRendiciones { get; } = new List<ControlRendicion>(); */

@@ -20,9 +20,9 @@ public class ContactoConfiguration : IEntityTypeConfiguration<Contacto>
 			.WithMany(p => p.Contactos)
 			.HasForeignKey(d => d.ContactoRelacionId);*/
 
-		/*builder.HasOne(d => d.Tutelado)
+		builder.HasOne(d => d.Tutelado)
 			.WithMany(p => p.Contactos)
-			.HasForeignKey(d => d.TuteladoId);*/
+			.HasForeignKey(d => d.TuteladoId);
 
 	}
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Document Editor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+    <h1>Word Document Editor</h1>
+    
+    <!-- Input para cargar el archivo -->
+    <input type="file" id="fileInput" accept=".docx">
+    
+    <!-- Contenedor para mostrar estructura de archivos internos -->
+    <div id="fileStructure" style="margin-top: 20px;"></div>
+    
+    <!-- Caja de texto para mostrar el contenido del archivo seleccionado -->
+    <textarea id="fileContent" style="width: 100%; height: 300px; margin-top: 20px;" placeholder="Contenido del archivo seleccionado"></textarea>
+    
+    <!-- Botón para guardar cambios en el documento .docx -->
+    <button id="saveChanges" style="margin-top: 20px;">Guardar Cambios y Exportar</button>
+    
+    <script src="app.js"></script>
+</body>
+</html>

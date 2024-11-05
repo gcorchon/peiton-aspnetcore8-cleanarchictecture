@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Peiton.Core;
+using Peiton.Core.Services;
 using Peiton.DependencyInjection;
 using RazorLight;
 
@@ -9,13 +10,16 @@ namespace Peiton.Infrastructure;
 public class RazorService : IRazorService
 {
     private readonly RazorLightEngine _razorEngine;
-
-    public RazorService()
+    private readonly ICryptographyService cryptographyService;
+    public RazorService(ICryptographyService cryptographyService)
     {
         _razorEngine = new RazorLightEngineBuilder()
             .UseFileSystemProject(Directory.GetCurrentDirectory())
+            .DisableEncoding()
             .UseMemoryCachingProvider()
             .Build();
+
+        this.cryptographyService = cryptographyService;
     }
 
     public async Task<string> RenderAsync<T>(string templatePath, T model)
@@ -38,5 +42,19 @@ public class RazorService : IRazorService
         var result = await _razorEngine.CompileRenderStringAsync(templateKey, templateContent, model);
 
         return result;
+    }
+
+    public async Task<string> RenderTemplateAsync<T>(string templateContent, T model)
+    {
+        var key = cryptographyService.GetMd5Hash(templateContent);
+        var cacheResult = _razorEngine.Handler.Cache.RetrieveTemplate(key);
+
+        if (cacheResult.Success)
+        {
+            var templatePage = cacheResult.Template.TemplatePageFactory();
+            return await _razorEngine.RenderTemplateAsync(templatePage, model);
+        }
+
+        return await _razorEngine.CompileRenderStringAsync(key, templateContent, model);
     }
 }
