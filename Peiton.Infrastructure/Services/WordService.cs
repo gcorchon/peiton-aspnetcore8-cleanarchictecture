@@ -4,7 +4,7 @@ using Peiton.Core;
 using Peiton.DependencyInjection;
 using System.IO.Compression;
 
-namespace Peiton.Infrastructure;
+namespace Peiton.Infrastructure.Services;
 
 [Injectable(typeof(IWordService), ServiceLifetime.Singleton)]
 public class WordService(IRazorService razorService) : IWordService
@@ -21,32 +21,25 @@ public class WordService(IRazorService razorService) : IWordService
 
         using (var archive = new ZipArchive(resourceStream, ZipArchiveMode.Read, false))
         {
-            using (var outputArchive = new ZipArchive(outputStream, ZipArchiveMode.Create, true))
+            using var outputArchive = new ZipArchive(outputStream, ZipArchiveMode.Create, true);
+            foreach (var entry in archive.Entries)
             {
-                foreach (var entry in archive.Entries)
+                var newEntry = outputArchive.CreateEntry(entry.FullName);
+
+                if (entry.FullName.EndsWith(".xml"))
                 {
-                    // Copiar archivos sin modificaciones
-                    var newEntry = outputArchive.CreateEntry(entry.FullName);
+                    using var reader = new StreamReader(entry.Open(), Encoding.UTF8);
+                    var docxPartContent = await reader.ReadToEndAsync();
+                    var templateContent = await ProcessAsync(docxPartContent, data);
 
-                    // Si es el archivo document.xml, aplicamos el reemplazo de texto
-                    if (entry.FullName.EndsWith(".xml"))
-                    {
-                        using (var reader = new StreamReader(entry.Open(), Encoding.UTF8))
-                        {
-                            var docxPartContent = await reader.ReadToEndAsync();
-                            var templateContent = await ProcessAsync(docxPartContent, data);
-
-                            using var writer = new StreamWriter(newEntry.Open(), Encoding.UTF8);
-                            await writer.WriteAsync(templateContent);
-                        }
-                    }
-                    else
-                    {
-                        // Para otros archivos, copiar el contenido directamente
-                        using var entryStream = entry.Open();
-                        using var newEntryStream = newEntry.Open();
-                        await entryStream.CopyToAsync(newEntryStream);
-                    }
+                    using var writer = new StreamWriter(newEntry.Open(), Encoding.UTF8);
+                    await writer.WriteAsync(templateContent);
+                }
+                else
+                {
+                    using var entryStream = entry.Open();
+                    using var newEntryStream = newEntry.Open();
+                    await entryStream.CopyToAsync(newEntryStream);
                 }
             }
         }

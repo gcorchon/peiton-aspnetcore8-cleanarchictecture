@@ -41,9 +41,9 @@ public class MensajeRepository : RepositoryBase<Mensaje>, IMensajeRepository
 	{
 		if (filter == null) return query;
 
-		if (!string.IsNullOrWhiteSpace(filter.Remitente))
+		if (!string.IsNullOrWhiteSpace(filter.Persona))
 		{
-			query = query.Where(s => s.UsuarioPara.NombreCompleto.Contains(filter.Remitente));
+			query = query.Where(s => s.UsuarioPara.NombreCompleto.Contains(filter.Persona));
 		}
 
 		if (!string.IsNullOrWhiteSpace(filter.Asunto))

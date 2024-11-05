@@ -15,13 +15,15 @@ public class MensajeEnviadoConfiguration : IEntityTypeConfiguration<MensajeEnvia
 		builder.Property(p => p.Usuario_DeId).HasColumnName("Fk_Usuario_De");
 		builder.Property(p => p.Dias).HasComputedColumnSql("(datediff(day,getdate(),dateadd(day,(30),[Fecha])))", false);
 
-		/*builder.HasOne(d => d.Mensaje)
-			.WithMany(p => p.MensajesEnviados)
-			.HasForeignKey(d => d.MensajeId);*/
+		/*
+				builder.HasOne(d => d.Mensaje)
+					.WithMany(p => p.MensajesEnviados)
+					.HasForeignKey(d => d.MensajeId);
+		*/
 
-		/*builder.HasOne(d => d.UsuarioDe)
-			.WithMany(p => p.MensajesEnviados)
-			.HasForeignKey(d => d.Usuario_DeId);*/
+		builder.HasOne(d => d.UsuarioDe)
+			.WithMany(p => p.MensajesEnviados2)
+			.HasForeignKey(d => d.Usuario_DeId);
 
 	}
 }
