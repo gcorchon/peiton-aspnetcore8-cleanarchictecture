@@ -37,5 +37,6 @@ public class ViewModelToDomainProfile : Profile
             .ForMember(ent => ent.Grupos, opt => opt.Ignore())
             .ForMember(ent => ent.Permisos, opt => opt.Ignore())
             .ForMember(ent => ent.Info, opt => opt.MapFrom(v => JsonConvert.SerializeObject(v.Info)));
+        CreateMap<VM.Requerimientos.GuardarRequerimientoRequest, Requerimiento>();
     }
 }
