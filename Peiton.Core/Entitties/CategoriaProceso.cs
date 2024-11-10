@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem(ParentValue = "Fk_CategoriaProceso")]
 public class CategoriaProceso
 {
 	public int Id { get; set; }

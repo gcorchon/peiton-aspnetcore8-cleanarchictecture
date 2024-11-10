@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem]
 public class ConceptoIngresoEstimacionFinanciera
 {
 	public int Id { get; set; }

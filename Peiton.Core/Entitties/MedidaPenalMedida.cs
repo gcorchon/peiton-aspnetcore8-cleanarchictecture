@@ -1,4 +1,9 @@
+using Peiton.Contracts.Common;
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem(ParentValue = "Fk_MedidaPenalNaturaleza")]
 public class MedidaPenalMedida
 {
 	public int Id { get; set; }

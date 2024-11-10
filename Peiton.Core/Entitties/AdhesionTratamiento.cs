@@ -1,4 +1,7 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+[ListItem]
 public class AdhesionTratamiento
 {
 	public int Id { get; set; }

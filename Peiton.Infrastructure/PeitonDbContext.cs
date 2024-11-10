@@ -16,7 +16,7 @@ public class PeitonDbContext : DbContext
 {
     public PeitonDbContext(DbContextOptions<PeitonDbContext> options) : base(options)
     {
-        Console.WriteLine("Creado PeitonDbContext");
+
     }
 
     public string DateAsString(DateTime date) => throw new NotSupportedException();

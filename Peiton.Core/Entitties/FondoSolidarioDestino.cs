@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem(ParentValue = "Fk_FondoSolidarioTipoFondo")]
 public class FondoSolidarioDestino
 {
 	public int Id { get; set; }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Peiton.Core.Mappings;
+using Peiton.ListItems;
 using Peiton.DependencyInjection;
 using System.Reflection;
 
@@ -10,7 +10,10 @@ public static class Extensions
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddInjectable(Assembly.GetExecutingAssembly());
+        services.AddListItemDefinitions(Assembly.GetExecutingAssembly());
 
         return services;
     }
+
+
 }

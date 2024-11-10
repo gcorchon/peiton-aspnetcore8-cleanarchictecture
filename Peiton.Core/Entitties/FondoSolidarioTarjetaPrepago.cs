@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem]
 public class FondoSolidarioTarjetaPrepago
 {
 	public int Id { get; set; }

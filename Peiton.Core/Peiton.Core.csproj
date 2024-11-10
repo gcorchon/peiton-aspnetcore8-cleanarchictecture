@@ -10,14 +10,15 @@
     <ProjectReference Include="..\Peiton.Contracts\Peiton.Contracts.csproj" />
     <ProjectReference Include="..\Peiton.DependencyInjection\Peiton.DependencyInjection.csproj" />
     <ProjectReference Include="..\Peiton.Configuration\Peiton.Configuration.csproj" />
+    <ProjectReference Include="..\Peiton.ListItems\Peiton.ListItems.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MassTransit" Version="8.2.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.10.48" />
   </ItemGroup>
 

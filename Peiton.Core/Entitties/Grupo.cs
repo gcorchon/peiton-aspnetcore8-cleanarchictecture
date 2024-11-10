@@ -1,4 +1,6 @@
+
 namespace Peiton.Core.Entities;
+
 public class Grupo
 {
 	public int Id { get; set; }

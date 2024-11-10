@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem]
 public class EstadoAprobacionInventario
 {
 	public int Id { get; set; }

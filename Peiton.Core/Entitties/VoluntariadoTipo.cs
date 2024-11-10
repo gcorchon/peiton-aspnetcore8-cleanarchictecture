@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem]
 public class VoluntariadoTipo
 {
 	public int Id { get; set; }

@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem(ParentValue = "Fk_AgendaAreaActuacion")]
 public class AgendaActuacion
 {
 	public int Id { get; set; }

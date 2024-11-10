@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem(ParentValue = "Fk_TipoObjetivo")]
 public class ObjetivoSocial
 {
 	public int Id { get; set; }

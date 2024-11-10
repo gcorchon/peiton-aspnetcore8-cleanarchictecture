@@ -1,4 +1,8 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+
+[ListItem(ParentValue = "Fk_TipoServicioApoyoFormal")]
 public class ServicioApoyoFormal
 {
 	public int Id { get; set; }

@@ -1,4 +1,7 @@
+using Peiton.ListItems;
+
 namespace Peiton.Core.Entities;
+[ListItem]
 public class TareaDepartamento
 {
 	public int Id { get; set; }
