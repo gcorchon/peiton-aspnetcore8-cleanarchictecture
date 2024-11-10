@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Peiton.Contracts.Usuarios;
+using Peiton.Core;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -10,10 +11,10 @@ namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IUsuarioRepository))]
 public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
 {
-
-    public UsuarioRepository(PeitonDbContext dbContext) : base(dbContext)
+    private readonly IIdentityService identityService;
+    public UsuarioRepository(PeitonDbContext dbContext, IIdentityService identityService) : base(dbContext)
     {
-
+        this.identityService = identityService;
     }
 
     private readonly static string GetPermissionsSql = @"
@@ -48,6 +49,11 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
         return Task.FromResult(this.GetPermissions(usuarioId));
     }
 
+    public Task<bool> HasPermissionAsync(int permisoId)
+    {
+        return this.HasPermissionAsync(identityService.GetUserId(), permisoId);
+    }
+
     public Task<bool> HasPermissionAsync(int usuarioId, int permisoId)
     {
         var fsf = FormattableStringFactory.Create(HasPermissionSql, usuarioId, permisoId);
@@ -57,6 +63,11 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
     public bool CanViewTutelado(int usuarioId, int tuteladoId)
     {
         return true;
+    }
+
+    public bool CanViewTutelado(int tuteladoId)
+    {
+        return this.CanViewTutelado(identityService.GetUserId(), tuteladoId);
     }
 
     public Task<UsuarioTipo[]> ObtenerUsuariosGruposAsync(string q, int v)
@@ -128,5 +139,12 @@ public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
         }
 
         return query;
+    }
+
+    public async Task<Usuario> GetMeAsync()
+    {
+        var usuario = await this.GetByIdAsync(identityService.GetUserId());
+        if (usuario != null) return usuario;
+        throw new Exception("El usuario no está autenticado");
     }
 }

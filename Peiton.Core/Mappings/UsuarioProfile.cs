@@ -1,5 +1,6 @@
 using AutoMapper;
 using Newtonsoft.Json;
+using Peiton.Authorization;
 using Ent = Peiton.Core.Entities;
 using VM = Peiton.Contracts;
 
@@ -22,5 +23,11 @@ public class UsuarioProfile : Profile
         CreateMap<Ent.Usuario, VM.Usuarios.UsuarioBloqueado>();
 
         CreateMap<Ent.Usuario, VM.Mensajes.Remitente>();
+
+        CreateMap<Ent.Usuario, VM.Usuarios.UsuarioPermisoEmail>()
+            .ForMember(v => v.RecibirMensajes, opt => opt.MapFrom(u => u.Permisos.Any(p => p.Id == PeitonPermission.ComunicacionesRecibirMensajesPorEmail) ||
+                                                                       u.Grupos.SelectMany(g => g.Permisos).Any(p => p.Id == PeitonPermission.ComunicacionesRecibirMensajesPorEmail)))
+            .ForMember(v => v.RecibirMensajesHeredado, opt => opt.MapFrom(u => u.Grupos.SelectMany(g => g.Permisos).Any(p => p.Id == PeitonPermission.ComunicacionesRecibirMensajesPorEmail)));
+
     }
 }

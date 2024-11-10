@@ -81,4 +81,9 @@ public class MensajeRepository : RepositoryBase<Mensaje>, IMensajeRepository
 
 		return query;
 	}
+
+	public Task<int> ContarMensajesSinLeerAsync()
+	{
+		return DbSet.CountAsync(m => !m.Leido && m.Usuario_ParaId == identityService.GetUserId());
+	}
 }

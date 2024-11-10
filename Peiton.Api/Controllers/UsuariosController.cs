@@ -73,4 +73,19 @@ public class UsuariosController(IMapper mapper) : ControllerBase
         await handler.HandleAsync(id);
         return Accepted();
     }
+
+    [HttpPatch("permiso-recibir-emails")]
+    public async Task<IActionResult> CambiarPermisoRecibirEmailsAsync(int id, CambiarPermisoRecibirEmailsHandler handler)
+    {
+        await handler.HandleAsync();
+        return Accepted();
+    }
+
+    [HttpGet("permiso-recibir-emails")]
+    public async Task<IActionResult> PermisoRecibirEmailsAsync(int id, PermisoRecibirEmailsHandler handler)
+    {
+        var usuario = await handler.HandleAsync();
+        var vm = mapper.Map<UsuarioPermisoEmail>(usuario);
+        return Ok(vm);
+    }
 }
