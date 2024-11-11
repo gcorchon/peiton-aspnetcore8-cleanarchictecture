@@ -19,6 +19,41 @@ public class TuteladoRepository : RepositoryBase<Tutelado>, ITuteladoRepository
 	{
 		this.identityService = identityService;
 	}
+
+	public override async Task<Tutelado?> GetByIdAsync(int id)
+	{
+		var profile = await identityService.GetUserProfileAsync();
+
+		if (profile.Perfil == 3) throw new UnauthorizedAccessException("No tienes permiso para ver los datos del tutelado");
+		var tutelado = await base.GetByIdAsync(id);
+
+		if (tutelado == null) return null;
+
+		if (tutelado.Muerto && profile.Muertos) throw new UnauthorizedAccessException("No tienes permiso para ver los datos del tutelado");
+
+		if (profile.Perfil == 2)
+		{
+			var visible = (profile.AbogadoChecked && profile.Abogado.HasValue && profile.Abogado == tutelado.AbogadoId)
+			 || (profile.EconomicoChecked && profile.Economico.HasValue && profile.Economico == tutelado.EconomicoId)
+			 || (profile.TrabajadorChecked && profile.Trabajador.HasValue && profile.Trabajador == tutelado.TrabajadorSocialId)
+			 || (profile.EducadorChecked && profile.Educador.HasValue && profile.Educador == tutelado.EducadorSocialId)
+			 || (profile.TecnicoIntegracionSocialChecked && profile.TecnicoIntegracionSocial.HasValue && profile.TecnicoIntegracionSocial == tutelado.TecnicoIntegracionSocialId)
+			 || (profile.CentroChecked && profile.Centro.HasValue && tutelado.ResidenciaHabitual != null && tutelado.ResidenciaHabitual.Tipo == "C" && tutelado.ResidenciaHabitual.CentroId == profile.Centro)
+			 || (profile.AmasChecked && tutelado.ResidenciaHabitual != null && tutelado.ResidenciaHabitual.Tipo == "C" && tutelado.ResidenciaHabitual.Centro != null && tutelado.ResidenciaHabitual.Centro.Amas)
+			 || (profile.CentroDiaChecked && profile.CentroDia.HasValue && tutelado.ApoyosFormales.Any(apoyo => apoyo.CentroId == profile.CentroDia.Value))
+			 || (profile.CentroOcupacionalChecked && profile.CentroOcupacional.HasValue && tutelado.DatosSociales != null && tutelado.DatosSociales.CentroOcupacionalAMASId == profile.CentroOcupacional)
+			 || (profile.AbogadoExternoChecked && profile.AbogadoExterno.HasValue &&
+										(tutelado.ProcedimientosAdicionales.Any(p => !p.Terminado && p.AbogadoExternoId == profile.AbogadoExterno) ||
+										 tutelado.OtrosAsuntos.Any(p => p.Terminado.HasValue && !p.Terminado.Value && p.AbogadoExternoId == profile.AbogadoExterno)))
+			 || (profile.ContigoAppChecked && tutelado.AppMovilTutelados.Any());
+
+
+			if (!visible) throw new UnauthorizedAccessException("No tienes permiso para ver los datos del tutelado");
+		}
+
+		return tutelado;
+	}
+
 	public async Task<Tutelado[]> ObtenerTuteladosAsync(int page, int total, TuteladosFilter filter)
 	{
 		var profile = await identityService.GetUserProfileAsync();
@@ -106,11 +141,11 @@ public class TuteladoRepository : RepositoryBase<Tutelado>, ITuteladoRepository
 			}
 
 			query = query.Where(predicate);
+		}
 
-			if (profile.Muertos)
-			{
-				query = query.Where(t => !t.Muerto);
-			}
+		if (profile.Muertos)
+		{
+			query = query.Where(t => !t.Muerto);
 		}
 
 		if (!string.IsNullOrWhiteSpace(filter.NumeroExpediente))

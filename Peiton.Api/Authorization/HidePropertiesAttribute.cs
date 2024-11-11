@@ -1,9 +1,7 @@
-﻿using System.Collections.Immutable;
-using System.Dynamic;
+﻿using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Peiton.Core;
-using Peiton.Core.Repositories;
 using Peiton.Serialization;
 
 namespace Peiton.Api.Authorization;
@@ -17,36 +15,18 @@ public class HidePropertiesByRoleAttribute : ServiceFilterAttribute
     }
 }
 
-public class HidePropertiesByRoleFilter : Attribute, IActionFilter
+public class HidePropertiesByRoleFilter(IIdentityService identityService) : Attribute, IAsyncActionFilter
 {
-
-    private readonly IUsuarioRepository usuarioRepository;
-    private readonly IIdentityService identityService;
-
-    public HidePropertiesByRoleFilter(IUsuarioRepository usuarioRepository, IIdentityService identityService)
+    public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        this.usuarioRepository = usuarioRepository;
-        this.identityService = identityService;
-    }
+        var executedContext = await next();
 
-    public void OnActionExecuting(ActionExecutingContext context)
-    {
-        // No es necesario implementar esta interfaz si no necesitas lógica antes de la ejecución del método del controlador
-    }
-
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-        if (context.Result is ObjectResult objectResult && objectResult.Value != null)
+        if (executedContext.Result is ObjectResult objectResult && objectResult.Value != null)
         {
             var result = objectResult.Value;
             var resultType = result.GetType();
 
             IDictionary<string, object?> expando = new ExpandoObject();
-
-            int? userId = identityService.GetUserId();
-            if (userId is null) throw new Exception("User not authenticated");
-
-            var permissions = usuarioRepository.GetPermissions(userId.Value).ToImmutableSortedSet()!;
 
             foreach (var property in resultType.GetProperties())
             {
@@ -54,7 +34,7 @@ public class HidePropertiesByRoleFilter : Attribute, IActionFilter
                 if (customAttributes.Any())
                 {
                     var customAttribute = (SerializeIfAttribute)customAttributes.First();
-                    if (permissions.Contains(customAttribute.Permission))
+                    if (await identityService.HasPermissionAsync(customAttribute.Permission))
                     {
                         expando.Add(property.Name, property.GetValue(result));
                     }
@@ -65,7 +45,7 @@ public class HidePropertiesByRoleFilter : Attribute, IActionFilter
                 }
             }
 
-            context.Result = new ObjectResult((dynamic)expando)
+            executedContext.Result = new ObjectResult((dynamic)expando)
             {
                 ContentTypes = objectResult.ContentTypes,
                 Formatters = objectResult.Formatters,

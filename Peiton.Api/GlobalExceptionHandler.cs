@@ -33,6 +33,7 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
         {
             EntityNotFoundException => (StatusCodes.Status404NotFound, exception.Message),
             ArgumentException => (StatusCodes.Status400BadRequest, exception.Message),
+            UnauthorizedAccessException => (StatusCodes.Status401Unauthorized, exception.Message),
             NotImplementedException => (StatusCodes.Status500InternalServerError, "Todavía no se ha implementado esta funcionalidad"),
             _ => (StatusCodes.Status500InternalServerError, "Internal Server Error")
         };

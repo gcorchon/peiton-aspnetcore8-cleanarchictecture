@@ -66,10 +66,12 @@ builder.Services.AddCore();
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, PeitonPermissionPolicyProvider>();
 builder.Services.AddSingleton<IAuthorizationHandler, PeitonPermissionAuthorizationHandler>();
 
+builder.Services.AddScoped<HidePropertiesByRoleFilter>();
+
 builder.Services.AddControllersWithViews(/*options =>
 {
-    options.Filters.Add(typeof(EntityNotFoundFilter), -3000);
-    options.ModelBinderProviders.Insert(0, new EntityModelBinderProvider());
+    options.Filters.Add(typeof(HidePropertiesByRoleFilter), -3000);
+
 }*/).AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;

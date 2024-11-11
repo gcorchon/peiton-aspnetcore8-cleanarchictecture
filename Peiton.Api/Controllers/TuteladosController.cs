@@ -6,7 +6,9 @@ using Peiton.Authorization;
 using Peiton.Contracts.Caja;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.Tutelados;
+using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Cajas;
+using Peiton.Core.UseCases.Common;
 using Peiton.Core.UseCases.GestionIndividual;
 using Peiton.Core.UseCases.Tutelados;
 
@@ -22,6 +24,15 @@ public class TuteladosController(IMapper mapper) : ControllerBase
         var data = await handler.HandleAsync(filter, pagination);
         var vm = mapper.Map<IEnumerable<TuteladoListItem>>(data.Items);
         return this.PaginatedResult(vm, data.Total);
+    }
+
+    [HttpGet("{id:int}/datos-generales")]
+    [HidePropertiesByRole]
+    public async Task<IActionResult> DatosGeneralesAsync(int id, TuteladoHandler handler)
+    {
+        var data = await handler.HandleAsync(id);
+        var vm = mapper.Map<TuteladoViewModel>(data);
+        return Ok(vm);
     }
 
     [HttpGet("{id}/historico-movimientos-caja")]
