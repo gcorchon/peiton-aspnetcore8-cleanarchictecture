@@ -108,7 +108,7 @@ public class Tutelado
 	public virtual ICollection<VwCajaAMTA> VwCajaAMTA { get; } = new List<VwCajaAMTA>();
 
 	/* public virtual ICollection<Agenda> Entradas { get; } = new List<Agenda>(); */
-	/* public virtual ICollection<ApoyoFormal> ApoyosFormales { get; } = new List<ApoyoFormal>(); */
+	public virtual ICollection<ApoyoFormal> ApoyosFormales { get; } = new List<ApoyoFormal>();
 	/* public virtual ICollection<ApoyoInformal> ApoyosInformales { get; } = new List<ApoyoInformal>(); */
 	/* public virtual ICollection<AppMovilCita> AppMovilCitas { get; } = new List<AppMovilCita>(); */
 	/* public virtual ICollection<AppMovilRegistroDiario> AppMovilRegistrosDiarios { get; } = new List<AppMovilRegistroDiario>(); */
@@ -149,10 +149,10 @@ public class Tutelado
 	/* public virtual ICollection<Inmueble> Inmuebles { get; } = new List<Inmueble>(); */
 	/* public virtual ICollection<MedidaPenal> MedidasPenales { get; } = new List<MedidaPenal>(); */
 	/* public virtual ICollection<NotaSimple> NotasSimples { get; } = new List<NotaSimple>(); */
-	/* public virtual ICollection<OtroAsunto> OtrosAsuntos { get; } = new List<OtroAsunto>(); */
+	public virtual ICollection<OtroAsunto> OtrosAsuntos { get; } = new List<OtroAsunto>();
 	/* public virtual ICollection<PlanDePension> PlanesDePensiones { get; } = new List<PlanDePension>(); */
 	/* public virtual ICollection<Prestamo> Prestamos { get; } = new List<Prestamo>(); */
-	/* public virtual ICollection<ProcedimientoAdicional> ProcedimientosAdicionales { get; } = new List<ProcedimientoAdicional>(); */
+	public virtual ICollection<ProcedimientoAdicional> ProcedimientosAdicionales { get; } = new List<ProcedimientoAdicional>();
 	/* public virtual ICollection<ProductoManual> ProductosManuales { get; } = new List<ProductoManual>(); */
 	/* public virtual ICollection<Queja> Quejas { get; } = new List<Queja>(); */
 

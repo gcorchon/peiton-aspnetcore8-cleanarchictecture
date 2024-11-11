@@ -46,9 +46,9 @@ public class ApoyoFormalConfiguration : IEntityTypeConfiguration<ApoyoFormal>
 			.WithMany(p => p.ApoyosFormales)
 			.HasForeignKey(d => d.TipoServicioApoyoFormalId);*/
 
-		/*builder.HasOne(d => d.Tutelado)
+		builder.HasOne(d => d.Tutelado)
 			.WithMany(p => p.ApoyosFormales)
-			.HasForeignKey(d => d.TuteladoId);*/
+			.HasForeignKey(d => d.TuteladoId);
 
 		/*builder.HasOne(d => d.Centro)
 			.WithMany(p => p.ApoyosFormales)

@@ -26,9 +26,9 @@ public class ProcedimientoAdicionalConfiguration : IEntityTypeConfiguration<Proc
 			.WithMany(p => p.ProcedimientosAdicionales)
 			.HasForeignKey(d => d.ProcedimientoId);*/
 
-		/*builder.HasOne(d => d.Tutelado)
+		builder.HasOne(d => d.Tutelado)
 			.WithMany(p => p.ProcedimientosAdicionales)
-			.HasForeignKey(d => d.TuteladoId);*/
+			.HasForeignKey(d => d.TuteladoId);
 
 	}
 }

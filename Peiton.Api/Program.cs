@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 ConfigurationManager configuration = builder.Configuration!;
 
-builder.Services.AddResponseCompression(options =>
+/*builder.Services.AddResponseCompression(options =>
 {
     options.EnableForHttps = true;
     options.Providers.Add<BrotliCompressionProvider>();
@@ -30,6 +30,7 @@ builder.Services.Configure<GzipCompressionProviderOptions>(options =>
 {
     options.Level = CompressionLevel.SmallestSize;
 });
+*/
 
 builder.Services.AddProblemDetails()
                 .AddExceptionHandler<GlobalExceptionHandler>();
@@ -81,7 +82,7 @@ builder.Services.AddControllersWithViews(/*options =>
 
 var app = builder.Build();
 
-app.UseResponseCompression();
+//app.UseResponseCompression();
 app.UseStatusCodePages();
 app.UseExceptionHandler();
 

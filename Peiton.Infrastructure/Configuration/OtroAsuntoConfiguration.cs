@@ -26,9 +26,9 @@ public class OtroAsuntoConfiguration : IEntityTypeConfiguration<OtroAsunto>
 			.WithMany(p => p.OtrosAsuntos)
 			.HasForeignKey(d => d.OtroAsuntoTipoId);*/
 
-		/*builder.HasOne(d => d.Tutelado)
+		builder.HasOne(d => d.Tutelado)
 			.WithMany(p => p.OtrosAsuntos)
-			.HasForeignKey(d => d.TuteladoId);*/
+			.HasForeignKey(d => d.TuteladoId);
 
 	}
 }

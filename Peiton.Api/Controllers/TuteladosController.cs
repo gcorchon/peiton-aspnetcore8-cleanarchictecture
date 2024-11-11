@@ -5,6 +5,7 @@ using Peiton.Api.Extensions;
 using Peiton.Authorization;
 using Peiton.Contracts.Caja;
 using Peiton.Contracts.Common;
+using Peiton.Contracts.Tutelados;
 using Peiton.Core.UseCases.Cajas;
 using Peiton.Core.UseCases.GestionIndividual;
 using Peiton.Core.UseCases.Tutelados;
@@ -15,6 +16,14 @@ namespace Peiton.Api.Controllers;
 [Route("api/[controller]")]
 public class TuteladosController(IMapper mapper) : ControllerBase
 {
+    [HttpGet()]
+    public async Task<IActionResult> TuteladosAsync([FromQuery] TuteladosFilter filter, [FromQuery] Pagination pagination, TuteladosHandler handler)
+    {
+        var data = await handler.HandleAsync(filter, pagination);
+        var vm = mapper.Map<IEnumerable<TuteladoListItem>>(data.Items);
+        return this.PaginatedResult(vm, data.Total);
+    }
+
     [HttpGet("{id}/historico-movimientos-caja")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
     public async Task<IActionResult> HistoricoMovimientosCajaAsync([FromQuery] HistoricoMovimientosFilter filter, [FromQuery] Pagination pagination, int id, HistoricoMovimientosCajaHandler handler)
@@ -32,11 +41,13 @@ public class TuteladosController(IMapper mapper) : ControllerBase
         return Ok(vm);
     }
 
-    [HttpGet()]
+    [HttpGet("por-nombre")]
     public async Task<IActionResult> TuteladosPorNombreAsync([FromQuery] string query, ObtenerTuteladosPorNombreHandler handler)
     {
         var data = await handler.HandleAsync(query);
         var vm = mapper.Map<IEnumerable<ListItem>>(data);
         return Ok(vm);
     }
+
+
 }
