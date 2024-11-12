@@ -5,6 +5,7 @@ using Peiton.Api.Extensions;
 using Peiton.Authorization;
 using Peiton.Contracts.Caja;
 using Peiton.Contracts.Common;
+using Peiton.Contracts.DatosJuridicos;
 using Peiton.Contracts.Tutelados;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Cajas;
@@ -32,6 +33,15 @@ public class TuteladosController(IMapper mapper) : ControllerBase
     {
         var data = await handler.HandleAsync(id);
         var vm = mapper.Map<DatosGeneralesViewModel>(data);
+        return Ok(vm);
+    }
+
+    [HttpGet("{id:int}/datos-juridicos")]
+    //[HidePropertiesByRole]
+    public async Task<IActionResult> DatosJuridicosAsync(int id, TuteladoHandler handler)
+    {
+        var data = await handler.HandleAsync(id);
+        var vm = mapper.Map<DatosJuridicosViewModel>(data.DatosJuridicos);
         return Ok(vm);
     }
 
