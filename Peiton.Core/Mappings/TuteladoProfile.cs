@@ -8,7 +8,7 @@ public class TuteladoProfile : Profile
 
     public TuteladoProfile()
     {
-        CreateMap<Ent.Tutelado, VM.Tutelados.TuteladoViewModel>();
+        CreateMap<Ent.Tutelado, VM.Tutelados.DatosGeneralesViewModel>();
         CreateMap<Ent.Tutelado, VM.Tutelados.TuteladoListItem>()
             .ForMember(vm => vm.NombreCompleto, opt => opt.MapFrom(t => t.Apellidos + ", " + t.Nombre))
             .ForMember(vm => vm.Cargo, opt => opt.MapFrom(t => t.DatosJuridicos != null && t.DatosJuridicos.Nombramiento != null ? t.DatosJuridicos.Nombramiento.Descripcion : null));

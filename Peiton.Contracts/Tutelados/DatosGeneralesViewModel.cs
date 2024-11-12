@@ -1,10 +1,12 @@
 ﻿using Peiton.Authorization;
+using Peiton.Contracts.Contactos;
+using Peiton.Contracts.ResidenciasHabituales;
+using Peiton.Contracts.SegurosContratados;
 using Peiton.Serialization;
 
 namespace Peiton.Contracts.Tutelados;
-public class TuteladoViewModel
+public class DatosGeneralesViewModel
 {
-    public int Id { get; set; }
     public string NumeroExpediente { get; set; } = string.Empty;
     public string Nombre { get; set; } = string.Empty;
     public string Apellido1 { get; set; } = string.Empty;
@@ -163,4 +165,13 @@ public class TuteladoViewModel
 
     [SerializeIf(PeitonPermission.GestionIndividualDatosPersonalesEquipoDefinitivo)]
     public DateTime? FechaEquipoDefinitivo { get; set; }
+
+    [SerializeIf(PeitonPermission.GestionIndividualDatosPersonalesResidencia)]
+    public ResidenciaHabitualViewModel? ResidenciaHabitual { get; set; }
+
+    [SerializeIf(PeitonPermission.GestionIndividualDatosPersonalesContactos)]
+    public IEnumerable<ContactoViewModel> Contactos { get; set; } = null!;
+
+    [SerializeIf(PeitonPermission.GestionIndividualDatosPersonalesSeguros)]
+    public IEnumerable<SeguroContratadoViewModel> SegurosContratados { get; set; } = null!;
 }

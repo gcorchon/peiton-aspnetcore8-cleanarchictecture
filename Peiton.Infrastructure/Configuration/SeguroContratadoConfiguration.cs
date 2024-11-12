@@ -32,5 +32,7 @@ public class SeguroContratadoConfiguration : IEntityTypeConfiguration<SeguroCont
 			.WithMany(p => p.SegurosContratados)
 			.HasForeignKey(d => d.TuteladoId);
 
+		builder.Navigation(s => s.Inmueble).AutoInclude();
+
 	}
 }

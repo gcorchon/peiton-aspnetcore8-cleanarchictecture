@@ -31,7 +31,7 @@ public class TuteladosController(IMapper mapper) : ControllerBase
     public async Task<IActionResult> DatosGeneralesAsync(int id, TuteladoHandler handler)
     {
         var data = await handler.HandleAsync(id);
-        var vm = mapper.Map<TuteladoViewModel>(data);
+        var vm = mapper.Map<DatosGeneralesViewModel>(data);
         return Ok(vm);
     }
 

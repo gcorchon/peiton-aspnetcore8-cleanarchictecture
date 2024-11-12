@@ -12,5 +12,8 @@ public class CentroProfile : Profile
         CreateMap<Ent.Centro, VM.Common.ListItem>()
             .ForMember(v => v.Value, opt => opt.MapFrom(c => c.Id))
             .ForMember(v => v.Text, opt => opt.MapFrom(c => c.Nombre));
+
+        CreateMap<Ent.Centro, VM.Centros.CentroResidenciaHabitual>()
+            .ForMember(v => v.Telefono, opt => opt.MapFrom(c => c.Telefono1 ?? c.Telefono2));
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 namespace Peiton.Core.Entities;
 public class Centro
 {
@@ -27,4 +28,30 @@ public class Centro
 	/* public virtual ICollection<ResidenciaHabitual> ResidenciasHabituales { get; } = new List<ResidenciaHabitual>(); */
 	/* public virtual ICollection<ResidenciaHabitualHistorico> ResidenciasHabitualesHistoricos { get; } = new List<ResidenciaHabitualHistorico>(); */
 
+	public string? DireccionCompleta
+	{
+		get
+		{
+			string? provincia = null;
+			if (!string.IsNullOrWhiteSpace(Provincia))
+			{
+				provincia = $"({Provincia})";
+			}
+
+			var parts1 = new string?[] { Via, Direccion, Numero }.Where(p => !string.IsNullOrWhiteSpace(p)).Select(p => p!.Trim());
+
+			if (!parts1.Any()) return null;
+
+			var parts2 = new string?[] { CP, Poblacion, provincia }.Where(p => !string.IsNullOrWhiteSpace(p)).Select(p => p!.Trim());
+
+			var fullParts = new List<string>() { string.Join(" ", parts1) };
+
+			if (parts2.Any())
+			{
+				fullParts.Add(string.Join(" ", parts2));
+			}
+
+			return string.Join(", ", fullParts);
+		}
+	}
 }
