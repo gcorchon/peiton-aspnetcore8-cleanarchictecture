@@ -219,7 +219,7 @@
 			"{",
 			"\tpublic ${TM_FILENAME_BASE}()",
 			"\t{",
-			"",
+			"\t\tCreateMap<Ent.${TM_FILENAME_BASE/(.*)Profile$/$1/},VM.$1>()",
 			"\t}",
 			"}",
 		],
