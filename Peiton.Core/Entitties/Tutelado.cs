@@ -147,7 +147,7 @@ public class Tutelado
 	/* public virtual ICollection<InformePersonalPIA> InformesPersonalesPIA { get; } = new List<InformePersonalPIA>(); */
 	/* public virtual ICollection<IngresoEstimacionFinanciera> IngresosEstimacionesFinancieras { get; } = new List<IngresoEstimacionFinanciera>(); */
 	/* public virtual ICollection<Inmueble> Inmuebles { get; } = new List<Inmueble>(); */
-	/* public virtual ICollection<MedidaPenal> MedidasPenales { get; } = new List<MedidaPenal>(); */
+	public virtual ICollection<MedidaPenal> MedidasPenales { get; } = new List<MedidaPenal>();
 	/* public virtual ICollection<NotaSimple> NotasSimples { get; } = new List<NotaSimple>(); */
 	public virtual ICollection<OtroAsunto> OtrosAsuntos { get; } = new List<OtroAsunto>();
 	/* public virtual ICollection<PlanDePension> PlanesDePensiones { get; } = new List<PlanDePension>(); */
@@ -169,7 +169,7 @@ public class Tutelado
 	/* public virtual ICollection<TuteladoAllegado> TuteladosAllegados { get; } = new List<TuteladoAllegado>(); */
 	/* public virtual ICollection<TuteladoCompania> TuteladosCompanias { get; } = new List<TuteladoCompania>(); */
 	/* public virtual ICollection<TuteladoDiagnostico> TuteladosDiagnosticos { get; } = new List<TuteladoDiagnostico>(); */
-	/* public virtual ICollection<TuteladoObjetivo> TuteladosObjetivos { get; } = new List<TuteladoObjetivo>(); */
+	public virtual ICollection<TuteladoObjetivo> Objetivos { get; } = new List<TuteladoObjetivo>();
 	/* public virtual ICollection<TuteladoRelacionConvivencional> TuteladosRelacionesConvivencionales { get; } = new List<TuteladoRelacionConvivencional>(); */
 	/* public virtual ICollection<TuteladoSaludFisica> TuteladosSaludFisicas { get; } = new List<TuteladoSaludFisica>(); */
 	/* public virtual ICollection<TuteladoSaludPsiquica> TuteladosSaludPsiquicas { get; } = new List<TuteladoSaludPsiquica>(); */

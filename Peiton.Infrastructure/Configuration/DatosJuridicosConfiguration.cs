@@ -39,6 +39,8 @@ public class DatosJuridicosConfiguration : IEntityTypeConfiguration<DatosJuridic
 			.WithOne(p => p.DatosJuridicos)
 			.HasForeignKey<DatosJuridicos>(t => t.TuteladoId);
 
+		builder.Navigation(p => p.Juzgado).AutoInclude();
+
 		/*builder.HasOne(d => d.ArchivoDocumentoJura)
 			.WithMany(p => p.DatosJuridicosArchivoDocumentoJura)
 			.HasForeignKey(d => d.Archivo_DocumentoJuraId);*/

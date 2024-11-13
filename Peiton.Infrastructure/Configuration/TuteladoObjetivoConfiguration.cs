@@ -21,9 +21,11 @@ public class TuteladoObjetivoConfiguration : IEntityTypeConfiguration<TuteladoOb
 			.WithMany(p => p.TuteladosObjetivos)
 			.HasForeignKey(d => d.TipoObjetivoId);*/
 
-		/*builder.HasOne(d => d.Tutelado)
-			.WithMany(p => p.TuteladosObjetivos)
-			.HasForeignKey(d => d.TuteladoId);*/
+		builder.HasOne(d => d.Tutelado)
+			.WithMany(p => p.Objetivos)
+			.HasForeignKey(d => d.TuteladoId);
+
+		builder.Navigation(to => to.ObjetivoSocial).AutoInclude();
 
 	}
 }

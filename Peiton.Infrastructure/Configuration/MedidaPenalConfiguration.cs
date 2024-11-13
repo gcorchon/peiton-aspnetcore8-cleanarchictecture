@@ -17,6 +17,7 @@ public class MedidaPenalConfiguration : IEntityTypeConfiguration<MedidaPenal>
 		builder.Property(p => p.MedidaPenalMedidaId).HasColumnName("Fk_MedidaPenalMedida");
 		builder.Property(p => p.Suspendida).IsRequired();
 
+		builder.Navigation(p => p.Juzgado).AutoInclude();
 		/*builder.HasOne(d => d.Juzgado)
 			.WithMany(p => p.MedidasPenales)
 			.HasForeignKey(d => d.JuzgadoId);*/

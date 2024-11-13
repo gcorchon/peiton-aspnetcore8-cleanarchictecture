@@ -1,11 +1,15 @@
 using Peiton.Contracts.Common;
+using Peiton.Contracts.MedidasPenales;
+using Peiton.Contracts.Procedimientos;
+using Peiton.Contracts.ProcedimientosAdicionales;
+using Peiton.Contracts.TuteladoObjetivos;
 
 namespace Peiton.Contracts.DatosJuridicos;
 
 public class DatosJuridicosViewModel
 {
     public ListItem? Juzgado { get; set; }
-    public int? ProcedimientoId { get; set; }
+    public ProcedimientoViewModel? Procedimiento { get; set; }
     public string? NumeroProcedimiento { get; set; }
     public int? NombramientoId { get; set; }
     public int? PartidoJudicialInhibicionId { get; set; }
@@ -45,5 +49,7 @@ public class DatosJuridicosViewModel
     public decimal? LimiteGastoExtraOrdinario { get; set; }
     public bool PresentarLexnet { get; set; }
     public DateTime? FechaComunicacionBajaJuzgado { get; set; }
-    //public virtual SolicitanteRevision? SolicitanteRevision { get; set; }
+    public IEnumerable<ProcedimientoAdicionalViewModel> ProcedimientosAdicionales { get; set; } = null!;
+    public IEnumerable<MedidaPenalViewModel> MedidasPenales { get; set; } = null!;
+    public IEnumerable<TuteladoObjetivoViewModel> ObjetivosJuridicos { get; set; } = null!;
 }

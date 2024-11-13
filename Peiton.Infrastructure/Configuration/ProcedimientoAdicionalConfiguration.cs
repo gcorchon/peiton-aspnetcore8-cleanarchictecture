@@ -30,5 +30,8 @@ public class ProcedimientoAdicionalConfiguration : IEntityTypeConfiguration<Proc
 			.WithMany(p => p.ProcedimientosAdicionales)
 			.HasForeignKey(d => d.TuteladoId);
 
+
+		builder.Navigation(p => p.Juzgado).AutoInclude();
+
 	}
 }
