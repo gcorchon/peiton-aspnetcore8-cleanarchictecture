@@ -160,7 +160,7 @@ public class TuteladoConfiguration : IEntityTypeConfiguration<Tutelado>
 			.WithMany(p => p.Tutelados)
 			.HasForeignKey(d => d.ValoracionTutorId);*/
 
-		/*builder.HasMany(d => d.AdiccionesComportamentales)
+		builder.HasMany(d => d.AdiccionesComportamentales)
 			.WithMany(p => p.Tutelados)
 			.UsingEntity<Dictionary<string, object>>(
 		"TuteladoAdiccionComportamental",
@@ -170,9 +170,9 @@ public class TuteladoConfiguration : IEntityTypeConfiguration<Tutelado>
 		{
 			j.HasKey("Fk_Tutelado", "Fk_AdiccionComportamental");
 			j.ToTable("TuteladoAdiccionComportamental");
-			});*/
+		});
 
-		/*builder.HasMany(d => d.AdiccionesSustancias)
+		builder.HasMany(d => d.AdiccionesSustancias)
 			.WithMany(p => p.Tutelados)
 			.UsingEntity<Dictionary<string, object>>(
 		"TuteladoAdiccionSustancia",
@@ -182,7 +182,7 @@ public class TuteladoConfiguration : IEntityTypeConfiguration<Tutelado>
 		{
 			j.HasKey("Fk_Tutelado", "Fk_AdiccionSustancia");
 			j.ToTable("TuteladoAdiccionSustancia");
-			});*/
+		});
 
 		/*builder.HasMany(d => d.ApoyosExternos)
 			.WithMany(p => p.Tutelados)
@@ -196,7 +196,7 @@ public class TuteladoConfiguration : IEntityTypeConfiguration<Tutelado>
 			j.ToTable("TuteladoApoyoExterno");
 			});*/
 
-		/*builder.HasMany(d => d.DiscapacidadesTipos)
+		builder.HasMany(d => d.DiscapacidadesTipos)
 			.WithMany(p => p.Tutelados)
 			.UsingEntity<Dictionary<string, object>>(
 		"TuteladoDiscapacidadTipo",
@@ -206,7 +206,31 @@ public class TuteladoConfiguration : IEntityTypeConfiguration<Tutelado>
 		{
 			j.HasKey("Fk_Tutelado", "Fk_DiscapacidadTipo");
 			j.ToTable("TuteladoDiscapacidadTipo");
-			});*/
+		});
+
+		builder.HasMany(d => d.DiscapacidadesServicios)
+			.WithMany(p => p.Tutelados)
+			.UsingEntity<Dictionary<string, object>>(
+		"TuteladoDiscapacidadServicio",
+		l => l.HasOne<DiscapacidadServicio>().WithMany().HasForeignKey("Fk_DiscapacidadServicio"),
+		r => r.HasOne<Tutelado>().WithMany().HasForeignKey("Fk_Tutelado"),
+		j =>
+		{
+			j.HasKey("Fk_Tutelado", "Fk_DiscapacidadServicio");
+			j.ToTable("TuteladoDiscapacidadServicio");
+		});
+
+		builder.HasMany(d => d.DiscapacidadesPVSs)
+			.WithMany(p => p.Tutelados)
+			.UsingEntity<Dictionary<string, object>>(
+		"TuteladoDiscapacidadPVS",
+		l => l.HasOne<DiscapacidadPVS>().WithMany().HasForeignKey("Fk_DiscapacidadPVS"),
+		r => r.HasOne<Tutelado>().WithMany().HasForeignKey("Fk_Tutelado"),
+		j =>
+		{
+			j.HasKey("Fk_Tutelado", "Fk_DiscapacidadPVS");
+			j.ToTable("TuteladoDiscapacidadPVS");
+		});
 
 		/*builder.HasMany(d => d.TiposCuratelas)
 			.WithMany(p => p.Tutelados)

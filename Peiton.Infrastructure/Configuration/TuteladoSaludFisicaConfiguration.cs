@@ -32,9 +32,9 @@ public class TuteladoSaludFisicaConfiguration : IEntityTypeConfiguration<Tutelad
 			.WithMany(p => p.TuteladosSaludFisicas)
 			.HasForeignKey(d => d.SituacionSaludId);*/
 
-		/*builder.HasOne(d => d.Tutelado)
-			.WithMany(p => p.TuteladosSaludFisicas)
-			.HasForeignKey(d => d.TuteladoId);*/
+		builder.HasOne(d => d.Tutelado)
+			.WithMany(p => p.RegistrosSaludFisica)
+			.HasForeignKey(d => d.TuteladoId);
 
 	}
 }
