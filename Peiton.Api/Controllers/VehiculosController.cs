@@ -1,8 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Peiton.Contracts.Vehiculos;
-using Peiton.Core.UseCases.Common;
-using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Vehiculos;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,10 +11,10 @@ namespace Peiton.Api.Controllers;
 public class VehiculosController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> VehiculosAsync([FromQuery][Required] int tuteladoId, EntityHandler<Tutelado> handler)
+    public async Task<IActionResult> VehiculosAsync([FromQuery][Required] int tuteladoId, VehiculosHandler handler)
     {
         var data = await handler.HandleAsync(tuteladoId);
-        var vm = mapper.Map<IEnumerable<VehiculoListItem>>(data.Vehiculos);
+        var vm = mapper.Map<IEnumerable<VehiculoListItem>>(data);
         return Ok(vm);
     }
 

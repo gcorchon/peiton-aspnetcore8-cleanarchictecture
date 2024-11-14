@@ -146,7 +146,7 @@ public class Tutelado
 	/* public virtual ICollection<InformePersonal> InformesPersonales { get; } = new List<InformePersonal>(); */
 	/* public virtual ICollection<InformePersonalPIA> InformesPersonalesPIA { get; } = new List<InformePersonalPIA>(); */
 	public virtual ICollection<IngresoEstimacionFinanciera> IngresosEstimacionesFinancieras { get; } = new List<IngresoEstimacionFinanciera>();
-	/* public virtual ICollection<Inmueble> Inmuebles { get; } = new List<Inmueble>(); */
+	public virtual ICollection<Inmueble> Inmuebles { get; } = new List<Inmueble>();
 	public virtual ICollection<MedidaPenal> MedidasPenales { get; } = new List<MedidaPenal>();
 	/* public virtual ICollection<NotaSimple> NotasSimples { get; } = new List<NotaSimple>(); */
 	public virtual ICollection<OtroAsunto> OtrosAsuntos { get; } = new List<OtroAsunto>();
@@ -164,7 +164,7 @@ public class Tutelado
 	/* public virtual ICollection<Tarea> Tareas { get; } = new List<Tarea>(); */
 	/* public virtual ICollection<TareaAgenda> TareasEntradas { get; } = new List<TareaAgenda>(); */
 	/* public virtual ICollection<TeAppoyo> TeAppoyos { get; } = new List<TeAppoyo>(); */
-	/* public virtual ICollection<TributoTutelado> TributosTutelados { get; } = new List<TributoTutelado>(); */
+	public virtual ICollection<TributoTutelado> TributosTutelados { get; } = new List<TributoTutelado>();
 	/* public virtual ICollection<TuteladoActividad> TuteladosActividades { get; } = new List<TuteladoActividad>(); */
 	/* public virtual ICollection<TuteladoAllegado> TuteladosAllegados { get; } = new List<TuteladoAllegado>(); */
 	/* public virtual ICollection<TuteladoCompania> TuteladosCompanias { get; } = new List<TuteladoCompania>(); */

@@ -7,6 +7,6 @@ public class DatosEconomicosCajaProfile : Profile
 {
     public DatosEconomicosCajaProfile()
     {
-        CreateMap<Ent.DatosEconomicosCaja, VM.DatosEconomicosCaja.DatosEconomicosCajaViewModel>().ReverseMap();
+        CreateMap<Ent.DatosEconomicosCaja, VM.DatosEconomicosCajaFuerte.DatosEconomicosCajaViewModel>().ReverseMap();
     }
 }

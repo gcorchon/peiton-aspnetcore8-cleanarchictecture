@@ -13,10 +13,10 @@ namespace Peiton.Api.Controllers;
 public class SueldosPensionesController(IMapper mapper) : ControllerBase
 {
     [HttpGet("")]
-    public async Task<IActionResult> SueldosPensionesAsync([FromQuery][Required] int tuteladoId, EntityHandler<Tutelado> handler)
+    public async Task<IActionResult> SueldosPensionesAsync([FromQuery][Required] int tuteladoId, SueldosPensionesHandler handler)
     {
         var data = await handler.HandleAsync(tuteladoId);
-        var vm = mapper.Map<IEnumerable<SueldoPensionListItem>>(data.SueldosPensiones);
+        var vm = mapper.Map<IEnumerable<SueldoPensionListItem>>(data);
         return Ok(vm);
     }
 

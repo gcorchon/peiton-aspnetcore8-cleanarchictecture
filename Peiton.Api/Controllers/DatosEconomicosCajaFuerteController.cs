@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Peiton.Api.Authorization;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Common;
-using Peiton.Contracts.DatosEconomicosCaja;
-using Peiton.Core.UseCases.DatosEconomicosCaja;
+using Peiton.Contracts.DatosEconomicosCajaFuerte;
+using Peiton.Core.UseCases.DatosEconomicosCajaFuerte;
 
 namespace Peiton.Api.Controllers;
 
 [ApiController]
-[Route("api/tutelados/{id:int}/datos-economicos/caja")]
+[Route("api/tutelados/{id:int}/datos-economicos/caja-fuerte")]
 public class DatosEconomicosCajaController(IMapper mapper) : ControllerBase
 {
     [HttpGet()]

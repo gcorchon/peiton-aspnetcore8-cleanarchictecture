@@ -1,4 +1,4 @@
-namespace Peiton.Contracts.DatosEconomicosCaja;
+namespace Peiton.Contracts.DatosEconomicosCajaFuerte;
 
 public class DatosEconomicosCajaViewModel
 {

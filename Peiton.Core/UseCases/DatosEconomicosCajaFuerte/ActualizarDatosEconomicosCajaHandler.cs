@@ -1,10 +1,10 @@
-using Peiton.Contracts.DatosEconomicosCaja;
+using Peiton.Contracts.DatosEconomicosCajaFuerte;
 using Peiton.Core.Repositories;
 using Ent = Peiton.Core.Entities;
 using Peiton.DependencyInjection;
 using AutoMapper;
 
-namespace Peiton.Core.UseCases.DatosEconomicosCaja;
+namespace Peiton.Core.UseCases.DatosEconomicosCajaFuerte;
 
 [Injectable]
 public class ActualizarDatosEconomicosCajaHandler(IMapper mapper, IDatosEconomicosCajaRepository datosEconomicosCajaRepository, IUnitOfWork unitOfWork)

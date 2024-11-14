@@ -18,6 +18,9 @@ public class TributoTuteladoConfiguration : IEntityTypeConfiguration<TributoTute
 		builder.Property(p => p.Baja).IsRequired();
 		builder.Property(p => p.Matricula).HasMaxLength(20);
 		builder.Property(p => p.Importe).HasColumnType("money");
+
+		builder.Navigation(p => p.Tributo).AutoInclude();
+
 		/*builder.HasOne(d => d.Tributo)
 			.WithMany(p => p.TributosTutelados)
 			.HasForeignKey(d => d.TributoId);*/
