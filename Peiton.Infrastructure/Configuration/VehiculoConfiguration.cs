@@ -15,6 +15,7 @@ public class VehiculoConfiguration : IEntityTypeConfiguration<Vehiculo>
 		builder.Property(p => p.Matricula).HasMaxLength(20);
 		builder.Property(p => p.Baja).IsRequired();
 
+		builder.Navigation(p => p.TipoVehiculo).AutoInclude();
 		/*builder.HasOne(d => d.TipoVehiculo)
 			.WithMany(p => p.Vehiculos)
 			.HasForeignKey(d => d.TipoVehiculoId);*/

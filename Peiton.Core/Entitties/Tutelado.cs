@@ -156,7 +156,7 @@ public class Tutelado
 	/* public virtual ICollection<ProductoManual> ProductosManuales { get; } = new List<ProductoManual>(); */
 	/* public virtual ICollection<Queja> Quejas { get; } = new List<Queja>(); */
 
-	/* public virtual ICollection<SeguroAhorro> SegurosAhorros { get; } = new List<SeguroAhorro>(); */
+	public virtual ICollection<SeguroAhorro> SegurosAhorro { get; } = new List<SeguroAhorro>();
 	public virtual ICollection<SeguroContratado> SegurosContratados { get; } = new List<SeguroContratado>();
 	/* public virtual ICollection<Senalamiento> Senalamientos { get; } = new List<Senalamiento>(); */
 	/* public virtual ICollection<Sucesion> Sucesiones { get; } = new List<Sucesion>(); */
@@ -173,7 +173,7 @@ public class Tutelado
 	/* public virtual ICollection<TuteladoRelacionConvivencional> TuteladosRelacionesConvivencionales { get; } = new List<TuteladoRelacionConvivencional>(); */
 	public virtual ICollection<TuteladoSaludFisica> RegistrosSaludFisica { get; } = new List<TuteladoSaludFisica>();
 	public virtual ICollection<TuteladoSaludPsiquica> RegistrosSaludPsiquica { get; } = new List<TuteladoSaludPsiquica>();
-	/* public virtual ICollection<Vehiculo> Vehiculos { get; } = new List<Vehiculo>(); */
+	public virtual ICollection<Vehiculo> Vehiculos { get; } = new List<Vehiculo>();
 	/* public virtual ICollection<Voluntariado> Voluntariados { get; } = new List<Voluntariado>(); */
 	public virtual ICollection<AdiccionComportamental> AdiccionesComportamentales { get; } = new List<AdiccionComportamental>();
 	public virtual ICollection<AdiccionSustancia> AdiccionesSustancias { get; } = new List<AdiccionSustancia>();
