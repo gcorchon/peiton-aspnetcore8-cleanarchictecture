@@ -160,7 +160,7 @@ public class Tutelado
 	public virtual ICollection<SeguroContratado> SegurosContratados { get; } = new List<SeguroContratado>();
 	/* public virtual ICollection<Senalamiento> Senalamientos { get; } = new List<Senalamiento>(); */
 	/* public virtual ICollection<Sucesion> Sucesiones { get; } = new List<Sucesion>(); */
-	/* public virtual ICollection<SueldoPension> SueldosPensiones { get; } = new List<SueldoPension>(); */
+	public virtual ICollection<SueldoPension> SueldosPensiones { get; } = new List<SueldoPension>();
 	/* public virtual ICollection<Tarea> Tareas { get; } = new List<Tarea>(); */
 	/* public virtual ICollection<TareaAgenda> TareasEntradas { get; } = new List<TareaAgenda>(); */
 	/* public virtual ICollection<TeAppoyo> TeAppoyos { get; } = new List<TeAppoyo>(); */

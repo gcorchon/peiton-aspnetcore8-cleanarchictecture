@@ -67,6 +67,8 @@ builder.Services.AddSingleton<IAuthorizationPolicyProvider, PeitonPermissionPoli
 builder.Services.AddSingleton<IAuthorizationHandler, PeitonPermissionAuthorizationHandler>();
 
 builder.Services.AddScoped<HidePropertiesByRoleFilter>();
+builder.Services.AddScoped<AuthorizeTuteladoViewFilter>();
+builder.Services.AddScoped<AuthorizeTuteladoModifyFilter>();
 
 builder.Services.AddControllersWithViews(/*options =>
 {

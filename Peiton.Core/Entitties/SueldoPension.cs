@@ -10,5 +10,5 @@ public class SueldoPension
 	public int Ano { get; set; }
 	public int TipoPensionId { get; set; }
 	public virtual Tutelado Tutelado { get; set; } = null!;
-
+	public virtual TipoPension TipoPension { get; set; } = null!;
 }

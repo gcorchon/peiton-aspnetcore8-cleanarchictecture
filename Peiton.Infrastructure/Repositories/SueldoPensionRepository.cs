@@ -1,3 +1,4 @@
+
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -12,4 +13,6 @@ public class SueldoPensionRepository : RepositoryBase<SueldoPension>, ISueldoPen
 	{
 
 	}
+
+
 }

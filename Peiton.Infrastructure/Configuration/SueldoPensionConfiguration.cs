@@ -14,6 +14,8 @@ public class SueldoPensionConfiguration : IEntityTypeConfiguration<SueldoPension
 		builder.Property(p => p.Fecha).IsRequired().HasDefaultValueSql("(getdate())");
 		builder.Property(p => p.TipoPensionId).HasColumnName("Fk_TipoPension");
 		builder.Property(p => p.Importe).HasColumnType("money");
+
+		builder.Navigation(p => p.TipoPension).AutoInclude();
 		/*builder.HasOne(d => d.Tutelado)
 			.WithMany(p => p.SueldosPensiones)
 			.HasForeignKey(d => d.TuteladoId);*/

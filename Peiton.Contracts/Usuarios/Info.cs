@@ -20,6 +20,9 @@ public class Info
     public int? Economico { get; set; }
     public bool EducadorChecked { get; set; }
     public int? Educador { get; set; }
+
+    public int? TrabajadorEdit { get; set; }
+    public bool TrabajadorEditChecked { get; set; }
     public bool TecnicoIntegracionSocialChecked { get; set; }
     public int? TecnicoIntegracionSocial { get; set; }
     public bool CentroEditChecked { get; set; }
