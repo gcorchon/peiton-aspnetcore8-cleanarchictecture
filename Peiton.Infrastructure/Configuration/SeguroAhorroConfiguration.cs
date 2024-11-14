@@ -14,6 +14,8 @@ public class SeguroAhorroConfiguration : IEntityTypeConfiguration<SeguroAhorro>
 		builder.Property(p => p.SeguroId).HasColumnName("Fk_Seguro");
 		builder.Property(p => p.NumeroPoliza).HasMaxLength(50);
 		builder.Property(p => p.PrimaUnica).HasColumnType("money");
+
+		builder.Navigation(p => p.Seguro).AutoInclude();
 		/*builder.HasOne(d => d.Seguro)
 			.WithMany(p => p.SegurosAhorros)
 			.HasForeignKey(d => d.SeguroId);*/
