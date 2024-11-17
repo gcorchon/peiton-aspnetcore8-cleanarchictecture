@@ -11,7 +11,7 @@ public class MensajeTuAppoyoHandler(IMensajeTuteladoRepository mensajeTuteladoRe
     public async Task<MensajeTutelado> HandleAsync(int id)
     {
         var mensaje = await mensajeTuteladoRepository.GetByIdAsync(id);
-        if (mensaje == null) throw new EntityNotFoundException("Mensaje no encontrado");
+        if (mensaje == null) throw new NotFoundException("Mensaje no encontrado");
         await mensajeTuteladoRepository.MarcarComoLeidoAsync(id);
         return mensaje;
     }

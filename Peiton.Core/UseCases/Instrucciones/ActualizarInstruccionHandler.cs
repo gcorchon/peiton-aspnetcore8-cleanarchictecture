@@ -15,7 +15,7 @@ public class ActualizarInstruccionHandler(IInstruccionRepository instruccionRepo
 
         if (instruccion == null)
         {
-            throw new EntityNotFoundException("Instrucción no encontrada");
+            throw new NotFoundException("Instrucción no encontrada");
         }
 
         var directory = "App_Data/Instrucciones";

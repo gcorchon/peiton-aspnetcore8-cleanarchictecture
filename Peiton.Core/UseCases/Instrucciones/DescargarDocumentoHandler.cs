@@ -14,12 +14,12 @@ public class DescargarDocumentoHandler(IInstruccionRepository instruccionReposit
 
         if (instruccion == null)
         {
-            throw new EntityNotFoundException("Documento no encontrado");
+            throw new NotFoundException("Documento no encontrado");
         }
 
         var filePath = Path.Combine("App_Data/Instrucciones/{0}", id.ToString(), instruccion.FileName);
 
-        if (!File.Exists(filePath)) throw new EntityNotFoundException("Documento no encontrado");
+        if (!File.Exists(filePath)) throw new NotFoundException("Documento no encontrado");
 
         return new FileData()
         {

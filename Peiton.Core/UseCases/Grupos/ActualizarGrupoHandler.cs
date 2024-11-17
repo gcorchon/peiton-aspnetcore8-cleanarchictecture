@@ -14,7 +14,7 @@ public class ActualizarGrupoHandler(IGrupoRepository grupoRepository, IPermisoRe
     {
         var grupo = await grupoRepository.GetByIdAsync(id);
 
-        if (grupo == null) throw new EntityNotFoundException("Grupo no encontrado");
+        if (grupo == null) throw new NotFoundException("Grupo no encontrado");
 
         grupo.Descripcion = request.Descripcion;
 

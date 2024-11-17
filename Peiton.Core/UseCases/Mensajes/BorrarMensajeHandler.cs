@@ -10,7 +10,7 @@ public class BorrarMensajeHandler(IMensajeRepository mensajeRepository, IUnitOfW
     public async Task HandleAsync(int id)
     {
         var mensaje = await mensajeRepository.GetByIdAsync(id);
-        if (mensaje == null) throw new EntityNotFoundException("Mensaje no encontrado");
+        if (mensaje == null) throw new NotFoundException("Mensaje no encontrado");
         mensajeRepository.Remove(mensaje);
         await unitOfWork.SaveChangesAsync();
     }

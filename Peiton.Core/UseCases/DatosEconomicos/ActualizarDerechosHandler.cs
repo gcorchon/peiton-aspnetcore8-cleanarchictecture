@@ -10,7 +10,7 @@ public class ActualizarDerechosHandler(IDatosEconomicosRepository datosEconomico
     public async Task HandleAsync(int id, string? derechos)
     {
         var datosEconomicos = await datosEconomicosRepository.GetAsync(d => d.TuteladoId == id);
-        if (datosEconomicos == null) throw new EntityNotFoundException("Datos económicos no encontrados");
+        if (datosEconomicos == null) throw new NotFoundException("Datos económicos no encontrados");
         datosEconomicos.Derechos = string.IsNullOrWhiteSpace(derechos) ? null : derechos.Trim();
         await unitOfWork.SaveChangesAsync();
     }

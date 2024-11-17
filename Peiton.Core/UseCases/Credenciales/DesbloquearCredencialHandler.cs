@@ -10,7 +10,7 @@ public class DesbloquearCredencialHandler(ICredencialRepository credencialReposi
     {
         var credencial = await credencialRepository.GetByIdAsync(id);
 
-        if (credencial == null) throw new EntityNotFoundException();
+        if (credencial == null) throw new NotFoundException();
 
         credencial.DatosCorrectos = true;
         credencial.Reintentos = 0;

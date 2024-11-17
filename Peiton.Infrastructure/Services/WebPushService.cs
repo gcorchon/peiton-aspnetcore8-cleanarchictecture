@@ -16,7 +16,7 @@ public class WebPushService(ITuteladoRepository tuteladoRepository) : IWebPushSe
     public async Task SendNotificationAsync(int tuteladoId, string subject, string body)
     {
         var tutelado = await tuteladoRepository.GetByIdAsync(tuteladoId);
-        if (tutelado == null) throw new EntityNotFoundException("Tutelado no encontrado");
+        if (tutelado == null) throw new NotFoundException("Tutelado no encontrado");
         var teAppoyo = tutelado.TeAppoyo;
 
         if (teAppoyo == null || !teAppoyo.Enabled || string.IsNullOrWhiteSpace(teAppoyo.WebPushInfo)) return;

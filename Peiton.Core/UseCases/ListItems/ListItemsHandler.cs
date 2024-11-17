@@ -13,7 +13,7 @@ public class ListItemsHandler(IDbService dbService, IListItemProvider listItemPr
     public async Task<IEnumerable<ListItem>> HandleAsync(string tableName)
     {
         var entityDefinition = listItemProvider.GetDefinition(tableName);
-        if (entityDefinition == null) throw new EntityNotFoundException("Entidad no consultable");
+        if (entityDefinition == null) throw new NotFoundException("Entidad no consultable");
         if (entityDefinition.ParentValueColumn == null)
         {
             return await dbService.QueryAsync<ListItem>($"select {entityDefinition.TextColumn} as Text, {entityDefinition.ValueColumn} as Value from {tableName} order by 1");

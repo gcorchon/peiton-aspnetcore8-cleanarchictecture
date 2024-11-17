@@ -11,7 +11,7 @@ public class MensajeHandler(IMensajeRepository mensajeRepository, IUnitOfWork un
     public async Task<Mensaje> HandleAsync(int id)
     {
         var mensaje = await mensajeRepository.GetByIdAsync(id); //Ojo: método sobreescrito en el repositorio para que solo puedan leer los mensajes los dueños de los mensajes
-        if (mensaje == null) throw new EntityNotFoundException("Mensaje no encontrado");
+        if (mensaje == null) throw new NotFoundException("Mensaje no encontrado");
 
         if (!mensaje.Leido)
         {

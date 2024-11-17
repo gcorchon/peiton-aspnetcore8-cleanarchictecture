@@ -10,7 +10,7 @@ public class BorrarUsuarioHandler(IUsuarioRepository usuarioRepository, IUnitOfW
     public async Task HandleAsync(int id)
     {
         var usuario = await usuarioRepository.GetByIdAsync(id);
-        if (usuario == null) throw new EntityNotFoundException("Usuario no encontrado");
+        if (usuario == null) throw new NotFoundException("Usuario no encontrado");
         usuario.Borrado = true;
         await unitOfWork.SaveChangesAsync();
     }

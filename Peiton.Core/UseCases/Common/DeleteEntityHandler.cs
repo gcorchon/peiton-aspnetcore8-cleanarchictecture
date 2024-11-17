@@ -10,7 +10,7 @@ public class DeleteEntityHandler<T>(IEntityService entityService, IUnitOfWork un
     public async Task HandleAsync(int id)
     {
         var entity = await entityService.GetEntityAsync<T>(id);
-        if (entity == null) throw new EntityNotFoundException($"{typeof(T).Name} Id {id} not found");
+        if (entity == null) throw new NotFoundException($"{typeof(T).Name} Id {id} not found");
         entityService.Remove(entity);
         await unitOfWork.SaveChangesAsync();
     }

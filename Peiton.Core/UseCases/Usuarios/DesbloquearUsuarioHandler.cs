@@ -11,7 +11,7 @@ public class DesbloquearUsuarioHandler(IUsuarioRepository usuarioRepository, IUn
     public async Task HandleAsync(int id)
     {
         var usuario = await usuarioRepository.GetByIdAsync(id);
-        if (usuario == null || !usuario.Bloqueado) throw new EntityNotFoundException("El usuario no existe o no está bloqueado");
+        if (usuario == null || !usuario.Bloqueado) throw new NotFoundException("El usuario no existe o no está bloqueado");
         usuario.Bloqueado = false;
         usuario.Reintentos = 0;
 

@@ -15,7 +15,7 @@ public class ActualizarUsuarioHandler(IMapper mapper, IUsuarioRepository usuario
     public async Task HandleAsync(int id, GuardarUsuarioRequest request)
     {
         var entity = await usuarioRepository.GetByIdAsync(id);
-        if (entity == null) throw new EntityNotFoundException("Usuario no encontrado");
+        if (entity == null) throw new NotFoundException("Usuario no encontrado");
         var usuario = mapper.Map(request, entity);
 
         if (!string.IsNullOrWhiteSpace(request.Pwd))

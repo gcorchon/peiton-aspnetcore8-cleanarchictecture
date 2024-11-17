@@ -10,7 +10,7 @@ public class BorrarVehiculoHandler(IVehiculoRepository vehiculoRepository, ITute
     public async Task HandleAsync(int id)
     {
         var vehiculo = await vehiculoRepository.GetByIdAsync(id);
-        if (vehiculo == null) throw new EntityNotFoundException("Sueldo o pensión no encontrada");
+        if (vehiculo == null) throw new NotFoundException("Sueldo o pensión no encontrada");
 
         if (!await tuteladoRepository.CanModifyAsync(vehiculo.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
         vehiculoRepository.Remove(vehiculo);

@@ -12,7 +12,7 @@ public class ExportarMensajeHandler(IMapper mapper, IMensajeEnviadoRepository me
     public async Task<byte[]> HandleAsync(int id)
     {
         var mensaje = await mensajeEnviadoRepository.GetByIdAsync(id); //Ojo: método sobreescrito en el repositorio
-        if (mensaje == null) throw new EntityNotFoundException("Mensaje no encontrado");
+        if (mensaje == null) throw new NotFoundException("Mensaje no encontrado");
 
         var vm = mapper.Map<MensajeViewModel>(mensaje);
         return await pdfService.RenderAsync("Views\\Mensajes\\mensaje.cshtml", vm);

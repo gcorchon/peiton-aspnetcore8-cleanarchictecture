@@ -11,7 +11,7 @@ public class TributosHandler(ITuteladoRepository tuteladoRepository)
     public async Task<TributoTutelado[]> HandleAsync(int tuteladoId)
     {
         var tutelado = await tuteladoRepository.GetByIdAsync(tuteladoId);
-        if (tutelado == null) throw new EntityNotFoundException("Tutelado no encontrado");
+        if (tutelado == null) throw new NotFoundException("Tutelado no encontrado");
         return tutelado.TributosTutelados.ToArray();
     }
 }

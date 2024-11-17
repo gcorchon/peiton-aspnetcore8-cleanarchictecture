@@ -25,7 +25,7 @@ public class CredencialBloqueadaHandler(ICredencialRepository credencialReposito
         });*/
 
         var credencial = await credencialRepository.GetByIdAsync(id);
-        if (credencial == null) throw new EntityNotFoundException();
+        if (credencial == null) throw new NotFoundException();
 
         string campos = credencial.EntidadFinanciera.Campos;
         string credenciales = credencial.DatosConexion;

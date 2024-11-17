@@ -10,7 +10,7 @@ public class InmueblesHandler(ITuteladoRepository tuteladoRepository)
 {
     public async Task<Inmueble[]> HandleAsync(int tuteladoId)
     {
-        var tutelado = await tuteladoRepository.GetByIdAsync(tuteladoId) ?? throw new EntityNotFoundException("Tutelado no encontrado");
+        var tutelado = await tuteladoRepository.GetByIdAsync(tuteladoId) ?? throw new NotFoundException("Tutelado no encontrado");
         return tutelado.Inmuebles.ToArray();
     }
 }

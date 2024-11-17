@@ -31,7 +31,7 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
     {
         return exception switch
         {
-            EntityNotFoundException => (StatusCodes.Status404NotFound, exception.Message),
+            NotFoundException => (StatusCodes.Status404NotFound, exception.Message),
             ArgumentException => (StatusCodes.Status400BadRequest, exception.Message),
             UnauthorizedAccessException => (StatusCodes.Status401Unauthorized, exception.Message),
             NotImplementedException => (StatusCodes.Status500InternalServerError, "Todavía no se ha implementado esta funcionalidad"),

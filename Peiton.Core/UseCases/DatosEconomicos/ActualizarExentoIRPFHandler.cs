@@ -10,7 +10,7 @@ public class ActualizarExentoIRPFHandler(IDatosEconomicosRepository datosEconomi
     public async Task HandleAsync(int id, bool exentoIRPF)
     {
         var datosEconomicos = await datosEconomicosRepository.GetAsync(d => d.TuteladoId == id);
-        if (datosEconomicos == null) throw new EntityNotFoundException("Datos económicos no encontrados");
+        if (datosEconomicos == null) throw new NotFoundException("Datos económicos no encontrados");
         datosEconomicos.ExentoIRPF = exentoIRPF;
         await unitOfWork.SaveChangesAsync();
     }

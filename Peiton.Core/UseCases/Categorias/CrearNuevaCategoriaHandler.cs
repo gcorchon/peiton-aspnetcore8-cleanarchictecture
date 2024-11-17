@@ -10,7 +10,7 @@ public class CrearNuevaCategoriaHandler(ICategoriaRepository categoriaRepository
     public async Task<Categoria> HandleAsync(int categoriaPadreId)
     {
         var categoriaPadre = await categoriaRepository.GetByIdAsync(categoriaPadreId);
-        if (categoriaPadre == null) throw new EntityNotFoundException($"Categoría {categoriaPadreId} no encontrada");
+        if (categoriaPadre == null) throw new NotFoundException($"Categoría {categoriaPadreId} no encontrada");
 
         var categoria = new Categoria();
         categoria.Descripcion = "NUEVA CATEGORÍA";

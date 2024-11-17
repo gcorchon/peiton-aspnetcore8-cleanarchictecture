@@ -14,7 +14,7 @@ public class ObtenerAbogadosParaSenalamientoHandler(ISenalamientoRepository sena
     {
         var tutelado = await tuteladoRepository.GetByIdAsync(tuteladoId);
 
-        if (tutelado == null) throw new EntityNotFoundException("No existe el tutelado");
+        if (tutelado == null) throw new NotFoundException("No existe el tutelado");
 
         var abogado = tutelado.Abogado;
 

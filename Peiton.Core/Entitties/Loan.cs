@@ -31,6 +31,8 @@ public class Loan
 	public string? Observaciones { get; set; }
 	public int? TipoPrestamoId { get; set; }
 	public virtual Credencial Credencial { get; set; } = null!;
+	public virtual TipoPrestamo? TipoPrestamo { get; set; } = null!;
+
 	/* public virtual ICollection<LoanDailyInfo> LoanesDailyInfos { get; } = new List<LoanDailyInfo>(); */
 
 }

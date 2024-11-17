@@ -13,7 +13,7 @@ public class ActualizarQuejaHandler(IQuejaRepository quejaRepository, IQuejaMoti
     public async Task HandleAsync(int quejaId, GuardarQuejaRequest request)
     {
         var queja = await quejaRepository.GetByIdAsync(quejaId);
-        if (queja == null) throw new EntityNotFoundException("Gestión no encontrada");
+        if (queja == null) throw new NotFoundException("Gestión no encontrada");
 
         mapper.Map(request, queja);
 

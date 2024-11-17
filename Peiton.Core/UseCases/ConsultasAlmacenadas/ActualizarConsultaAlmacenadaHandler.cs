@@ -13,7 +13,7 @@ public class ActualizarConsultaAlmacenadaHandler(IUnitOfWork unitOfWork, IEntity
     public async Task HandleAsync(int id, ActualizarConsultaRequest data)
     {
         var consultaAlmacenada = await entityService.GetEntityAsync<ConsultaAlmacenada>(id);
-        if (consultaAlmacenada == null) throw new EntityNotFoundException();
+        if (consultaAlmacenada == null) throw new NotFoundException();
 
         consultaAlmacenada.Descripcion = data.Descripcion;
         consultaAlmacenada.Resumen = data.Resumen;

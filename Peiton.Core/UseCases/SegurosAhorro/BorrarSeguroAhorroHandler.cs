@@ -10,7 +10,7 @@ public class BorrarSeguroAhorroHandler(ISeguroAhorroRepository SeguroAhorroRepos
     public async Task HandleAsync(int id)
     {
         var SeguroAhorro = await SeguroAhorroRepository.GetByIdAsync(id);
-        if (SeguroAhorro == null) throw new EntityNotFoundException("Seguro de ahorro no encontrada");
+        if (SeguroAhorro == null) throw new NotFoundException("Seguro de ahorro no encontrada");
 
         if (!await tuteladoRepository.CanModifyAsync(SeguroAhorro.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
         SeguroAhorroRepository.Remove(SeguroAhorro);

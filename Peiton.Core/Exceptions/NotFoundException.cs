@@ -1,8 +1,8 @@
 namespace Peiton.Core.Exceptions;
 
-public class EntityNotFoundException : Exception
+public class NotFoundException : Exception
 {
 
-    public EntityNotFoundException() { }
-    public EntityNotFoundException(string message) : base(message) { }
+    public NotFoundException() { }
+    public NotFoundException(string message) : base(message) { }
 }

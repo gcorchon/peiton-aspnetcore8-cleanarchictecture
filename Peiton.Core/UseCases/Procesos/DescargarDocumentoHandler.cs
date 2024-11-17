@@ -14,12 +14,12 @@ public class DescargarDocumentoHandler(IProcesoRepository procesoRepository)
 
         if (proceso == null)
         {
-            throw new EntityNotFoundException("Documento no encontrado");
+            throw new NotFoundException("Documento no encontrado");
         }
 
         var filePath = Path.Combine("App_Data/Procesos/{0}", id.ToString(), proceso.FileName);
 
-        if (!File.Exists(filePath)) throw new EntityNotFoundException("Documento no encontrado");
+        if (!File.Exists(filePath)) throw new NotFoundException("Documento no encontrado");
 
         return new FileData()
         {

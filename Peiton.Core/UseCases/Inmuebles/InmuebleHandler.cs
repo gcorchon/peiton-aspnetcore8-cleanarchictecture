@@ -10,7 +10,7 @@ public class InmuebleHandler(IInmuebleRepository inmuebleRepository, ITuteladoRe
 {
     public async Task<Inmueble> HandleAsync(int id)
     {
-        var inmueble = await inmuebleRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("inmueble no encontrado");
+        var inmueble = await inmuebleRepository.GetByIdAsync(id) ?? throw new NotFoundException("inmueble no encontrado");
         if (!await tuteladoRepository.CanViewAsync(inmueble.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para ver los datos del tutelado");
 
         return inmueble;

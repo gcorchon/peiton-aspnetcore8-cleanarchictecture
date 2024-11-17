@@ -11,7 +11,7 @@ public class ActualizarCNAEHandler(ICNAERepository cnaeRepository, IUnitOfWork u
     public async Task HandleAsync(string cnae, ActualizarCNAERequest request)
     {
         var entity = await cnaeRepository.GetAsync(c => c.Cnae2009 == cnae);
-        if (entity == null) { throw new EntityNotFoundException($"CNAE {cnae} no encontrado"); }
+        if (entity == null) { throw new NotFoundException($"CNAE {cnae} no encontrado"); }
 
         entity.CategoriaId = request.CategoriaId;
 

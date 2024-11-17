@@ -13,7 +13,7 @@ public class ActualizarRegistroEntradaHandler(IRegistroEntradaRepository registr
     {
 
         var registroEntrada = await registroEntradaRepository.GetByIdAsync(id);
-        if (registroEntrada == null) throw new EntityNotFoundException("El registro de entrada no existe");
+        if (registroEntrada == null) throw new NotFoundException("El registro de entrada no existe");
 
         registroEntrada.Dni = request.Visitante.Dni;
         registroEntrada.Nombre = request.Visitante.Nombre;

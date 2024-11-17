@@ -19,10 +19,10 @@ public class Credencial
 	public virtual Tutelado Tutelado { get; set; } = null!;
 	public virtual ICollection<Account> Accounts { get; } = new List<Account>();
 	/* public virtual ICollection<CuentaCaixabank> CuentasCaixabank { get; } = new List<CuentaCaixabank>(); */
-	/* public virtual ICollection<Deposit> Deposit { get; } = new List<Deposit>(); */
-	/* public virtual ICollection<Fund> Fundes { get; } = new List<Fund>(); */
-	/* public virtual ICollection<Loan> Loanes { get; } = new List<Loan>(); */
-	/* public virtual ICollection<PensionPlan> PensionesPlanes { get; } = new List<PensionPlan>(); */
-	/* public virtual ICollection<Share> Shares { get; } = new List<Share>(); */
+	public virtual ICollection<Deposit> Deposits { get; } = [];
+	public virtual ICollection<Fund> Funds { get; } = [];
+	public virtual ICollection<Loan> Loans { get; } = [];
+	public virtual ICollection<PensionPlan> PensionesPlans { get; } = [];
+	public virtual ICollection<Share> Shares { get; } = [];
 
 }

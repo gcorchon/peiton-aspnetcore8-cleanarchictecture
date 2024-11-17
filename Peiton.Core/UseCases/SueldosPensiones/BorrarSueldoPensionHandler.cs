@@ -10,7 +10,7 @@ public class BorrarSueldoPensionHandler(ISueldoPensionRepository sueldoPensionRe
     public async Task HandleAsync(int id)
     {
         var sueldoPension = await sueldoPensionRepository.GetByIdAsync(id);
-        if (sueldoPension == null) throw new EntityNotFoundException("Sueldo o pensión no encontrada");
+        if (sueldoPension == null) throw new NotFoundException("Sueldo o pensión no encontrada");
 
         if (!await tuteladoRepository.CanModifyAsync(sueldoPension.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
         sueldoPensionRepository.Remove(sueldoPension);

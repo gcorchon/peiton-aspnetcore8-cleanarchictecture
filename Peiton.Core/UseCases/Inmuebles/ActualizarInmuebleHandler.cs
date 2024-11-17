@@ -12,7 +12,7 @@ public class ActualizarInmuebleHandler(IMapper mapper, IInmuebleRepository inmue
 {
     public async Task HandleAsync(int id, InmuebleViewModel request)
     {
-        var inmueble = await inmuebleRepository.GetByIdAsync(id) ?? throw new EntityNotFoundException("Inmueble no encontrado");
+        var inmueble = await inmuebleRepository.GetByIdAsync(id) ?? throw new NotFoundException("Inmueble no encontrado");
         if (!await tuteladoRepository.CanModifyAsync(inmueble.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
 
         mapper.Map(request, inmueble);

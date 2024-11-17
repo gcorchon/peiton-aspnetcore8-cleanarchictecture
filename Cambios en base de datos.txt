@@ -60,3 +60,6 @@ where Pk_TipoPension is null
 ALTER TABLE [dbo].SueldoPension  WITH CHECK ADD  CONSTRAINT [FK_TipoPension_TipoPension] FOREIGN KEY([Fk_TipoPension])
 REFERENCES [dbo].[TipoPension] ([Pk_TipoPension])
 GO
+
+ALTER TABLE [dbo].[Loan]  WITH CHECK ADD  CONSTRAINT [FK_Loan_TipoPrestamo] FOREIGN KEY([Fk_TipoPrestamo])
+REFERENCES [dbo].[TipoPrestamo] ([Pk_TipoPrestamo])

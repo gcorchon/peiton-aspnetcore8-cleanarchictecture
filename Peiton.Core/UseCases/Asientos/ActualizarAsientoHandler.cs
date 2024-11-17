@@ -13,7 +13,7 @@ public class ActualizarAsientoHandler(IAsientoRepository asientoRepository, IFac
         var asiento = await asientoRepository.GetByIdAsync(id);
         if (asiento is null)
         {
-            throw new EntityNotFoundException($"No existe el asiento con Id {id}");
+            throw new NotFoundException($"No existe el asiento con Id {id}");
         }
 
         int multiplicador = item.TipoMovimiento!.Value == 1 ? -1 : 1;

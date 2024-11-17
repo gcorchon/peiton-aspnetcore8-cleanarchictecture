@@ -19,6 +19,10 @@ public class PrestamoConfiguration : IEntityTypeConfiguration<Prestamo>
 		builder.Property(p => p.Pendiente).HasColumnType("money");
 		builder.Property(p => p.Inicial).HasColumnType("money");
 		builder.Property(p => p.Cuota).HasColumnType("money");
+
+		builder.Navigation(p => p.EntidadFinanciera).AutoInclude();
+		builder.Navigation(p => p.TipoPrestamo).AutoInclude();
+
 		/*builder.HasOne(d => d.EntidadFinanciera)
 			.WithMany(p => p.Prestamos)
 			.HasForeignKey(d => d.EntidadFinancieraId);*/

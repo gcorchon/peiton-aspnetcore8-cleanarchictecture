@@ -16,7 +16,7 @@ public class MultipleListItemsHandler(IDbService dbService, IListItemProvider li
         foreach (var tableName in tableNames)
         {
             var entityDefinition = listItemProvider.GetDefinition(tableName);
-            if (entityDefinition == null) throw new EntityNotFoundException($"Entidad {tableName} no consultable");
+            if (entityDefinition == null) throw new NotFoundException($"Entidad {tableName} no consultable");
 
             if (entityDefinition.ParentValueColumn == null)
             {

@@ -15,7 +15,7 @@ public class ActualizarSenalamientoHandler(ISenalamientoRepository senalamientoR
     {
         var senalamiento = await senalamientoRepository.GetByIdAsync(id);
 
-        if (senalamiento == null) throw new EntityNotFoundException("No existe el señalamiento");
+        if (senalamiento == null) throw new NotFoundException("No existe el señalamiento");
 
         mapper.Map(request, senalamiento);
         await unitOfWork.SaveChangesAsync();

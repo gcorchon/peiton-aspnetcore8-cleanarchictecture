@@ -11,7 +11,7 @@ public class ObtenerParametrosConsultaHandler(IConsultaAlmacenadaRepository cons
     {
         var consultaAlmacenada = await consultaAlmacenadaRepository.GetByIdAsync(id);
 
-        if (consultaAlmacenada == null) throw new EntityNotFoundException();
+        if (consultaAlmacenada == null) throw new NotFoundException();
 
         var usuarioId = identityService.GetUserId();
         if (!await consultaAlmacenadaRepository.PuedeEjecutarConsultaAsync(id, usuarioId))

@@ -15,7 +15,7 @@ public class ActualizarProcesoHandler(IProcesoRepository procesoRepository, IUni
 
         if (proceso == null)
         {
-            throw new EntityNotFoundException("Instrucción no encontrada");
+            throw new NotFoundException("Instrucción no encontrada");
         }
 
         var directory = "App_Data/Procesos";

@@ -12,7 +12,7 @@ public class MovimientoCajaHandler(IMapper mapper, ICajaRepository cajaRepositor
     public async Task<CajaViewModel> HandleAsync(int id)
     {
         var movimiento = await cajaRepository.GetByIdAsync(id);
-        if (movimiento == null) throw new EntityNotFoundException();
+        if (movimiento == null) throw new NotFoundException();
         var saldoCaja = await cajaRepository.ObtenerSaldoCajaAsync(movimiento.TuteladoId);
         var vm = mapper.Map(movimiento, new CajaViewModel());
         vm.SaldoCaja = saldoCaja;

@@ -12,7 +12,7 @@ public class CrearGestionAdminisrtativaHandler(ITuteladoRepository tuteladoRepos
     public async Task HandleAsync(int tuteladoId, GuardarGestionAdministrativaRequest request)
     {
         var tutelado = await tuteladoRepository.GetByIdAsync(tuteladoId);
-        if (tutelado == null) throw new EntityNotFoundException("Tutelado no encontrada");
+        if (tutelado == null) throw new NotFoundException("Tutelado no encontrada");
 
         tutelado.GestionesAdministrativas.Add(new GestionAdministrativa()
         {

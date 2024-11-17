@@ -31,6 +31,10 @@ public class FondoSolidarioConfiguration : IEntityTypeConfiguration<FondoSolidar
 		builder.Property(p => p.Archivo2).HasMaxLength(255);
 		builder.Property(p => p.FondoSolidarioPadreId).HasColumnName("Fk_FondoSolidarioPadre");
 		builder.Property(p => p.Importe).HasColumnType("money");
+
+		//builder.Navigation(p => p.FondoSolidarioDestino).AutoInclude();
+		//builder.Navigation(p => p.Solicitante).AutoInclude();
+
 		/*builder.HasOne(d => d.FondoSolidarioDestino)
 			.WithMany(p => p.FondosSolidarios)
 			.HasForeignKey(d => d.FondoSolidarioDestinoId);*/

@@ -11,7 +11,7 @@ public class TuteladoHandler(ITuteladoRepository tuteladoRepository)
     public async Task<Tutelado> HandleAsync(int id)
     {
         var tutelado = await tuteladoRepository.GetByIdAsync(id);
-        if (tutelado == null) throw new EntityNotFoundException("Tutelado no encontrado");
+        if (tutelado == null) throw new NotFoundException("Tutelado no encontrado");
         return tutelado;
     }
 }

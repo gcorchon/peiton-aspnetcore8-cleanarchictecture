@@ -15,7 +15,7 @@ public class ActualizarDocumentoHandler(IDocumentoRepository DocumentoRepository
 
         if (documento == null)
         {
-            throw new EntityNotFoundException("Documento no encontrado");
+            throw new NotFoundException("Documento no encontrado");
         }
 
         var directory = "App_Data/Documentos";

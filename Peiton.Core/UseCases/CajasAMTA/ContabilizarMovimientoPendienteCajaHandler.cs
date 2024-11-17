@@ -13,7 +13,7 @@ public class ContabilizarMovimientoPendienteCajaHandler(IEntityService entitySer
     public async Task HandleAsync(int id, AsientoSaveRequest[] request)
     {
         var cajaAMTA = await entityService.GetEntityAsync<CajaAMTA>(id);
-        if (cajaAMTA == null) throw new EntityNotFoundException($"No existe la entrada de CajaAMTA con el Id {id}");
+        if (cajaAMTA == null) throw new NotFoundException($"No existe la entrada de CajaAMTA con el Id {id}");
 
         var asientoList = cajaAMTA.Asientos;
         IEnumerable<int> asientosYaSeleccionados = request.Where(a => a.Id.HasValue).Select(a => a.Id!.Value);

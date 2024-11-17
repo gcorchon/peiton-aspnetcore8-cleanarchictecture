@@ -13,7 +13,7 @@ public class OrdenarRulesHandler(IRuleRepository ruleRepository)
 
         if (rule == null)
         {
-            throw new EntityNotFoundException($"No exite la regla con Id {ruleId}");
+            throw new NotFoundException($"No exite la regla con Id {ruleId}");
         }
 
         await ruleRepository.ReordenarReglaAsync(ruleId, newPosition);

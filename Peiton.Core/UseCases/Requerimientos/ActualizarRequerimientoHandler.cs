@@ -13,7 +13,7 @@ public class ActualizarRequerimientoHandler(IMapper mapper, IRequerimientoReposi
     public async Task HandleAsync(int id, GuardarRequerimientoRequest request)
     {
         var requerimiento = await requerimientoRepository.GetByIdAsync(id);
-        if (requerimiento == null) throw new EntityNotFoundException("Requerimiento no encontrado");
+        if (requerimiento == null) throw new NotFoundException("Requerimiento no encontrado");
         mapper.Map(request, requerimiento);
         await unitOfWork.SaveChangesAsync();
     }

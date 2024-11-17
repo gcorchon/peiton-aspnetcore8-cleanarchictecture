@@ -13,7 +13,7 @@ public class ResolverAvisoTributarioHandler(IAvisoTributarioRepository avisoTrib
         var avisoTributario = await avisoTributarioRepository.GetByIdAsync(id);
         if (avisoTributario == null)
         {
-            throw new EntityNotFoundException();
+            throw new NotFoundException();
         }
 
         if (avisoTributario.Resuelto)

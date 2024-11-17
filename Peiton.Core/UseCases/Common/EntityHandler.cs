@@ -10,7 +10,7 @@ public class EntityHandler<T>(IEntityService entityService) where T : class
     public async Task<T> HandleAsync(int id)
     {
         var entity = await entityService.GetEntityAsync<T>(id);
-        if (entity == null) throw new EntityNotFoundException($"{typeof(T).Name} Id {id} not found");
+        if (entity == null) throw new NotFoundException($"{typeof(T).Name} Id {id} not found");
         return entity;
     }
 }

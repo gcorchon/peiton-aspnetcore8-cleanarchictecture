@@ -15,6 +15,8 @@ public class EfectoPublicoConfiguration : IEntityTypeConfiguration<EfectoPublico
 		builder.Property(p => p.TipoProducto).HasMaxLength(50);
 		builder.Property(p => p.Identificacion).HasMaxLength(50);
 		builder.Property(p => p.Valoracion).HasColumnType("money");
+
+		builder.Navigation(p => p.EntidadFinanciera).AutoInclude();
 		/*builder.HasOne(d => d.EntidadFinanciera)
 			.WithMany(p => p.EfectosPublicos)
 			.HasForeignKey(d => d.EntidadFinancieraId);*/

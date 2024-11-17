@@ -12,7 +12,7 @@ public class CrearSolicitudAlquilerVentaHandler(IInmuebleRepository inmuebleRepo
     public async Task HandleAsync(int inmuebleId, CrearInmuebleAutorizacionRequest request)
     {
         var inmueble = await inmuebleRepository.GetByIdAsync(inmuebleId);
-        if (inmueble == null) throw new EntityNotFoundException("Inmueble no encontrado");
+        if (inmueble == null) throw new NotFoundException("Inmueble no encontrado");
 
         inmueble.InmueblesAutorizaciones.Add(new InmuebleAutorizacion()
         {

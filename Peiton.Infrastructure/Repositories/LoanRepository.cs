@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -11,5 +12,10 @@ public class LoanRepository : RepositoryBase<Loan>, ILoanRepository
 	public LoanRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
 
+	}
+
+	public Task<Loan[]> ObtenerLoansAsync(int tuteladoId)
+	{
+		return DbSet.Include(d => d.Credencial).Where(l => l.Credencial.TuteladoId == tuteladoId).ToArrayAsync();
 	}
 }

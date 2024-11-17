@@ -11,7 +11,7 @@ public class ActualizarGestionAdministrativaHandler(IGestionAdministrativaReposi
     public async Task HandleAsync(int gestionAdministrativaId, ActualizarGestionAdministrativaRequest request)
     {
         var gestion = await gestionAdministrativaRepository.GetByIdAsync(gestionAdministrativaId);
-        if (gestion == null) throw new EntityNotFoundException("Gestión no encontrada");
+        if (gestion == null) throw new NotFoundException("Gestión no encontrada");
 
         gestion.FechaSolicitud = request.FechaSolicitud;
         gestion.FechaDesignacion = request.FechaDesignacion;

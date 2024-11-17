@@ -12,7 +12,7 @@ public class ObtenerDocumentoDePagoHandler(IInmuebleAvisoCosteRepository inmuebl
     public async Task<DocumentoPago?> HandleAsync(string costeId)
     {
         var coste = await inmuebleAvisoCosteRepository.GetAsync(c => c.CosteId == costeId);
-        if (coste?.DocumentoPago == null) throw new EntityNotFoundException();
+        if (coste?.DocumentoPago == null) throw new NotFoundException();
         return coste.DocumentoPago.Deserialize<DocumentoPago>();
     }
 

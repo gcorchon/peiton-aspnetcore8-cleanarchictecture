@@ -12,7 +12,7 @@ public class BorrarVariosMensajesHandler(IMensajeRepository mensajeRepository, I
         foreach (var id in ids)
         {
             var mensaje = await mensajeRepository.GetByIdAsync(id);
-            if (mensaje == null) throw new EntityNotFoundException("Mensaje no encontrado");
+            if (mensaje == null) throw new NotFoundException("Mensaje no encontrado");
             mensajeRepository.Remove(mensaje);
         }
 

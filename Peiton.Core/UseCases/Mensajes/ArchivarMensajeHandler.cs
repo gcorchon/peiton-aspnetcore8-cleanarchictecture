@@ -12,7 +12,7 @@ public class ArchivarMensajeHandler(IMensajeRepository mensajeRepository, IUnitO
     public async Task HandleAsync(int id)
     {
         var mensaje = await mensajeRepository.GetByIdAsync(id);
-        if (mensaje == null) throw new EntityNotFoundException("Mensaje no encontrado");
+        if (mensaje == null) throw new NotFoundException("Mensaje no encontrado");
         mensaje.Archivado = true;
         await unitOfWork.SaveChangesAsync();
     }

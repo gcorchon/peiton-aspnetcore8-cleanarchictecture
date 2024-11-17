@@ -12,7 +12,7 @@ public class ActualizarSeguroAhorroHandler(IMapper mapper, ISeguroAhorroReposito
     public async Task HandleAsync(int id, ActualizarSeguroAhorroRequest request)
     {
         var SeguroAhorro = await SeguroAhorroRepository.GetByIdAsync(id);
-        if (SeguroAhorro == null) throw new EntityNotFoundException("Seguro de ahorro no encontrado");
+        if (SeguroAhorro == null) throw new NotFoundException("Seguro de ahorro no encontrado");
 
         if (!await tuteladoRepository.CanModifyAsync(SeguroAhorro.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
 
