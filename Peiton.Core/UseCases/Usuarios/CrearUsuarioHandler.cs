@@ -8,7 +8,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Usuarios;
 
 [Injectable]
-public class CrearUsuarioHandler(IMapper mapper, IUsuarioRepository usuarioRepository, IPermisoRepository permisoRepository, IGrupoRepository grupoRepository, ICryptographyService cryptographyService, IUnitOfWork unitOfWork)
+public class CrearUsuarioHandler(IMapper mapper, IUsuarioRepository usuarioRepository, IPermisoRepository permisoRepository, IGrupoRepository grupoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(GuardarUsuarioRequest request)
     {
@@ -16,7 +16,7 @@ public class CrearUsuarioHandler(IMapper mapper, IUsuarioRepository usuarioRepos
 
         var usuario = mapper.Map(request, new Usuario());
 
-        usuario.Pwd = cryptographyService.GetMd5Hash(request.Pwd!);
+        usuario.Pwd = Cryptography.GetMd5Hash(request.Pwd!);
         usuario.Borrado = false;
 
         foreach (var permisoId in request.Permisos)

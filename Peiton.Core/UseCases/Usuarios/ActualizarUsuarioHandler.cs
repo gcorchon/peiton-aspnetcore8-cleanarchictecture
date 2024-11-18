@@ -10,7 +10,7 @@ using Peiton.DependencyInjection;
 namespace Peiton.Core.UseCases.Usuarios;
 
 [Injectable]
-public class ActualizarUsuarioHandler(IMapper mapper, IUsuarioRepository usuarioRepository, IPermisoRepository permisoRepository, IGrupoRepository grupoRepository, ICryptographyService cryptographyService, IUnitOfWork unitOfWork)
+public class ActualizarUsuarioHandler(IMapper mapper, IUsuarioRepository usuarioRepository, IPermisoRepository permisoRepository, IGrupoRepository grupoRepository, IUnitOfWork unitOfWork)
 {
     public async Task HandleAsync(int id, GuardarUsuarioRequest request)
     {
@@ -20,7 +20,7 @@ public class ActualizarUsuarioHandler(IMapper mapper, IUsuarioRepository usuario
 
         if (!string.IsNullOrWhiteSpace(request.Pwd))
         {
-            usuario.Pwd = cryptographyService.GetMd5Hash(request.Pwd!);
+            usuario.Pwd = Cryptography.GetMd5Hash(request.Pwd!);
         }
 
         usuario.Permisos.Merge(request.Permisos, p => p.Id, permisoId =>

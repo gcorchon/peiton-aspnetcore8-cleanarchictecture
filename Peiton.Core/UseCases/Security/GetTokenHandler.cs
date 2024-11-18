@@ -17,18 +17,16 @@ namespace Peiton.Core.UseCases.Security;
 public class GetTokenHandler
 {
     private readonly JwtConfig jwtConfig;
-    private readonly ICryptographyService cryptographyService;
     private readonly IUsuarioRepository usuarioRepository;
     private readonly ILogAccesoRepository logAccesoRepository;
     private readonly IHttpContextAccessor context;
     private readonly IUnitOfWork unitOfWork;
 
-    public GetTokenHandler(IUsuarioRepository usuarioRepository, ICryptographyService cryptographyService,
+    public GetTokenHandler(IUsuarioRepository usuarioRepository,
                            IUnitOfWork unitOfWork, ILogAccesoRepository logAccesoRepository, IHttpContextAccessor context,
                            IOptions<JwtConfig> jwtConfig)
     {
         this.usuarioRepository = usuarioRepository;
-        this.cryptographyService = cryptographyService;
         this.unitOfWork = unitOfWork;
         this.logAccesoRepository = logAccesoRepository;
         this.context = context;
@@ -41,7 +39,7 @@ public class GetTokenHandler
         if (user == null || user.Borrado) throw new UnauthorizedAccessException("Usuario y/o contraseña incorrectos");
         if (user.Bloqueado) throw new UnauthorizedAccessException("El usuario está bloqueado");
 
-        var hashedPassword = cryptographyService.GetMd5Hash(request.Password);
+        var hashedPassword = Cryptography.GetMd5Hash(request.Password);
 
         if (user.Pwd != hashedPassword)
         {

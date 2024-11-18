@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Peiton.Contracts.Bancos;
+using Peiton.Contracts.Credenciales;
 using Peiton.Contracts.Excel;
 using Peiton.Core.Repositories;
 using Peiton.Core.Services;

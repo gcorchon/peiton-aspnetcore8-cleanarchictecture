@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Peiton.Contracts.Bancos;
+using Peiton.Contracts.Credenciales;
 using Peiton.Contracts.Common;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
@@ -80,5 +80,13 @@ public class CredencialRepository : RepositoryBase<Credencial>, ICredencialRepos
         return this.DbContext.Database.ExecuteSqlAsync(@$"update credencial set DatosCorrectos=1, Reintentos=0, ProximaEjecucion=getdate()
                                                            from credencial inner join tutelado on pk_tutelado=fk_tutelado
                                                            where Tutelado.Muerto=0 and Credencial.Baja=0 and Credencial.DetenerRobot=0");
+    }
+
+    public Task<Credencial[]> ObtenerCredencialesAsync(int tuteladoId)
+    {
+        return this.DbSet.Include(c => c.EntidadFinanciera)
+                    .Where(c => c.TuteladoId == tuteladoId)
+                    .AsNoTracking()
+                    .ToArrayAsync();
     }
 }

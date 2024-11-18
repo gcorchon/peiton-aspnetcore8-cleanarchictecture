@@ -1,4 +1,4 @@
-﻿using Peiton.Contracts.Bancos;
+﻿using Peiton.Contracts.Credenciales;
 using Peiton.Contracts.Common;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
