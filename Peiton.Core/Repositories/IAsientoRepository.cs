@@ -14,4 +14,7 @@ public interface IAsientoRepository : IRepository<Asiento>
     Task<decimal> ObtenerDiferenciaFondoAsync(FondosFilter filter, IEnumerable<CapituloPartidaFilter> partidas);
     Task<IEnumerable<Saldo>> ObtenerSaldosAsync(int page, int total, int ano, SaldosFilter filter);
     Task<int> ContarSaldosAsync(int ano, SaldosFilter filter);
+    Task<Asiento[]> ObtenerAsientosFondoTuteladoAsync(int page, int total, int tuteladoId);
+    Task<int> ContarAsientosFondoTuteladoAsync(int tuteladoId);
+    Task<IngresosGastos> ObtenerIngresosYGastosFondoTuteladoAsync(int tuteladoId, DateTime? maxFechaAutorizacion = null);
 }

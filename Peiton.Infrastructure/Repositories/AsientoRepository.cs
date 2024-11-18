@@ -4,6 +4,7 @@ using Peiton.Contracts.Asientos;
 using Peiton.Core.Entities;
 using Peiton.DependencyInjection;
 using System.Linq.Expressions;
+using Dapper;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IAsientoRepository))]
@@ -421,5 +422,47 @@ public class AsientoRepository : RepositoryBase<Asiento>, IAsientoRepository
         }
 
         return query;
+    }
+
+
+    public Task<Asiento[]> ObtenerAsientosFondoTuteladoAsync(int page, int total, int tuteladoId)
+    {
+        return ApplyFilters(DbSet, tuteladoId)
+            .OrderByDescending(s => s.FechaAutorizacion)
+            .Skip((page - 1) * total)
+            .Take(total)
+            .AsNoTracking()
+            .ToArrayAsync();
+    }
+
+    public Task<int> ContarAsientosFondoTuteladoAsync(int tuteladoId)
+    {
+        return ApplyFilters(DbSet, tuteladoId).CountAsync();
+    }
+
+    private IQueryable<Asiento> ApplyFilters(IQueryable<Asiento> query, int tuteladoId)
+    {
+        query = query.Where(a => a.TuteladoId == tuteladoId && ((a.Partida.Numero == "83192" && a.Partida.Capitulo.Numero == "8") || (a.Partida.Numero == "83190" && a.Partida.Capitulo.Numero == "8")));
+        return query;
+    }
+
+    public Task<IngresosGastos> ObtenerIngresosYGastosFondoTuteladoAsync(int tuteladoId, DateTime? maxFechaAutorizacion = null)
+    {
+        var fechaLimite = maxFechaAutorizacion.HasValue ? maxFechaAutorizacion.Value.Date : (DateTime?)null;
+
+        var query = @" select isnull(sum(case when Importe > 0 then Importe else 0 end),0) as Ingresos,
+                               isnull(sum(case when Importe < 0 then Importe else 0 end),0) as Gastos,
+                               isnull(sum(Importe), 0) as Diferencia
+                        from Asiento
+                        inner join Partida on Pk_Partida = Fk_Partida
+                        inner join Capitulo on Pk_Capitulo = Fk_Capitulo
+                        where Asiento.Fk_Tutelado=@tuteladoId and ((Partida.Numero='83192' and Capitulo.Numero='8') or (Partida.Numero='83190' and Capitulo.Numero='8'))";
+
+        if (maxFechaAutorizacion.HasValue)
+        {
+            query += " and FechaAutorizacion is not null and convert(date,FechaAutorizacion) <= @maxFechaAutorizacion";
+        }
+
+        return DbContext.Database.GetDbConnection().QueryFirstAsync<IngresosGastos>(query, new { tuteladoId, maxFechaAutorizacion = fechaLimite });
     }
 }

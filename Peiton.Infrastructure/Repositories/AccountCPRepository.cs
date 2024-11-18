@@ -12,4 +12,6 @@ public class AccountCPRepository : RepositoryBase<AccountCP>, IAccountCPReposito
 	{
 
 	}
+
+
 }

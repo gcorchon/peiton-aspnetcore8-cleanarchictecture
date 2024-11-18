@@ -3,5 +3,5 @@ using Peiton.Core.Entities;
 namespace Peiton.Core.Repositories;
 public interface IAccountRepository : IRepository<Account>
 {
-
+    Task<Account[]> ObtenerAccountsAsync(int tuteladoId);
 }

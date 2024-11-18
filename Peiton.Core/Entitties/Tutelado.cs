@@ -153,7 +153,7 @@ public class Tutelado
 	/* public virtual ICollection<PlanDePension> PlanesDePensiones { get; } = []; */
 	public virtual ICollection<Prestamo> Prestamos { get; } = [];
 	public virtual ICollection<ProcedimientoAdicional> ProcedimientosAdicionales { get; } = [];
-	/* public virtual ICollection<ProductoManual> ProductosManuales { get; } = []; */
+	public virtual ICollection<ProductoManual> ProductosManuales { get; } = [];
 	/* public virtual ICollection<Queja> Quejas { get; } = []; */
 
 	public virtual ICollection<SeguroAhorro> SegurosAhorro { get; } = [];

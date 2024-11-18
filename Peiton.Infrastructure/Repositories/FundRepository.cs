@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -11,5 +12,12 @@ public class FundRepository : RepositoryBase<Fund>, IFundRepository
 	public FundRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
 
+	}
+
+	public Task<Fund[]> ObtenerFundsAsync(int tuteladoId)
+	{
+		return DbSet.Include(f => f.Credencial)
+		.ThenInclude(c => c.EntidadFinanciera)
+		.Where(f => f.Credencial.TuteladoId == tuteladoId).AsNoTracking().ToArrayAsync();
 	}
 }
