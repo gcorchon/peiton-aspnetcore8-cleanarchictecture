@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -11,5 +12,12 @@ public class TuteladoObjetivoRepository : RepositoryBase<TuteladoObjetivo>, ITut
 	public TuteladoObjetivoRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
 
+	}
+
+	public Task<TuteladoObjetivo[]> ObtenerObjetivosAsync(int tuteladoId, int tipoObjetivoId)
+	{
+		return DbSet
+			.Where(t => t.TuteladoId == tuteladoId && t.TipoObjetivoId == tipoObjetivoId)
+			.ToArrayAsync();
 	}
 }
