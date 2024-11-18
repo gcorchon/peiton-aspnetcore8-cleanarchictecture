@@ -17,6 +17,7 @@ public class FundProfile : Profile
         CreateMap<Ent.Fund, VM.ProductosBancarios.ProductoBancarioViewModel>()
             .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Fondo"))
             .ForMember(vm => vm.TipoProductoId, opt => opt.MapFrom(p => 2))
+            .ForMember(vm => vm.EntidadFinancieraId, opt => opt.MapFrom(p => p.Credencial.EntidadFinancieraId))
             .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.AccountNumber));
 
         CreateMap<VM.ProductosBancarios.ActualizarProductoBancarioRobotRequest, Ent.Fund>();

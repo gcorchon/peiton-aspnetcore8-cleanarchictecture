@@ -14,5 +14,10 @@ public class ProductoManualProfile : Profile
             .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(p => p.EntidadFinanciera.Descripcion));
 
         CreateMap<Ent.ProductoManual, VM.ProductosBancarios.ProductoBancarioViewModel>();
+
+        CreateMap<VM.ProductosBancarios.CrearProductoBancarioRequest, Ent.ProductoManual>();
+        CreateMap<VM.ProductosBancarios.ProductoBancarioViewModel, Ent.ProductoManual>();
+
+
     }
 }

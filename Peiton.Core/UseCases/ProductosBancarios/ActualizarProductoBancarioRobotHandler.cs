@@ -40,7 +40,9 @@ public class ActualizarProductoBancarioRobotHandler(IMapper mapper, ITuteladoRep
             mapper.Map(request, share);
             await unitOfWork.SaveChangesAsync();
         }
-
-        throw new ArgumentOutOfRangeException("Tipo de producto no válido");
+        else
+        {
+            throw new ArgumentOutOfRangeException("Tipo de producto no válido");
+        }
     }
 }
