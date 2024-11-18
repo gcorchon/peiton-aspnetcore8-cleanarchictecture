@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.ComponentModel.DataAnnotations;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Peiton.Api.Authorization;
 using Peiton.Api.Extensions;
@@ -13,7 +14,6 @@ using Peiton.Core.UseCases.Common;
 namespace Peiton.Api.Controllers;
 
 [ApiController]
-[PeitonAuthorization(PeitonPermission.Contapeiton)]
 [Route("api/[controller]")]
 public class AsientosController(IMapper mapper) : ControllerBase
 {
@@ -46,7 +46,6 @@ public class AsientosController(IMapper mapper) : ControllerBase
     {
         await handler.HandleAsync(id, data);
         return Accepted();
-
     }
 
     [HttpDelete("{id:int}")]
@@ -74,4 +73,26 @@ public class AsientosController(IMapper mapper) : ControllerBase
         return this.PaginatedResult(vm, data.Total);
     }
 
+    //Datos Economicos - Deuda
+    [HttpGet("fondo-tutelado")]
+    public async Task<IActionResult> AsientosFondoTuteladoAsync([FromQuery][Required] int tuteladoId, [FromQuery] Pagination pagination, AsientosFondoTuteladoHandler handler)
+    {
+        var data = await handler.HandleAsync(tuteladoId, pagination);
+        var vm = mapper.Map<IEnumerable<AsientoFondoTuteladoListItem>>(data.Items);
+        return this.PaginatedResult(vm, data.Total);
+    }
+
+    [HttpGet("fondo-tutelado/ingresos-gastos")]
+    public async Task<IActionResult> IngresosYGastosFondoTuteladoAsync([FromQuery][Required] int tuteladoId, IngresosGastosFondoTuteladoHandler handler)
+    {
+        var data = await handler.HandleAsync(tuteladoId);
+        return Ok(data);
+    }
+
+    [HttpGet("fondo-tutelado/certificado-deuda")]
+    public async Task<IActionResult> CertificadoDeudaFondoTuteladoAsync([FromQuery] CertificadoIngresosGastosRequest request, CertificadoDeudaFondoTuteladoHandler handler)
+    {
+        var data = await handler.HandleAsync(request);
+        return File(data, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "certificado-deuda.docx");
+    }
 }
