@@ -1,0 +1,39 @@
+[
+    {
+        "type": "Directory",
+        "name": "c:\\Desarrollo\\Personales\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Api\\Controllers",
+        "parent_id": null,
+        "fsPath": "c:\\Desarrollo\\Personales\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Api\\Controllers",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "0uiOm6EGsUCNSzIn"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Desarrollo\\Personales\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Contracts",
+        "parent_id": null,
+        "fsPath": "c:\\Desarrollo\\Personales\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Contracts",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "sA7pg9cmYDUPCKx2",
+        "label": "Contracts"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Desarrollo\\Personales\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Core\\Mappings",
+        "parent_id": null,
+        "fsPath": "c:\\Desarrollo\\Personales\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Core\\Mappings",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "RGwlNhoEvIexSHqD"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Desarrollo\\Personales\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Core\\UseCases",
+        "parent_id": null,
+        "fsPath": "c:\\Desarrollo\\Personales\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Core\\UseCases",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "J9G4IHD3xtLqhWPC"
+    }
+]

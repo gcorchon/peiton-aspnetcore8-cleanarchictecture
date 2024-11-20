@@ -1,3 +1,21 @@
 {
-    "dotnet.defaultSolution": "Peiton.sln"
+    "dotnet.defaultSolution": "Peiton.sln",
+    "favorites.resources": [
+        {
+            "filePath": "Peiton.Api\\Controllers",
+            "group": "Default"
+        },
+        {
+            "filePath": "Peiton.Core\\Mappings",
+            "group": "Default"
+        },
+        {
+            "filePath": "Peiton.Core\\UseCases",
+            "group": "Default"
+        },
+        {
+            "filePath": "Peiton.Contracts",
+            "group": "Default"
+        }
+    ]
 }

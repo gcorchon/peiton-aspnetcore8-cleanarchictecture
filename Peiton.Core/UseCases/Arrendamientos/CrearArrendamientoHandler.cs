@@ -2,6 +2,7 @@ using AutoMapper;
 using Peiton.Contracts.Arrendamientos;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Arrendamientos;
@@ -11,7 +12,7 @@ public class CrearArrendamientoHandler(IMapper mapper, IArrendamientoRepository 
 {
     public async Task HandleAsync(CrearArrendamientoRequest request)
     {
-        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         var arrendamiento = mapper.Map(request, new Arrendamiento());
         arrendamientoRepository.Add(arrendamiento);

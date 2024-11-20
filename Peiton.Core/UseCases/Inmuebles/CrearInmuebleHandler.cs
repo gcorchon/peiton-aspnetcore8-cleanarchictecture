@@ -2,6 +2,7 @@ using AutoMapper;
 using Peiton.Contracts.Inmuebles;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Inmuebles;
@@ -11,7 +12,7 @@ public class CrearInmuebleHandler(IMapper mapper, IInmuebleRepository inmuebleRe
 {
     public async Task HandleAsync(CrearInmuebleRequest request)
     {
-        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         var inmueble = mapper.Map(request, new Inmueble());
         inmuebleRepository.Add(inmueble);

@@ -4,6 +4,7 @@ using Peiton.Contracts.Mensajes;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
 using Peiton.Core.Services;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.FondosSolidarios;
@@ -14,7 +15,7 @@ public class ActualizarFondoSolidarioHandler(IFondoSolidarioRepository fondoSoli
     public async Task HandleAsync(int id, ActualizarFondoSolidarioRequest request)
     {
         var fondoSolidario = await fondoSolidarioRepository.GetByIdAsync(id) ?? throw new NotFoundException("Fondo solidario no encontrado");
-        if (!await tuteladoRepository.CanModifyAsync(fondoSolidario.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar los datos del tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(fondoSolidario.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         fondoSolidario.ObservacionesAutorizacion = request.ObservacionesAutorizacion;
 

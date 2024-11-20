@@ -1,6 +1,7 @@
 using Peiton.Contracts.Credenciales;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Credenciales;
@@ -10,7 +11,7 @@ public class CrearCredencialHandler(ICredencialRepository credencialRepository, 
 {
     public async Task HandleAsync(CrearCredencialRequest request)
     {
-        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar los datos del tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         var credencial = new Credencial()
         {

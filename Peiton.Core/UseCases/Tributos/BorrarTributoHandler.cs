@@ -1,5 +1,6 @@
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Tributos;
@@ -11,7 +12,7 @@ public class BorrarTributoHandler(ITributoTuteladoRepository tributoTuteladoRepo
     {
         var tributoTutelado = await tributoTuteladoRepository.GetByIdAsync(id);
         if (tributoTutelado == null) throw new NotFoundException("Tributo no encontrado");
-        if (!await tuteladoRepository.CanModifyAsync(tributoTutelado.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(tributoTutelado.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
         tributoTuteladoRepository.Remove(tributoTutelado);
 
         await unitOfWork.SaveChangesAsync();

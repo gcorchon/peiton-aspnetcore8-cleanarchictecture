@@ -3,6 +3,7 @@ using Peiton.Contracts.FondosSolidarios;
 using Peiton.Core.Entities;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.FondosSolidarios;
@@ -12,7 +13,7 @@ public class CrearFondoSolidarioHandler(IMapper mapper, IIdentityService identit
 {
     public async Task HandleAsync(CrearFondoSolidarioRequest request)
     {
-        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modifcar datos del tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
         var fondo = mapper.Map(request, new FondoSolidario());
         fondo.FechaSolicitud = DateTime.Now;
         fondo.SolicitanteId = identityService.GetUserId();

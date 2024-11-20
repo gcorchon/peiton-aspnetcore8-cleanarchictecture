@@ -2,6 +2,7 @@ using AutoMapper;
 using Peiton.Contracts.ProductosBancarios;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.ProductosBancarios;
@@ -11,7 +12,7 @@ public class CrearProductoBancarioHandler(IMapper mapper, ITuteladoRepository tu
 {
     public async Task HandleAsync(CrearProductoBancarioRequest request)
     {
-        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar los datos del tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
         var productoBancario = mapper.Map(request, new ProductoManual());
         productoManualRepository.Add(productoBancario);
         await unitOfWork.SaveChangesAsync();

@@ -2,6 +2,7 @@ using AutoMapper;
 using Peiton.Contracts.Prestamos;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Prestamos;
@@ -14,13 +15,13 @@ public class PrestamoHandler(IMapper mapper, IPrestamoRepository prestamoReposit
         if (tipo == "manual")
         {
             var prestamo = await prestamoRepository.GetByIdAsync(id) ?? throw new NotFoundException("Préstamo no encontrado");
-            if (!await tuteladoRepository.CanViewAsync(prestamo.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para ver los datos de este tutelado");
+            if (!await tuteladoRepository.CanViewAsync(prestamo.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
             return mapper.Map<PrestamoViewModel>(prestamo);
         }
         else if (tipo == "robot")
         {
             var loan = await loanRepository.GetByIdAsync(id) ?? throw new NotFoundException("Préstamo no encontrado");
-            if (!await tuteladoRepository.CanViewAsync(loan.Credencial.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para ver los datos de este tutelado");
+            if (!await tuteladoRepository.CanViewAsync(loan.Credencial.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
             return mapper.Map<PrestamoViewModel>(loan);
         }
 

@@ -1,5 +1,6 @@
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.EfectosPublicos;
@@ -12,7 +13,7 @@ public class BorrarEfectoPublicoHandler(IEfectoPublicoRepository efectoPublicoRe
         var efectoPublico = await efectoPublicoRepository.GetByIdAsync(id);
         if (efectoPublico == null) throw new NotFoundException("Efecto público no encontrado");
 
-        if (!await tuteladoRepository.CanModifyAsync(efectoPublico.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(efectoPublico.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
         efectoPublicoRepository.Remove(efectoPublico);
         await unitOfWork.SaveChangesAsync();
     }

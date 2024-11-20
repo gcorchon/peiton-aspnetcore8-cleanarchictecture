@@ -1,6 +1,8 @@
 using System.Text.RegularExpressions;
+using Dapper;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
+using Peiton.Contracts.Common;
 using Peiton.Contracts.Tutelados;
 using Peiton.Contracts.Usuarios;
 using Peiton.Core;
@@ -237,5 +239,47 @@ public class TuteladoRepository : RepositoryBase<Tutelado>, ITuteladoRepository
 	{
 		return DbSet.Where(t => t.NombreCompleto!.Contains(query)).OrderBy(t => t.NombreCompleto).Take(total).AsNoTracking().ToArrayAsync();
 
+	}
+
+
+	public Task<IEnumerable<ListItem>> ObtenerEquipoAsync(int tuteladoId)
+	{
+		var sql = @"select Pk_Usuario as Value, NombreCompleto as Text from (
+					select Usuario.Pk_Usuario, Usuario.NombreCompleto
+					from Usuario inner join TrabajadorSocial on TrabajadorSocial.Nombre = Usuario.NombreCompleto
+					inner join Tutelado on Tutelado.Fk_TrabajadorSocial = Pk_TrabajadorSocial
+					where Pk_Tutelado = @TuteladoId
+					union
+					select Usuario.Pk_Usuario, Usuario.NombreCompleto
+					from Usuario inner join Abogado on Abogado.Nombre = Usuario.NombreCompleto
+					inner join Tutelado on Tutelado.Fk_Abogado = Pk_Abogado
+					where Pk_Tutelado = @TuteladoId
+					union
+					select Usuario.Pk_Usuario, Usuario.NombreCompleto
+					from Usuario inner join Economico on Economico.Nombre = Usuario.NombreCompleto
+					inner join Tutelado on Tutelado.Fk_Economico = Pk_Economico
+					where Pk_Tutelado = @TuteladoId
+					union
+					select Usuario.Pk_Usuario, Usuario.NombreCompleto
+					from Usuario inner join TecnicoIntegracionSocial on TecnicoIntegracionSocial.Nombre = Usuario.NombreCompleto
+					inner join Tutelado on Tutelado.Fk_TecnicoIntegracionSocial = Pk_TecnicoIntegracionSocial
+					where Pk_Tutelado = @TuteladoId
+					union
+					select Usuario.Pk_Usuario, Usuario.NombreCompleto
+					from Usuario inner join EducadorSocial on EducadorSocial.Nombre = Usuario.NombreCompleto
+					inner join Tutelado on Tutelado.Fk_EducadorSocial = Pk_EducadorSocial
+					where Pk_Tutelado = @TuteladoId
+					union
+					select Usuario.Pk_Usuario, Usuario.NombreCompleto
+					from Usuario inner join CoordinadorSocial on CoordinadorSocial.Nombre = Usuario.NombreCompleto
+					inner join Tutelado on Tutelado.Fk_CoordinadorSocial = Pk_CoordinadorSocial
+					where Pk_Tutelado = @TuteladoId
+					union
+					select Usuario.Pk_Usuario, Usuario.NombreCompleto
+					from Usuario inner join ReferenteDF on ReferenteDF.Descripcion = Usuario.NombreCompleto
+					inner join Tutelado on Tutelado.Fk_ReferenteDF = Pk_ReferenteDF
+					where Pk_Tutelado = @TuteladoId) dv";
+
+		return DbContext.Database.GetDbConnection().QueryAsync<ListItem>(sql, new { TuteladoId = tuteladoId });
 	}
 }

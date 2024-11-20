@@ -1,0 +1,89 @@
+@using RazorLight;
+@using System;
+@using System.Linq;
+@using System.Text.RegularExpressions;
+@using System.Collections.Generic;
+@inherits TemplatePage<IEnumerable<Peiton.Core.Entities.Agenda>>
+
+<!doctype html>
+
+<head>
+    <title>
+
+    </title>
+    <meta charset="utf-8" />
+    <style>
+        * {
+            font-family: Arial;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        p span:first-child {
+            display: inline-block;
+            width: 200px;
+        }
+
+        table {
+            border: none;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        td {
+            width: 33.33%;
+        }
+
+        .justify {
+            text-align: justify;
+        }
+    </style>
+</head>
+
+<body>
+    @foreach (var tutelado in Model.Select(a => a.Tutelado).Distinct())
+    {
+        <div style="page-break-after:always">
+            <p style="text-align:center;font-size:20px; margin-bottom:40px;">
+                <strong>@tutelado.NombreCompleto</strong><br />@tutelado.NumeroExpediente
+            </p>
+            <hr />
+            @foreach (var entrada in Model.Where(a => a.TuteladoId == tutelado.Id).OrderBy(e => e.Fecha))
+            {
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fecha:</strong> @entrada.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td align="center"><strong>Usuario:</strong> @entrada.Usuario.NombreCompleto</td>
+                            <td align="right"><strong>Categoria:</strong> @entrada.CategoriaAgenda.Descripcion</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <p class="justify">@entrada.Descripcion.Replace(Environment.NewLine, "<br />")</p>
+
+                if (entrada.AgendaAreaActuacion != null)
+                {
+                    <p><strong>Area actuación:</strong> @entrada.AgendaAreaActuacion.Descripcion</p>
+                }
+                if (entrada.AgendaActuacion != null)
+                {
+                    <p><strong>Actuación:</strong> @entrada.AgendaActuacion.Descripcion</p>
+                }
+                if (entrada.Realizada.HasValue)
+                {
+                    <p><strong>Realizada:</strong> @(entrada.Realizada.Value ? "Si" : "No")</p>
+                }
+                if (entrada.Minutos.HasValue)
+                {
+                    <p><strong>Minutos:</strong> @entrada.Minutos.Value</p>
+                }
+                <hr />
+            }
+        </div>
+    }
+</body>

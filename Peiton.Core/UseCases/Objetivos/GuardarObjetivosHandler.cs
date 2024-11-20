@@ -3,6 +3,7 @@ using AutoMapper;
 using Peiton.Contracts.TuteladoObjetivos;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Objetivos;
@@ -12,7 +13,7 @@ public class GuardarObjetivosHandler(IMapper mapper, ITuteladoObjetivoRepository
 {
     public async Task HandleAsync(int tuteladoId, int tipoObjetivoId, GuardarObjetivosRequest[] data)
     {
-        if (!await tuteladoRepository.CanModifyAsync(tuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(tuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         var objetivos = await tuteladoObjetivoRepository.ObtenerObjetivosAsync(tuteladoId, tipoObjetivoId);
 

@@ -13,7 +13,7 @@ public class ActualizarPrestamoRobotHandler(IMapper mapper, ILoanRepository loan
     public async Task HandleAsync(int id, ActualizarPrestamoRobotRequest request)
     {
         var loan = await loanRepository.GetByIdAsync(id) ?? throw new NotFoundException("Préstamo no encontrado");
-        if (!await tuteladoRepository.CanModifyAsync(loan.Credencial.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para modificar los datos del tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(loan.Credencial.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
         mapper.Map(request, loan);
         await unitOfWork.SaveChangesAsync();
     }

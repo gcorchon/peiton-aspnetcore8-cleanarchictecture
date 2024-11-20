@@ -53,6 +53,15 @@ public partial class TuteladosController(IMapper mapper) : ControllerBase
         var vm = mapper.Map<VM.DatosSociales.DatosSocialesViewModel>(data.DatosSociales);
         return Ok(vm);
     }
+
+    [HttpGet("{id:int}/equipo")]
+    [AuthorizeTuteladoView]
+    public async Task<IActionResult> EquipoAsync(int id, EquipoHandler handler)
+    {
+        var data = await handler.HandleAsync(id);
+        return Ok(data);
+    }
+
     /*
         [HttpGet("{id:int}/datos-economicos")]
         //[HidePropertiesByRole]

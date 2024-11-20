@@ -1,6 +1,7 @@
 using Peiton.Contracts.Credenciales;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Credenciales;
@@ -11,7 +12,7 @@ public class ActualizarCredencialHandler(ICredencialRepository credencialReposit
     public async Task HandleAsync(int id, ActualizarCredencialRequest request)
     {
         var credencial = await credencialRepository.GetByIdAsync(id) ?? throw new NotFoundException("Credencial no encontrada");
-        if (!await tuteladoRepository.CanModifyAsync(credencial.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar los datos del tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(credencial.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         credencial.EntidadFinancieraId = request.EntidadFinancieraId;
         credencial.DatosConexion = CredencialHelper.CodificarCampos(request.Campos);

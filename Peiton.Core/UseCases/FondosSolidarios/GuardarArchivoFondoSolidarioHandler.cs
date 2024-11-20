@@ -1,5 +1,6 @@
 using Peiton.Contracts.FondosSolidarios;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.FondosSolidarios;
@@ -9,7 +10,7 @@ public class GuardarArchivoFondoSolidarioHandler(ITuteladoRepository tuteladoRep
 {
     public async Task<string> HandleAsync(GuardarArchivoFondoSolidarioRequest request)
     {
-        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modificar el tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(request.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         var filename = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + request.Archivo.FileName;
         var directory = Path.Combine("App_Data/Documentos", request.TuteladoId.ToString(), "fondosolidario");

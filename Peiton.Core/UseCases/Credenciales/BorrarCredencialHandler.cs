@@ -1,5 +1,6 @@
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Credenciales;
@@ -10,7 +11,7 @@ public class BorrarCredencialHandler(ICredencialRepository credencialRepository,
     public async Task HandleAsync(int id)
     {
         var credencial = await credencialRepository.GetByIdAsync(id) ?? throw new NotFoundException("Credencial no encontrada");
-        if (!await tuteladoRepository.CanModifyAsync(credencial.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para modificar los datos del tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(credencial.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         credencialRepository.Remove(credencial);
         await unitOfWork.SaveChangesAsync();

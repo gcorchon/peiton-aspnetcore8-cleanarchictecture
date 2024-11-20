@@ -1,6 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <Compile Remove="Seguimiento\SeguimientoListItem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Seguimiento\SeguimientoListItem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Peiton.ModelBinders\Peiton.ModelBinders.csproj" />
     <ProjectReference Include="..\PeitonSerialization\Peiton.Serialization.csproj" />
     <ProjectReference Include="..\Peiton.Authorization\Peiton.Authorization.csproj" />

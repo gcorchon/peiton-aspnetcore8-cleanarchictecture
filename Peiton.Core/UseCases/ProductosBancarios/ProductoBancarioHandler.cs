@@ -2,6 +2,7 @@ using AutoMapper;
 using Peiton.Contracts.ProductosBancarios;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.ProductosBancarios;
@@ -14,31 +15,31 @@ public class ProductoBancarioHandler(IMapper mapper, ITuteladoRepository tutelad
         if (tipo == "manual")
         {
             var productoBancario = await productoManualRepository.GetByIdAsync(id) ?? throw new NotFoundException("Producto no encontrado");
-            if (!await tuteladoRepository.CanViewAsync(productoBancario.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para ver los datos de este tutelado");
+            if (!await tuteladoRepository.CanViewAsync(productoBancario.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
             return mapper.Map<ProductoBancarioViewModel>(productoBancario);
         }
         else if (tipo == "cuenta")
         {
             var account = await accountRepository.GetByIdAsync(id) ?? throw new NotFoundException("Libreta no encontrada");
-            if (!await tuteladoRepository.CanViewAsync(account.Credencial.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para ver los datos de este tutelado");
+            if (!await tuteladoRepository.CanViewAsync(account.Credencial.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
             return mapper.Map<ProductoBancarioViewModel>(account);
         }
         else if (tipo == "fondo")
         {
             var fund = await fundRepository.GetByIdAsync(id) ?? throw new NotFoundException("Fondo no encontrado");
-            if (!await tuteladoRepository.CanViewAsync(fund.Credencial.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para ver los datos de este tutelado");
+            if (!await tuteladoRepository.CanViewAsync(fund.Credencial.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
             return mapper.Map<ProductoBancarioViewModel>(fund);
         }
         else if (tipo == "deposito")
         {
             var deposit = await depositRepository.GetByIdAsync(id) ?? throw new NotFoundException("Depósito no encontrado");
-            if (!await tuteladoRepository.CanViewAsync(deposit.Credencial.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para ver los datos de este tutelado");
+            if (!await tuteladoRepository.CanViewAsync(deposit.Credencial.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
             return mapper.Map<ProductoBancarioViewModel>(deposit);
         }
         else if (tipo == "cuenta-de-valores")
         {
             var share = await shareRepository.GetByIdAsync(id) ?? throw new NotFoundException("Cuenta de valores no encontrada");
-            if (!await tuteladoRepository.CanViewAsync(share.Credencial.TuteladoId)) throw new UnauthorizedAccessException("No tienes permisos para ver los datos de este tutelado");
+            if (!await tuteladoRepository.CanViewAsync(share.Credencial.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
             return mapper.Map<ProductoBancarioViewModel>(share);
         }
 

@@ -1,5 +1,6 @@
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Objetivos;
@@ -9,7 +10,7 @@ public class ObjetivosHandler(ITuteladoObjetivoRepository tuteladoObjetivoReposi
 {
     public async Task<TuteladoObjetivo[]> HandleAsync(int tuteladoId, int tipoObjetivoId)
     {
-        if (!await tuteladoRepository.CanViewAsync(tuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para ver los datos del tutelado");
+        if (!await tuteladoRepository.CanViewAsync(tuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
         return await tuteladoObjetivoRepository.ObtenerObjetivosAsync(tuteladoId, tipoObjetivoId);
     }
 }

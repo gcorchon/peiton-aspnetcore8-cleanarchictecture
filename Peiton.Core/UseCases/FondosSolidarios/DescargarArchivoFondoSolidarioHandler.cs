@@ -12,7 +12,7 @@ public class DescargarArchivoFondoSolidarioHandler(IFondoSolidarioRepository fon
     public async Task<ArchivoFondoSolidario> HandleAsync(int id, int tipo)
     {
         var fondoSolidario = await fondoSolidarioRepository.GetByIdAsync(id) ?? throw new NotFoundException("Fondo solidario no encontrado");
-        if (!await tuteladoRepository.CanModifyAsync(fondoSolidario.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para modifcar datos del tutelado");
+        if (!await tuteladoRepository.CanModifyAsync(fondoSolidario.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         var fileName = tipo switch
         {

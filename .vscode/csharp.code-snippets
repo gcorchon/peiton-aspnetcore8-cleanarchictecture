@@ -195,7 +195,7 @@
 		"prefix": "peiton-irepository-pagination",
 		"body": [
 			"Task<int> Contar$1Async($1Filter filter);",
-			"Task<${TM_FILENAME_BASE/I(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter)",
+			"Task<${TM_FILENAME_BASE/I(.*)Repository$/$1/}[]> Obtener$1Async(int page, int total, $1Filter filter);",
 		]
 	},
 	"Peiton String Filter": {
@@ -252,5 +252,12 @@
 			"}",
 		],
 		"description": "Crear el Use Case para una paginación"
+	},
+	"Peiton AutoMapper ForMember": {
+		"prefix": "pt-fm",
+		"body": [
+			".ForMember(vm => vm.$1, opt => opt.MapFrom(ent => ent.$2))"
+		],
+		"description": "Añadir un ForMember a un CreateMap"
 	}
 }

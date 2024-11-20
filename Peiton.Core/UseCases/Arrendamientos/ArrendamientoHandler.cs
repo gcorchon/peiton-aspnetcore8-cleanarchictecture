@@ -1,6 +1,7 @@
 using Peiton.Core.Entities;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.Arrendamientos;
@@ -11,7 +12,7 @@ public class ArrendamientoHandler(IArrendamientoRepository arrendamientoReposito
     public async Task<Arrendamiento> HandleAsync(int id)
     {
         var arrendamiento = await arrendamientoRepository.GetByIdAsync(id) ?? throw new NotFoundException("arrendamiento no encontrado");
-        if (!await tuteladoRepository.CanViewAsync(arrendamiento.TuteladoId)) throw new UnauthorizedAccessException("No tienes permiso para ver los datos del tutelado");
+        if (!await tuteladoRepository.CanViewAsync(arrendamiento.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
 
         return arrendamiento;
     }
