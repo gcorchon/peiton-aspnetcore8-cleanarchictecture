@@ -161,8 +161,8 @@ public class Tutelado
 	/* public virtual ICollection<Senalamiento> Senalamientos { get; } = []; */
 	/* public virtual ICollection<Sucesion> Sucesiones { get; } = []; */
 	public virtual ICollection<SueldoPension> SueldosPensiones { get; } = [];
-	/* public virtual ICollection<Tarea> Tareas { get; } = []; */
-	/* public virtual ICollection<TareaAgenda> TareasEntradas { get; } = []; */
+	public virtual ICollection<Tarea> Tareas { get; } = [];
+	public virtual ICollection<TareaAgenda> TareasAgenda { get; } = [];
 	/* public virtual ICollection<TeAppoyo> TeAppoyos { get; } = []; */
 	public virtual ICollection<TributoTutelado> TributosTutelados { get; } = [];
 	/* public virtual ICollection<TuteladoActividad> TuteladosActividades { get; } = []; */

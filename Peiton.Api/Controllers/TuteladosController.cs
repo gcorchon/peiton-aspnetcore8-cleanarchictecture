@@ -9,8 +9,10 @@ using Peiton.Core.UseCases.Cajas;
 using Peiton.Core.UseCases.GestionIndividual;
 using Peiton.Core.UseCases.Tutelados;
 using Peiton.Core.UseCases.Common;
+using Peiton.Core.UseCases.Seguimientos;
 using Peiton.Core.Entities;
-using Peiton.Core.UseCases.DatosEconomicos;
+using Peiton.Contracts.Seguimientos;
+
 
 namespace Peiton.Api.Controllers;
 
@@ -62,66 +64,23 @@ public partial class TuteladosController(IMapper mapper) : ControllerBase
         return Ok(data);
     }
 
-    /*
-        [HttpGet("{id:int}/datos-economicos")]
-        //[HidePropertiesByRole]
-        [AuthorizeTuteladoView]
-        public async Task<IActionResult> DatosEconomicosAsync(int id, EntityHandler<Tutelado> handler)
-        {
-            var data = await handler.HandleAsync(id);
-            var vm = mapper.Map<VM.DatosEconomicos.DatosEconomicosViewModel>(data.DatosEconomicos);
-            return Ok(vm);
-        }
+    [HttpGet("{id:int}/tareas-seguimiento")]
+    [AuthorizeTuteladoView]
+    public async Task<IActionResult> TareasSeguimientoAsync(int id, EntityHandler<Tutelado> handler)
+    {
+        var data = await handler.HandleAsync(id);
+        var vm = mapper.Map<IEnumerable<VM.Seguimientos.TareaAgendaViewModel>>(data.TareasAgenda.OrderBy(t => t.Orden));
+        return Ok(vm);
+    }
 
-        [HttpPatch("{id:int}/datos-economicos/otros-datos")]
-        [AuthorizeTuteladoModify]
-        public async Task<IActionResult> ActualizarOtrosDatosDeInteresAsync(int id, [FromBody] string otrosDatos, ActualizarOtrosDatosDeInteresHandler handler)
-        {
-            await handler.HandleAsync(id, otrosDatos);
-            return Accepted();
-        }
+    [HttpPost("{id:int}/tareas-seguimiento")]
+    [AuthorizeTuteladoModify]
+    public async Task<IActionResult> GuardarTareasSeguimientoAsync(int id, [FromBody] TareaAgendaViewModel[] request, GuardarTareasSeguimientoHandler handler)
+    {
+        await handler.HandleAsync(id, request);
+        return Accepted();
+    }
 
-        [HttpPatch("{id:int}/datos-economicos/derechos")]
-        [AuthorizeTuteladoModify]
-        public async Task<IActionResult> ActualizarDerechosAsync(int id, [FromBody] string derechos, ActualizarDerechosHandler handler)
-        {
-            await handler.HandleAsync(id, derechos);
-            return Accepted();
-        }
-
-        [HttpPatch("{id:int}/datos-economicos/derechos-de-credito")]
-        [AuthorizeTuteladoModify]
-        public async Task<IActionResult> ActualizarDerechosDeCreditoAsync(int id, [FromBody] string derechosDeCredito, ActualizarDerechosDeCreditoHandler handler)
-        {
-            await handler.HandleAsync(id, derechosDeCredito);
-            return Accepted();
-        }
-
-        [HttpPatch("{id:int}/datos-economicos/otros-bienes")]
-        [AuthorizeTuteladoModify]
-        public async Task<IActionResult> ActualizarOtrosBienesAsync(int id, [FromBody] string otrosBienes, ActualizarOtrosBienesHandler handler)
-        {
-            await handler.HandleAsync(id, otrosBienes);
-            return Accepted();
-        }
-
-        [HttpPatch("{id:int}/datos-economicos/exento-irpf")]
-        [AuthorizeTuteladoModify]
-        public async Task<IActionResult> ActualizarExentoIRPFAsync(int id, [FromBody] bool exentoIRPF, ActualizarExentoIRPFHandler handler)
-        {
-            await handler.HandleAsync(id, exentoIRPF);
-            return Accepted();
-        }
-    */
-    /*    [HttpGet("{id:int}/productos")]
-        [AuthorizeTuteladoView]
-        public async Task<IActionResult> ProductosAsync(int id, [FromQuery] SueldosPensionesFilter filter, [FromQuery] Pagination pagination, SueldosPensionesHandler handler)
-        {
-            var data = await handler.HandleAsync(id, filter, pagination);
-            var vm = mapper.Map<IEnumerable<SueldoPensionListItem>>(data.Items);
-            return this.PaginatedResult(vm, data.Total);
-        }
-    */
     [HttpGet("{id}/historico-movimientos-caja")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
     public async Task<IActionResult> HistoricoMovimientosCajaAsync([FromQuery] VM.Caja.HistoricoMovimientosFilter filter, [FromQuery] Pagination pagination, int id, HistoricoMovimientosCajaHandler handler)
