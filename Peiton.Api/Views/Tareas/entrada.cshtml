@@ -1,0 +1,130 @@
+@using RazorLight;
+@inherits TemplatePage<Peiton.Core.Entities.Tarea>
+@using System;
+@using System.Linq;
+
+<!doctype html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        * {
+            font-family: Arial;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        tr {
+            height: 50px;
+        }
+
+        td {
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <p style="text-align:center;font-size:20px; margin-bottom:40px;"><strong>@Model.Tutelado.Nombre
+            @Model.Tutelado.Apellidos</strong><br />@Model.Tutelado.NumeroExpediente</p>
+    <p><strong>Solicitante</strong>: @Model.UsuarioSolicitante.NombreCompleto</p>
+
+    <hr />
+    <div>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <label>Departamento</label>
+                        <span>@(Model.TareaDepartamento != null ? Model.TareaDepartamento.Descripcion : "")</span>
+                    </td>
+                    <td colspan="3">
+                        <label>Categoría</label>
+                        <span>@(Model.TareaCategoria != null ? Model.TareaCategoria.Descripcion : "")</span>
+                    </td>
+                    <td colspan="4">
+                        <label>Tarea</label>
+                        <span>@(Model.TareaSubcategoria != null ? Model.TareaSubcategoria.Descripcion : "")</span>
+                    </td>
+                    <td colspan="3">
+                        <label>Tipo</label>
+                        <span>@(Model.TareaTipo != null ? Model.TareaTipo.Descripcion : "")</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <label>Distribuidor</label>
+                        <span>@(Model.UsuarioDistribuidor != null ? Model.UsuarioDistribuidor.NombreCompleto :
+                              "")</span>
+                    </td>
+                    <td colspan="3">
+                        <label>Gestor</label>
+                        <span>@(Model.UsuarioGestor != null ? Model.UsuarioGestor.NombreCompleto : "")</span>
+                    </td>
+                    <td colspan="3">
+                        <label>Entidad</label>
+                        <span>@(Model.TareaEntidad != null ? Model.TareaEntidad.Descripcion : "")</span>
+                    </td>
+                    <td colspan="3">
+                        <label>Estado</label>
+                        <span>@(Model.TareaEstado != null ? Model.TareaEstado.Descripcion : "")</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <label>Fecha solicitud</label>
+                        <span>@Model.Fecha.ToString("dd/MM/yyyy")</span>
+                    </td>
+                    <td colspan="3">
+                        <label>Fecha gestión</label>
+                        <span>@(Model.FechaGestion.HasValue ? Model.FechaGestion.Value.ToString("dd/MM/yyyy") :
+                              "")</span>
+                    </td>
+                    <td colspan="3">
+                        <label>Fecha cierre</label>
+                        <span>@(Model.FechaCierre.HasValue ? Model.FechaCierre.Value.ToString("dd/MM/yyyy") : "")</span>
+                    </td>
+                    <td colspan="3"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <label>Motivo de la solicitud</label>
+        <p>
+            @Raw(System.Text.RegularExpressions.Regex.Replace(Model.Motivo ?? "", "\r?\n", "<br />"))
+        </p>
+    </div>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <label>Comentarios distribuidor</label>
+                    <p>
+                        @Raw(System.Text.RegularExpressions.Regex.Replace(Model.ComentariosDistribuidor ?? "",
+                                 "\r?\n", "<br />"))
+                    </p>
+                </td>
+                <td>
+                    <label>Comentarios gestor</label>
+                    <p>
+                        @Raw(System.Text.RegularExpressions.Regex.Replace(Model.ComentariosGestor ?? "", "\r?\n",
+                                 "<br />"))
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>

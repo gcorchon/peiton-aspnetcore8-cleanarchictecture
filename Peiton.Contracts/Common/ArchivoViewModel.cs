@@ -1,6 +1,6 @@
-namespace Peiton.Contracts.FondosSolidarios;
+namespace Peiton.Contracts.Common;
 
-public class ArchivoFondoSolidario
+public class ArchivoViewModel
 {
     public string FileName { get; set; } = null!;
     public byte[] Data { get; set; } = null!;

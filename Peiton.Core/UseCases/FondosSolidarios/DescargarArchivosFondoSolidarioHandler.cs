@@ -1,4 +1,4 @@
-using Peiton.Contracts.FondosSolidarios;
+using Peiton.Contracts.Common;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -8,11 +8,11 @@ namespace Peiton.Core.UseCases.FondosSolidarios;
 [Injectable]
 public class DescargarArchivosFondoSolidarioHandler(IFondoSolidarioRepository fondoSolidarioRepository, DescargarArchivoFondoSolidarioHandler archivoFondoSolidarioHandler, IZipService zipService)
 {
-    public async Task<ArchivoFondoSolidario> HandleAsync(int id)
+    public async Task<ArchivoViewModel> HandleAsync(int id)
     {
         var fondoSolidario = await fondoSolidarioRepository.GetByIdAsync(id) ?? throw new NotFoundException("Fondo solidario no encontrado");
 
-        var archivos = new List<ArchivoFondoSolidario>();
+        var archivos = new List<ArchivoViewModel>();
         foreach (var tipo in new int[] { 1, 2 })
         {
             try
@@ -34,7 +34,7 @@ public class DescargarArchivosFondoSolidarioHandler(IFondoSolidarioRepository fo
 
         var tutelado = fondoSolidario.Tutelado;
 
-        return new ArchivoFondoSolidario()
+        return new ArchivoViewModel()
         {
             Data = zipService.Save(),
             FileName = "Fondo Solidario - " + tutelado.NombreCompleto + " " + tutelado.NumeroExpediente + ".zip",

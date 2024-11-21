@@ -22,6 +22,7 @@ public class Tarea
 	public string? AlertasEnviadas { get; set; }
 	public virtual TareaCategoria? TareaCategoria { get; set; }
 	public virtual TareaDepartamento? TareaDepartamento { get; set; }
+	public virtual TareaEntidad? TareaEntidad { get; set; }
 	public virtual TareaEstado? TareaEstado { get; set; }
 	public virtual TareaSubcategoria? TareaSubcategoria { get; set; }
 	public virtual TareaTipo? TareaTipo { get; set; }

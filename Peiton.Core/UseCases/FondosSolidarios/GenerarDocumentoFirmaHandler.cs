@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 using Peiton.Configuration;
-using Peiton.Contracts.FondosSolidarios;
+using Peiton.Contracts.Common;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -10,7 +10,7 @@ namespace Peiton.Core.UseCases.FondosSolidarios;
 [Injectable]
 public class GenerarDocumentoFirmaHandler(ITuteladoRepository tuteladoRepository, IWordService wordService, IOptions<AppSettings> appSettings)
 {
-    public async Task<ArchivoFondoSolidario> HandleAsync(int tuteladoId, string tipo)
+    public async Task<ArchivoViewModel> HandleAsync(int tuteladoId, string tipo)
     {
         var tutelado = await tuteladoRepository.GetByIdAsync(tuteladoId) ?? throw new NotFoundException("Tutelado no encontrado");
         if (!new string[] { "titular", "familiar" }.Contains(tipo)) throw new ArgumentException("Tipo de plantilla incorrecto");
@@ -24,7 +24,7 @@ public class GenerarDocumentoFirmaHandler(ITuteladoRepository tuteladoRepository
             {"[FECHA ACTUAL]", DateTime.Now.ToString("dd 'de' MMMM 'de' yyyy").ToLower()}
         };
 
-        return new ArchivoFondoSolidario()
+        return new ArchivoViewModel()
         {
             Data = await wordService.RenderAsync(template, data),
             FileName = "Firma Fondo Solidario " + tutelado.NombreCompleto + ".docx",

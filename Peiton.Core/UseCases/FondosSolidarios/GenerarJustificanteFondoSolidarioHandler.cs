@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
 using Peiton.Configuration;
+using Peiton.Contracts.Common;
 using Peiton.Contracts.FondosSolidarios;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
@@ -11,7 +12,7 @@ namespace Peiton.Core.UseCases.FondosSolidarios;
 [Injectable]
 public class GenerarJustificanteFondoSolidarioHandler(IFondoSolidarioRepository fondoSolidarioRepository, ITuteladoRepository tuteladoRepository, IWordService wordService, IOptions<AppSettings> appSettings)
 {
-    public async Task<ArchivoFondoSolidario> HandleAsync(int id)
+    public async Task<ArchivoViewModel> HandleAsync(int id)
     {
         var fondoSolidario = await fondoSolidarioRepository.GetByIdAsync(id) ?? throw new NotFoundException("Fondo solidario no encontrado");
 
@@ -29,7 +30,7 @@ public class GenerarJustificanteFondoSolidarioHandler(IFondoSolidarioRepository 
             {"[FORMA PAGO]", fondoSolidario.FondoSolidarioFormaPago != null? fondoSolidario.FondoSolidarioFormaPago.Descripcion : ""}
         };
 
-        return new ArchivoFondoSolidario()
+        return new ArchivoViewModel()
         {
             Data = await wordService.RenderAsync(template, data),
             FileName = "justificante.docx",

@@ -40,6 +40,10 @@ GO
 ALTER TABLE [dbo].[Senalamiento] CHECK CONSTRAINT [FK_Senalamiento_Abogado1]
 GO
 
+ALTER TABLE [dbo].[Tarea]  WITH CHECK ADD  CONSTRAINT [FK_Tarea_TareaEntidad] FOREIGN KEY([Fk_TareaEntidad])
+REFERENCES [dbo].[TareaEntidad] ([Pk_TareaEntidad])
+GO
+
 Añadir Columna Autonumérica en Sucursal Pk_Sucursal y poner índice único sobre Fk_EntidadFinanciera y Número
 
 Archivos de Calidad

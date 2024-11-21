@@ -17,4 +17,9 @@ public class UnitOfWork : IUnitOfWork
     {
         return this.dbContext.SaveChangesAsync();
     }
+
+    public void Clear()
+    {
+        this.dbContext.ChangeTracker.Clear();
+    }
 }

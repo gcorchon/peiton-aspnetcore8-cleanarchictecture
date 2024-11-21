@@ -1,4 +1,4 @@
-namespace Peiton.Contracts.FondosSolidarios;
+namespace Peiton.Contracts.Common;
 
 public class ActualizarFondoSolidarioRequest
 {

@@ -63,13 +63,9 @@ public class QuejasController(IMapper mapper) : ControllerBase
     }
 
     [HttpGet("documentos")]
-    public async Task<IActionResult> DescargarDocumentoAsync([FromQuery] string path)
+    public async Task<IActionResult> DescargarDocumentoAsync([FromQuery] string path, DescargarDocumentoHandler handler)
     {
-        var filePath = FilePathValidator.CombineSafe("App_Data/Quejas", path);
-
-        if (!System.IO.File.Exists(filePath)) return NotFound();
-
-        var content = await System.IO.File.ReadAllBytesAsync(filePath);
-        return File(content, MimeTypeHelper.GetMimeType(filePath), path.Substring(path.IndexOf("_") + 1));
+        var data = await handler.HandleAsync(path);
+        return File(data.Data, data.MimeType, data.FileName);
     }
 }

@@ -1,3 +1,4 @@
+using Peiton.Contracts.Common;
 using Peiton.Contracts.FondosSolidarios;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
@@ -9,7 +10,7 @@ namespace Peiton.Core.UseCases.FondosSolidarios;
 [Injectable]
 public class DescargarArchivoFondoSolidarioHandler(IFondoSolidarioRepository fondoSolidarioRepository, ITuteladoRepository tuteladoRepository)
 {
-    public async Task<ArchivoFondoSolidario> HandleAsync(int id, int tipo)
+    public async Task<ArchivoViewModel> HandleAsync(int id, int tipo)
     {
         var fondoSolidario = await fondoSolidarioRepository.GetByIdAsync(id) ?? throw new NotFoundException("Fondo solidario no encontrado");
         if (!await tuteladoRepository.CanModifyAsync(fondoSolidario.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
@@ -27,7 +28,7 @@ public class DescargarArchivoFondoSolidarioHandler(IFondoSolidarioRepository fon
 
         if (!File.Exists(filePath)) throw new NotFoundException("Archivo no encontrado");
 
-        return new ArchivoFondoSolidario()
+        return new ArchivoViewModel()
         {
             Data = await File.ReadAllBytesAsync(filePath),
             FileName = fileName,
