@@ -7,8 +7,6 @@ using Peiton.Contracts.Credenciales;
 using Peiton.Contracts.Common;
 using Peiton.Core.UseCases.Credenciales;
 using System.ComponentModel.DataAnnotations;
-using Peiton.Core.UseCases.Common;
-using Peiton.Core.Entities;
 
 namespace Peiton.Api.Controllers;
 
@@ -25,10 +23,25 @@ public class CredencialesController(IMapper mapper) : ControllerBase
         return Ok(vm);
     }
 
+    [HttpGet("posicion-global")]
+    public async Task<IActionResult> CredencialesPosicionGlobalAsync([FromQuery][Required] int tuteladoId, PosicionGlobalHandler handler)
+    {
+        var data = await handler.HandleAsync(tuteladoId);
+        var vm = mapper.Map<IEnumerable<CredencialPosicionGlobal>>(data);
+        return Ok(vm);
+    }
+
     [HttpPatch("{id:int}")]
     public async Task<IActionResult> ActualizarCredencialAsync(int id, ActualizarCredencialRequest request, ActualizarCredencialHandler handler)
     {
         await handler.HandleAsync(id, request);
+        return Accepted();
+    }
+
+    [HttpPatch("{id:int}/resetear")]
+    public async Task<IActionResult> ResetearCredencialAsync(int id, ResetearCredencialHandler handler)
+    {
+        await handler.HandleAsync(id);
         return Accepted();
     }
 
@@ -79,7 +92,7 @@ public class CredencialesController(IMapper mapper) : ControllerBase
         return Accepted();
     }
 
-    [HttpGet("exportar")]
+    [HttpGet("exportar-bloqueadas")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaBancos)]
     public async Task<IActionResult> ExportarAsync([FromQuery] CredencialesBloqueadasFilter filter, ExportarCredencialesBloqueadasHandler handler)
     {

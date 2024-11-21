@@ -19,7 +19,11 @@ public class CredencialProfile : Profile
             .ForMember(vm => vm.EntidadFinancieraId, opt => opt.MapFrom(c => c.EntidadFinancieraId))
             .ForMember(vm => vm.EntidadFinancieraCssClass, opt => opt.MapFrom(c => c.EntidadFinanciera.CssClass))
             .ForMember(vm => vm.Campos, opt => opt.MapFrom(c => CredencialHelper.ObtenerCampos(c.EntidadFinanciera.Campos, c.DatosConexion)));
-    }
 
+        CreateMap<Ent.Credencial, VM.Credenciales.CredencialPosicionGlobal>()
+            .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(o => o.EntidadFinanciera.Descripcion))
+            .ForMember(vm => vm.EntidadFinancieraCssClass, opt => opt.MapFrom(o => o.EntidadFinanciera.CssClass))
+            .ForMember(vm => vm.Ok, opt => opt.MapFrom(o => o.Reintentos == 0 && o.DatosCorrectos));
+    }
 
 }
