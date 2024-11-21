@@ -41,7 +41,7 @@ public class IdentityService(ClaimsPrincipal claimsPrincipal, IDbService dbServi
         if (info == null)
         {
             var data = await dbService.ExecuteScalarAsync<string>("select info from Usuario where Pk_Usuario=@usuarioId", new { usuarioId = this.GetUserId() });
-            this.info = JsonConvert.DeserializeObject<Info>(data);
+            this.info = JsonConvert.DeserializeObject<Info>(data!)!;
         }
         return this.info;
     }

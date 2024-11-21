@@ -18,7 +18,7 @@ public class UsuarioProfile : Profile
         CreateMap<Ent.Usuario, VM.Usuarios.UsuarioViewModel>()
             .ForMember(v => v.Permisos, opt => opt.MapFrom(u => u.Permisos.Select(p => p.Id)))
             .ForMember(v => v.PermisosGrupo, opt => opt.MapFrom(u => u.Grupos.SelectMany(g => g.Permisos.Select(p => p.Id)).Distinct()))
-            .ForMember(v => v.Info, opt => opt.MapFrom(u => JsonConvert.DeserializeObject<VM.Usuarios.Info>(u.Info)));
+            .ForMember(v => v.Info, opt => opt.MapFrom(u => u.Info != null ? JsonConvert.DeserializeObject<VM.Usuarios.Info>(u.Info) : null));
 
         CreateMap<Ent.Usuario, VM.Usuarios.UsuarioBloqueado>();
 

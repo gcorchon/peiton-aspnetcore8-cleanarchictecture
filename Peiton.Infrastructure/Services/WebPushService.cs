@@ -22,7 +22,7 @@ public class WebPushService(ITuteladoRepository tuteladoRepository) : IWebPushSe
         if (teAppoyo == null || !teAppoyo.Enabled || string.IsNullOrWhiteSpace(teAppoyo.WebPushInfo)) return;
 
         var vapidDetails = new VapidDetails(subject, this.VAPID_PUBLIC_KEY, this.VAPID_PRIVATE_KEY);
-        var wpInfo = JsonConvert.DeserializeObject<WebPushSubscriptionRequest>(teAppoyo.WebPushInfo);
+        var wpInfo = JsonConvert.DeserializeObject<WebPushSubscriptionRequest>(teAppoyo.WebPushInfo)!;
         var subscription = new PushSubscription(wpInfo.Endpoint, wpInfo.Keys.P256Dh, wpInfo.Keys.Auth);
         var webPushClient = new WebPushClient();
         try
