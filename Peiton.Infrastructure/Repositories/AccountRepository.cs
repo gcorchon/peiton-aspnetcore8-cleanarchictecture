@@ -21,4 +21,12 @@ public class AccountRepository : RepositoryBase<Account>, IAccountRepository
 			.AsNoTracking()
 			.ToArrayAsync();
 	}
+
+	public Task<Account[]> ObtenerCuentasConMovimientosAsync(int tuteladoId, DateTime desde, DateTime hasta)
+	{
+		return DbSet.Include(a => a.Credencial).ThenInclude(c => c.EntidadFinanciera)
+			.Where(a => a.Credencial.TuteladoId == tuteladoId && a.AccountsTransactions.Any(act => act.OperationDate >= desde && act.OperationDate <= hasta))
+			.AsNoTracking()
+			.ToArrayAsync();
+	}
 }

@@ -8,7 +8,7 @@ public class TipoPensionProfile : Profile
     public TipoPensionProfile()
     {
         CreateMap<Ent.TipoPension, VM.Common.ListItem>()
-            .ForMember(vm => vm.Value, opt => opt.MapFrom(e => e.Id))
+            .ForMember(vm => vm.Id, opt => opt.MapFrom(e => e.Id))
             .ForMember(vm => vm.Text, opt => opt.MapFrom(e => e.Descripcion));
     }
 }

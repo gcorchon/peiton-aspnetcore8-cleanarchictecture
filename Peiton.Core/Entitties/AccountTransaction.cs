@@ -9,6 +9,7 @@ public class AccountTransaction
 	public DateTime OperationDate { get; set; }
 	public DateTime ValueDate { get; set; }
 	public decimal Quantity { get; set; }
+	public decimal Balance { get; set; }
 	public string? Reference { get; set; }
 	public string? TransactionType { get; set; }
 	public DateTime Fecha { get; set; }

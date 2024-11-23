@@ -10,7 +10,7 @@ public class CentroProfile : Profile
         CreateMap<Ent.Centro, VM.Centros.CentroListItem>();
         CreateMap<Ent.Centro, VM.Centros.CentroViewModel>();
         CreateMap<Ent.Centro, VM.Common.ListItem>()
-            .ForMember(v => v.Value, opt => opt.MapFrom(c => c.Id))
+            .ForMember(v => v.Id, opt => opt.MapFrom(c => c.Id))
             .ForMember(v => v.Text, opt => opt.MapFrom(c => c.Nombre));
 
         CreateMap<Ent.Centro, VM.Centros.CentroResidenciaHabitual>()

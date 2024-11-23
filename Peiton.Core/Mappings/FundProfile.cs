@@ -21,5 +21,10 @@ public class FundProfile : Profile
             .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.AccountNumber));
 
         CreateMap<VM.ProductosBancarios.ActualizarProductoBancarioRobotRequest, Ent.Fund>();
+
+        CreateMap<Ent.Fund, VM.ProductosBancarios.ProductoBancarioPosicionGlobalViewModel>()
+            .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Fondo"))
+            .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.AccountNumber))
+            .ForMember(vm => vm.UltimaActualizacion, opt => opt.MapFrom(p => p.FechaSaldo));
     }
 }

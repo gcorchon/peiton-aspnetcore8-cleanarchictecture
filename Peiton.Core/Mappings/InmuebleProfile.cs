@@ -10,7 +10,7 @@ public class InmuebleProfile : Profile
         CreateMap<Ent.Inmueble, VM.Inmuebles.InmuebleInfo>();
         CreateMap<Ent.Inmueble, VM.Inmuebles.InmuebleSolicitudAlquilerVentaInfo>();
         CreateMap<Ent.Inmueble, VM.Common.ListItem>()
-            .ForMember(vm => vm.Value, opt => opt.MapFrom(i => i.Id))
+            .ForMember(vm => vm.Id, opt => opt.MapFrom(i => i.Id))
             .ForMember(vm => vm.Text, opt => opt.MapFrom(i => !string.IsNullOrWhiteSpace(i.DireccionCompleta) ? i.DireccionCompleta.Trim() : null));
 
         CreateMap<Ent.Inmueble, VM.Inmuebles.InmuebleListItem>()

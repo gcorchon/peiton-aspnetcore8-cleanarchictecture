@@ -8,7 +8,7 @@ public class SalaProfile : Profile
     public SalaProfile()
     {
         CreateMap<Ent.Sala, VM.Common.ListItem>()
-            .ForMember(s => s.Value, opt => opt.MapFrom(s => s.Id))
+            .ForMember(s => s.Id, opt => opt.MapFrom(s => s.Id))
             .ForMember(s => s.Text, opt => opt.MapFrom(s => s.Descripcion));
 
         CreateMap<Ent.Sala, VM.Salas.SalaListItem>();

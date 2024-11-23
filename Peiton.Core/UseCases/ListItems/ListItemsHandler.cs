@@ -16,9 +16,9 @@ public class ListItemsHandler(IDbService dbService, IListItemProvider listItemPr
         if (entityDefinition == null) throw new NotFoundException("Entidad no consultable");
         if (entityDefinition.ParentValueColumn == null)
         {
-            return await dbService.QueryAsync<ListItem>($"select {entityDefinition.TextColumn} as Text, {entityDefinition.ValueColumn} as Value from {tableName} order by 1");
+            return await dbService.QueryAsync<ListItem>($"select {entityDefinition.TextColumn} as Text, {entityDefinition.ValueColumn} as Id from {tableName} order by 1");
         }
 
-        return await dbService.QueryAsync<ListItemExtended>($"select {entityDefinition.TextColumn} as Text, {entityDefinition.ValueColumn} as Value, {entityDefinition.ParentValueColumn} as ParentValue from {tableName} order by 1");
+        return await dbService.QueryAsync<ListItemExtended>($"select {entityDefinition.TextColumn} as Text, {entityDefinition.ValueColumn} as Id, {entityDefinition.ParentValueColumn} as ParentValue from {tableName} order by 1");
     }
 }

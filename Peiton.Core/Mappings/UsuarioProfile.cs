@@ -11,7 +11,7 @@ public class UsuarioProfile : Profile
     {
         CreateMap<Ent.Usuario, VM.Common.ListItem>()
             .ForMember(v => v.Text, opt => opt.MapFrom(u => u.NombreCompleto))
-            .ForMember(v => v.Value, opt => opt.MapFrom(u => u.Id));
+            .ForMember(v => v.Id, opt => opt.MapFrom(u => u.Id));
 
         CreateMap<Ent.Usuario, VM.Usuarios.UsuarioConGrupos>();
 

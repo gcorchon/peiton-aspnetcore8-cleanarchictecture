@@ -8,7 +8,7 @@ public class ClienteProfile : Profile
     public ClienteProfile()
     {
         CreateMap<Ent.Cliente, VM.Common.ListItem>()
-            .ForMember(vm => vm.Value, opt => opt.MapFrom(obj => obj.Id))
+            .ForMember(vm => vm.Id, opt => opt.MapFrom(obj => obj.Id))
             .ForMember(vm => vm.Text, opt => opt.MapFrom(obj => obj.Nombre));
 
         CreateMap<Ent.Cliente, VM.Clientes.ClienteListItem>();

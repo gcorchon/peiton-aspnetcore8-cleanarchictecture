@@ -6,5 +6,5 @@ public class ListItemExtended : ListItem
 {
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public int? ParentValue { get; set; }
+    public int? ParentId { get; set; }
 }

@@ -21,5 +21,10 @@ public class DepositProfile : Profile
             .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.AccountNumber));
 
         CreateMap<VM.ProductosBancarios.ActualizarProductoBancarioRobotRequest, Ent.Deposit>();
+
+        CreateMap<Ent.Deposit, VM.ProductosBancarios.ProductoBancarioPosicionGlobalViewModel>()
+            .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Depósito"))
+            .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.AccountNumber))
+            .ForMember(vm => vm.UltimaActualizacion, opt => opt.MapFrom(p => p.FechaSaldo));
     }
 }

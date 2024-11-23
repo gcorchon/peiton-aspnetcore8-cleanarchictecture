@@ -8,7 +8,7 @@ public class VwCategoriaProfile : Profile
     public VwCategoriaProfile()
     {
         CreateMap<Ent.VwCategoria, VM.Common.ListItem>()
-                    .ForMember(vm => vm.Value, opt => opt.MapFrom(o => o.Id))
+                    .ForMember(vm => vm.Id, opt => opt.MapFrom(o => o.Id))
                     .ForMember(vm => vm.Text, opt => opt.MapFrom(o => o.BreadCrumb));
     }
 }

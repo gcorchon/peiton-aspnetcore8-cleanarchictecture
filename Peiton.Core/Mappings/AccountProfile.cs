@@ -24,5 +24,13 @@ public class AccountProfile : Profile
 
         CreateMap<VM.ProductosBancarios.ActualizarProductoBancarioRobotRequest, Ent.Account>();
 
+        CreateMap<Ent.Account, VM.ProductosBancarios.ProductoBancarioPosicionGlobalViewModel>()
+            .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Libreta"))
+            .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.Iban))
+            .ForMember(vm => vm.UltimaActualizacion, opt => opt.MapFrom(p => p.FechaSaldo));
+
+        CreateMap<Ent.Account, VM.Common.ListItem>()
+            .ForMember(vm => vm.Text, opt => opt.MapFrom(o => o.WebAlias ?? o.Iban))
+            .ForMember(vm => vm.Id, opt => opt.MapFrom(o => o.Id));
     }
 }

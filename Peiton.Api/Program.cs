@@ -54,7 +54,6 @@ builder.Services.AddAuthorization()
 builder.Services.Configure<JwtConfig>(configuration.GetSection("JwtConfig"));
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.Configure<CajaAMTASettings>(builder.Configuration.GetSection("CajaAMTASettings"));
-builder.Services.Configure<CajaAMTASettings>(builder.Configuration.GetSection("WkhtmltopdgSettings"));
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient(s => s.GetService<IHttpContextAccessor>()!.HttpContext!.User); //<-- Para poder usar ClaimsPrincipal dentro de mis servicios.

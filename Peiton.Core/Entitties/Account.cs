@@ -18,6 +18,6 @@ public class Account
 	public virtual Credencial Credencial { get; set; } = null!;
 	/* public virtual ICollection<AccountDailyBalance> AccountsDailyBalances { get; } = new List<AccountDailyBalance>(); */
 	/* public virtual ICollection<AccountDailyBalanceReal> AccountsDailyBalancesReales { get; } = new List<AccountDailyBalanceReal>(); */
-	/* public virtual ICollection<AccountTransaction> AccountsTransactions { get; } = new List<AccountTransaction>(); */
+	public virtual ICollection<AccountTransaction> AccountsTransactions { get; } = new List<AccountTransaction>();
 
 }

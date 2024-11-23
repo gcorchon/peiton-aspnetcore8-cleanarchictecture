@@ -4,4 +4,5 @@ namespace Peiton.Core.Repositories;
 public interface IAccountRepository : IRepository<Account>
 {
     Task<Account[]> ObtenerAccountsAsync(int tuteladoId);
+    Task<Account[]> ObtenerCuentasConMovimientosAsync(int tuteladoId, DateTime desde, DateTime hasta);
 }

@@ -21,5 +21,10 @@ public class ShareProfile : Profile
             .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.AccountNumber));
 
         CreateMap<VM.ProductosBancarios.ActualizarProductoBancarioRobotRequest, Ent.Share>();
+
+        CreateMap<Ent.Share, VM.ProductosBancarios.ProductoBancarioPosicionGlobalViewModel>()
+            .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Cuenta de valores"))
+            .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.AccountNumber))
+            .ForMember(vm => vm.UltimaActualizacion, opt => opt.MapFrom(p => p.FechaSaldo));
     }
 }

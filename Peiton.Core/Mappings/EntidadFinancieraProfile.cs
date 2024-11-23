@@ -8,7 +8,7 @@ public class EntidadFinancieraProfile : Profile
     public EntidadFinancieraProfile()
     {
         CreateMap<Ent.EntidadFinanciera, VM.Common.ListItem>()
-            .ForMember(vm => vm.Value, opt => opt.MapFrom(e => e.Id))
+            .ForMember(vm => vm.Id, opt => opt.MapFrom(e => e.Id))
             .ForMember(vm => vm.Text, opt => opt.MapFrom(e => e.Descripcion));
     }
 }

@@ -24,7 +24,7 @@ public class TuteladoProfile : Profile
         CreateMap<Ent.Tutelado, VM.Inmuebles.TuteladoSolicitudAlquilerVenta>();
 
         CreateMap<Ent.Tutelado, VM.Common.ListItem>()
-            .ForMember(vm => vm.Value, m => m.MapFrom(o => o.Id))
+            .ForMember(vm => vm.Id, m => m.MapFrom(o => o.Id))
             .ForMember(vm => vm.Text, m => m.MapFrom(o => o.NombreCompleto));
     }
 

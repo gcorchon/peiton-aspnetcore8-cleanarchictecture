@@ -12,6 +12,7 @@ using Peiton.Core.UseCases.Common;
 using Peiton.Core.UseCases.Seguimientos;
 using Peiton.Core.Entities;
 using Peiton.Contracts.Seguimientos;
+using Peiton.Core.UseCases.ProductosBancarios;
 
 
 namespace Peiton.Api.Controllers;
@@ -79,6 +80,13 @@ public partial class TuteladosController(IMapper mapper) : ControllerBase
     {
         await handler.HandleAsync(id, request);
         return Accepted();
+    }
+
+    [HttpGet("{id:int}/posicion-global")]
+    public async Task<IActionResult> PosicionGlobalAsync(int id, PosicionGlobalHandler handler)
+    {
+        var data = await handler.HandleAsync(id);
+        return Ok(data);
     }
 
     [HttpGet("{id}/historico-movimientos-caja")]

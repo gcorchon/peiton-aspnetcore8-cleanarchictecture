@@ -9,7 +9,7 @@ public class GrupoProfile : Profile
     {
         CreateMap<Ent.Grupo, VM.Common.ListItem>()
             .ForMember(v => v.Text, opt => opt.MapFrom(g => g.Descripcion))
-            .ForMember(v => v.Value, opt => opt.MapFrom(g => g.Id));
+            .ForMember(v => v.Id, opt => opt.MapFrom(g => g.Id));
 
 
         CreateMap<Ent.Grupo, VM.Grupos.GrupoConUsuaios>();

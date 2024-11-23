@@ -27,7 +27,7 @@ public class CNAERepository : RepositoryBase<CNAE>, ICNAERepository
                         Description = cnae.Description,
                         Categoria = categoria != null ? new ListItem()
                         {
-                            Value = categoria.Id,
+                            Id = categoria.Id,
                             Text = categoria.BreadCrumb
                         } : null
                     };
@@ -47,7 +47,7 @@ public class CNAERepository : RepositoryBase<CNAE>, ICNAERepository
                         Description = cnae.Description,
                         Categoria = categoria != null ? new ListItem()
                         {
-                            Value = categoria.Id,
+                            Id = categoria.Id,
                             Text = categoria.BreadCrumb
                         } : null
                     };

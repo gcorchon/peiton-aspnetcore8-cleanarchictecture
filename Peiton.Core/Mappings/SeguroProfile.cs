@@ -8,7 +8,7 @@ public class SeguroProfile : Profile
     public SeguroProfile()
     {
         CreateMap<Ent.Seguro, VM.Common.ListItem>()
-            .ForMember(vm => vm.Value, opt => opt.MapFrom(c => c.Id))
+            .ForMember(vm => vm.Id, opt => opt.MapFrom(c => c.Id))
             .ForMember(vm => vm.Text, opt => opt.MapFrom(c => c.Descripcion));
     }
 }
