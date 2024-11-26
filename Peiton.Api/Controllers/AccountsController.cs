@@ -7,6 +7,7 @@ using Peiton.Authorization;
 using Peiton.Core.UseCases.Accounts;
 using Peiton.Core.UseCases.AccountTransactions;
 using System.ComponentModel.DataAnnotations;
+using Peiton.Core.Utils;
 
 namespace Peiton.Api.Controllers;
 
@@ -26,14 +27,14 @@ public class AccountsController : ControllerBase
     public async Task<IActionResult> ExportExcelExtractoBancarioAsync([FromQuery][Required] int tuteladoId, [FromQuery][Required] DateTime desde, [FromQuery][Required] DateTime hasta, ExportExcelExtractoBancarioHandler handler)
     {
         var data = await handler.HandleAsync(tuteladoId, desde, hasta);
-        return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "extracto.xlsx");
+        return File(data, MimeTypeHelper.Excel, "extracto.xlsx");
     }
 
     [HttpGet("extracto/word")]
     public async Task<IActionResult> ExportWordExtractoBancarioAsync([FromQuery][Required] int tuteladoId, [FromQuery][Required] DateTime desde, [FromQuery][Required] DateTime hasta, ExportWordExtractoBancarioHandler handler)
     {
         var data = await handler.HandleAsync(tuteladoId, desde, hasta);
-        return File(data, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "extracto.docx");
+        return File(data, MimeTypeHelper.Word, "extracto.docx");
     }
 
     [HttpPatch("{id:int}/baja")]

@@ -7,6 +7,7 @@ using Peiton.Contracts.Credenciales;
 using Peiton.Contracts.Common;
 using Peiton.Core.UseCases.Credenciales;
 using System.ComponentModel.DataAnnotations;
+using Peiton.Core.Utils;
 
 namespace Peiton.Api.Controllers;
 
@@ -97,7 +98,7 @@ public class CredencialesController(IMapper mapper) : ControllerBase
     public async Task<IActionResult> ExportarAsync([FromQuery] CredencialesBloqueadasFilter filter, ExportarCredencialesBloqueadasHandler handler)
     {
         var data = await handler.HandleAsync(filter);
-        return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "credenciales-bloqueadas.xlsx");
+        return File(data, MimeTypeHelper.Excel, "credenciales-bloqueadas.xlsx");
     }
 
 }

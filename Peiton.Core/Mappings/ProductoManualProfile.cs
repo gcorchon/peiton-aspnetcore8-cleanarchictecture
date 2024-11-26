@@ -11,7 +11,7 @@ public class ProductoManualProfile : Profile
             .ForMember(vm => vm.Manual, opt => opt.MapFrom(p => true))
             .ForMember(vm => vm.TipoProducto, opt => opt.MapFrom(p => p.TipoProducto.Descripcion))
             .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.Identificacion))
-            .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(p => p.EntidadFinanciera.Descripcion));
+            .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(p => p.EntidadFinanciera));
 
         CreateMap<Ent.ProductoManual, VM.ProductosBancarios.ProductoBancarioViewModel>();
 

@@ -21,6 +21,7 @@ public class AccountTransactionConfiguration : IEntityTypeConfiguration<AccountT
 		builder.Property(p => p.AfterbanksTransactionId).HasMaxLength(100);
 		builder.Property(p => p.Origen).HasMaxLength(1).IsRequired().HasDefaultValueSql("('AB')");
 		builder.Property(p => p.Quantity).HasColumnType("money");
+		builder.Property(p => p.Balance).HasColumnType("money");
 		/*builder.HasOne(d => d.Account)
 			.WithMany(p => p.AccountsTransactions)
 			.HasForeignKey(d => d.AccountId);*/

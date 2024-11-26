@@ -65,7 +65,7 @@ public class ExcelBuilder : IDisposable
             {
                 list.Add((o) => new Cell()
                 {
-                    CellValue = o != null ? new CellValue((string)o) : new CellValue(),
+                    CellValue = o != null ? new CellValue((string)o) : new CellValue(""),
                     DataType = CellValues.String
                 });
             }
@@ -73,7 +73,7 @@ public class ExcelBuilder : IDisposable
             {
                 list.Add((o) => new Cell()
                 {
-                    CellValue = o != null ? new CellValue((decimal)o) : new CellValue(),
+                    CellValue = o != null ? new CellValue((decimal)o) : new CellValue(""),
                     DataType = CellValues.Number
                 });
             }
@@ -81,7 +81,7 @@ public class ExcelBuilder : IDisposable
             {
                 list.Add((o) => new Cell()
                 {
-                    CellValue = o != null ? new CellValue((double)o) : new CellValue(),
+                    CellValue = o != null ? new CellValue((double)o) : new CellValue(""),
                     DataType = CellValues.Number
                 });
             }
@@ -89,7 +89,7 @@ public class ExcelBuilder : IDisposable
             {
                 list.Add((o) => new Cell()
                 {
-                    CellValue = o != null ? new CellValue(((DateTime)o).ToOADate().ToString()) : new CellValue(),
+                    CellValue = o != null ? new CellValue(((DateTime)o).ToOADate().ToString()) : new CellValue(""),
                     DataType = CellValues.Number,
                     StyleIndex = 1
                 });
@@ -98,7 +98,7 @@ public class ExcelBuilder : IDisposable
             {
                 list.Add((o) => new Cell()
                 {
-                    CellValue = o != null ? new CellValue((bool)o) : new CellValue(),
+                    CellValue = o != null ? new CellValue((bool)o) : new CellValue(""),
                     DataType = CellValues.Boolean
                 });
             }
@@ -106,7 +106,7 @@ public class ExcelBuilder : IDisposable
             {
                 list.Add((o) => new Cell()
                 {
-                    CellValue = o != null ? new CellValue((int)o) : new CellValue(),
+                    CellValue = o != null ? new CellValue((int)o) : new CellValue(""),
                     DataType = CellValues.Number
                 });
             }
@@ -114,7 +114,7 @@ public class ExcelBuilder : IDisposable
             {
                 list.Add((o) => new Cell()
                 {
-                    CellValue = o != null ? new CellValue(o.ToString() ?? "") : new CellValue(),
+                    CellValue = o != null ? new CellValue(o.ToString() ?? "") : new CellValue(""),
                     DataType = CellValues.String
                 });
 

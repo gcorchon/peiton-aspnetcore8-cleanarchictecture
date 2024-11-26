@@ -106,6 +106,7 @@ public class Tutelado
 	public virtual ValoracionResultado? ValoracionResultado { get; set; }
 	public virtual ValoracionTutor? ValoracionTutor { get; set; }
 	public virtual ICollection<VwCajaAMTA> VwCajaAMTA { get; } = [];
+	public virtual ICollection<VwCaja> VwCaja { get; } = [];
 
 	/* public virtual ICollection<Agenda> Entradas { get; } = []; */
 	public virtual ICollection<ApoyoFormal> ApoyosFormales { get; } = [];

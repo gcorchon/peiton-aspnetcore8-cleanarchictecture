@@ -14,7 +14,7 @@ public class AccountProfile : Profile
             .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Libreta"))
             .ForMember(vm => vm.TipoProducto, opt => opt.MapFrom(p => "Libreta"))
             .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.Iban))
-            .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(p => p.Credencial.EntidadFinanciera.Descripcion));
+            .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(p => p.Credencial.EntidadFinanciera));
 
         CreateMap<Ent.Account, VM.ProductosBancarios.ProductoBancarioViewModel>()
             .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Libreta"))

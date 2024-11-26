@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Peiton.Core.UseCases.ProductosBancarios;
 using Peiton.Contracts.ProductosBancarios;
+using Peiton.Core.Utils;
 
 namespace Peiton.Api.Controllers;
 
@@ -42,5 +43,19 @@ public class ProductosBancariosController : ControllerBase
     {
         await handler.HandleAsync(id, request);
         return Accepted();
+    }
+
+    [HttpGet("certificado/word")]
+    public async Task<IActionResult> CertificadoAsync([FromQuery] CertificadoRequest request, CertificadoWordHandler handler)
+    {
+        var data = await handler.HandleAsync(request.TuteladoId, request.EntidadFinancieraId, request.Fecha);
+        return File(data, MimeTypeHelper.Word, "certificado.docx");
+    }
+
+    [HttpGet("certificado/pdf")]
+    public async Task<IActionResult> CertificadoAsync([FromQuery] CertificadoRequest request, CertificadoPdfHandler handler)
+    {
+        var data = await handler.HandleAsync(request.TuteladoId, request.EntidadFinancieraId, request.Fecha);
+        return File(data, MimeTypeHelper.PDF, "certificado.pdf");
     }
 }

@@ -5,6 +5,7 @@ using Peiton.Api.Extensions;
 using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Core.UseCases.Test;
+using Peiton.Core.Utils;
 
 namespace Peiton.Api.Controllers;
 
@@ -17,7 +18,7 @@ public class TestController : ControllerBase
     public async Task<IActionResult> ObtenerDocumentoWordAsync(TestHandler handler)
     {
         var data = await handler.HandleAsync();
-        return File(data, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+        return File(data, MimeTypeHelper.Word);
     }
 
     [HttpGet("text")]

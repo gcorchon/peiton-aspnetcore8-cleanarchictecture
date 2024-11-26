@@ -1,3 +1,6 @@
+using Dapper;
+using Microsoft.EntityFrameworkCore;
+using Peiton.Contracts.ProductosBancarios;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -11,5 +14,11 @@ public class ShareDailyBalanceRepository : RepositoryBase<ShareDailyBalance>, IS
 	public ShareDailyBalanceRepository(PeitonDbContext dbContext) : base(dbContext)
 	{
 
+	}
+
+	public async Task<DailyBalance?> ObtenerBalanceAsync(int id, DateTime fechaCertificado)
+	{
+		return await DbContext.Database.GetDbConnection()
+				.QueryFirstOrDefaultAsync<DailyBalance>("select * from dbo.ObtenerSaldoShare(@ShareId, @Fecha) where Saldo is not null", new { ShareId = id, Fecha = fechaCertificado });
 	}
 }

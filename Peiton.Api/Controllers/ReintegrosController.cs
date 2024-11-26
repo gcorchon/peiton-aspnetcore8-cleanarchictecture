@@ -4,6 +4,7 @@ using Peiton.Api.Authorization;
 using Peiton.Authorization;
 using Peiton.Contracts.Caja;
 using Peiton.Core.UseCases.Cajas;
+using Peiton.Core.Utils;
 
 namespace Peiton.Api.Controllers;
 
@@ -44,7 +45,7 @@ public class ReintegrosController(IMapper mapper) : ControllerBase
     public async Task<IActionResult> ExportarReintegrosAsync(ExportarReintegrosHandler handler)
     {
         var data = await handler.HandleAsync();
-        return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "reintegros.xlsx");
+        return File(data, MimeTypeHelper.Excel, "reintegros.xlsx");
     }
 
     [HttpGet("tutelados")]

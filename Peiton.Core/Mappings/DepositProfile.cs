@@ -12,7 +12,7 @@ public class DepositProfile : Profile
             .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Depósito"))
             .ForMember(vm => vm.TipoProducto, opt => opt.MapFrom(p => "Depósito"))
             .ForMember(vm => vm.Identificacion, opt => opt.MapFrom(p => p.AccountNumber))
-            .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(p => p.Credencial.EntidadFinanciera.Descripcion));
+            .ForMember(vm => vm.EntidadFinanciera, opt => opt.MapFrom(p => p.Credencial.EntidadFinanciera));
 
         CreateMap<Ent.Deposit, VM.ProductosBancarios.ProductoBancarioViewModel>()
             .ForMember(vm => vm.Nombre, opt => opt.MapFrom(p => p.WebAlias ?? "Depósito"))

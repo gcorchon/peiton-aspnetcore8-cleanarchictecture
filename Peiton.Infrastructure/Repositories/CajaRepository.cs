@@ -4,6 +4,7 @@ using Peiton.Core.Entities;
 using Peiton.Contracts.Enums;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
+using Peiton.Infrastructure.Utils;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(ICajaRepository))]
@@ -145,4 +146,5 @@ public class CajaRepository : RepositoryBase<Caja>, ICajaRepository
                                                 ON Pk_Tutelado = dv.Fk_Tutelado
                                                 order by 1, Caja.FechaPago desc").ToArrayAsync();
 	}
+
 }

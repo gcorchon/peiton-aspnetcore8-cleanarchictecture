@@ -7,6 +7,7 @@ using Peiton.Authorization;
 using Peiton.Contracts.AccountTransactions;
 using Peiton.Core.UseCases.AccountTransactions;
 using System.ComponentModel.DataAnnotations;
+using Peiton.Core.Utils;
 
 namespace Peiton.Api.Controllers;
 
@@ -26,7 +27,7 @@ public class AccountTransactionsController(IMapper mapper) : ControllerBase
     public async Task<IActionResult> ExportAccountTransactionsAsync([FromQuery][Required] int accountId, [FromQuery] AccountTransactionsFilter filter, ExportAccountTransactionsHandler handler)
     {
         var data = await handler.HandleAsync(accountId, filter);
-        return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "movimientos.xlsx");
+        return File(data, MimeTypeHelper.Excel, "movimientos.xlsx");
     }
 
     [HttpPatch()]

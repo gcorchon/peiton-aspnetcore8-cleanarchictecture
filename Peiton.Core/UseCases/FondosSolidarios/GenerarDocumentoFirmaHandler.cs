@@ -3,6 +3,7 @@ using Peiton.Configuration;
 using Peiton.Contracts.Common;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
+using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.FondosSolidarios;
@@ -28,7 +29,7 @@ public class GenerarDocumentoFirmaHandler(ITuteladoRepository tuteladoRepository
         {
             Data = await wordService.RenderAsync(template, data),
             FileName = "Firma Fondo Solidario " + tutelado.NombreCompleto + ".docx",
-            MimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            MimeType = MimeTypeHelper.Word,
         };
     }
 }

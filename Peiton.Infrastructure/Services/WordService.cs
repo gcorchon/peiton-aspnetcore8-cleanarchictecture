@@ -85,6 +85,7 @@ public class WordService(IRazorService razorService) : IWordService
 @inherits TemplatePage<{modelType}>
 @using System
 @using System.Linq
+@using Peiton.Core.Utils
 {sourceTemplate}";
         return await razorService.RenderTemplateAsync(template, data);
     }

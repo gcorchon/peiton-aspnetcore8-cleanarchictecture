@@ -34,7 +34,7 @@ public class GenerarJustificanteFondoSolidarioHandler(IFondoSolidarioRepository 
         {
             Data = await wordService.RenderAsync(template, data),
             FileName = "justificante.docx",
-            MimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            MimeType = MimeTypeHelper.Word
         };
     }
 }

@@ -43,7 +43,7 @@ public class PeitonDbContext : DbContext
 
 
     public DbSet<VwCajaAMTA> VwCajaAMTA => Set<VwCajaAMTA>();
-
+    public DbSet<VwCaja> VwCaja => Set<VwCaja>();
     public DbSet<VwCategoria> VwCategoria => Set<VwCategoria>();
 
 

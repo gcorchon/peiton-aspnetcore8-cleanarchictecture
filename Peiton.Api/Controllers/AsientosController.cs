@@ -10,6 +10,7 @@ using Peiton.Contracts.Facturas;
 using Peiton.Core.Entities;
 using Peiton.Core.UseCases.Asientos;
 using Peiton.Core.UseCases.Common;
+using Peiton.Core.Utils;
 
 namespace Peiton.Api.Controllers;
 
@@ -93,6 +94,6 @@ public class AsientosController(IMapper mapper) : ControllerBase
     public async Task<IActionResult> CertificadoDeudaFondoTuteladoAsync([FromQuery] CertificadoIngresosGastosRequest request, CertificadoDeudaFondoTuteladoHandler handler)
     {
         var data = await handler.HandleAsync(request);
-        return File(data, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "certificado-deuda.docx");
+        return File(data, MimeTypeHelper.Word, "certificado-deuda.docx");
     }
 }

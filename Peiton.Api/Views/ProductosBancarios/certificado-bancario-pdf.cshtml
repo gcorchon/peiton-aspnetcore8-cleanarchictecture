@@ -1,0 +1,66 @@
+@using RazorLight;
+@inherits TemplatePage<Peiton.Contracts.ProductosBancarios.CertificadoViewModel>
+@using System;
+@using System.Linq;
+@using Peiton.Core.Utils;
+<!doctype html>
+<html>
+
+<head>
+    <title>Certificado</title>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-family: Arial
+        }
+
+        p {
+            text-align: justify;
+            font-size: 18px
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        @Model.Cabecera
+    </p>
+    <p>
+        CERTIFICA:
+    </p>
+    <div style="margin-left:100px">
+        <p>Que, según consta en los antecedentes que obran en poder de esta Entidad, @Model.Tutelado, con DNI nº
+            @Model.DNI, es titular individual de los siguientes productos:</p>
+
+        @foreach (var producto in Model.Productos)
+        {
+            @switch (producto.Tipo)
+            {
+                case "Libreta":
+                    <p>* Cuenta Nº @producto.Numero, la cual tiene a fecha @producto.Fecha.ToReadableFormat() un saldo de
+                        @producto.Importe.ToMoneyString() //@producto.Importe.ToString("N2")</p>
+                    break;
+                case "Fondo":
+                    <p>* Fondo Nº @producto.Numero, el cual tiene a fecha @producto.Fecha.ToReadableFormat() una valoración de
+                        @producto.Importe.ToMoneyString() //@producto.Importe.ToString("N2")</p>
+                    break;
+                case "Depósito":
+                    <p>* Depósito Nº @producto.Numero, el cual tiene a fecha @producto.Fecha.ToReadableFormat() una valoración de
+                        @producto.Importe.ToMoneyString() //@producto.Importe.ToString("N2") </p>
+                    break;
+                case "Cuenta de Valores":
+                    <p>* Cuenta de valores Nº @producto.Numero, la cual tiene a fecha @producto.Fecha.ToReadableFormat() una
+                        valoración de @producto.Importe.ToMoneyString() //@producto.Importe.ToString("N2")</p>
+                    break;
+            }
+
+        }
+
+    </div>
+
+    <p>Para que conste, a petición del interesado, se expide el presente documento en Madrid a
+        @DateTime.Now.Date.ToReadableFormat().</p>
+
+</body>
+
+</html>
