@@ -57,10 +57,25 @@ public class CajaController(IMapper mapper) : ControllerBase
         return this.PaginatedResult(vm, data.Total);
     }
 
+    [HttpGet("tutelado/pendientes")]
+    public async Task<IActionResult> CajaMovimientosPendientesAsync([FromQuery][Required] int tuteladoId, [FromQuery] CajaPendienteTuteladoFilter filter, [FromQuery] Pagination pagination, CajaPendienteTuteladoHandler handler)
+    {
+        var data = await handler.HandleAsync(tuteladoId, filter, pagination);
+        var vm = mapper.Map<IEnumerable<CajaPendienteTuteladoListItem>>(data.Items);
+        return this.PaginatedResult(vm, data.Total);
+    }
+
     [HttpGet("tutelado/exportar")]
     public async Task<IActionResult> ExportaCajaAsync([FromQuery][Required] int tuteladoId, [FromQuery] CajaTuteladoFilter filter, ExportarCajaTuteladoHandler handler)
     {
         var data = await handler.HandleAsync(tuteladoId, filter);
         return File(data, MimeTypeHelper.Excel, "caja.xlsx");
+    }
+
+    [HttpPost("tutelado/justificante-ingreso")]
+    public async Task<IActionResult> JustificanteIngresoAsync([FromBody] JustificanteIngresoRequest request, JustificanteIngresoHandler handler)
+    {
+        var data = await handler.HandleAsync(request);
+        return File(data, MimeTypeHelper.Word, "justificante.docx");
     }
 }

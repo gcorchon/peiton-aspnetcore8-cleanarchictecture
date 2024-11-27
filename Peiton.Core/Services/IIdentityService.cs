@@ -7,4 +7,5 @@ public interface IIdentityService
     int GetUserId();
     Task<bool> HasPermissionAsync(int permissionId);
     Task<Info> GetUserProfileAsync();
+    Task<string> GetUserNameAsync();
 }

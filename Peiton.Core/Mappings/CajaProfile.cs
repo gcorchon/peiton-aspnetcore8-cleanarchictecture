@@ -23,5 +23,9 @@ public class CajaProfile : Profile
         CreateMap<Ent.Caja, Ent.CajaIncidencia>()
             .ForMember(vm => vm.Id, opt => opt.Ignore())
             .ForMember(vm => vm.CajaId, opt => opt.MapFrom(c => c.Id));
+
+        CreateMap<Ent.Caja, VM.Caja.CajaPendienteTuteladoListItem>()
+            .ForMember(vm => vm.TipoPago, m => m.MapFrom(o => o.TipoPago != null ? o.TipoPago.Descripcion : null))
+            .ForMember(vm => vm.MetodoPago, m => m.MapFrom(o => o.MetodoPago != null ? o.MetodoPago.Descripcion : null));
     }
 }

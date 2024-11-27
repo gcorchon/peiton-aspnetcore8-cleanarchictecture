@@ -32,7 +32,7 @@ public class VwCajaRepository : RepositoryBase<VwCaja>, IVwCajaRepository
 
 	private IQueryable<VwCaja> ApplyFilters(IQueryable<VwCaja> query, int tuteladoId, CajaTuteladoFilter filter)
 	{
-		query = query.Include(c => c.MetodoPago).Include(c => c.TipoPago).Where(c => c.TuteladoId == tuteladoId);
+		query = query.Include(c => c.MetodoPago).Include(c => c.TipoPago).Where(c => c.TuteladoId == tuteladoId && !c.Pendiente);
 
 		if (filter == null) return query;
 

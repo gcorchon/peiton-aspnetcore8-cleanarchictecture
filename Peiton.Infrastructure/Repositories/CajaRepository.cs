@@ -147,4 +147,48 @@ public class CajaRepository : RepositoryBase<Caja>, ICajaRepository
                                                 order by 1, Caja.FechaPago desc").ToArrayAsync();
 	}
 
+
+	public Task<Caja[]> ObtenerCajaPendienteTuteladoAsync(int page, int total, int tuteladoId, CajaPendienteTuteladoFilter filter)
+	{
+		return ApplyFilters(DbSet, tuteladoId, filter)
+			.OrderByDescending(s => s.FechaPago).ThenByDescending(s => s.Id)
+			.Skip((page - 1) * total)
+			.Take(total)
+			.AsNoTracking()
+			.ToArrayAsync();
+	}
+
+	public Task<int> ContarCajaPendienteTuteladoAsync(int tuteladoId, CajaPendienteTuteladoFilter filter)
+	{
+		return ApplyFilters(DbSet, tuteladoId, filter).CountAsync();
+	}
+
+	private IQueryable<Caja> ApplyFilters(IQueryable<Caja> query, int tuteladoId, CajaPendienteTuteladoFilter filter)
+	{
+		query = query.Include(c => c.MetodoPago).Include(c => c.TipoPago).Where(c => c.TuteladoId == tuteladoId && c.Pendiente);
+
+		if (filter == null) return query;
+
+		if (filter.FechaAutorizacion.HasValue)
+		{
+			query = query.Where(c => c.FechaAutorizacion.Date == filter.FechaAutorizacion.Value.Date);
+		}
+
+		if (filter.TipoPagoId.HasValue)
+		{
+			query = query.Where(c => c.TipoPagoId == filter.TipoPagoId.Value);
+		}
+
+		if (filter.MetodoPagoId.HasValue)
+		{
+			query = query.Where(c => c.MetodoPagoId == filter.MetodoPagoId.Value);
+		}
+
+		if (filter.Importe.HasValue)
+		{
+			query = query.Where(c => DbContext.DecimalAsString(c.Importe).StartsWith(filter.Importe.Value.ToString()));
+		}
+
+		return query;
+	}
 }

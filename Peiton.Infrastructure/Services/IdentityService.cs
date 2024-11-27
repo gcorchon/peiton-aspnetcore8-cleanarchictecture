@@ -45,4 +45,9 @@ public class IdentityService(ClaimsPrincipal claimsPrincipal, IDbService dbServi
         }
         return this.info;
     }
+
+    public async Task<string> GetUserNameAsync()
+    {
+        return await dbService.ExecuteScalarAsync<string>("select NombreCompleto from Usuario where Pk_Usuario=@usuarioId", new { usuarioId = GetUserId() }) ?? throw new UnauthorizedAccessException("Usuario no logado");
+    }
 }
