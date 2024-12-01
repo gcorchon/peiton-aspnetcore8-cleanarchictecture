@@ -5,12 +5,14 @@ public class Archivo
 	public int TuteladoId { get; set; }
 	public int CategoriaArchivoId { get; set; }
 	public string Descripcion { get; set; } = null!;
-	public string? ContentType { get; set; }
+	public string ContentType { get; set; } = null!;
 	public string FileName { get; set; } = null!;
+	public string OriginalFileName { get; set; } = null!;
 	public DateTime Fecha { get; set; }
 	public string? Tags { get; set; }
 	public bool TuAppoyo { get; set; }
 	public virtual Tutelado Tutelado { get; set; } = null!;
+	public virtual CategoriaArchivo CategoriaArchivo { get; set; } = null!;
 	/* public virtual ICollection<ControlCuentaGeneral> ControlesCuentasGeneralesArchivoAprobacion { get; } = new List<ControlCuentaGeneral>(); */
 	/* public virtual ICollection<ControlCuentaGeneral> ControlesCuentasGeneralesArchivoCGJ { get; } = new List<ControlCuentaGeneral>(); */
 	/* public virtual ICollection<ControlInventario> ControlesInventarios { get; } = new List<ControlInventario>(); */

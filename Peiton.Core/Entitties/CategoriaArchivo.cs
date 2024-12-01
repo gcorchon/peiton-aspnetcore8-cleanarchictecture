@@ -9,7 +9,7 @@ public class CategoriaArchivo
 	public int? CategoriaArchivoId { get; set; }
 	public string? CssClass { get; set; }
 	public virtual CategoriaArchivo? CategoriaArchivoPadre { get; set; }
-	/* public virtual ICollection<CategoriaArchivo> CategoriasArchivos { get; } = new List<CategoriaArchivo>(); */
+	public virtual ICollection<CategoriaArchivo> CategoriasArchivos { get; } = [];
 	/* public virtual ICollection<UrgenciaArchivo> UrgenciasArchivos { get; } = new List<UrgenciaArchivo>(); */
 
 }

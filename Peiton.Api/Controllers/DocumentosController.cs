@@ -55,6 +55,6 @@ public class DocumentosController : ControllerBase
     public async Task<IActionResult> DescargarDocumentoAsync(int id, DescargarDocumentoHandler handler)
     {
         var data = await handler.HandleAsync(id);
-        return File(data.Content, MimeTypeHelper.GetMimeType(data.FileName), data.FileName);
+        return File(data.Data, data.MimeType, data.FileName);
     }
 }

@@ -69,14 +69,22 @@ ALTER TABLE [dbo].[Loan]  WITH CHECK ADD  CONSTRAINT [FK_Loan_TipoPrestamo] FORE
 REFERENCES [dbo].[TipoPrestamo] ([Pk_TipoPrestamo])
 GO
 
-
-
-/****** Object:  View [dbo].[vwCajaBalance]    Script Date: 26/11/2024 6:56:05 ******/
-SET ANSI_NULLS ON
+delete from Archivo
+from Archivo 
+left join CategoriaArchivo on Archivo.Fk_CategoriaArchivo = Pk_CategoriaArchivo
+where Pk_CategoriaArchivo is null 
 GO
 
-SET QUOTED_IDENTIFIER ON
+ALTER TABLE [dbo].[Archivo]  WITH CHECK ADD  CONSTRAINT [FK_CategoriaArchivo_Archivo] FOREIGN KEY([Fk_CategoriaArchivo])
+REFERENCES [dbo].[CategoriaArchivo] ([Pk_CategoriaArchivo])
 GO
+
+alter table Archivo alter column ContentType nvarchar(150) not null
+GO
+
+alter table Archivo add OriginalFileName nvarchar(255)
+GO
+update Archivo set OriginalFileName = Archivo.FileName
 
 
 

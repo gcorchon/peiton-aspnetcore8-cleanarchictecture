@@ -14,9 +14,9 @@ public class CategoriaArchivoConfiguration : IEntityTypeConfiguration<CategoriaA
 		builder.Property(p => p.CategoriaArchivoId).HasColumnName("Fk_CategoriaArchivo");
 		builder.Property(p => p.CssClass).HasMaxLength(50);
 
-		/*builder.HasOne(d => d.CategoriaArchivoPadre)
+		builder.HasOne(d => d.CategoriaArchivoPadre)
 			.WithMany(p => p.CategoriasArchivos)
-			.HasForeignKey(d => d.CategoriaArchivoId);*/
+			.HasForeignKey(d => d.CategoriaArchivoId);
 
 	}
 }

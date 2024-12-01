@@ -2,15 +2,16 @@
 using Peiton.DependencyInjection;
 using Peiton.Core.Exceptions;
 using Peiton.Contracts.Common;
+using Peiton.Core.Utils;
 
 namespace Peiton.Core.UseCases.Documentos;
 
 [Injectable]
-public class DescargarDocumentoHandler(IDocumentoRepository DocumentoRepository)
+public class DescargarDocumentoHandler(IDocumentoRepository documentoRepository)
 {
-    public async Task<FileData> HandleAsync(int id)
+    public async Task<ArchivoViewModel> HandleAsync(int id)
     {
-        var documento = await DocumentoRepository.GetByIdAsync(id);
+        var documento = await documentoRepository.GetByIdAsync(id);
 
         if (documento == null)
         {
@@ -21,10 +22,11 @@ public class DescargarDocumentoHandler(IDocumentoRepository DocumentoRepository)
 
         if (!File.Exists(filePath)) throw new NotFoundException("Documento no encontrado");
 
-        return new FileData()
+        return new ArchivoViewModel()
         {
             FileName = Path.GetFileName(filePath),
-            Content = await System.IO.File.ReadAllBytesAsync(filePath),
+            Data = await System.IO.File.ReadAllBytesAsync(filePath),
+            MimeType = documento.ContentType!
         };
     }
 }
