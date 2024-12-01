@@ -8,7 +8,8 @@ public class CajaProfile : Profile
     public CajaProfile()
     {
         CreateMap<Ent.Caja, VM.Caja.CajaViewModel>()
-            .ForMember(vm => vm.Autorizador, opt => opt.MapFrom(obj => obj.Usuario.NombreCompleto));
+            .ForMember(vm => vm.Autorizador, opt => opt.MapFrom(obj => obj.Usuario.NombreCompleto))
+            .ForMember(vm => vm.Centro, opt => opt.MapFrom(obj => obj.Centro != null ? obj.Centro.Nombre : null));
 
         CreateMap<Ent.Caja, VM.Caja.CajaListItem>()
             .ForMember(vm => vm.Nombre, opt => opt.MapFrom(obj => obj.Tutelado.NombreCompleto))
@@ -27,5 +28,31 @@ public class CajaProfile : Profile
         CreateMap<Ent.Caja, VM.Caja.CajaPendienteTuteladoListItem>()
             .ForMember(vm => vm.TipoPago, m => m.MapFrom(o => o.TipoPago != null ? o.TipoPago.Descripcion : null))
             .ForMember(vm => vm.MetodoPago, m => m.MapFrom(o => o.MetodoPago != null ? o.MetodoPago.Descripcion : null));
+
+        CreateMap<Ent.Caja, VM.Caja.CajaPendienteTuteladoViewModel>()
+            .ForMember(vm => vm.Autorizador, opt => opt.MapFrom(obj => obj.Usuario.NombreCompleto));
+    }
+
+    public CajaProfile(IIdentityService identityService)
+    {
+        CreateMap<VM.Caja.ActualizarMovimientoCajaTuteladoRequest, Ent.Caja>()
+            .ForMember(c => c.PeriodicidadId, m => m.MapFrom(v => v.TipoPagoId == 1 ? null : v.TipoPagoId))
+            .ForMember(c => c.Importe, m => m.MapFrom(v => -Math.Abs(v.Importe)))
+            .ForMember(c => c.UsuarioId, m => m.MapFrom(v => identityService.GetUserId()));
+
+        CreateMap<VM.Caja.CrearMovimientoCajaTuteladoRequest, Ent.Caja>()
+            .ForMember(c => c.PeriodicidadId, m => m.MapFrom(v => v.Tipo == 1 && v.TipoPagoId == 1 ? null : v.TipoPagoId))
+            .ForMember(c => c.Importe, m => m.MapFrom(v => v.Tipo == 1 ? -Math.Abs(v.Importe) : Math.Abs(v.Importe)))
+            .ForMember(c => c.FechaPago, m => m.MapFrom(v => v.Tipo == 1 ? (DateTime?)null : v.FechaAutorizacion))
+            .ForMember(c => c.Pendiente, m => m.MapFrom(v => v.Tipo == 1))
+            .ForMember(c => c.UsuarioId, m => m.MapFrom(v => identityService.GetUserId()));
+
+
+        CreateMap<VM.Caja.ActualizarMovimientoCajaRequest, Ent.Caja>()
+            .ForMember(c => c.Pendiente, m => m.MapFrom(v => false))
+            .ForMember(c => c.FechaPago, m => m.MapFrom(v => DateTime.Now))
+            .ForMember(c => c.PagadorId, m => m.MapFrom(v => identityService.GetUserId()));
+
+
     }
 }

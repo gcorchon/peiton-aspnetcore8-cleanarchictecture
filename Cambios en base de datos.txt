@@ -68,8 +68,8 @@ GO
 ALTER TABLE [dbo].[Loan]  WITH CHECK ADD  CONSTRAINT [FK_Loan_TipoPrestamo] FOREIGN KEY([Fk_TipoPrestamo])
 REFERENCES [dbo].[TipoPrestamo] ([Pk_TipoPrestamo])
 GO
-USE [Peiton2AB]
-GO
+
+
 
 /****** Object:  View [dbo].[vwCajaBalance]    Script Date: 26/11/2024 6:56:05 ******/
 SET ANSI_NULLS ON
@@ -102,3 +102,8 @@ GO
 
 alter table TipoPago alter column Descripcion nvarchar(50)
 update TipoPago set Descripcion = TRIM(Descripcion)
+
+ALTER TABLE [dbo].[Caja]  WITH CHECK ADD  CONSTRAINT [Caja_FK_Centro_Centro] FOREIGN KEY([Fk_Centro])
+REFERENCES [dbo].[Centro] ([Pk_Centro])
+  
+GO

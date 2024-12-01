@@ -12,7 +12,6 @@ public class CajaViewModel
     public int? TipoPagoId { get; set; }
     public int? MetodoPagoId { get; set; }
     public int? PeriodicidadId { get; set; }
-    public int UsuarioId { get; set; }
     public bool Pendiente { get; set; }
     public string? Observaciones { get; set; }
     public bool? HablarConSocial { get; set; }
@@ -21,5 +20,7 @@ public class CajaViewModel
     public string? RecepcionOtro { get; set; }
     public int? ParentescoId { get; set; }
     public string Autorizador { get; set; } = null!;
+    public string? Centro { get; set; }
+    public string? DireccionCentro { get; set; }
     public decimal SaldoCaja { get; set; } // <!-- Este valor hay que calcularlo aparte, no está en la tabla de Caja
 }

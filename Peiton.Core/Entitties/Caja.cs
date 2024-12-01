@@ -30,6 +30,7 @@ public class Caja
 	public virtual TipoPago? TipoPago { get; set; }
 	public virtual Usuario Usuario { get; set; } = null!;
 	public virtual Usuario? Pagador { get; set; }
+	public virtual Centro? Centro { get; set; }
 	public virtual ICollection<CajaAMTA> CajaAMTA { get; } = new List<CajaAMTA>();
 	public virtual ICollection<VwCajaAMTA> VwCajaAMTA { get; } = new List<VwCajaAMTA>();
 

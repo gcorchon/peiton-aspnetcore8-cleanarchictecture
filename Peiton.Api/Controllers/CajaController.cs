@@ -41,6 +41,42 @@ public class CajaController(IMapper mapper) : ControllerBase
         return Accepted();
     }
 
+    [HttpPost()]
+    public async Task<IActionResult> CrearMovimientoCajaTuteladoAsync(CrearMovimientoCajaTuteladoRequest request, CrearMovimientoCajaTuteladoHandler handler)
+    {
+        await handler.HandleAsync(request);
+        return Accepted();
+    }
+
+    [HttpPatch("{id:int}")]
+    public async Task<IActionResult> ActualizarMovimientoCajaAsync(int id, ActualizarMovimientoCajaRequest request, ActualizarMovimientoCajaHandler handler)
+    {
+        await handler.HandleAsync(id, request);
+        return Accepted();
+    }
+
+    [HttpPatch("{id:int}/pendiente")]
+    public async Task<IActionResult> ActualizarMovimientoCajaTuteladoAsync(int id, ActualizarMovimientoCajaTuteladoRequest request, ActualizarMovimientoCajaTuteladoHandler handler)
+    {
+        await handler.HandleAsync(id, request);
+        return Accepted();
+    }
+
+    [HttpGet("{id:int}/pendiente")]
+    public async Task<IActionResult> MovimientoPendienteCajaTuteladoAsync(int id, MovimientoPendienteCajaTutelado handler)
+    {
+        var data = await handler.HandleAsync(id);
+        var vm = mapper.Map<CajaPendienteTuteladoViewModel>(data);
+        return Ok(vm);
+    }
+
+    [HttpDelete("{id:int}/pendiente")]
+    public async Task<IActionResult> BorrarMovimientoPendienteCajaTuteladoAsync(int id, BorrarMovimientoPendienteCajaTutelado handler)
+    {
+        await handler.HandleAsync(id);
+        return Accepted();
+    }
+
     [HttpDelete("{id:int}/deshacer-pago")]
     [PeitonAuthorization(PeitonPermission.GestionMasivaCaja)]
     public async Task<IActionResult> DeshacerMovimientoCajaAsync(int id, DeshacerMovimientoCajaHandler handler)

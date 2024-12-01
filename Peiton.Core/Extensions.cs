@@ -13,11 +13,11 @@ public static class Extensions
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-        /*services.AddAutoMapper(
+        services.AddAutoMapper(
             (IServiceProvider serviceProvider, IMapperConfigurationExpression mapperConfiguration) =>
-                mapperConfiguration.AddProfile(new CredencialProfile(serviceProvider.GetService<ICredencialService>()!)),
+                mapperConfiguration.AddProfile(new CajaProfile(serviceProvider.GetService<IIdentityService>()!)),
             Assembly.GetExecutingAssembly()
-        );*/
+        );
 
         services.AddInjectable(Assembly.GetExecutingAssembly());
         services.AddListItemDefinitions(Assembly.GetExecutingAssembly());
