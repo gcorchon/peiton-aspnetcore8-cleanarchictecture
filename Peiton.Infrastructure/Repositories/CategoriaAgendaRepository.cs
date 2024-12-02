@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICategoriaAgendaRepository))]
-public class CategoriaAgendaRepository : RepositoryBase<CategoriaAgenda>, ICategoriaAgendaRepository
+public class CategoriaAgendaRepository(PeitonDbContext dbContext) : RepositoryBase<CategoriaAgenda>(dbContext), ICategoriaAgendaRepository
 {
-	public CategoriaAgendaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

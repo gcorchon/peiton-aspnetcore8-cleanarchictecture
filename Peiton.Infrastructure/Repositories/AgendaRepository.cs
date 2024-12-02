@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAgendaRepository))]
-public class AgendaRepository : RepositoryBase<Agenda>, IAgendaRepository
+public class AgendaRepository(PeitonDbContext dbContext) : RepositoryBase<Agenda>(dbContext), IAgendaRepository
 {
-	public AgendaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarSeguimientosAsync(int tuteladoId, SeguimientosFilter filter)
 	{
 		return ApplyFilters(DbSet, tuteladoId, filter).CountAsync();

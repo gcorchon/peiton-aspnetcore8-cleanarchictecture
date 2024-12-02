@@ -11,13 +11,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInmuebleAvisoRepository))]
-public class InmuebleAvisoRepository : RepositoryBase<InmuebleAviso>, IInmuebleAvisoRepository
+public class InmuebleAvisoRepository(PeitonDbContext dbContext) : RepositoryBase<InmuebleAviso>(dbContext), IInmuebleAvisoRepository
 {
-    public InmuebleAvisoRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarAvisosAsync(InmuebleAvisosFilter filter)
     {
         return ApplyFilters(DbSet.Include(a => a.Usuario)

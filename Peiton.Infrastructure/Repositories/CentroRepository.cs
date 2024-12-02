@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICentroRepository))]
-public class CentroRepository : RepositoryBase<Centro>, ICentroRepository
+public class CentroRepository(PeitonDbContext dbContext) : RepositoryBase<Centro>(dbContext), ICentroRepository
 {
-	public CentroRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarCentrosAsync(CentrosFilter filter)
 	{
 		return ApplyFilters(DbSet, filter).CountAsync();

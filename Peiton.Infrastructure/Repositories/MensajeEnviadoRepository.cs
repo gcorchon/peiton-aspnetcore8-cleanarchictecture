@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IMensajeEnviadoRepository))]
-public class MensajeEnviadoRepository : RepositoryBase<MensajeEnviado>, IMensajeEnviadoRepository
+public class MensajeEnviadoRepository(PeitonDbContext dbContext, IIdentityService identityService) : RepositoryBase<MensajeEnviado>(dbContext), IMensajeEnviadoRepository
 {
-	private readonly IIdentityService identityService;
-	public MensajeEnviadoRepository(PeitonDbContext dbContext, IIdentityService identityService) : base(dbContext)
-	{
-		this.identityService = identityService;
-	}
 
 	public override Task<MensajeEnviado?> GetByIdAsync(int id)
 	{

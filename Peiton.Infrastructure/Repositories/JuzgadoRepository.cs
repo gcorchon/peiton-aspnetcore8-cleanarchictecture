@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IJuzgadoRepository))]
-public class JuzgadoRepository : RepositoryBase<Juzgado>, IJuzgadoRepository
+public class JuzgadoRepository(PeitonDbContext dbContext) : RepositoryBase<Juzgado>(dbContext), IJuzgadoRepository
 {
-	public JuzgadoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

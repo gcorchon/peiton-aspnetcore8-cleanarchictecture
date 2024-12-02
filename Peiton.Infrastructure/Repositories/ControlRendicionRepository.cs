@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IControlRendicionRepository))]
-public class ControlRendicionRepository : RepositoryBase<ControlRendicion>, IControlRendicionRepository
+public class ControlRendicionRepository(PeitonDbContext dbContext) : RepositoryBase<ControlRendicion>(dbContext), IControlRendicionRepository
 {
-	public ControlRendicionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

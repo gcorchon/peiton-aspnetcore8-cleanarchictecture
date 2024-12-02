@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IUtilizacionRepository))]
-public class UtilizacionRepository : RepositoryBase<Utilizacion>, IUtilizacionRepository
+public class UtilizacionRepository(PeitonDbContext dbContext) : RepositoryBase<Utilizacion>(dbContext), IUtilizacionRepository
 {
-	public UtilizacionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

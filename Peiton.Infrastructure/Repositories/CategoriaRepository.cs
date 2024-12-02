@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICategoriaRepository))]
-public class CategoriaRepository : RepositoryBase<Categoria>, ICategoriaRepository
+public class CategoriaRepository(PeitonDbContext dbContext) : RepositoryBase<Categoria>(dbContext), ICategoriaRepository
 {
-	public CategoriaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task BorrarCategoriaAsync(int id)
 	{
 		return this.DbContext.Database.ExecuteSqlAsync(@$"declare @Categoriatree table (Pk_Categoria int, Descripcion nvarchar(255), Fk_CategoriaPadre int, Level int, BreadCrumb nvarchar(max));

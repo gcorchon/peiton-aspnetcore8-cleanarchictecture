@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IOrdenJurisdiccionalRepository))]
-public class OrdenJurisdiccionalRepository : RepositoryBase<OrdenJurisdiccional>, IOrdenJurisdiccionalRepository
+public class OrdenJurisdiccionalRepository(PeitonDbContext dbContext) : RepositoryBase<OrdenJurisdiccional>(dbContext), IOrdenJurisdiccionalRepository
 {
-	public OrdenJurisdiccionalRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

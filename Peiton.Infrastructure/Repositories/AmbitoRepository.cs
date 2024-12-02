@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAmbitoRepository))]
-public class AmbitoRepository : RepositoryBase<Ambito>, IAmbitoRepository
+public class AmbitoRepository(PeitonDbContext dbContext) : RepositoryBase<Ambito>(dbContext), IAmbitoRepository
 {
-	public AmbitoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

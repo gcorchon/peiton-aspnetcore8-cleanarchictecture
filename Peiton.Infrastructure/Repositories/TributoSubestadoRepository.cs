@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITributoSubestadoRepository))]
-public class TributoSubestadoRepository : RepositoryBase<TributoSubestado>, ITributoSubestadoRepository
+public class TributoSubestadoRepository(PeitonDbContext dbContext) : RepositoryBase<TributoSubestado>(dbContext), ITributoSubestadoRepository
 {
-	public TributoSubestadoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRuleRepository))]
-public class RuleRepository : RepositoryBase<Rule>, IRuleRepository
+public class RuleRepository(PeitonDbContext dbContext) : RepositoryBase<Rule>(dbContext), IRuleRepository
 {
-    public RuleRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task BorrarReglaAsync(int ruleId)
     {
         return DbContext.Database.ExecuteSqlAsync($@"

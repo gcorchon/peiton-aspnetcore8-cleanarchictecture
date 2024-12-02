@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICitaRepository))]
-public class CitaRepository : RepositoryBase<Cita>, ICitaRepository
+public class CitaRepository(PeitonDbContext dbContext) : RepositoryBase<Cita>(dbContext), ICitaRepository
 {
-	public CitaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

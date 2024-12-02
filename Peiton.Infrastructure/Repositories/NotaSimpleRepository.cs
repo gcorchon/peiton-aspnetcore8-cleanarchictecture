@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(INotaSimpleRepository))]
-public class NotaSimpleRepository : RepositoryBase<NotaSimple>, INotaSimpleRepository
+public class NotaSimpleRepository(PeitonDbContext dbContext) : RepositoryBase<NotaSimple>(dbContext), INotaSimpleRepository
 {
-    public NotaSimpleRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarNotasSimplesAsync(NotasSimplesFilter filter)
     {
         return ApplyFilters(DbSet.Include(a => a.Tutelado)

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRequerimientoTipoRepository))]
-public class RequerimientoTipoRepository : RepositoryBase<RequerimientoTipo>, IRequerimientoTipoRepository
+public class RequerimientoTipoRepository(PeitonDbContext dbContext) : RepositoryBase<RequerimientoTipo>(dbContext), IRequerimientoTipoRepository
 {
-	public RequerimientoTipoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IPartidaRepository))]
-public class PartidaRepository : RepositoryBase<Partida>, IPartidaRepository
+public class PartidaRepository(PeitonDbContext dbContext) : RepositoryBase<Partida>(dbContext), IPartidaRepository
 {
-	public PartidaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

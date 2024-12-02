@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IConcienciaEnfermedadRepository))]
-public class ConcienciaEnfermedadRepository : RepositoryBase<ConcienciaEnfermedad>, IConcienciaEnfermedadRepository
+public class ConcienciaEnfermedadRepository(PeitonDbContext dbContext) : RepositoryBase<ConcienciaEnfermedad>(dbContext), IConcienciaEnfermedadRepository
 {
-	public ConcienciaEnfermedadRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

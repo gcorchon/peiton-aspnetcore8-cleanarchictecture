@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IProcedimientoAdicionalRepository))]
-public class ProcedimientoAdicionalRepository : RepositoryBase<ProcedimientoAdicional>, IProcedimientoAdicionalRepository
+public class ProcedimientoAdicionalRepository(PeitonDbContext dbContext) : RepositoryBase<ProcedimientoAdicional>(dbContext), IProcedimientoAdicionalRepository
 {
-	public ProcedimientoAdicionalRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

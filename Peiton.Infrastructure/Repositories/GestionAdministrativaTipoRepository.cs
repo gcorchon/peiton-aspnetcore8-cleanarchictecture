@@ -7,10 +7,6 @@ using Peiton.DependencyInjection;
 namespace Peiton.Infrastructure.Repositories;
 
 [Injectable(typeof(IGestionAdministrativaTipoRepository))]
-public class GestionAdministrativaTipoRepository : RepositoryBase<GestionAdministrativaTipo>, IGestionAdministrativaTipoRepository
+public class GestionAdministrativaTipoRepository(PeitonDbContext dbContext) : RepositoryBase<GestionAdministrativaTipo>(dbContext), IGestionAdministrativaTipoRepository
 {
-    public GestionAdministrativaTipoRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
 }

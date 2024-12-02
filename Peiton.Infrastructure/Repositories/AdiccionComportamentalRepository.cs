@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAdiccionComportamentalRepository))]
-public class AdiccionComportamentalRepository : RepositoryBase<AdiccionComportamental>, IAdiccionComportamentalRepository
+public class AdiccionComportamentalRepository(PeitonDbContext dbContext) : RepositoryBase<AdiccionComportamental>(dbContext), IAdiccionComportamentalRepository
 {
-	public AdiccionComportamentalRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInmuebleTipoTitularidadRepository))]
-public class InmuebleTipoTitularidadRepository : RepositoryBase<InmuebleTipoTitularidad>, IInmuebleTipoTitularidadRepository
+public class InmuebleTipoTitularidadRepository(PeitonDbContext dbContext) : RepositoryBase<InmuebleTipoTitularidad>(dbContext), IInmuebleTipoTitularidadRepository
 {
-	public InmuebleTipoTitularidadRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

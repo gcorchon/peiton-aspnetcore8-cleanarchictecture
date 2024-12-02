@@ -8,13 +8,8 @@ using Dapper;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IAsientoRepository))]
-public class AsientoRepository : RepositoryBase<Asiento>, IAsientoRepository
+public class AsientoRepository(PeitonDbContext dbContext) : RepositoryBase<Asiento>(dbContext), IAsientoRepository
 {
-    public AsientoRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarAsientosAsync(AsientosFilter filter)
     {
         var query = ApplyFilters(this.DbSet.Include(a => a.Partida).ThenInclude(b => b!.Capitulo), filter);

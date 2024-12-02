@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IEventoRepository))]
-public class EventoRepository : RepositoryBase<Evento>, IEventoRepository
+public class EventoRepository(PeitonDbContext dbContext) : RepositoryBase<Evento>(dbContext), IEventoRepository
 {
-	public EventoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IMedidaPenalMedidaRepository))]
-public class MedidaPenalMedidaRepository : RepositoryBase<MedidaPenalMedida>, IMedidaPenalMedidaRepository
+public class MedidaPenalMedidaRepository(PeitonDbContext dbContext) : RepositoryBase<MedidaPenalMedida>(dbContext), IMedidaPenalMedidaRepository
 {
-	public MedidaPenalMedidaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

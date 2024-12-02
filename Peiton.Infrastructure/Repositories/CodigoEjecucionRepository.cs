@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICodigoEjecucionRepository))]
-public class CodigoEjecucionRepository : RepositoryBase<CodigoEjecucion>, ICodigoEjecucionRepository
+public class CodigoEjecucionRepository(PeitonDbContext dbContext) : RepositoryBase<CodigoEjecucion>(dbContext), ICodigoEjecucionRepository
 {
-	public CodigoEjecucionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

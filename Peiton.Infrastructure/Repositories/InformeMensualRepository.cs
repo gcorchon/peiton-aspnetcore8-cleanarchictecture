@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInformeMensualRepository))]
-public class InformeMensualRepository : RepositoryBase<InformeMensual>, IInformeMensualRepository
+public class InformeMensualRepository(PeitonDbContext dbContext) : RepositoryBase<InformeMensual>(dbContext), IInformeMensualRepository
 {
-	public InformeMensualRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

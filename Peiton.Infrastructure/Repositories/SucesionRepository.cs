@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISucesionRepository))]
-public class SucesionRepository : RepositoryBase<Sucesion>, ISucesionRepository
+public class SucesionRepository(PeitonDbContext dbContext) : RepositoryBase<Sucesion>(dbContext), ISucesionRepository
 {
-    public SucesionRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarSucesionesAsync(SucesionesFilter filter)
     {
         return ApplyFilters(DbSet.Include(s => s.Tutelado).Include(s => s.Usuario).Include(s => s.SucesionTipo), filter)

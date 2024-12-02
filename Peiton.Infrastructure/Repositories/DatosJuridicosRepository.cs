@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDatosJuridicosRepository))]
-public class DatosJuridicosRepository : RepositoryBase<DatosJuridicos>, IDatosJuridicosRepository
+public class DatosJuridicosRepository(PeitonDbContext dbContext) : RepositoryBase<DatosJuridicos>(dbContext), IDatosJuridicosRepository
 {
-	public DatosJuridicosRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

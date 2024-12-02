@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITuteladoObjetivoRepository))]
-public class TuteladoObjetivoRepository : RepositoryBase<TuteladoObjetivo>, ITuteladoObjetivoRepository
+public class TuteladoObjetivoRepository(PeitonDbContext dbContext) : RepositoryBase<TuteladoObjetivo>(dbContext), ITuteladoObjetivoRepository
 {
-	public TuteladoObjetivoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<TuteladoObjetivo[]> ObtenerObjetivosAsync(int tuteladoId, int tipoObjetivoId)
 	{
 		return DbSet

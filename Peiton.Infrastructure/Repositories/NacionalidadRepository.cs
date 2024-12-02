@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(INacionalidadRepository))]
-public class NacionalidadRepository : RepositoryBase<Nacionalidad>, INacionalidadRepository
+public class NacionalidadRepository(PeitonDbContext dbContext) : RepositoryBase<Nacionalidad>(dbContext), INacionalidadRepository
 {
-	public NacionalidadRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IErrorLogRepository))]
-public class ErrorLogRepository : RepositoryBase<ErrorLog>, IErrorLogRepository
+public class ErrorLogRepository(PeitonDbContext dbContext) : RepositoryBase<ErrorLog>(dbContext), IErrorLogRepository
 {
-	public ErrorLogRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

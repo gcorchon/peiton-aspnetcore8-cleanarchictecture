@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICompanyRepository))]
-public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
+public class CompanyRepository(PeitonDbContext dbContext) : RepositoryBase<Company>(dbContext), ICompanyRepository
 {
-    public CompanyRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<Company[]> ObtenerCompaniesAsync(int page, int total, BuscarCompaniesFilter filter)
     {
         return ApplyFilters(this.DbSet.Include(c => c.Cnae2009Navigation).ThenInclude(c => c.Categoria), filter)

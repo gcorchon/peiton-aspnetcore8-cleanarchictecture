@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAppMovilTuteladoRepository))]
-public class AppMovilTuteladoRepository : RepositoryBase<AppMovilTutelado>, IAppMovilTuteladoRepository
+public class AppMovilTuteladoRepository(PeitonDbContext dbContext) : RepositoryBase<AppMovilTutelado>(dbContext), IAppMovilTuteladoRepository
 {
-	public AppMovilTuteladoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

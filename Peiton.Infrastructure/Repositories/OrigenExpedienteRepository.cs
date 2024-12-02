@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IOrigenExpedienteRepository))]
-public class OrigenExpedienteRepository : RepositoryBase<OrigenExpediente>, IOrigenExpedienteRepository
+public class OrigenExpedienteRepository(PeitonDbContext dbContext) : RepositoryBase<OrigenExpediente>(dbContext), IOrigenExpedienteRepository
 {
-	public OrigenExpedienteRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

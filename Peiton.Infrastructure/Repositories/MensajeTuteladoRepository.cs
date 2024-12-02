@@ -10,14 +10,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IMensajeTuteladoRepository))]
-public class MensajeTuteladoRepository : RepositoryBase<MensajeTutelado>, IMensajeTuteladoRepository
+public class MensajeTuteladoRepository(PeitonDbContext dbContext, IIdentityService identityService) : RepositoryBase<MensajeTutelado>(dbContext), IMensajeTuteladoRepository
 {
-	private readonly IIdentityService identityService;
-	public MensajeTuteladoRepository(PeitonDbContext dbContext, IIdentityService identityService) : base(dbContext)
-	{
-		this.identityService = identityService;
-	}
-
 	public Task<MensajeTuAppoyoListItem[]> ObtenerMensajesRecibidosAsync(int page, int total, MensajesTuAppoyoFilter filter)
 	{
 		var usuarioId = identityService.GetUserId();

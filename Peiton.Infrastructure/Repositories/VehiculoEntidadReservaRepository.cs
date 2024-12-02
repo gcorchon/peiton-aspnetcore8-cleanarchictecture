@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IVehiculoEntidadReservaRepository))]
-public class VehiculoEntidadReservaRepository : RepositoryBase<VehiculoEntidadReserva>, IVehiculoEntidadReservaRepository
+public class VehiculoEntidadReservaRepository(PeitonDbContext dbContext) : RepositoryBase<VehiculoEntidadReserva>(dbContext), IVehiculoEntidadReservaRepository
 {
-    public VehiculoEntidadReservaRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<VehiculoEntidadReserva[]> ObtenerReservasAsync(DateTime fecha)
     {
         return this.DbSet.Include("Usuario").Where(r => r.Fecha == fecha).ToArrayAsync();

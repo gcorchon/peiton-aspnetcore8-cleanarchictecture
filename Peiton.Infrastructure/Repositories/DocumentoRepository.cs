@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDocumentoRepository))]
-public class DocumentoRepository : RepositoryBase<Documento>, IDocumentoRepository
+public class DocumentoRepository(PeitonDbContext dbContext) : RepositoryBase<Documento>(dbContext), IDocumentoRepository
 {
-	public DocumentoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Documento[]> ObtenerDocumentosAsync()
 	{
 		return DbSet.Include(d => d.CategoriaDocumento)

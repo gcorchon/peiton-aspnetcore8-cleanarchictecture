@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IValoracionResultadoRepository))]
-public class ValoracionResultadoRepository : RepositoryBase<ValoracionResultado>, IValoracionResultadoRepository
+public class ValoracionResultadoRepository(PeitonDbContext dbContext) : RepositoryBase<ValoracionResultado>(dbContext), IValoracionResultadoRepository
 {
-	public ValoracionResultadoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

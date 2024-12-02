@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAppMovilCitaRepository))]
-public class AppMovilCitaRepository : RepositoryBase<AppMovilCita>, IAppMovilCitaRepository
+public class AppMovilCitaRepository(PeitonDbContext dbContext) : RepositoryBase<AppMovilCita>(dbContext), IAppMovilCitaRepository
 {
-	public AppMovilCitaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

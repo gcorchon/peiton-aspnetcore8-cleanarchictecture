@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICalendarioFestivosRepository))]
-public class CalendarioFestivosRepository : RepositoryBase<CalendarioFestivos>, ICalendarioFestivosRepository
+public class CalendarioFestivosRepository(PeitonDbContext dbContext) : RepositoryBase<CalendarioFestivos>(dbContext), ICalendarioFestivosRepository
 {
-	public CalendarioFestivosRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

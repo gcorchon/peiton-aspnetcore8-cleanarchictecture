@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInstruccionRepository))]
-public class InstruccionRepository : RepositoryBase<Instruccion>, IInstruccionRepository
+public class InstruccionRepository(PeitonDbContext dbContext) : RepositoryBase<Instruccion>(dbContext), IInstruccionRepository
 {
-	public InstruccionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<InstruccionListItem[]> ObtenerInstruccionesAsync()
 	{
 		return this.DbContext.Database.SqlQuery<InstruccionListItem>(@$"select cr.Pk_CategoriaInstruccion as CategoriaInstruccionId, cr.Descripcion as Categoria, cr.CssClass,

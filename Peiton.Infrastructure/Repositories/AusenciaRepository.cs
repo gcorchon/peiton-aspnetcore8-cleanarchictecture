@@ -7,13 +7,8 @@ using Peiton.DependencyInjection;
 namespace Peiton.Infrastructure.Repositories;
 
 [Injectable(typeof(IAusenciaRepository))]
-public class AusenciaRepository : RepositoryBase<Ausencia>, IAusenciaRepository
+public class AusenciaRepository(PeitonDbContext dbContext) : RepositoryBase<Ausencia>(dbContext), IAusenciaRepository
 {
-    public AusenciaRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarAusenciasAsync(AusenciasFilter filter)
     {
         return ApplyFilters(this.DbSet.Include(a => a.Usuario)

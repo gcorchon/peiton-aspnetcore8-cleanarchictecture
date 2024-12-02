@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IParentescoRepository))]
-public class ParentescoRepository : RepositoryBase<Parentesco>, IParentescoRepository
+public class ParentescoRepository(PeitonDbContext dbContext) : RepositoryBase<Parentesco>(dbContext), IParentescoRepository
 {
-	public ParentescoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

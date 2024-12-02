@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISalaReservaRepository))]
-public class SalaReservaRepository : RepositoryBase<SalaReserva>, ISalaReservaRepository
+public class SalaReservaRepository(PeitonDbContext dbContext) : RepositoryBase<SalaReserva>(dbContext), ISalaReservaRepository
 {
-	public SalaReservaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<SalaReserva[]> ObtenerReservasAsync(DateTime fecha)
 	{
 		return DbSet.Where(r => r.Fecha == fecha).Include(r => r.Usuario).AsNoTracking().ToArrayAsync();

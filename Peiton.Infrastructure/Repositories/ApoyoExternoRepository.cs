@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IApoyoExternoRepository))]
-public class ApoyoExternoRepository : RepositoryBase<ApoyoExterno>, IApoyoExternoRepository
+public class ApoyoExternoRepository(PeitonDbContext dbContext) : RepositoryBase<ApoyoExterno>(dbContext), IApoyoExternoRepository
 {
-	public ApoyoExternoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

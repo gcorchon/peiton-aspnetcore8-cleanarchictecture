@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IShareDailyBalanceRepository))]
-public class ShareDailyBalanceRepository : RepositoryBase<ShareDailyBalance>, IShareDailyBalanceRepository
+public class ShareDailyBalanceRepository(PeitonDbContext dbContext) : RepositoryBase<ShareDailyBalance>(dbContext), IShareDailyBalanceRepository
 {
-	public ShareDailyBalanceRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public async Task<DailyBalance?> ObtenerBalanceAsync(int id, DateTime fechaCertificado)
 	{
 		return await DbContext.Database.GetDbConnection()

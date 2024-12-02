@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAvisoTributarioRepository))]
-public class AvisoTributarioRepository : RepositoryBase<AvisoTributario>, IAvisoTributarioRepository
+public class AvisoTributarioRepository(PeitonDbContext dbContext) : RepositoryBase<AvisoTributario>(dbContext), IAvisoTributarioRepository
 {
-    public AvisoTributarioRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarAvisosTributariosAsync(AvisosTributariosFilter filter)
     {
         return ApplyFilters(this.DbSet.Include(a => a.TipoAvisoTributario)

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITecnicoIntegracionSocialRepository))]
-public class TecnicoIntegracionSocialRepository : RepositoryBase<TecnicoIntegracionSocial>, ITecnicoIntegracionSocialRepository
+public class TecnicoIntegracionSocialRepository(PeitonDbContext dbContext) : RepositoryBase<TecnicoIntegracionSocial>(dbContext), ITecnicoIntegracionSocialRepository
 {
-	public TecnicoIntegracionSocialRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

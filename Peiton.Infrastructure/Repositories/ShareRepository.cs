@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IShareRepository))]
-public class ShareRepository : RepositoryBase<Share>, IShareRepository
+public class ShareRepository(PeitonDbContext dbContext) : RepositoryBase<Share>(dbContext), IShareRepository
 {
-	public ShareRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Share[]> ObtenerSharesAsync(int tuteladoId)
 	{
 		return DbSet.Include(s => s.Credencial)

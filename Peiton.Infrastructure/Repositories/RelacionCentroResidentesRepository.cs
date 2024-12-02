@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRelacionCentroResidentesRepository))]
-public class RelacionCentroResidentesRepository : RepositoryBase<RelacionCentroResidentes>, IRelacionCentroResidentesRepository
+public class RelacionCentroResidentesRepository(PeitonDbContext dbContext) : RepositoryBase<RelacionCentroResidentes>(dbContext), IRelacionCentroResidentesRepository
 {
-	public RelacionCentroResidentesRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

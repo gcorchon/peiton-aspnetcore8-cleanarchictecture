@@ -8,15 +8,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Peiton.Infrastructure.Repositories;
 
 [Injectable(typeof(IAccountTransactionCPRepository))]
-public class AccountTransactionCPRepository : RepositoryBase<AccountTransactionCP>, IAccountTransactionCPRepository
+public class AccountTransactionCPRepository(PeitonDbContext dbContext) : RepositoryBase<AccountTransactionCP>(dbContext), IAccountTransactionCPRepository
 {
-    public AccountTransactionCPRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
-
-
     public Task<AccountTransactionCP[]> ObtenerMovimientosPendientesBancoAsync(int page, int total, MovimientosPendientesBancoFilter filter)
     {
         IQueryable<AccountTransactionCP> query = this.DbSet

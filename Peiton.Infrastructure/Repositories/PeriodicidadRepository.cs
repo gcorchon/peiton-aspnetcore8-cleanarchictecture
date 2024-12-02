@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IPeriodicidadRepository))]
-public class PeriodicidadRepository : RepositoryBase<Periodicidad>, IPeriodicidadRepository
+public class PeriodicidadRepository(PeitonDbContext dbContext) : RepositoryBase<Periodicidad>(dbContext), IPeriodicidadRepository
 {
-	public PeriodicidadRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

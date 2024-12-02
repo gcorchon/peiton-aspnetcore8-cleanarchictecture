@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICajaIncidenciaRepository))]
-public class CajaIncidenciaRepository : RepositoryBase<CajaIncidencia>, ICajaIncidenciaRepository
+public class CajaIncidenciaRepository(PeitonDbContext dbContext) : RepositoryBase<CajaIncidencia>(dbContext), ICajaIncidenciaRepository
 {
-	public CajaIncidenciaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarIncidenciasAsync(IncidenciasFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(i => i.Tutelado), filter).CountAsync();

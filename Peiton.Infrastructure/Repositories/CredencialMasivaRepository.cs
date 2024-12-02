@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICredencialMasivaRepository))]
-public class CredencialMasivaRepository : RepositoryBase<CredencialMasiva>, ICredencialMasivaRepository
+public class CredencialMasivaRepository(PeitonDbContext dbContext) : RepositoryBase<CredencialMasiva>(dbContext), ICredencialMasivaRepository
 {
-	public CredencialMasivaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

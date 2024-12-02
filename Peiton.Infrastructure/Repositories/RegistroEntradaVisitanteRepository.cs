@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRegistroEntradaVisitanteRepository))]
-public class RegistroEntradaVisitanteRepository : RepositoryBase<RegistroEntradaVisitante>, IRegistroEntradaVisitanteRepository
+public class RegistroEntradaVisitanteRepository(PeitonDbContext dbContext) : RepositoryBase<RegistroEntradaVisitante>(dbContext), IRegistroEntradaVisitanteRepository
 {
-	public RegistroEntradaVisitanteRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Visitante[]> ObtenerVisitantesAsync(string query)
 	{
 		var queryContains = "%" + query + "%";

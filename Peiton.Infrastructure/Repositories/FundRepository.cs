@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IFundRepository))]
-public class FundRepository : RepositoryBase<Fund>, IFundRepository
+public class FundRepository(PeitonDbContext dbContext) : RepositoryBase<Fund>(dbContext), IFundRepository
 {
-	public FundRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Fund[]> ObtenerFundsAsync(int tuteladoId)
 	{
 		return DbSet.Include(f => f.Credencial)

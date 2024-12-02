@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IFondoSolidarioRepository))]
-public class FondoSolidarioRepository : RepositoryBase<FondoSolidario>, IFondoSolidarioRepository
+public class FondoSolidarioRepository(PeitonDbContext dbContext) : RepositoryBase<FondoSolidario>(dbContext), IFondoSolidarioRepository
 {
-	public FondoSolidarioRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarFondosSolidariosAsync(int tuteladoId)
 	{
 		return DbSet

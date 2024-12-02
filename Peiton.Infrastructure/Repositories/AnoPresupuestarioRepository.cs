@@ -6,13 +6,8 @@ using Peiton.DependencyInjection;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IAnoPresupuestarioRepository))]
-public class AnoPresupuestarioRepository : RepositoryBase<AnoPresupuestario>, IAnoPresupuestarioRepository
+public class AnoPresupuestarioRepository(PeitonDbContext dbContext) : RepositoryBase<AnoPresupuestario>(dbContext), IAnoPresupuestarioRepository
 {
-    public AnoPresupuestarioRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarAnosPrespuestariosAsync(AnoPresupuestarioFilter filter)
     {
         var query = ApplyFilters(this.DbSet, filter);

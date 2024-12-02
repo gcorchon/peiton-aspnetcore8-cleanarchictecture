@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDatosSocialesRepository))]
-public class DatosSocialesRepository : RepositoryBase<DatosSociales>, IDatosSocialesRepository
+public class DatosSocialesRepository(PeitonDbContext dbContext) : RepositoryBase<DatosSociales>(dbContext), IDatosSocialesRepository
 {
-	public DatosSocialesRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

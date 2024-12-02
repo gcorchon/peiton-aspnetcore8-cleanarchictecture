@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITareaAgendaRepository))]
-public class TareaAgendaRepository : RepositoryBase<TareaAgenda>, ITareaAgendaRepository
+public class TareaAgendaRepository(PeitonDbContext dbContext) : RepositoryBase<TareaAgenda>(dbContext), ITareaAgendaRepository
 {
-	public TareaAgendaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IExportacionRepository))]
-public class ExportacionRepository : RepositoryBase<Exportacion>, IExportacionRepository
+public class ExportacionRepository(PeitonDbContext dbContext) : RepositoryBase<Exportacion>(dbContext), IExportacionRepository
 {
-	public ExportacionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

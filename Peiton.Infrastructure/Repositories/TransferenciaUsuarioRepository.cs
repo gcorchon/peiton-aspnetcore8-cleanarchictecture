@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITransferenciaUsuarioRepository))]
-public class TransferenciaUsuarioRepository : RepositoryBase<TransferenciaUsuario>, ITransferenciaUsuarioRepository
+public class TransferenciaUsuarioRepository(PeitonDbContext dbContext) : RepositoryBase<TransferenciaUsuario>(dbContext), ITransferenciaUsuarioRepository
 {
-	public TransferenciaUsuarioRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

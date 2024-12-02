@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(INivelIntensidadRepository))]
-public class NivelIntensidadRepository : RepositoryBase<NivelIntensidad>, INivelIntensidadRepository
+public class NivelIntensidadRepository(PeitonDbContext dbContext) : RepositoryBase<NivelIntensidad>(dbContext), INivelIntensidadRepository
 {
-	public NivelIntensidadRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAgenteRepository))]
-public class AgenteRepository : RepositoryBase<Agente>, IAgenteRepository
+public class AgenteRepository(PeitonDbContext dbContext) : RepositoryBase<Agente>(dbContext), IAgenteRepository
 {
-	public AgenteRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

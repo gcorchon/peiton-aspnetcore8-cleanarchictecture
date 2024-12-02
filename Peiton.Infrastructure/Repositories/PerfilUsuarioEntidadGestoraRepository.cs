@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IPerfilUsuarioEntidadGestoraRepository))]
-public class PerfilUsuarioEntidadGestoraRepository : RepositoryBase<PerfilUsuarioEntidadGestora>, IPerfilUsuarioEntidadGestoraRepository
+public class PerfilUsuarioEntidadGestoraRepository(PeitonDbContext dbContext) : RepositoryBase<PerfilUsuarioEntidadGestora>(dbContext), IPerfilUsuarioEntidadGestoraRepository
 {
-	public PerfilUsuarioEntidadGestoraRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

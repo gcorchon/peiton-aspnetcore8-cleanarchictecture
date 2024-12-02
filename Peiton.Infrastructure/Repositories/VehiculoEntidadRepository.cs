@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IVehiculoEntidadRepository))]
-public class VehiculoEntidadRepository : RepositoryBase<VehiculoEntidad>, IVehiculoEntidadRepository
+public class VehiculoEntidadRepository(PeitonDbContext dbContext) : RepositoryBase<VehiculoEntidad>(dbContext), IVehiculoEntidadRepository
 {
-	public VehiculoEntidadRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

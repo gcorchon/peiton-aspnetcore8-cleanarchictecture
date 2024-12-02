@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ILauRepository))]
-public class LauRepository : RepositoryBase<Lau>, ILauRepository
+public class LauRepository(PeitonDbContext dbContext) : RepositoryBase<Lau>(dbContext), ILauRepository
 {
-	public LauRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

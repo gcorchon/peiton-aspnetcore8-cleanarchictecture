@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAppMovilEstadoAnimoRepository))]
-public class AppMovilEstadoAnimoRepository : RepositoryBase<AppMovilEstadoAnimo>, IAppMovilEstadoAnimoRepository
+public class AppMovilEstadoAnimoRepository(PeitonDbContext dbContext) : RepositoryBase<AppMovilEstadoAnimo>(dbContext), IAppMovilEstadoAnimoRepository
 {
-	public AppMovilEstadoAnimoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

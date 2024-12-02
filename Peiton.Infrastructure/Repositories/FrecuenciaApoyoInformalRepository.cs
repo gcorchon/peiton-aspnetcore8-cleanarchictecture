@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IFrecuenciaApoyoInformalRepository))]
-public class FrecuenciaApoyoInformalRepository : RepositoryBase<FrecuenciaApoyoInformal>, IFrecuenciaApoyoInformalRepository
+public class FrecuenciaApoyoInformalRepository(PeitonDbContext dbContext) : RepositoryBase<FrecuenciaApoyoInformal>(dbContext), IFrecuenciaApoyoInformalRepository
 {
-	public FrecuenciaApoyoInformalRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

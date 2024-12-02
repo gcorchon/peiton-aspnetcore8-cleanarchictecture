@@ -7,13 +7,8 @@ using Peiton.DependencyInjection;
 namespace Peiton.Infrastructure.Repositories;
 
 [Injectable(typeof(IGestionAdministrativaRepository))]
-public class GestionAdministrativaRepository : RepositoryBase<GestionAdministrativa>, IGestionAdministrativaRepository
+public class GestionAdministrativaRepository(PeitonDbContext dbContext) : RepositoryBase<GestionAdministrativa>(dbContext), IGestionAdministrativaRepository
 {
-    public GestionAdministrativaRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarGestionesAdministrativasAsync(GestionesAdministrativasFilter filter)
     {
         IQueryable<GestionAdministrativa> query = this.DbSet.Include(g => g.Tutelado)

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICategoriaDocumentoRepository))]
-public class CategoriaDocumentoRepository : RepositoryBase<CategoriaDocumento>, ICategoriaDocumentoRepository
+public class CategoriaDocumentoRepository(PeitonDbContext dbContext) : RepositoryBase<CategoriaDocumento>(dbContext), ICategoriaDocumentoRepository
 {
-	public CategoriaDocumentoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

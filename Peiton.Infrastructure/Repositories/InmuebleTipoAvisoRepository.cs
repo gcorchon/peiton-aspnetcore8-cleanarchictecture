@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInmuebleTipoAvisoRepository))]
-public class InmuebleTipoAvisoRepository : RepositoryBase<InmuebleTipoAviso>, IInmuebleTipoAvisoRepository
+public class InmuebleTipoAvisoRepository(PeitonDbContext dbContext) : RepositoryBase<InmuebleTipoAviso>(dbContext), IInmuebleTipoAvisoRepository
 {
-	public InmuebleTipoAvisoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

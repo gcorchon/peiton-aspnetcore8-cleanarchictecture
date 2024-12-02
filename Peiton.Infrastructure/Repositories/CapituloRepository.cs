@@ -9,14 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICapituloRepository))]
-public class CapituloRepository : RepositoryBase<Capitulo>, ICapituloRepository
+public class CapituloRepository(PeitonDbContext dbContext) : RepositoryBase<Capitulo>(dbContext), ICapituloRepository
 {
-
-    public CapituloRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public IAsyncEnumerable<CapituloViewModel> ObtenerCapitulosAsync(CapituloFilter filter)
     {
         var conditions = new List<string>();

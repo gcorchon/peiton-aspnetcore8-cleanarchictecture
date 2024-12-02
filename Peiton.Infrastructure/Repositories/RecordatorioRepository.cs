@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRecordatorioRepository))]
-public class RecordatorioRepository : RepositoryBase<Recordatorio>, IRecordatorioRepository
+public class RecordatorioRepository(PeitonDbContext dbContext) : RepositoryBase<Recordatorio>(dbContext), IRecordatorioRepository
 {
-	public RecordatorioRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

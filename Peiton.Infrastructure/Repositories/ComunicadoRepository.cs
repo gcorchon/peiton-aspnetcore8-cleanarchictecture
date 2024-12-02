@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IComunicadoRepository))]
-public class ComunicadoRepository : RepositoryBase<Comunicado>, IComunicadoRepository
+public class ComunicadoRepository(PeitonDbContext dbContext) : RepositoryBase<Comunicado>(dbContext), IComunicadoRepository
 {
-	public ComunicadoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

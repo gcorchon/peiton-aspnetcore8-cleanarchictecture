@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInmuebleTasadorRepository))]
-public class InmuebleTasadorRepository : RepositoryBase<InmuebleTasador>, IInmuebleTasadorRepository
+public class InmuebleTasadorRepository(PeitonDbContext dbContext) : RepositoryBase<InmuebleTasador>(dbContext), IInmuebleTasadorRepository
 {
-	public InmuebleTasadorRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

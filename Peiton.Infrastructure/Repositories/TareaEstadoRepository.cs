@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITareaEstadoRepository))]
-public class TareaEstadoRepository : RepositoryBase<TareaEstado>, ITareaEstadoRepository
+public class TareaEstadoRepository(PeitonDbContext dbContext) : RepositoryBase<TareaEstado>(dbContext), ITareaEstadoRepository
 {
-	public TareaEstadoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

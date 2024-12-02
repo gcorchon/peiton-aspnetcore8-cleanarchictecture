@@ -10,13 +10,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAccountDailyBalanceRealRepository))]
-public class AccountDailyBalanceRealRepository : RepositoryBase<AccountDailyBalanceReal>, IAccountDailyBalanceRealRepository
+public class AccountDailyBalanceRealRepository(PeitonDbContext dbContext) : RepositoryBase<AccountDailyBalanceReal>(dbContext), IAccountDailyBalanceRealRepository
 {
-	public AccountDailyBalanceRealRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<DailyBalance?> ObtenerBalanceAsync(int accountId, DateTime fecha)
 	{
 		return DbContext.Database.GetDbConnection()

@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAccountRepository))]
-public class AccountRepository : RepositoryBase<Account>, IAccountRepository
+public class AccountRepository(PeitonDbContext dbContext) : RepositoryBase<Account>(dbContext), IAccountRepository
 {
-	public AccountRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Account[]> ObtenerAccountsAsync(int tuteladoId)
 	{
 		return DbSet.Include(a => a.Credencial).ThenInclude(c => c.EntidadFinanciera)

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IArqueoRepository))]
-public class ArqueoRepository : RepositoryBase<Arqueo>, IArqueoRepository
+public class ArqueoRepository(PeitonDbContext dbContext) : RepositoryBase<Arqueo>(dbContext), IArqueoRepository
 {
-	public ArqueoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

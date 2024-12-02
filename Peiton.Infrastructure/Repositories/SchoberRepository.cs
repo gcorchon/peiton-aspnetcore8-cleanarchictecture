@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISchoberRepository))]
-public class SchoberRepository : RepositoryBase<Schober>, ISchoberRepository
+public class SchoberRepository(PeitonDbContext dbContext) : RepositoryBase<Schober>(dbContext), ISchoberRepository
 {
-	public SchoberRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

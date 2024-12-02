@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ILoanDailyInfoRepository))]
-public class LoanDailyInfoRepository : RepositoryBase<LoanDailyInfo>, ILoanDailyInfoRepository
+public class LoanDailyInfoRepository(PeitonDbContext dbContext) : RepositoryBase<LoanDailyInfo>(dbContext), ILoanDailyInfoRepository
 {
-	public LoanDailyInfoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

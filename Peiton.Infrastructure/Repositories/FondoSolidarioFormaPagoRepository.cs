@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IFondoSolidarioFormaPagoRepository))]
-public class FondoSolidarioFormaPagoRepository : RepositoryBase<FondoSolidarioFormaPago>, IFondoSolidarioFormaPagoRepository
+public class FondoSolidarioFormaPagoRepository(PeitonDbContext dbContext) : RepositoryBase<FondoSolidarioFormaPago>(dbContext), IFondoSolidarioFormaPagoRepository
 {
-	public FondoSolidarioFormaPagoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

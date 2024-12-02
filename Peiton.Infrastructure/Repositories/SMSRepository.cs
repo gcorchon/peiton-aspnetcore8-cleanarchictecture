@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISMSRepository))]
-public class SMSRepository : RepositoryBase<SMS>, ISMSRepository
+public class SMSRepository(PeitonDbContext dbContext) : RepositoryBase<SMS>(dbContext), ISMSRepository
 {
-	public SMSRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

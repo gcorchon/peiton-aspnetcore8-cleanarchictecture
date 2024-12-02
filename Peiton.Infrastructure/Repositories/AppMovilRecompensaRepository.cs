@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAppMovilRecompensaRepository))]
-public class AppMovilRecompensaRepository : RepositoryBase<AppMovilRecompensa>, IAppMovilRecompensaRepository
+public class AppMovilRecompensaRepository(PeitonDbContext dbContext) : RepositoryBase<AppMovilRecompensa>(dbContext), IAppMovilRecompensaRepository
 {
-	public AppMovilRecompensaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

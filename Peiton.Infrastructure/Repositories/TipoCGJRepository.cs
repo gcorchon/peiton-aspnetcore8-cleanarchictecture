@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITipoCGJRepository))]
-public class TipoCGJRepository : RepositoryBase<TipoCGJ>, ITipoCGJRepository
+public class TipoCGJRepository(PeitonDbContext dbContext) : RepositoryBase<TipoCGJ>(dbContext), ITipoCGJRepository
 {
-	public TipoCGJRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

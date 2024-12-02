@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDiagnosticoRepository))]
-public class DiagnosticoRepository : RepositoryBase<Diagnostico>, IDiagnosticoRepository
+public class DiagnosticoRepository(PeitonDbContext dbContext) : RepositoryBase<Diagnostico>(dbContext), IDiagnosticoRepository
 {
-	public DiagnosticoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

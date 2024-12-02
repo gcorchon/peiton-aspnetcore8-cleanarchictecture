@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IComunidadAutonomaRepository))]
-public class ComunidadAutonomaRepository : RepositoryBase<ComunidadAutonoma>, IComunidadAutonomaRepository
+public class ComunidadAutonomaRepository(PeitonDbContext dbContext) : RepositoryBase<ComunidadAutonoma>(dbContext), IComunidadAutonomaRepository
 {
-	public ComunidadAutonomaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

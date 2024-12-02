@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IHabilidadPracticaRepository))]
-public class HabilidadPracticaRepository : RepositoryBase<HabilidadPractica>, IHabilidadPracticaRepository
+public class HabilidadPracticaRepository(PeitonDbContext dbContext) : RepositoryBase<HabilidadPractica>(dbContext), IHabilidadPracticaRepository
 {
-	public HabilidadPracticaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

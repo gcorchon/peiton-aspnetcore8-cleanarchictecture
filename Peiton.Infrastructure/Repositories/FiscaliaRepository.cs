@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IFiscaliaRepository))]
-public class FiscaliaRepository : RepositoryBase<Fiscalia>, IFiscaliaRepository
+public class FiscaliaRepository(PeitonDbContext dbContext) : RepositoryBase<Fiscalia>(dbContext), IFiscaliaRepository
 {
-	public FiscaliaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDirectorioAMTARepository))]
-public class DirectorioAMTARepository : RepositoryBase<DirectorioAMTA>, IDirectorioAMTARepository
+public class DirectorioAMTARepository(PeitonDbContext dbContext) : RepositoryBase<DirectorioAMTA>(dbContext), IDirectorioAMTARepository
 {
-	public DirectorioAMTARepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<DirectorioAMTA[]> ObtenerDirectorioAsync(DirectorioFilter filter)
 	{
 		return ApplyFilters(DbSet, filter)

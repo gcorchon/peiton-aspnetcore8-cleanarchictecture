@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ILogAccesoFiscaliaRepository))]
-public class LogAccesoFiscaliaRepository : RepositoryBase<LogAccesoFiscalia>, ILogAccesoFiscaliaRepository
+public class LogAccesoFiscaliaRepository(PeitonDbContext dbContext) : RepositoryBase<LogAccesoFiscalia>(dbContext), ILogAccesoFiscaliaRepository
 {
-	public LogAccesoFiscaliaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

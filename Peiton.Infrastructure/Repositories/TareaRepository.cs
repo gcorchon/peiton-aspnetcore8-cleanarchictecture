@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITareaRepository))]
-public class TareaRepository : RepositoryBase<Tarea>, ITareaRepository
+public class TareaRepository(PeitonDbContext dbContext) : RepositoryBase<Tarea>(dbContext), ITareaRepository
 {
-	public TareaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarTareasAsync(int tuteladoId, TareasFilter filter)
 	{
 		return ApplyFilters(DbSet, tuteladoId, filter).CountAsync();

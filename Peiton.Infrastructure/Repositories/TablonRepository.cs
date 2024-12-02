@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITablonRepository))]
-public class TablonRepository : RepositoryBase<Tablon>, ITablonRepository
+public class TablonRepository(PeitonDbContext dbContext) : RepositoryBase<Tablon>(dbContext), ITablonRepository
 {
-	public TablonRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

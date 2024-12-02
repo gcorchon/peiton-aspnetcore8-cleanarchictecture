@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITransferenciaBeneficiarioRepository))]
-public class TransferenciaBeneficiarioRepository : RepositoryBase<TransferenciaBeneficiario>, ITransferenciaBeneficiarioRepository
+public class TransferenciaBeneficiarioRepository(PeitonDbContext dbContext) : RepositoryBase<TransferenciaBeneficiario>(dbContext), ITransferenciaBeneficiarioRepository
 {
-	public TransferenciaBeneficiarioRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

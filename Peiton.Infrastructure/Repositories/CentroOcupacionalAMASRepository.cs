@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICentroOcupacionalAMASRepository))]
-public class CentroOcupacionalAMASRepository : RepositoryBase<CentroOcupacionalAMAS>, ICentroOcupacionalAMASRepository
+public class CentroOcupacionalAMASRepository(PeitonDbContext dbContext) : RepositoryBase<CentroOcupacionalAMAS>(dbContext), ICentroOcupacionalAMASRepository
 {
-	public CentroOcupacionalAMASRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

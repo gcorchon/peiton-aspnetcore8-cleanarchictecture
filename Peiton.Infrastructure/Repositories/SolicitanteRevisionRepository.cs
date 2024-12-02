@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISolicitanteRevisionRepository))]
-public class SolicitanteRevisionRepository : RepositoryBase<SolicitanteRevision>, ISolicitanteRevisionRepository
+public class SolicitanteRevisionRepository(PeitonDbContext dbContext) : RepositoryBase<SolicitanteRevision>(dbContext), ISolicitanteRevisionRepository
 {
-	public SolicitanteRevisionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

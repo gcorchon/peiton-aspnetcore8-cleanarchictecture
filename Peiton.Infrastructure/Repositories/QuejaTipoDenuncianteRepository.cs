@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IQuejaTipoDenuncianteRepository))]
-public class QuejaTipoDenuncianteRepository : RepositoryBase<QuejaTipoDenunciante>, IQuejaTipoDenuncianteRepository
+public class QuejaTipoDenuncianteRepository(PeitonDbContext dbContext) : RepositoryBase<QuejaTipoDenunciante>(dbContext), IQuejaTipoDenuncianteRepository
 {
-	public QuejaTipoDenuncianteRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

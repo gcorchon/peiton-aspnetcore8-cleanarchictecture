@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDepositRepository))]
-public class DepositRepository : RepositoryBase<Deposit>, IDepositRepository
+public class DepositRepository(PeitonDbContext dbContext) : RepositoryBase<Deposit>(dbContext), IDepositRepository
 {
-	public DepositRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Deposit[]> ObtenerDepositsAsync(int tuteladoId)
 	{
 		return DbSet.Include(d => d.Credencial)

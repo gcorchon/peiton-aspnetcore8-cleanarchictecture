@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IPartidoJudicialInhibicionRepository))]
-public class PartidoJudicialInhibicionRepository : RepositoryBase<PartidoJudicialInhibicion>, IPartidoJudicialInhibicionRepository
+public class PartidoJudicialInhibicionRepository(PeitonDbContext dbContext) : RepositoryBase<PartidoJudicialInhibicion>(dbContext), IPartidoJudicialInhibicionRepository
 {
-	public PartidoJudicialInhibicionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

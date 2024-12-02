@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IPrestamoRepository))]
-public class PrestamoRepository : RepositoryBase<Prestamo>, IPrestamoRepository
+public class PrestamoRepository(PeitonDbContext dbContext) : RepositoryBase<Prestamo>(dbContext), IPrestamoRepository
 {
-	public PrestamoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IEquipoAtencionEntidadGestoraRepository))]
-public class EquipoAtencionEntidadGestoraRepository : RepositoryBase<EquipoAtencionEntidadGestora>, IEquipoAtencionEntidadGestoraRepository
+public class EquipoAtencionEntidadGestoraRepository(PeitonDbContext dbContext) : RepositoryBase<EquipoAtencionEntidadGestora>(dbContext), IEquipoAtencionEntidadGestoraRepository
 {
-	public EquipoAtencionEntidadGestoraRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

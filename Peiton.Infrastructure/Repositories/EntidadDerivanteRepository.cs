@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IEntidadDerivanteRepository))]
-public class EntidadDerivanteRepository : RepositoryBase<EntidadDerivante>, IEntidadDerivanteRepository
+public class EntidadDerivanteRepository(PeitonDbContext dbContext) : RepositoryBase<EntidadDerivante>(dbContext), IEntidadDerivanteRepository
 {
-	public EntidadDerivanteRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

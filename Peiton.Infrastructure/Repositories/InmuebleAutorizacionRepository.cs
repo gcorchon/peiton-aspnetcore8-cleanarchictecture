@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInmuebleAutorizacionRepository))]
-public class InmuebleAutorizacionRepository : RepositoryBase<InmuebleAutorizacion>, IInmuebleAutorizacionRepository
+public class InmuebleAutorizacionRepository(PeitonDbContext dbContext) : RepositoryBase<InmuebleAutorizacion>(dbContext), IInmuebleAutorizacionRepository
 {
-    public InmuebleAutorizacionRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarAutorizacionesAsync(InmuebleAutorizacionesFilter filter)
     {
         return ApplyFilters(DbSet.Include(a => a.Inmueble)

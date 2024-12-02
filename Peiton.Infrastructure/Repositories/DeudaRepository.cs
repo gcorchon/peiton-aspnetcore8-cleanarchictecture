@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDeudaRepository))]
-public class DeudaRepository : RepositoryBase<Deuda>, IDeudaRepository
+public class DeudaRepository(PeitonDbContext dbContext) : RepositoryBase<Deuda>(dbContext), IDeudaRepository
 {
-	public DeudaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

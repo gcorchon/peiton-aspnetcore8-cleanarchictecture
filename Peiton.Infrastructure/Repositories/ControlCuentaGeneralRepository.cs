@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IControlCuentaGeneralRepository))]
-public class ControlCuentaGeneralRepository : RepositoryBase<ControlCuentaGeneral>, IControlCuentaGeneralRepository
+public class ControlCuentaGeneralRepository(PeitonDbContext dbContext) : RepositoryBase<ControlCuentaGeneral>(dbContext), IControlCuentaGeneralRepository
 {
-	public ControlCuentaGeneralRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAutonomiaTratamientoRepository))]
-public class AutonomiaTratamientoRepository : RepositoryBase<AutonomiaTratamiento>, IAutonomiaTratamientoRepository
+public class AutonomiaTratamientoRepository(PeitonDbContext dbContext) : RepositoryBase<AutonomiaTratamiento>(dbContext), IAutonomiaTratamientoRepository
 {
-	public AutonomiaTratamientoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

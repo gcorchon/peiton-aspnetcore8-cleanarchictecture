@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IPuntoInformacionTipoConsultaRepository))]
-public class PuntoInformacionTipoConsultaRepository : RepositoryBase<PuntoInformacionTipoConsulta>, IPuntoInformacionTipoConsultaRepository
+public class PuntoInformacionTipoConsultaRepository(PeitonDbContext dbContext) : RepositoryBase<PuntoInformacionTipoConsulta>(dbContext), IPuntoInformacionTipoConsultaRepository
 {
-	public PuntoInformacionTipoConsultaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

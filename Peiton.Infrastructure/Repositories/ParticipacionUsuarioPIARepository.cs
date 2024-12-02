@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IParticipacionUsuarioPIARepository))]
-public class ParticipacionUsuarioPIARepository : RepositoryBase<ParticipacionUsuarioPIA>, IParticipacionUsuarioPIARepository
+public class ParticipacionUsuarioPIARepository(PeitonDbContext dbContext) : RepositoryBase<ParticipacionUsuarioPIA>(dbContext), IParticipacionUsuarioPIARepository
 {
-	public ParticipacionUsuarioPIARepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

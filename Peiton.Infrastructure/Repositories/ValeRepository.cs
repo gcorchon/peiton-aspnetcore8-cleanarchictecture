@@ -6,13 +6,8 @@ using Peiton.DependencyInjection;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IValeRepository))]
-public class ValeRepository : RepositoryBase<Vale>, IValeRepository
+public class ValeRepository(PeitonDbContext dbContext) : RepositoryBase<Vale>(dbContext), IValeRepository
 {
-	public ValeRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarValesAsync(ValesFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(v => v.Solicitante), filter).CountAsync();

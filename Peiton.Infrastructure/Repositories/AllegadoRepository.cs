@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAllegadoRepository))]
-public class AllegadoRepository : RepositoryBase<Allegado>, IAllegadoRepository
+public class AllegadoRepository(PeitonDbContext dbContext) : RepositoryBase<Allegado>(dbContext), IAllegadoRepository
 {
-	public AllegadoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

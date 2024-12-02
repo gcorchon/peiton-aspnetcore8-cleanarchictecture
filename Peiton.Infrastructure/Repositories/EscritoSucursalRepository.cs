@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IEscritoSucursalRepository))]
-public class EscritoSucursalRepository : RepositoryBase<EscritoSucursal>, IEscritoSucursalRepository
+public class EscritoSucursalRepository(PeitonDbContext dbContext) : RepositoryBase<EscritoSucursal>(dbContext), IEscritoSucursalRepository
 {
-	public EscritoSucursalRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

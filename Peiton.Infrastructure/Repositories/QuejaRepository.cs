@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IQuejaRepository))]
-public class QuejaRepository : RepositoryBase<Queja>, IQuejaRepository
+public class QuejaRepository(PeitonDbContext dbContext) : RepositoryBase<Queja>(dbContext), IQuejaRepository
 {
-    public QuejaRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarQuejasAsync(QuejasFilter filter)
     {
         var query = ApplySearchFilters(this.DbSet, filter);

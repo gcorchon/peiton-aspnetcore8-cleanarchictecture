@@ -6,12 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAccountCPRepository))]
-public class AccountCPRepository : RepositoryBase<AccountCP>, IAccountCPRepository
+public class AccountCPRepository(PeitonDbContext dbContext) : RepositoryBase<AccountCP>(dbContext), IAccountCPRepository
 {
-	public AccountCPRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
-
 }

@@ -9,14 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IMensajeRepository))]
-public class MensajeRepository : RepositoryBase<Mensaje>, IMensajeRepository
+public class MensajeRepository(PeitonDbContext dbContext, IIdentityService identityService) : RepositoryBase<Mensaje>(dbContext), IMensajeRepository
 {
-	private readonly IIdentityService identityService;
-	public MensajeRepository(PeitonDbContext dbContext, IIdentityService identityService) : base(dbContext)
-	{
-		this.identityService = identityService;
-	}
-
 	public override Task<Mensaje?> GetByIdAsync(int id)
 	{
 		return DbSet.FirstOrDefaultAsync(m => m.Id == id && m.Usuario_ParaId == identityService.GetUserId());

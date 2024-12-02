@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICoordinadorSocialRepository))]
-public class CoordinadorSocialRepository : RepositoryBase<CoordinadorSocial>, ICoordinadorSocialRepository
+public class CoordinadorSocialRepository(PeitonDbContext dbContext) : RepositoryBase<CoordinadorSocial>(dbContext), ICoordinadorSocialRepository
 {
-	public CoordinadorSocialRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -14,14 +14,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITuteladoRepository))]
-public class TuteladoRepository : RepositoryBase<Tutelado>, ITuteladoRepository
+public class TuteladoRepository(PeitonDbContext dbContext, IIdentityService identityService) : RepositoryBase<Tutelado>(dbContext), ITuteladoRepository
 {
-	private readonly IIdentityService identityService;
-	public TuteladoRepository(PeitonDbContext dbContext, IIdentityService identityService) : base(dbContext)
-	{
-		this.identityService = identityService;
-	}
-
 	public override async Task<Tutelado?> GetByIdAsync(int id)
 	{
 		var visible = await CanViewAsync(id);

@@ -8,13 +8,8 @@ using Peiton.Infrastructure.Utils;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IVwCajaRepository))]
-public class VwCajaRepository : RepositoryBase<VwCaja>, IVwCajaRepository
+public class VwCajaRepository(PeitonDbContext dbContext) : RepositoryBase<VwCaja>(dbContext), IVwCajaRepository
 {
-	public VwCajaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<VwCaja[]> ObtenerCajaTuteladoAsync(int page, int total, int tuteladoId, CajaTuteladoFilter filter)
 	{
 		return ApplyFilters(DbSet, tuteladoId, filter)

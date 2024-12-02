@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IFundDailyInfoRepository))]
-public class FundDailyInfoRepository : RepositoryBase<FundDailyInfo>, IFundDailyInfoRepository
+public class FundDailyInfoRepository(PeitonDbContext dbContext) : RepositoryBase<FundDailyInfo>(dbContext), IFundDailyInfoRepository
 {
-	public FundDailyInfoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public async Task<DailyBalance?> ObtenerBalanceAsync(int id, DateTime fechaCertificado)
 	{
 		return await DbContext.Database.GetDbConnection().QueryFirstOrDefaultAsync<DailyBalance>("select * from  dbo.ObtenerSaldoFund(@FundId, @Fecha) where Saldo is not null", new { FundId = id, Fecha = fechaCertificado });

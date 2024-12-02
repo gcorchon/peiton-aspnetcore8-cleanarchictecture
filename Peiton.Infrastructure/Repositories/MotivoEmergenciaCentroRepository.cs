@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IMotivoEmergenciaCentroRepository))]
-public class MotivoEmergenciaCentroRepository : RepositoryBase<MotivoEmergenciaCentro>, IMotivoEmergenciaCentroRepository
+public class MotivoEmergenciaCentroRepository(PeitonDbContext dbContext) : RepositoryBase<MotivoEmergenciaCentro>(dbContext), IMotivoEmergenciaCentroRepository
 {
-	public MotivoEmergenciaCentroRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICategoriaProcesoRepository))]
-public class CategoriaProcesoRepository : RepositoryBase<CategoriaProceso>, ICategoriaProcesoRepository
+public class CategoriaProcesoRepository(PeitonDbContext dbContext) : RepositoryBase<CategoriaProceso>(dbContext), ICategoriaProcesoRepository
 {
-	public CategoriaProcesoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

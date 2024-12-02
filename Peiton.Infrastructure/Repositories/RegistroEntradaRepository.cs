@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRegistroEntradaRepository))]
-public class RegistroEntradaRepository : RepositoryBase<RegistroEntrada>, IRegistroEntradaRepository
+public class RegistroEntradaRepository(PeitonDbContext dbContext) : RepositoryBase<RegistroEntrada>(dbContext), IRegistroEntradaRepository
 {
-	public RegistroEntradaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarRegistrosEntradaAsync(RegistroEntradaFilter filter)
 	{
 		IQueryable<RegistroEntrada> query = ApplyFilter(DbSet, filter);

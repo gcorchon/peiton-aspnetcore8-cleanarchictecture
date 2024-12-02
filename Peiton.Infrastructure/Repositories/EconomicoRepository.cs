@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IEconomicoRepository))]
-public class EconomicoRepository : RepositoryBase<Economico>, IEconomicoRepository
+public class EconomicoRepository(PeitonDbContext dbContext) : RepositoryBase<Economico>(dbContext), IEconomicoRepository
 {
-	public EconomicoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

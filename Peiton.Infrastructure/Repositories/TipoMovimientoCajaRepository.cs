@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITipoMovimientoCajaRepository))]
-public class TipoMovimientoCajaRepository : RepositoryBase<TipoMovimientoCaja>, ITipoMovimientoCajaRepository
+public class TipoMovimientoCajaRepository(PeitonDbContext dbContext) : RepositoryBase<TipoMovimientoCaja>(dbContext), ITipoMovimientoCajaRepository
 {
-	public TipoMovimientoCajaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

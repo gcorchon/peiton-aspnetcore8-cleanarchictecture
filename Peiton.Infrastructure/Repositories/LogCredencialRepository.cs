@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ILogCredencialRepository))]
-public class LogCredencialRepository : RepositoryBase<LogCredencial>, ILogCredencialRepository
+public class LogCredencialRepository(PeitonDbContext dbContext) : RepositoryBase<LogCredencial>(dbContext), ILogCredencialRepository
 {
-	public LogCredencialRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

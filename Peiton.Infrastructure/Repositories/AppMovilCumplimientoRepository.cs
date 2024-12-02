@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAppMovilCumplimientoRepository))]
-public class AppMovilCumplimientoRepository : RepositoryBase<AppMovilCumplimiento>, IAppMovilCumplimientoRepository
+public class AppMovilCumplimientoRepository(PeitonDbContext dbContext) : RepositoryBase<AppMovilCumplimiento>(dbContext), IAppMovilCumplimientoRepository
 {
-	public AppMovilCumplimientoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -7,13 +7,8 @@ using Peiton.Contracts.Account;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IEntidadFinancieraRepository))]
-public class EntidadFinancieraRepository : RepositoryBase<EntidadFinanciera>, IEntidadFinancieraRepository
+public class EntidadFinancieraRepository(PeitonDbContext dbContext) : RepositoryBase<EntidadFinanciera>(dbContext), IEntidadFinancieraRepository
 {
-	public EntidadFinancieraRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<EntidadFinancieraViewModel[]> ObtenerEntidadesConCuentasActivasAsync(int tuteladoId)
 	{
 		var query = from account in DbContext.Account

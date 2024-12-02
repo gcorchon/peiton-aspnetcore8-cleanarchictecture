@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICNAERepository))]
-public class CNAERepository : RepositoryBase<CNAE>, ICNAERepository
+public class CNAERepository(PeitonDbContext dbContext) : RepositoryBase<CNAE>(dbContext), ICNAERepository
 {
-    public CNAERepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarCNAEsAsync(ObtenerCNAEsFilter filter)
     {
         var query = from cnae in DbSet

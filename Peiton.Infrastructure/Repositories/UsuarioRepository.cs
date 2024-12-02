@@ -9,14 +9,8 @@ using Peiton.DependencyInjection;
 namespace Peiton.Infrastructure.Repositories;
 
 [Injectable(typeof(IUsuarioRepository))]
-public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
+public class UsuarioRepository(PeitonDbContext dbContext, IIdentityService identityService) : RepositoryBase<Usuario>(dbContext), IUsuarioRepository
 {
-    private readonly IIdentityService identityService;
-    public UsuarioRepository(PeitonDbContext dbContext, IIdentityService identityService) : base(dbContext)
-    {
-        this.identityService = identityService;
-    }
-
     private readonly static string GetPermissionsSql = @"
                 select UsuarioPermiso.Fk_Permiso as Value from UsuarioPermiso where Fk_Usuario={0}
                 union

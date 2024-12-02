@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISalaRepository))]
-public class SalaRepository : RepositoryBase<Sala>, ISalaRepository
+public class SalaRepository(PeitonDbContext dbContext) : RepositoryBase<Sala>(dbContext), ISalaRepository
 {
-	public SalaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarSalasAsync(SalasFilter filter)
 	{
 		return ApplyFilter(DbSet, filter).CountAsync();

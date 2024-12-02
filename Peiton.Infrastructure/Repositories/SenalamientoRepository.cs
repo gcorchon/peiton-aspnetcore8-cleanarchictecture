@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISenalamientoRepository))]
-public class SenalamientoRepository : RepositoryBase<Senalamiento>, ISenalamientoRepository
+public class SenalamientoRepository(PeitonDbContext dbContext) : RepositoryBase<Senalamiento>(dbContext), ISenalamientoRepository
 {
-	public SenalamientoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Senalamiento[]> ObtenerSenalamientosAsync(SenalamientosFillter filter)
 	{
 		var fechaDesde = new DateTime(filter.Year, filter.Month, 1);

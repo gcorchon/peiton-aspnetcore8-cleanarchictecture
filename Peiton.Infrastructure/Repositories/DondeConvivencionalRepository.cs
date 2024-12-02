@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDondeConvivencionalRepository))]
-public class DondeConvivencionalRepository : RepositoryBase<DondeConvivencional>, IDondeConvivencionalRepository
+public class DondeConvivencionalRepository(PeitonDbContext dbContext) : RepositoryBase<DondeConvivencional>(dbContext), IDondeConvivencionalRepository
 {
-	public DondeConvivencionalRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

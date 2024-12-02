@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITeAppoyoRepository))]
-public class TeAppoyoRepository : RepositoryBase<TeAppoyo>, ITeAppoyoRepository
+public class TeAppoyoRepository(PeitonDbContext dbContext) : RepositoryBase<TeAppoyo>(dbContext), ITeAppoyoRepository
 {
-	public TeAppoyoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

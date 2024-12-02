@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITipoCentroDiaRepository))]
-public class TipoCentroDiaRepository : RepositoryBase<TipoCentroDia>, ITipoCentroDiaRepository
+public class TipoCentroDiaRepository(PeitonDbContext dbContext) : RepositoryBase<TipoCentroDia>(dbContext), ITipoCentroDiaRepository
 {
-	public TipoCentroDiaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAccountTransactionRepository))]
-public class AccountTransactionRepository : RepositoryBase<AccountTransaction>, IAccountTransactionRepository
+public class AccountTransactionRepository(PeitonDbContext dbContext) : RepositoryBase<AccountTransaction>(dbContext), IAccountTransactionRepository
 {
-	public AccountTransactionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarAccountTransactionsAsync(int accountId, AccountTransactionsFilter filter)
 	{
 		return ApplyFilters(DbSet, accountId, filter).CountAsync();

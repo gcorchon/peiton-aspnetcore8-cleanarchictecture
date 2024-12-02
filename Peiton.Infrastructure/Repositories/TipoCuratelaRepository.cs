@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITipoCuratelaRepository))]
-public class TipoCuratelaRepository : RepositoryBase<TipoCuratela>, ITipoCuratelaRepository
+public class TipoCuratelaRepository(PeitonDbContext dbContext) : RepositoryBase<TipoCuratela>(dbContext), ITipoCuratelaRepository
 {
-	public TipoCuratelaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

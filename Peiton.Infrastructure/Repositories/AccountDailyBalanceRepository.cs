@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAccountDailyBalanceRepository))]
-public class AccountDailyBalanceRepository : RepositoryBase<AccountDailyBalance>, IAccountDailyBalanceRepository
+public class AccountDailyBalanceRepository(PeitonDbContext dbContext) : RepositoryBase<AccountDailyBalance>(dbContext), IAccountDailyBalanceRepository
 {
-	public AccountDailyBalanceRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

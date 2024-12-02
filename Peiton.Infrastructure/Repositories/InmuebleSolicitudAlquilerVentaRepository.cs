@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInmuebleSolicitudAlquilerVentaRepository))]
-public class InmuebleSolicitudAlquilerVentaRepository : RepositoryBase<InmuebleSolicitudAlquilerVenta>, IInmuebleSolicitudAlquilerVentaRepository
+public class InmuebleSolicitudAlquilerVentaRepository(PeitonDbContext dbContext) : RepositoryBase<InmuebleSolicitudAlquilerVenta>(dbContext), IInmuebleSolicitudAlquilerVentaRepository
 {
-    public InmuebleSolicitudAlquilerVentaRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarSolicitudesAsync(InmuebleSolicitudesAlquilerVentaFilter filter)
     {
         return ApplyFilters(DbSet.Include(s => s.Inmueble).ThenInclude(i => i.Tutelado), filter)

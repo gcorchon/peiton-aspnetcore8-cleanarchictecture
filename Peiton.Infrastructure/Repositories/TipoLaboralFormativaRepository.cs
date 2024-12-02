@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITipoLaboralFormativaRepository))]
-public class TipoLaboralFormativaRepository : RepositoryBase<TipoLaboralFormativa>, ITipoLaboralFormativaRepository
+public class TipoLaboralFormativaRepository(PeitonDbContext dbContext) : RepositoryBase<TipoLaboralFormativa>(dbContext), ITipoLaboralFormativaRepository
 {
-	public TipoLaboralFormativaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

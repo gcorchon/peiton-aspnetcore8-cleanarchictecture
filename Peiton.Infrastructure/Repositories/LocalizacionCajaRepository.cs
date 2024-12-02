@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ILocalizacionCajaRepository))]
-public class LocalizacionCajaRepository : RepositoryBase<LocalizacionCaja>, ILocalizacionCajaRepository
+public class LocalizacionCajaRepository(PeitonDbContext dbContext) : RepositoryBase<LocalizacionCaja>(dbContext), ILocalizacionCajaRepository
 {
-	public LocalizacionCajaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

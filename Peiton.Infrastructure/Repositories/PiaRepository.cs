@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IPiaRepository))]
-public class PiaRepository : RepositoryBase<Pia>, IPiaRepository
+public class PiaRepository(PeitonDbContext dbContext) : RepositoryBase<Pia>(dbContext), IPiaRepository
 {
-	public PiaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

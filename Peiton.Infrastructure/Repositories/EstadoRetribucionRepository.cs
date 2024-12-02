@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IEstadoRetribucionRepository))]
-public class EstadoRetribucionRepository : RepositoryBase<EstadoRetribucion>, IEstadoRetribucionRepository
+public class EstadoRetribucionRepository(PeitonDbContext dbContext) : RepositoryBase<EstadoRetribucion>(dbContext), IEstadoRetribucionRepository
 {
-	public EstadoRetribucionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

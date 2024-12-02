@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDiscapacidadRepository))]
-public class DiscapacidadRepository : RepositoryBase<Discapacidad>, IDiscapacidadRepository
+public class DiscapacidadRepository(PeitonDbContext dbContext) : RepositoryBase<Discapacidad>(dbContext), IDiscapacidadRepository
 {
-	public DiscapacidadRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IFondoSolidarioDestinoRepository))]
-public class FondoSolidarioDestinoRepository : RepositoryBase<FondoSolidarioDestino>, IFondoSolidarioDestinoRepository
+public class FondoSolidarioDestinoRepository(PeitonDbContext dbContext) : RepositoryBase<FondoSolidarioDestino>(dbContext), IFondoSolidarioDestinoRepository
 {
-	public FondoSolidarioDestinoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

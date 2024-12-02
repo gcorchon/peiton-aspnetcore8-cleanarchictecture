@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IConceptoIngresoEstimacionFinancieraRepository))]
-public class ConceptoIngresoEstimacionFinancieraRepository : RepositoryBase<ConceptoIngresoEstimacionFinanciera>, IConceptoIngresoEstimacionFinancieraRepository
+public class ConceptoIngresoEstimacionFinancieraRepository(PeitonDbContext dbContext) : RepositoryBase<ConceptoIngresoEstimacionFinanciera>(dbContext), IConceptoIngresoEstimacionFinancieraRepository
 {
-	public ConceptoIngresoEstimacionFinancieraRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

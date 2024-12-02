@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IReglaRepository))]
-public class ReglaRepository : RepositoryBase<Regla>, IReglaRepository
+public class ReglaRepository(PeitonDbContext dbContext) : RepositoryBase<Regla>(dbContext), IReglaRepository
 {
-	public ReglaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

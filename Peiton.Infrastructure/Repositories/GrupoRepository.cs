@@ -7,13 +7,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IGrupoRepository))]
-public class GrupoRepository : RepositoryBase<Grupo>, IGrupoRepository
+public class GrupoRepository(PeitonDbContext dbContext) : RepositoryBase<Grupo>(dbContext), IGrupoRepository
 {
-	public GrupoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Grupo[]> ObtenerGruposConUsuariosAsync()
 	{
 		return DbSet.Include(g => g.Usuarios.Where(u => !u.Borrado)

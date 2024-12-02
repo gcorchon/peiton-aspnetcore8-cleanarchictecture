@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IProcesoRepository))]
-public class ProcesoRepository : RepositoryBase<Proceso>, IProcesoRepository
+public class ProcesoRepository(PeitonDbContext dbContext) : RepositoryBase<Proceso>(dbContext), IProcesoRepository
 {
-	public ProcesoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<ProcesoListItem[]> ObtenerProcesosAsync()
 	{
 		return this.DbContext.Database.SqlQuery<ProcesoListItem>(@$"select cr.Pk_CategoriaProceso as CategoriaProcesoId, cr.Descripcion as Categoria, cr.CssClass,

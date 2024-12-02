@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IUrgenciaOrigenRepository))]
-public class UrgenciaOrigenRepository : RepositoryBase<UrgenciaOrigen>, IUrgenciaOrigenRepository
+public class UrgenciaOrigenRepository(PeitonDbContext dbContext) : RepositoryBase<UrgenciaOrigen>(dbContext), IUrgenciaOrigenRepository
 {
-	public UrgenciaOrigenRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

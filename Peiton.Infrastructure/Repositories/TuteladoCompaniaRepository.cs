@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITuteladoCompaniaRepository))]
-public class TuteladoCompaniaRepository : RepositoryBase<TuteladoCompania>, ITuteladoCompaniaRepository
+public class TuteladoCompaniaRepository(PeitonDbContext dbContext) : RepositoryBase<TuteladoCompania>(dbContext), ITuteladoCompaniaRepository
 {
-	public TuteladoCompaniaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

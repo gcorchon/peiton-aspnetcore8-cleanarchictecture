@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IVoluntariadoTipoRepository))]
-public class VoluntariadoTipoRepository : RepositoryBase<VoluntariadoTipo>, IVoluntariadoTipoRepository
+public class VoluntariadoTipoRepository(PeitonDbContext dbContext) : RepositoryBase<VoluntariadoTipo>(dbContext), IVoluntariadoTipoRepository
 {
-	public VoluntariadoTipoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

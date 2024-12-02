@@ -8,13 +8,8 @@ using Peiton.Infrastructure.Utils;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(ICajaRepository))]
-public class CajaRepository : RepositoryBase<Caja>, ICajaRepository
+public class CajaRepository(PeitonDbContext dbContext) : RepositoryBase<Caja>(dbContext), ICajaRepository
 {
-	public CajaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarMovimientosAsync(TipoMovimiento tipo, CajaFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(c => c.Tutelado).Include(c => c.TipoPago), tipo, filter).CountAsync();

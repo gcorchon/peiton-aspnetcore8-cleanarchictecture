@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAtencionApoyoFormalRepository))]
-public class AtencionApoyoFormalRepository : RepositoryBase<AtencionApoyoFormal>, IAtencionApoyoFormalRepository
+public class AtencionApoyoFormalRepository(PeitonDbContext dbContext) : RepositoryBase<AtencionApoyoFormal>(dbContext), IAtencionApoyoFormalRepository
 {
-	public AtencionApoyoFormalRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

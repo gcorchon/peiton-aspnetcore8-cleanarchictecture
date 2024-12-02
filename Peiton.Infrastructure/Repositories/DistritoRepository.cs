@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IDistritoRepository))]
-public class DistritoRepository : RepositoryBase<Distrito>, IDistritoRepository
+public class DistritoRepository(PeitonDbContext dbContext) : RepositoryBase<Distrito>(dbContext), IDistritoRepository
 {
-	public DistritoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IClienteRepository))]
-public class ClienteRepository : RepositoryBase<Cliente>, IClienteRepository
+public class ClienteRepository(PeitonDbContext dbContext) : RepositoryBase<Cliente>(dbContext), IClienteRepository
 {
-	public ClienteRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarClientesAsync(ClientesFilter filter)
 	{
 		return ApplyFilters(DbSet, filter).CountAsync();

@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IConsultaAlmacenadaRepository))]
-public class ConsultaAlmacenadaRepository : RepositoryBase<ConsultaAlmacenada>, IConsultaAlmacenadaRepository
+public class ConsultaAlmacenadaRepository(PeitonDbContext dbContext) : RepositoryBase<ConsultaAlmacenada>(dbContext), IConsultaAlmacenadaRepository
 {
-    public ConsultaAlmacenadaRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<ConsultaListItem[]> ObtenerConsultasAsync(int usuarioId, ConsultasFilter filter)
     {
         return ApplyFilters(DbContext.ObtenerConsultasAlmacenadas(usuarioId), filter)

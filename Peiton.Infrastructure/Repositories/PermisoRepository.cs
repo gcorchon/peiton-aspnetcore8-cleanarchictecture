@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IPermisoRepository))]
-public class PermisoRepository : RepositoryBase<Permiso>, IPermisoRepository
+public class PermisoRepository(PeitonDbContext dbContext) : RepositoryBase<Permiso>(dbContext), IPermisoRepository
 {
-	public PermisoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

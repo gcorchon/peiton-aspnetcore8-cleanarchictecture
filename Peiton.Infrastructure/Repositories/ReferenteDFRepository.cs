@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IReferenteDFRepository))]
-public class ReferenteDFRepository : RepositoryBase<ReferenteDF>, IReferenteDFRepository
+public class ReferenteDFRepository(PeitonDbContext dbContext) : RepositoryBase<ReferenteDF>(dbContext), IReferenteDFRepository
 {
-	public ReferenteDFRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

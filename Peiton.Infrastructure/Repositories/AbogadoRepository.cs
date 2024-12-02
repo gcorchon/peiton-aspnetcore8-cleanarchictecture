@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAbogadoRepository))]
-public class AbogadoRepository : RepositoryBase<Abogado>, IAbogadoRepository
+public class AbogadoRepository(PeitonDbContext dbContext) : RepositoryBase<Abogado>(dbContext), IAbogadoRepository
 {
-	public AbogadoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<Abogado[]> AbogadosParaSenalamientoAsync(string nombre)
 	{
 		var nombreContains = "%" + nombre + "%";

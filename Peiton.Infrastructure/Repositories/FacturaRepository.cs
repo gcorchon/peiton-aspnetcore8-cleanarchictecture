@@ -7,13 +7,8 @@ using Peiton.DependencyInjection;
 namespace Peiton.Infrastructure.Repositories;
 
 [Injectable(typeof(IFacturaRepository))]
-public class FacturaRepository : RepositoryBase<Factura>, IFacturaRepository
+public class FacturaRepository(PeitonDbContext dbContext) : RepositoryBase<Factura>(dbContext), IFacturaRepository
 {
-    public FacturaRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<int> ContarFacturasAsync(FacturasFilter filter)
     {
         var query = ApplyFilter(this.DbSet, filter);

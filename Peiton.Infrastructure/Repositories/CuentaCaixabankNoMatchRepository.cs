@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICuentaCaixabankNoMatchRepository))]
-public class CuentaCaixabankNoMatchRepository : RepositoryBase<CuentaCaixabankNoMatch>, ICuentaCaixabankNoMatchRepository
+public class CuentaCaixabankNoMatchRepository(PeitonDbContext dbContext) : RepositoryBase<CuentaCaixabankNoMatch>(dbContext), ICuentaCaixabankNoMatchRepository
 {
-	public CuentaCaixabankNoMatchRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

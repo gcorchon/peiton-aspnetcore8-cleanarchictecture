@@ -4,10 +4,6 @@ using Peiton.DependencyInjection;
 
 namespace Peiton.Infrastructure.Repositories;
 [Injectable(typeof(IAbogadoExternoRepository))]
-public class AbogadoExternoRepository : RepositoryBase<AbogadoExterno>, IAbogadoExternoRepository
+public class AbogadoExternoRepository(PeitonDbContext dbContext) : RepositoryBase<AbogadoExterno>(dbContext), IAbogadoExternoRepository
 {
-	public AbogadoExternoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

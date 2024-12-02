@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITipoSeguroRepository))]
-public class TipoSeguroRepository : RepositoryBase<TipoSeguro>, ITipoSeguroRepository
+public class TipoSeguroRepository(PeitonDbContext dbContext) : RepositoryBase<TipoSeguro>(dbContext), ITipoSeguroRepository
 {
-	public TipoSeguroRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRequerimientoRepository))]
-public class RequerimientoRepository : RepositoryBase<Requerimiento>, IRequerimientoRepository
+public class RequerimientoRepository(PeitonDbContext dbContext) : RepositoryBase<Requerimiento>(dbContext), IRequerimientoRepository
 {
-	public RequerimientoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarRequerimientosAsync(RequerimientosFilter filter)
 	{
 		return ApplyFilters(DbSet.Include(r => r.Tutelado).Include(r => r.RequerimientoTipo).Include(r => r.RequerimientoDetalle), filter).CountAsync();

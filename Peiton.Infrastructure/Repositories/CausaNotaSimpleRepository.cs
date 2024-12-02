@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICausaNotaSimpleRepository))]
-public class CausaNotaSimpleRepository : RepositoryBase<CausaNotaSimple>, ICausaNotaSimpleRepository
+public class CausaNotaSimpleRepository(PeitonDbContext dbContext) : RepositoryBase<CausaNotaSimple>(dbContext), ICausaNotaSimpleRepository
 {
-	public CausaNotaSimpleRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

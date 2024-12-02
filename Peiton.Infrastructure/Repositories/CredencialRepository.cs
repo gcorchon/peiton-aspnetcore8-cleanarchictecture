@@ -9,13 +9,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICredencialRepository))]
-public class CredencialRepository : RepositoryBase<Credencial>, ICredencialRepository
+public class CredencialRepository(PeitonDbContext dbContext) : RepositoryBase<Credencial>(dbContext), ICredencialRepository
 {
-    public CredencialRepository(PeitonDbContext dbContext) : base(dbContext)
-    {
-
-    }
-
     public Task<Credencial[]> ObtenerCredencialesBloqueadasAsync(CredencialesBloqueadasFilter filter)
     {
         return ApplyFilters(DbSet.Include(c => c.EntidadFinanciera).Include("Tutelado.DatosJuridicos.Nombramiento"), filter)

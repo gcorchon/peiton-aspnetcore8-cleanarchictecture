@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITipoViaRepository))]
-public class TipoViaRepository : RepositoryBase<TipoVia>, ITipoViaRepository
+public class TipoViaRepository(PeitonDbContext dbContext) : RepositoryBase<TipoVia>(dbContext), ITipoViaRepository
 {
-	public TipoViaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

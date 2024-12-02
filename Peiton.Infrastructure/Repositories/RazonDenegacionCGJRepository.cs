@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRazonDenegacionCGJRepository))]
-public class RazonDenegacionCGJRepository : RepositoryBase<RazonDenegacionCGJ>, IRazonDenegacionCGJRepository
+public class RazonDenegacionCGJRepository(PeitonDbContext dbContext) : RepositoryBase<RazonDenegacionCGJ>(dbContext), IRazonDenegacionCGJRepository
 {
-	public RazonDenegacionCGJRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

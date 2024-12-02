@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IEstadoInventarioRepository))]
-public class EstadoInventarioRepository : RepositoryBase<EstadoInventario>, IEstadoInventarioRepository
+public class EstadoInventarioRepository(PeitonDbContext dbContext) : RepositoryBase<EstadoInventario>(dbContext), IEstadoInventarioRepository
 {
-	public EstadoInventarioRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ILogAccesoRepository))]
-public class LogAccesoRepository : RepositoryBase<LogAcceso>, ILogAccesoRepository
+public class LogAccesoRepository(PeitonDbContext dbContext) : RepositoryBase<LogAcceso>(dbContext), ILogAccesoRepository
 {
-	public LogAccesoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarLogAccesosAsync(LogAccesosFilter filter)
 	{
 		return ApplyFilters(DbSet, filter).CountAsync();

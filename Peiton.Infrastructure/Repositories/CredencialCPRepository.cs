@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ICredencialCPRepository))]
-public class CredencialCPRepository : RepositoryBase<CredencialCP>, ICredencialCPRepository
+public class CredencialCPRepository(PeitonDbContext dbContext) : RepositoryBase<CredencialCP>(dbContext), ICredencialCPRepository
 {
-	public CredencialCPRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

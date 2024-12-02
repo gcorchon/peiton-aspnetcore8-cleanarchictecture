@@ -8,13 +8,8 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISucursalRepository))]
-public class SucursalRepository : RepositoryBase<Sucursal>, ISucursalRepository
+public class SucursalRepository(PeitonDbContext dbContext) : RepositoryBase<Sucursal>(dbContext), ISucursalRepository
 {
-	public SucursalRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
-
 	public Task<int> ContarSucursalesAsync(SucursalesFilter filter)
 	{
 		return ApplyFilters(DbSet, filter).CountAsync();

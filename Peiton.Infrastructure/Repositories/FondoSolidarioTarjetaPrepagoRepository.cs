@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IFondoSolidarioTarjetaPrepagoRepository))]
-public class FondoSolidarioTarjetaPrepagoRepository : RepositoryBase<FondoSolidarioTarjetaPrepago>, IFondoSolidarioTarjetaPrepagoRepository
+public class FondoSolidarioTarjetaPrepagoRepository(PeitonDbContext dbContext) : RepositoryBase<FondoSolidarioTarjetaPrepago>(dbContext), IFondoSolidarioTarjetaPrepagoRepository
 {
-	public FondoSolidarioTarjetaPrepagoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IProvinciaRepository))]
-public class ProvinciaRepository : RepositoryBase<Provincia>, IProvinciaRepository
+public class ProvinciaRepository(PeitonDbContext dbContext) : RepositoryBase<Provincia>(dbContext), IProvinciaRepository
 {
-	public ProvinciaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

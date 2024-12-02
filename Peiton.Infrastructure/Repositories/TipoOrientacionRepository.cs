@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITipoOrientacionRepository))]
-public class TipoOrientacionRepository : RepositoryBase<TipoOrientacion>, ITipoOrientacionRepository
+public class TipoOrientacionRepository(PeitonDbContext dbContext) : RepositoryBase<TipoOrientacion>(dbContext), ITipoOrientacionRepository
 {
-	public TipoOrientacionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

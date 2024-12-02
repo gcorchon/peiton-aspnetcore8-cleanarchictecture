@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAgendaActuacionRepository))]
-public class AgendaActuacionRepository : RepositoryBase<AgendaActuacion>, IAgendaActuacionRepository
+public class AgendaActuacionRepository(PeitonDbContext dbContext) : RepositoryBase<AgendaActuacion>(dbContext), IAgendaActuacionRepository
 {
-	public AgendaActuacionRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ITextoEstaticoRepository))]
-public class TextoEstaticoRepository : RepositoryBase<TextoEstatico>, ITextoEstaticoRepository
+public class TextoEstaticoRepository(PeitonDbContext dbContext) : RepositoryBase<TextoEstatico>(dbContext), ITextoEstaticoRepository
 {
-	public TextoEstaticoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IRelacionAMTAVisitaRepository))]
-public class RelacionAMTAVisitaRepository : RepositoryBase<RelacionAMTAVisita>, IRelacionAMTAVisitaRepository
+public class RelacionAMTAVisitaRepository(PeitonDbContext dbContext) : RepositoryBase<RelacionAMTAVisita>(dbContext), IRelacionAMTAVisitaRepository
 {
-	public RelacionAMTAVisitaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

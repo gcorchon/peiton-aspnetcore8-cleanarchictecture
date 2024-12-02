@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(ISucesionTipoRepository))]
-public class SucesionTipoRepository : RepositoryBase<SucesionTipo>, ISucesionTipoRepository
+public class SucesionTipoRepository(PeitonDbContext dbContext) : RepositoryBase<SucesionTipo>(dbContext), ISucesionTipoRepository
 {
-	public SucesionTipoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

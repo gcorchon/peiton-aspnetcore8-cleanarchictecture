@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAppMovilTipoTareaRepository))]
-public class AppMovilTipoTareaRepository : RepositoryBase<AppMovilTipoTarea>, IAppMovilTipoTareaRepository
+public class AppMovilTipoTareaRepository(PeitonDbContext dbContext) : RepositoryBase<AppMovilTipoTarea>(dbContext), IAppMovilTipoTareaRepository
 {
-	public AppMovilTipoTareaRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

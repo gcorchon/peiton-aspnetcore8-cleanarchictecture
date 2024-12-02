@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IAdhesionTratamientoRepository))]
-public class AdhesionTratamientoRepository : RepositoryBase<AdhesionTratamiento>, IAdhesionTratamientoRepository
+public class AdhesionTratamientoRepository(PeitonDbContext dbContext) : RepositoryBase<AdhesionTratamiento>(dbContext), IAdhesionTratamientoRepository
 {
-	public AdhesionTratamientoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }

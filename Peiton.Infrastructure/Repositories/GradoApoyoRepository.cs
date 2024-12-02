@@ -6,10 +6,6 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IGradoApoyoRepository))]
-public class GradoApoyoRepository : RepositoryBase<GradoApoyo>, IGradoApoyoRepository
+public class GradoApoyoRepository(PeitonDbContext dbContext) : RepositoryBase<GradoApoyo>(dbContext), IGradoApoyoRepository
 {
-	public GradoApoyoRepository(PeitonDbContext dbContext) : base(dbContext)
-	{
-
-	}
 }
