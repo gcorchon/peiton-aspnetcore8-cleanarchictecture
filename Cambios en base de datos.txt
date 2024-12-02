@@ -86,6 +86,8 @@ alter table Archivo add OriginalFileName nvarchar(255)
 GO
 update Archivo set OriginalFileName = Archivo.FileName
 
+alter table DocumentoGenerado alter column ContentType nvarchar(150) not null
+GO
 
 
 /* Tengo que usar dos vistas separadas para usar el balance porque por alguna razón cae el rendimiento estrepitosamente cuando lo combino todo en una sola vista */

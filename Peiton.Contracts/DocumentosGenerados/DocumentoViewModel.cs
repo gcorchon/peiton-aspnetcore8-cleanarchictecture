@@ -1,9 +1,8 @@
-namespace Peiton.Contracts.Documentos;
+namespace Peiton.Contracts.DocumentosGenerados;
 
 public class DocumentoViewModel
 {
     public int Id { get; set; }
-    public string Subcategoria { get; set; } = null!;
     public string Descripcion { get; set; } = null!;
     public string ContentType { get; set; } = null!;
     public string FileName { get; set; } = null!;

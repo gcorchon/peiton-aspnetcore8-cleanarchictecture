@@ -14,9 +14,9 @@ public class CategoriaDocumentoGeneradoConfiguration : IEntityTypeConfiguration<
 		builder.Property(p => p.CategoriaDocumentoGeneradoId).HasColumnName("Fk_CategoriaDocumentoGenerado");
 		builder.Property(p => p.CssClass).HasMaxLength(50);
 
-		/*builder.HasOne(d => d.CategoriaDocumentoGeneradoPadre)
+		builder.HasOne(d => d.CategoriaDocumentoGeneradoPadre)
 			.WithMany(p => p.CategoriasDocumentosGenerados)
-			.HasForeignKey(d => d.CategoriaDocumentoGeneradoId);*/
+			.HasForeignKey(d => d.CategoriaDocumentoGeneradoId);
 
 	}
 }

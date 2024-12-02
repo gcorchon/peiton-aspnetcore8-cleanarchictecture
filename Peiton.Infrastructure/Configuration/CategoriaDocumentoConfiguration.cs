@@ -14,9 +14,9 @@ public class CategoriaDocumentoConfiguration : IEntityTypeConfiguration<Categori
 		builder.Property(p => p.CategoriaDocumentoId).HasColumnName("Fk_CategoriaDocumento");
 		builder.Property(p => p.CssClass).HasMaxLength(50);
 
-		/*builder.HasOne(d => d.CategoriaDocumentoPadre)
+		builder.HasOne(d => d.CategoriaDocumentoPadre)
 			.WithMany(p => p.CategoriasDocumentos)
-			.HasForeignKey(d => d.CategoriaDocumentoId);*/
+			.HasForeignKey(d => d.CategoriaDocumentoId);
 
 	}
 }

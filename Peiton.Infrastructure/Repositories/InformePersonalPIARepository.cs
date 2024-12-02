@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Peiton.Core.Entities;
 using Peiton.Core.Repositories;
 using Peiton.DependencyInjection;
@@ -6,10 +7,26 @@ namespace Peiton.Infrastructure.Repositories;
 
 
 [Injectable(typeof(IInformePersonalPIARepository))]
-public class InformePersonalPIARepository : RepositoryBase<InformePersonalPIA>, IInformePersonalPIARepository
+public class InformePersonalPIARepository(PeitonDbContext dbContext) : RepositoryBase<InformePersonalPIA>(dbContext), IInformePersonalPIARepository
 {
-	public InformePersonalPIARepository(PeitonDbContext dbContext) : base(dbContext)
+	public Task<int> ContarInformesPersonalesPIAAsync(int tuteladoId)
 	{
+		return ApplyFilters(DbSet, tuteladoId).CountAsync();
+	}
 
+	public Task<InformePersonalPIA[]> ObtenerInformesPersonalesPIAAsync(int page, int total, int tuteladoId)
+	{
+		return ApplyFilters(DbSet, tuteladoId)
+			.OrderByDescending(s => s.Id)
+			.Skip((page - 1) * total)
+			.Take(total)
+			.AsNoTracking()
+			.ToArrayAsync();
+	}
+
+	private IQueryable<InformePersonalPIA> ApplyFilters(IQueryable<InformePersonalPIA> query, int tuteladoId)
+	{
+		query = query.Include(i => i.Usuario).Where(i => i.TuteladoId == tuteladoId);
+		return query;
 	}
 }

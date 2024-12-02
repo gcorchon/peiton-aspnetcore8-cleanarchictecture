@@ -15,14 +15,10 @@ public class DocumentoRepository : RepositoryBase<Documento>, IDocumentoReposito
 
 	}
 
-	public Task<DocumentoListItem[]> ObtenerDocumentosAsync()
+	public Task<Documento[]> ObtenerDocumentosAsync()
 	{
-		return this.DbContext.Database.SqlQuery<DocumentoListItem>(@$"select cr.Pk_CategoriaDocumento as CategoriaDocumentoId, cr.Descripcion as Categoria, cr.CssClass,
-								ci.Pk_CategoriaDocumento as SubcategoriaDocumentoId, ci.Descripcion as Subcategoria, i.Pk_Documento as DocumentoId, i.Descripcion, i.ContentType, i.FileName, i.Fecha
-							from CategoriaDocumento ci inner join Documento i on i.Fk_CategoriaDocumento = Pk_CategoriaDocumento
-							inner join (
-								select Pk_CategoriaDocumento, Descripcion, CssClass
-								from CategoriaDocumento where Fk_CategoriaDocumento is null
-							) cr on ci.Fk_CategoriaDocumento = cr.Pk_CategoriaDocumento").ToArrayAsync();
+		return DbSet.Include(d => d.CategoriaDocumento)
+					.ThenInclude(d => d.CategoriaDocumentoPadre)
+					.AsNoTracking().ToArrayAsync();
 	}
 }

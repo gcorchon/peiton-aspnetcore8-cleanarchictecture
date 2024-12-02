@@ -10,7 +10,7 @@ public class CategoriaDocumento
 	public int? CategoriaDocumentoId { get; set; }
 	public string? CssClass { get; set; }
 	public virtual CategoriaDocumento? CategoriaDocumentoPadre { get; set; }
-	/* public virtual ICollection<CategoriaDocumento> CategoriasDocumentos { get; } = new List<CategoriaDocumento>(); */
+	public virtual ICollection<CategoriaDocumento> CategoriasDocumentos { get; } = new List<CategoriaDocumento>();
 	/* public virtual ICollection<Documento> Documentos { get; } = new List<Documento>(); */
 
 }

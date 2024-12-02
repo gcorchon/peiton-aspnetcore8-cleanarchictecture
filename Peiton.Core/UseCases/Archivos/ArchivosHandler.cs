@@ -20,16 +20,15 @@ public class ArchivosHandler(IArchivoRepository archivoRepository, ITuteladoRepo
                 Id = group.Key.Id,
                 Descripcion = group.Key.Descripcion,
                 CssClass = group.Key.CssClass ?? "",
-                Archivos = group.Select(i => new ArchivoViewModel
+                Archivos = group.Select(i => new ArchivoListItem
                 {
                     Id = i.Id,
+                    Subcategoria = i.CategoriaArchivo.Descripcion,
                     Descripcion = i.Descripcion,
-                    ContentType = i.ContentType,
-                    FileName = i.FileName,
                     Tags = i.Tags,
                     TuAppoyo = i.TuAppoyo,
                     Fecha = i.Fecha
-                })
+                }).OrderBy(d => d.Descripcion)
             })
             .OrderBy(item => item.Descripcion.StartsWith("Otros") ? 1 : 0)
             .ThenBy(item => item.Descripcion);

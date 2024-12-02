@@ -4,5 +4,5 @@ using Peiton.Core.Entities;
 namespace Peiton.Core.Repositories;
 public interface IDocumentoRepository : IRepository<Documento>
 {
-    Task<DocumentoListItem[]> ObtenerDocumentosAsync();
+    Task<Documento[]> ObtenerDocumentosAsync();
 }
