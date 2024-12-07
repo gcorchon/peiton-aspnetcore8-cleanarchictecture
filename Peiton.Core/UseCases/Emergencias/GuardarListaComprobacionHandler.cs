@@ -13,7 +13,7 @@ public class GuardarListaComprobacionHandler(IEmergenciaRepository emergenciaRep
     public async Task HandleAsync(int id, CheckListItem[] request)
     {
         var emergencia = await emergenciaRepository.GetByIdAsync(id) ?? throw new NotFoundException("Emergencia no encontrada");
-        if(!await tuteladoRepository.CanViewAsync(emergencia.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_VIEW_ALLOWED);
+        if(!await tuteladoRepository.CanViewAsync(emergencia.TuteladoId)) throw new UnauthorizedAccessException(PeitonMessages.TUTELADO_NO_MODIFICATION_ALLOWED);
 
         emergencia.CheckList = request.ToXDocument()!.ToString();
         await unitOfWork.SaveChangesAsync();
