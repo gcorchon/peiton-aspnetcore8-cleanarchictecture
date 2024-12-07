@@ -21,6 +21,8 @@ public class PeitonDbContext : DbContext
 
     public string DateAsString(DateTime date) => throw new NotSupportedException();
 
+    public string TimeFromDate(DateTime date) => throw new NotSupportedException();
+
 
     public string IntAsString(int value) => throw new NotSupportedException();
     public string DecimalAsString(decimal value) => throw new NotSupportedException();
@@ -73,6 +75,18 @@ public class PeitonDbContext : DbContext
                             typeof(string),
                             null
                         ));
+
+        modelBuilder.HasDbFunction(this.GetType().GetMethod("TimeFromDate", [typeof(DateTime)])!)
+                    .HasTranslation(args =>
+                        new SqlFunctionExpression("dbo.TimeFromDate",
+                            [
+                                args.First(),
+                            ],
+                            false,
+                            [false],
+                            typeof(string),
+                            null
+                        ));                        
 
         modelBuilder.HasDbFunction(this.GetType().GetMethod("IntAsString", [typeof(int)])!)
                     .HasTranslation(args =>

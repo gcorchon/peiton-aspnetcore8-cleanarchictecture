@@ -5,42 +5,37 @@ using Peiton.DependencyInjection;
 namespace Peiton.Infrastructure;
 
 [Injectable(typeof(IEntityService))]
-public class EntityService : IEntityService
+public class EntityService(PeitonDbContext dbContext) : IEntityService
 {
-    private readonly PeitonDbContext dbContext;
 
-    public EntityService(PeitonDbContext dbContext)
-    {
-        this.dbContext = dbContext;
-    }
 
     public object? GetEntity(Type type, int id)
     {
-        return this.dbContext.Find(type, [id]);
+        return dbContext.Find(type, [id]);
     }
 
     public Task<object?> GetEntityAsync(Type type, int id)
     {
-        return this.dbContext.FindAsync(type, [id]).AsTask();
+        return dbContext.FindAsync(type, [id]).AsTask();
     }
 
     public T? GetEntity<T>(int id) where T : class
     {
-        return this.dbContext.Find<T>([id]);
+        return dbContext.Find<T>([id]);
     }
 
     public Task<T?> GetEntityAsync<T>(int id) where T : class
     {
-        return this.dbContext.FindAsync<T>([id]).AsTask();
+        return dbContext.FindAsync<T>([id]).AsTask();
     }
 
     public void Remove<T>(T entity) where T : class
     {
-        this.dbContext.Remove<T>(entity);
+        dbContext.Remove<T>(entity);
     }
 
     public Task AddAsync<T>(T entity) where T : class
     {
-        return this.dbContext.AddAsync<T>(entity).AsTask();
+        return dbContext.AddAsync<T>(entity).AsTask();
     }
 }
