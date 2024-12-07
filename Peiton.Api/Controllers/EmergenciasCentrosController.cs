@@ -15,11 +15,18 @@ namespace Peiton.Api.Controllers;
 public class EmergenciasCentrosController(IMapper mapper) : ControllerBase
 {
     [HttpGet()]
-    public async Task<IActionResult> EmergenciasAsync([FromQuery][Required] int tuteladoId, [FromQuery] EmergenciasCentrosFilter filter, [FromQuery] Pagination pagination, EmergenciasCentrosHandler handler)
+    public async Task<IActionResult> EmergenciasCentrosAsync([FromQuery][Required] int tuteladoId, [FromQuery] EmergenciasCentrosFilter filter, [FromQuery] Pagination pagination, EmergenciasCentrosHandler handler)
     {
         var data = await handler.HandleAsync(tuteladoId, filter, pagination);
         var vm = mapper.Map<IEnumerable<EmergenciaCentroListItem>>(data.Items);
         return this.PaginatedResult(vm, data.Total);
+    }
+
+    [HttpPost()]
+    public async Task<IActionResult> CrearEmergenciaCentroAsync(CrearEmergenciaCentroRequest request, CrearEmergenciaCentroHandler handler)
+    {
+        await handler.HandleAsync(request);
+        return Accepted();
     }
 
     [HttpGet("{id:int}/lista-comprobacion")]

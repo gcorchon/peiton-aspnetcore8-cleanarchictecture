@@ -3,7 +3,6 @@ using Peiton.ListItems;
 using Peiton.DependencyInjection;
 using System.Reflection;
 using Peiton.Core.Mappings;
-using Peiton.Core.Services;
 using AutoMapper;
 
 namespace Peiton.Core;
@@ -14,8 +13,12 @@ public static class Extensions
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddAutoMapper(
-            (IServiceProvider serviceProvider, IMapperConfigurationExpression mapperConfiguration) =>
-                mapperConfiguration.AddProfile(new CajaProfile(serviceProvider.GetService<IIdentityService>()!)),
+            (IServiceProvider serviceProvider, IMapperConfigurationExpression mapperConfiguration) => {
+                mapperConfiguration.AddProfile(new CajaProfile(serviceProvider.GetService<IIdentityService>()!));
+                mapperConfiguration.AddProfile(new EmergenciaProfile(serviceProvider.GetService<IIdentityService>()!));
+                mapperConfiguration.AddProfile(new EmergenciaCentroProfile(serviceProvider.GetService<IIdentityService>()!));
+            },
+                
             Assembly.GetExecutingAssembly()
         );
 

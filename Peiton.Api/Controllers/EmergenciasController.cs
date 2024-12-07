@@ -22,6 +22,13 @@ public class EmergenciasController(IMapper mapper) : ControllerBase
         return this.PaginatedResult(vm, data.Total);
     }
 
+    [HttpPost()]
+    public async Task<IActionResult> CrearEmergenciaAsync(CrearEmergenciaRequest request, CrearEmergenciaHandler handler)
+    {
+        await handler.HandleAsync(request);
+        return Accepted();
+    }
+
     [HttpGet("{id:int}/lista-comprobacion")]
     public async Task<IActionResult> CheckListsAsync(int id, ListaComprobacionHandler handler)
     {
