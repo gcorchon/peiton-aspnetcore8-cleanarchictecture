@@ -1,5 +1,4 @@
 using AutoMapper;
-using Peiton.Contracts.Emergencias;
 using Peiton.Core.Entities;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
@@ -8,6 +7,7 @@ using Peiton.Core.Utils;
 using Peiton.DependencyInjection;
 using Peiton.Contracts.Seguimientos;
 using Peiton.Core.Services;
+using Peiton.Contracts.Emergencias;
 
 namespace Peiton.Core.UseCases.Emergencias;
 

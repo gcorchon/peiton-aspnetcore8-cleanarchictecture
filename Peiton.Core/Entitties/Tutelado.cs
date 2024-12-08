@@ -119,12 +119,12 @@ public class Tutelado
 	/* public virtual ICollection<Archivo> Archivos { get; } = []; */
 	public virtual ICollection<Arrendamiento> Arrendamientos { get; } = [];
 	public virtual ICollection<Asiento> Asientos { get; } = [];
-	/* public virtual ICollection<Autorizacion> Autorizaciones { get; } = []; */
+	public virtual ICollection<Autorizacion> Autorizaciones { get; } = [];
 	/* public virtual ICollection<AvisoTributario> AvisosTributarios { get; } = []; */
 	public virtual ICollection<CajaAMTA> CajaAMTA { get; } = [];
 
 	public virtual ICollection<CajaIncidencia> CajaIncidencias { get; } = [];
-	/* public virtual ICollection<Cita> Citas { get; } = []; */
+	public virtual ICollection<Cita> Citas { get; } = [];
 	public virtual ICollection<Contacto> Contactos { get; } = [];
 	/* public virtual ICollection<ControlCuentaGeneral> ControlesCuentasGenerales { get; } = []; */
 	/* public virtual ICollection<ControlInventario> ControlesInventarios { get; } = []; */

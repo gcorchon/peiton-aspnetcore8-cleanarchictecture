@@ -1,11 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Peiton.Api.Extensions;
-using Peiton.Contracts.Common;
-using Peiton.Contracts.Inmuebles;
-using Peiton.Core.Entities;
-using Peiton.Core.UseCases.Common;
-using Peiton.Core.UseCases.InmuebleAutorizaciones;
+using Peiton.Core.UseCases.Autorizaciones;
+using System.ComponentModel.DataAnnotations;
+using Peiton.Contracts.Autorizaciones;
 
 namespace Peiton.Api.Controllers;
 
@@ -13,27 +10,32 @@ namespace Peiton.Api.Controllers;
 [Route("api/[controller]")]
 public class AutorizacionesController(IMapper mapper) : ControllerBase
 {
-    [HttpGet("")]
-    public async Task<IActionResult> AutorizacionesAsync([FromQuery] InmuebleAutorizacionesFilter filter, [FromQuery] Pagination pagination, AutorizacionesHandler handler)
+    [HttpGet()]
+    public async Task<IActionResult> AutorizacionesAsync([FromQuery][Required] int tuteladoId, AutorizacionesHandler handler)
     {
-        var data = await handler.HandleAsync(filter, pagination);
-        var vm = mapper.Map<IEnumerable<InmuebleAutorizacionListItem>>(data.Items);
-        return this.PaginatedResult(vm, data.Total);
-    }
-
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> AutorizacionAsync(int id, EntityHandler<InmuebleAutorizacion> handler)
-    {
-        var data = await handler.HandleAsync(id);
-        var vm = mapper.Map<InmuebleAutorizacionViewModel>(data);
+        var data = await handler.HandleAsync(tuteladoId);
+        var vm = mapper.Map<IEnumerable<AutorizacionListItem>>(data);
         return Ok(vm);
     }
 
+    [HttpPost()]
+    public async Task<IActionResult> CrearAutorizacionAsync(CrearAutorizacionRequest request, CrearAutorizacionHandler handler)
+    {
+        await handler.HandleAsync(request);
+        return Accepted();
+    }
+
     [HttpPatch("{id:int}")]
-    public async Task<IActionResult> ActualizarAutorizacionAsync(int id, ActualizarInmuebleAutorizacionRequest request, ActualizarEntityHandler<InmuebleAutorizacion> handler)
+    public async Task<IActionResult> ActualizarAutorizacionAsync(int id, ActualizarAutorizacionRequest request, ActualizarAutorizacionHandler handler)
     {
         await handler.HandleAsync(id, request);
         return Accepted();
     }
 
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> BorrarAutorizacionAsync(int id, BorrarAutorizacionHandler handler)
+    {
+        await handler.HandleAsync(id);
+        return Accepted();
+    }
 }
