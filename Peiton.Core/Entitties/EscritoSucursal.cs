@@ -1,6 +1,7 @@
 namespace Peiton.Core.Entities;
 public class EscritoSucursal
 {
+	public int Id { get; set; }
 	public int TuteladoId { get; set; }
 	public int EntidadFinancieraId { get; set; }
 	public string Numero { get; set; } = null!;

@@ -25,6 +25,8 @@ public class SucursalRepository(PeitonDbContext dbContext) : RepositoryBase<Sucu
 				.ToArrayAsync();
 	}
 
+
+
 	private IQueryable<Sucursal> ApplyFilters(IQueryable<Sucursal> query, SucursalesFilter filter)
 	{
 		if (filter == null) return query;
@@ -65,5 +67,11 @@ public class SucursalRepository(PeitonDbContext dbContext) : RepositoryBase<Sucu
 		}
 
 		return query;
+	}
+
+
+	public Task<Sucursal?> ObtenerSucursalAsync(int entidadFinancieraId, string oficina)
+	{
+		return DbSet.Include(s => s.EntidadFinanciera).Where(s => s.Numero == oficina && s.EntidadFinancieraId == entidadFinancieraId).FirstOrDefaultAsync();
 	}
 }

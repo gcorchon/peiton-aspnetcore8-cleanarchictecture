@@ -117,3 +117,43 @@ ALTER TABLE [dbo].[Caja]  WITH CHECK ADD  CONSTRAINT [Caja_FK_Centro_Centro] FOR
 REFERENCES [dbo].[Centro] ([Pk_Centro])
   
 GO
+
+ALTER FUNCTION [dbo].[ObtenerOficinasTutelado] 
+(	
+	-- Add the parameters for the function here
+	@pk_tutelado int
+)
+RETURNS @data TABLE(Fk_EntidadFinanciera int, Branch char(4), Fk_Tutelado int) 
+AS
+BEGIN
+
+	insert @data
+	select distinct Fk_EntidadFinanciera, Branch, @pk_tutelado as Fk_Tutelado from 
+	(
+		select Fk_EntidadFinanciera, SUBSTRING(Iban, 9, 4) as Branch from Account 
+		inner join Credencial on Pk_Credencial = Fk_Credencial
+		where Fk_Tutelado=@pk_tutelado and Account.FechaBaja is null 
+		union all
+		select Fk_EntidadFinanciera,  
+			case when LEN(Identificacion)=20 then SUBSTRING(Identificacion, 5, 4) 
+				 when LEN(Identificacion)=24 then SUBSTRING(Identificacion, 9, 4) 
+			end as branch
+		 from (
+		 select Fk_EntidadFinanciera, REPLACE(REPLACE(REPLACE(Identificacion, ' ',''),'-',''),'.','') as Identificacion
+		 from ProductoManual where Fk_TipoProducto=1 and Fk_Tutelado=@pk_tutelado and Baja=0
+		 ) dv where LEN(Identificacion)=20 or LEN(Identificacion)=24
+	) dv
+	
+	RETURN;
+END
+
+GO
+
+alter table EscritoSucursal add Pk_EscritoSucursal int IDENTITY(1,1)
+GO
+alter table EscritoSucursal Drop constraint PK_EscritoSucursal
+GO
+alter table EscritoSucursal add primary key (Pk_EscritoSucursal)
+GO
+ALTER TABLE EscritoSucursal
+ADD CONSTRAINT Unique_EscritoSucursal UNIQUE (Fk_Tutelado, Fk_EntidadFinanciera, Numero);

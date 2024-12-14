@@ -7,8 +7,9 @@ public class EscritoSucursalConfiguration : IEntityTypeConfiguration<EscritoSucu
 {
 	public void Configure(EntityTypeBuilder<EscritoSucursal> builder)
 	{
-		builder.HasKey(t => new { t.TuteladoId, t.EntidadFinancieraId, t.Numero });
+		builder.HasKey(t => t.Id);
 
+		builder.Property(p => p.Id).HasColumnName("Pk_EscritoSucursal");
 		builder.Property(p => p.TuteladoId).HasColumnName("Fk_Tutelado");
 		builder.Property(p => p.EntidadFinancieraId).HasColumnName("Fk_EntidadFinanciera");
 		builder.Property(p => p.Numero).HasMaxLength(2);

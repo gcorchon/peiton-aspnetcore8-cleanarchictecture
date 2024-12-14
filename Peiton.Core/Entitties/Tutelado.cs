@@ -139,7 +139,7 @@ public class Tutelado
 	public virtual ICollection<EfectoPublico> EfectosPublicos { get; } = [];
 	/* public virtual ICollection<Emergencia> Emergencias { get; } = []; */
 	/* public virtual ICollection<EmergenciaCentro> EmergenciasCentros { get; } = []; */
-	/* public virtual ICollection<EscritoSucursal> EscritosSucursales { get; } = []; */
+	public virtual ICollection<EscritoSucursal> EscritosSucursales { get; } = [];
 	/* public virtual ICollection<Evento> Eventos { get; } = []; */
 	/* public virtual ICollection<FondoSolidario> FondosSolidarios { get; } = []; */
 	public virtual ICollection<GastoEstimacionFinanciera> GastosEstimacionesFinancieras { get; } = [];

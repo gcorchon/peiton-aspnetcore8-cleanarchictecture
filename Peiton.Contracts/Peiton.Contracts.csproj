@@ -7,6 +7,11 @@
     <ProjectReference Include="..\Peiton.Authorization\Peiton.Authorization.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="EscritosSucursales\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

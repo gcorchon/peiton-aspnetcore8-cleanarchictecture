@@ -45,7 +45,7 @@ public static class CollectionExtensions
                 var entity = entityGetter(item);
                 if (entity == null)
                 {
-                    throw new ArgumentException("Entidad incorrecta incorrecto");
+                    throw new ArgumentException("Entidad incorrecta");
                 }
                 collection.Add(entity);
             }

@@ -13,15 +13,17 @@ public static class Extensions
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddAutoMapper(
-            (IServiceProvider serviceProvider, IMapperConfigurationExpression mapperConfiguration) => {
+            (IServiceProvider serviceProvider, IMapperConfigurationExpression mapperConfiguration) =>
+            {
                 var identityService = serviceProvider.GetService<IIdentityService>()!;
                 mapperConfiguration.AddProfile(new CajaProfile(identityService));
                 mapperConfiguration.AddProfile(new EmergenciaProfile(identityService));
                 mapperConfiguration.AddProfile(new EmergenciaCentroProfile(identityService));
                 mapperConfiguration.AddProfile(new AutorizacionProfile(identityService));
                 mapperConfiguration.AddProfile(new CitaProfile(identityService));
+                mapperConfiguration.AddProfile(new ControlInventarioProfile(identityService));
             },
-                
+
             Assembly.GetExecutingAssembly()
         );
 
