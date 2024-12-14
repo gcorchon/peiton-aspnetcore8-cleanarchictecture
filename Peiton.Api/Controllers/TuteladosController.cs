@@ -13,6 +13,7 @@ using Peiton.Core.UseCases.Seguimientos;
 using Peiton.Core.Entities;
 using Peiton.Contracts.Seguimientos;
 using Peiton.Core.UseCases.ProductosBancarios;
+using Peiton.Core.UseCases.ControlRendiciones;
 
 
 namespace Peiton.Api.Controllers;
@@ -114,5 +115,19 @@ public partial class TuteladosController(IMapper mapper) : ControllerBase
         return Ok(vm);
     }
 
+
+    [HttpGet("{id}/retribucion-continuada")]
+    public async Task<IActionResult> RetribucionContinuadaAsync(int id, ObtenerRetribucionContinuadaHandler handler)
+    {
+        var vm = await handler.HandleAsync(id);
+        return Ok(vm);
+    }
+
+    [HttpPatch("{id}/retribucion-continuada")]
+    public async Task<IActionResult> RetribucionContinuadaAsync(int id, [FromBody] bool continuada, MarcarRetribucionContinuadaHandler handler)
+    {
+        await handler.HandleAsync(id, continuada);
+        return Accepted();
+    }
 
 }

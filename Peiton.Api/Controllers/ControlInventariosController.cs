@@ -11,11 +11,11 @@ using System.ComponentModel.DataAnnotations;
 namespace Peiton.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class ControlInventarioController(IMapper mapper) : ControllerBase
+[Route("api/control-inventarios")]
+public class ControlInventariosController(IMapper mapper) : ControllerBase
 {
     [HttpGet()]
-    public async Task<IActionResult> ControlInventarioAsync([FromQuery][Required] int tuteladoId, ControlInventariosHandler handler)
+    public async Task<IActionResult> ControlInventariosAsync([FromQuery][Required] int tuteladoId, ControlInventariosHandler handler)
     {
         var data = await handler.HandleAsync(tuteladoId);
         var vm = mapper.Map<IEnumerable<ControlInventarioListItem>>(data);

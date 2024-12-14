@@ -157,3 +157,6 @@ alter table EscritoSucursal add primary key (Pk_EscritoSucursal)
 GO
 ALTER TABLE EscritoSucursal
 ADD CONSTRAINT Unique_EscritoSucursal UNIQUE (Fk_Tutelado, Fk_EntidadFinanciera, Numero);
+GO
+
+Eliminar columna "Aprobacion" de la tabla ControlInventario
