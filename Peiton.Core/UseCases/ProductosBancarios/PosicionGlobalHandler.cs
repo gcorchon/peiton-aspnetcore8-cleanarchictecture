@@ -19,8 +19,7 @@ public class PosicionGlobalHandler(IMapper mapper, ITuteladoRepository tuteladoR
 
         foreach (var credencial in tutelado.Credenciales)
         {
-            EntidadPosicionGlobalViewModel? entidad;
-            if (!entidades.TryGetValue(credencial.EntidadFinancieraId, out entidad))
+            if (!entidades.TryGetValue(credencial.EntidadFinancieraId, out EntidadPosicionGlobalViewModel? entidad))
             {
                 entidad = new EntidadPosicionGlobalViewModel()
                 {

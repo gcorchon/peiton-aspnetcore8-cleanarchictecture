@@ -3,6 +3,34 @@ let zipFile = null;
 let modifiedFiles = {}; // Para almacenar el contenido modificado de cada archivo
 let currentFilePath = null;
 let fileName = null;
+let editor = null;
+
+
+require.config({ paths: { 'vs': 'vs' } });
+    
+require(['vs/editor/editor.main'], function () {
+  // Crear el editor dentro del contenedor
+  editor = monaco.editor.create(document.getElementById('editor-container'), {
+    value: [
+      
+    ].join('\n'), // Contenido inicial
+    language: 'xml', // Lenguaje del editor
+    theme: 'vs-dark', // Tema (vs, vs-dark, hc-black)
+    fontSize: 14, // Tamaño de la fuente
+    minimap: { enabled: true }, // Habilita la minimapa
+    autoIndent: true,
+    formatOnPaste: true,
+    formatOnType: true
+  });
+
+  editor.onDidChangeModelContent((event) => {
+    if (currentFilePath) {
+        modifiedFiles[currentFilePath] = editor.getValue();
+    }
+  });
+});
+
+
 // Selección del archivo y carga de su contenido
 document.getElementById('fileInput').addEventListener('change', async (event) => {
     const file = event.target.files[0];
@@ -35,47 +63,60 @@ async function loadFileContent(filePath) {
 
     const file = zipFile.file(filePath);
     if (file) {
-        const content = await file.async('text');
-        const formattedContent = formatXML(modifiedFiles[filePath] || content);
-        console.log(formattedContent);
-        document.getElementById('fileContent').value = formattedContent;
         currentFilePath = filePath;
+        const content = await file.async('text');       
+        const formattedContent = formatXML(modifiedFiles[filePath] || content);
+        editor.setValue(formattedContent);
     }
 }
 
 function formatXML(xml) {
-    // Remover espacios en blanco al inicio y al final
-    xml = xml.trim();
-
-    // Variables de configuración
-    const PADDING = '  '; // Define el tamaño de la indentación
-    let formatted = '';   // Almacena el XML formateado
-    let indentLevel = 0;  // Nivel de indentación actual
-
-    // Separar las etiquetas de apertura, cierre y auto-cierre en una lista
-    xml.split(/>\s*</).forEach((node) => {
-        if (node.match(/^\/\w/)) { // Etiqueta de cierre
-            indentLevel--;
-            formatted += `${PADDING.repeat(indentLevel)}<${node.trim()}>\n`;
-        } else if (node.match(/^<?\w/)) { // Etiqueta de apertura o auto-cierre
-            formatted += `${PADDING.repeat(indentLevel)}<${node.trim()}>\n`;
-            if (!node.match(/\/$/)) { // Si no es una etiqueta de auto-cierre
-                indentLevel++;
-            }
-        } else { // Contenido de texto dentro de una etiqueta
-            formatted += `${PADDING.repeat(indentLevel)}${node.trim()}\n`;
-        }
-    });
-
-    return formatted.trim(); // Elimina espacios en blanco adicionales al final
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xml, "application/xml");
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n` + recursivePrint(doc.documentElement, 0, '  ');
 }
 
-// Guardar el contenido modificado temporalmente
-document.getElementById('fileContent').addEventListener('input', () => {
-    if (currentFilePath) {
-        modifiedFiles[currentFilePath] = document.getElementById('fileContent').value;
+function printOpenNode(node){
+    const attrs = [];
+    if(!node.attributes) { 
+        return node.nodeName;
     }
-});
+    for(var i=0;i<node.attributes.length;i++){
+        const attr = node.attributes.item(i);
+        attrs.push(`${attr.name}="${attr.value}"`);
+    }
+    if(attrs.length > 0) return node.nodeName + " " + attrs.join(" ");
+    return node.nodeName;
+    
+}
+function recursivePrint(node, indentLevel, padding){
+    const pad = padding.repeat(indentLevel);
+    
+    if(node.nodeType == Node.ELEMENT_NODE){
+        if(node.childNodes.length == 0) {
+            return pad + `<${printOpenNode(node)}/>\n`;
+        }
+        if(node.childNodes.length == 1 && node.childNodes[0].nodeType == Node.TEXT_NODE) {
+            return pad + `<${printOpenNode(node)}>${node.childNodes[0].nodeValue}</${node.nodeName}>\n`;
+        }
+
+        let data = pad + `<${printOpenNode(node)}>\n`;
+        node.childNodes.forEach(element => {
+            data += recursivePrint(element, indentLevel + 1, padding);
+        });
+
+        data += pad + `</${node.nodeName}>\n`;
+        return data;
+    }
+    
+    
+    if(node.childNodes.length == 1 && node.childNodes[0].nodeType == Node.TEXT_NODE) {
+        return pad + `<${printOpenNode(node)}>${node.childNodes[0].nodeValue}</${node.nodeName}>\n`;
+    }
+    
+    return '';
+}
+
 
 // Guardar cambios y exportar el documento
 document.getElementById('saveChanges').addEventListener('click', async () => {

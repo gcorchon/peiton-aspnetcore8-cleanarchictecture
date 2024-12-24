@@ -13,13 +13,13 @@ public class InmuebleTipoTitularidadConfiguration : IEntityTypeConfiguration<Inm
 		builder.Property(p => p.TipoTitularidadId).HasColumnName("Fk_TipoTitularidad");
 		builder.Property(p => p.Porcentaje).HasMaxLength(10);
 
-		/*builder.HasOne(d => d.Inmueble)
+		builder.HasOne(d => d.Inmueble)
 			.WithMany(p => p.InmueblesTiposTitularidades)
-			.HasForeignKey(d => d.InmuebleId);*/
+			.HasForeignKey(d => d.InmuebleId);
 
-		/*builder.HasOne(d => d.TipoTitularidad)
+		builder.HasOne(d => d.TipoTitularidad)
 			.WithMany(p => p.InmueblesTiposTitularidades)
-			.HasForeignKey(d => d.TipoTitularidadId);*/
+			.HasForeignKey(d => d.TipoTitularidadId);
 
 	}
 }

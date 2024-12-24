@@ -1,3 +1,5 @@
+using MassTransit.Transports;
+
 namespace Peiton.Core.Entities;
 public class Tutelado
 {
@@ -135,7 +137,7 @@ public class Tutelado
 	/* public virtual ICollection<DatosJuridicos> DatosJuridicos { get; } = []; */
 	/* public virtual ICollection<DatosJuridicosHistorico> DatosJuridicosHistoricos { get; } = []; */
 	/* public virtual ICollection<DatosSociales> DatosSociales { get; } = []; */
-	/* public virtual ICollection<Deuda> Deudas { get; } = []; */
+	public virtual ICollection<Deuda> Deudas { get; } = [];
 	public virtual ICollection<EfectoPublico> EfectosPublicos { get; } = [];
 	/* public virtual ICollection<Emergencia> Emergencias { get; } = []; */
 	/* public virtual ICollection<EmergenciaCentro> EmergenciasCentros { get; } = []; */
@@ -185,4 +187,13 @@ public class Tutelado
 	/* public virtual ICollection<TipoCuratela> TiposCuratelas { get; } = []; */
 	/* public virtual ICollection<TipoCuratela> TiposCuratelas { get; } = []; */
 	/* public virtual ICollection<TipoOrientacion> TiposOrientaciones { get; } = []; */
+
+
+	public string Tratamiento
+	{
+		get
+		{
+			return this.Sexo == "H" ? "D." : "Dña";
+		}
+	}
 }

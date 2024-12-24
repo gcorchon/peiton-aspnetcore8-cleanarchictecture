@@ -63,13 +63,13 @@ public class Inmueble
 	public virtual Tutelado Tutelado { get; set; } = null!;
 	public virtual Utilizacion Utilizacion { get; set; } = null!;
 	public virtual Valoracion? Valoracion { get; set; }
-	public virtual ICollection<AvisoTributario> AvisosTributarios { get; } = new List<AvisoTributario>();
+	public virtual ICollection<AvisoTributario> AvisosTributarios { get; } = [];
 	/* public virtual ICollection<InmuebleAnejo> InmueblesAnejos { get; } = new List<InmuebleAnejo>(); */
-	public virtual ICollection<InmuebleAutorizacion> InmueblesAutorizaciones { get; } = new List<InmuebleAutorizacion>();
+	public virtual ICollection<InmuebleAutorizacion> InmueblesAutorizaciones { get; } = [];
 	/* public virtual ICollection<InmuebleAviso> InmueblesAvisos { get; } = new List<InmuebleAviso>(); */
 	/* public virtual ICollection<InmuebleSolicitudAlquilerVenta> InmueblesSolicitudesAlquileresVentas { get; } = new List<InmuebleSolicitudAlquilerVenta>(); */
-	public virtual ICollection<InmuebleTasacion> InmueblesTasaciones { get; } = new List<InmuebleTasacion>();
-	/* public virtual ICollection<InmuebleTipoTitularidad> InmueblesTiposTitularidades { get; } = new List<InmuebleTipoTitularidad>(); */
+	public virtual ICollection<InmuebleTasacion> InmueblesTasaciones { get; } = [];
+	public virtual ICollection<InmuebleTipoTitularidad> InmueblesTiposTitularidades { get; } = [];
 	/* public virtual ICollection<NotaSimple> NotasSimples { get; } = new List<NotaSimple>(); */
 	/* public virtual ICollection<SeguroContratado> SegurosContratados { get; } = new List<SeguroContratado>(); */
 	/* public virtual ICollection<UtilizacionOpcion> UtilizacionesOpciones { get; } = new List<UtilizacionOpcion>(); */

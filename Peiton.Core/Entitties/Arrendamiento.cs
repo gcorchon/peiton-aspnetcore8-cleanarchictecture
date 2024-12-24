@@ -35,4 +35,41 @@ public class Arrendamiento
 	public virtual Tutelado Tutelado { get; set; } = null!;
 	/* public virtual ICollection<ArrendamientoInquilino> ArrendamientosInquilinos { get; } = new List<ArrendamientoInquilino>(); */
 
+	public string ObtenerDireccion()
+	{
+		var partes = new List<string>();
+		var parte1 = new List<string>();
+		var parte2 = new List<string>();
+		var parte3 = new List<string>();
+
+		if (this.TipoVia != null) parte1.Add(this.TipoVia.Descripcion);
+		if (!string.IsNullOrWhiteSpace(this.NombreVia)) parte1.Add(this.NombreVia);
+		if (!string.IsNullOrWhiteSpace(this.Numero)) parte1.Add(this.Numero);
+
+		if (parte1.Count > 0) partes.Add(string.Join(" ", parte1));
+
+		if (!string.IsNullOrWhiteSpace(this.Portal)) parte2.Add("Portal " + this.Portal);
+		if (!string.IsNullOrWhiteSpace(this.Escalera)) parte2.Add("Esc. " + this.Escalera);
+		if (!string.IsNullOrWhiteSpace(this.Piso)) parte2.Add("Piso " + this.Piso);
+		if (!string.IsNullOrWhiteSpace(this.Puerta)) parte2.Add("Puerta " + this.Puerta);
+
+
+		if (parte2.Count > 0) partes.Add(string.Join(" ", parte2));
+
+		if (!string.IsNullOrWhiteSpace(this.CodigoPostal)) parte3.Add(this.CodigoPostal);
+
+		var temp = new List<string>();
+		if (!string.IsNullOrWhiteSpace(this.Municipio)) temp.Add(this.Municipio);
+		if (this.Distrito != null) temp.Add(this.Distrito.Descripcion);
+
+
+		if (temp.Count > 0)
+			parte3.Add(string.Join(" - ", temp));
+
+		if (this.Provincia != null) parte3.Add("(" + this.Provincia.Nombre + ")");
+
+		partes.Add(string.Join(" ", parte3));
+
+		return string.Join(", ", partes);
+	}
 }

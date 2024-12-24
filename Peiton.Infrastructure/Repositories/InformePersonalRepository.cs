@@ -29,4 +29,9 @@ public class InformePersonalRepository(PeitonDbContext dbContext) : RepositoryBa
 		query = query.Include(i => i.Usuario).Where(i => i.TuteladoId == tuteladoId);
 		return query;
 	}
+
+	public Task<InformePersonal?> ObtenerUltimoInformePersonalAsync(int tuteladoId)
+	{
+		return DbSet.OrderByDescending(i => i.Fecha).FirstOrDefaultAsync();
+	}
 }
