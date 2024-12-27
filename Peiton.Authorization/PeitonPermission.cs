@@ -232,6 +232,7 @@ public struct PeitonPermission
     public const int GestionIndividualDocumentosNuevo = 76;
     public const int GestionIndividualDocumentosOtros = 144;
     public const int GestionIndividualDocumentosProcedimientosAdicionales = 230;
+    public const int GestionIndividualDocumentosRendiciones = 362;
     public const int GestionIndividualDocumentosRSAT = 141;
     public const int GestionIndividualDocumentosSalud = 206;
     public const int GestionIndividualDocumentosSociales = 142;

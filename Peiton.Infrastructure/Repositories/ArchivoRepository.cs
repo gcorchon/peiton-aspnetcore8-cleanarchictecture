@@ -33,7 +33,8 @@ public class ArchivoRepository(PeitonDbContext dbContext, IIdentityService ident
 			{ PeitonPermission.GestionIndividualDocumentosSalud, 273 },
 			{ PeitonPermission.GestionIndividualDocumentosValoracion, 275 },
 			{ PeitonPermission.GestionIndividualDocumentosProcedimientosAdicionales, 314 },
-			{ PeitonPermission.GestionIndividualDocumentosAcogida, 354 }
+			{ PeitonPermission.GestionIndividualDocumentosAcogida, 354 },
+			{ PeitonPermission.GestionIndividualDocumentosRendiciones, 379 },
 		};
 
 		var lista = new List<int>();
