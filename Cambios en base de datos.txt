@@ -26,128 +26,16 @@ BEGIN
 			  else convert(bit, 0) end
 END
 
-
-update Senalamiento set Fk_AbogadoAsignado = null where Fk_AbogadoAsignado=0
-
-update Senalamiento set Fk_AbogadoAsignado = null
-from Senalamiento left join Abogado on Fk_AbogadoAsignado = Pk_Abogado
-where Fk_AbogadoAsignado is not null and Pk_Abogado is null
-
-ALTER TABLE [dbo].[Senalamiento]  WITH CHECK ADD  CONSTRAINT [FK_Senalamiento_Abogado1] FOREIGN KEY([Fk_AbogadoAsignado])
-REFERENCES [dbo].[Abogado] ([Pk_Abogado])
-GO
-
-ALTER TABLE [dbo].[Senalamiento] CHECK CONSTRAINT [FK_Senalamiento_Abogado1]
-GO
-
-ALTER TABLE [dbo].[Tarea]  WITH CHECK ADD  CONSTRAINT [FK_Tarea_TareaEntidad] FOREIGN KEY([Fk_TareaEntidad])
-REFERENCES [dbo].[TareaEntidad] ([Pk_TareaEntidad])
-GO
-
-Añadir Columna Autonumérica en Sucursal Pk_Sucursal y poner índice único sobre Fk_EntidadFinanciera y Número
-
 Archivos de Calidad
 - Sacar todos los archivos de las subcarpetas de App_Data/Instrucciones y dejarlos tirados directamente en esa carpeta.
 - Sacar todos los archivos de las subcarpetas de App_Data/Procesos y dejarlos tirados directamente en esa carpeta.
 - Sacar todos los archivos de las subcarpetas de App_Data/Documentos y dejarlos tirados directamente en esa carpeta.
 
 
-update Usuario set Username = Username + '* borrado *', Email=Email + '* borrado *' where Borrado=1
-
-Cambiar en la tabla usuario los indices IX_Usuario y IX_Usuario_1 a UNIQUE. IX_Usuario_1 hay que cambiarlo a IX_Email
-
-delete from SueldoPension 
-from SueldoPension
-left join TipoPension on Fk_TipoPension = Pk_TipoPension
-where Pk_TipoPension is null
-
-ALTER TABLE [dbo].SueldoPension  WITH CHECK ADD  CONSTRAINT [FK_TipoPension_TipoPension] FOREIGN KEY([Fk_TipoPension])
-REFERENCES [dbo].[TipoPension] ([Pk_TipoPension])
-GO
-
-ALTER TABLE [dbo].[Loan]  WITH CHECK ADD  CONSTRAINT [FK_Loan_TipoPrestamo] FOREIGN KEY([Fk_TipoPrestamo])
-REFERENCES [dbo].[TipoPrestamo] ([Pk_TipoPrestamo])
-GO
-
-delete from Archivo
-from Archivo 
-left join CategoriaArchivo on Archivo.Fk_CategoriaArchivo = Pk_CategoriaArchivo
-where Pk_CategoriaArchivo is null 
-GO
-
-ALTER TABLE [dbo].[Archivo]  WITH CHECK ADD  CONSTRAINT [FK_CategoriaArchivo_Archivo] FOREIGN KEY([Fk_CategoriaArchivo])
-REFERENCES [dbo].[CategoriaArchivo] ([Pk_CategoriaArchivo])
-GO
-
-alter table Archivo alter column ContentType nvarchar(150) not null
-GO
 
 alter table Archivo add OriginalFileName nvarchar(255)
 GO
 update Archivo set OriginalFileName = Archivo.FileName
-
-alter table DocumentoGenerado alter column ContentType nvarchar(150) not null
-GO
-
-
-/* Tengo que usar dos vistas separadas para usar el balance porque por alguna razón cae el rendimiento estrepitosamente cuando lo combino todo en una sola vista */
-CREATE VIEW [dbo].[vwCajaBalance]
- as
-SELECT 
-	[Pk_Caja] as [Fk_Caja], [Fk_Tutelado], [FechaPago],
-    SUM(case when Anticipo=1 then 0 else Importe end) OVER (PARTITION BY Fk_Tutelado ORDER BY FechaPago, Pk_Caja ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
-     + (select SaldoInicialCaja from Tutelado where Pk_Tutelado = Fk_Tutelado) AS Balance    
-FROM 
-    dbo.Caja
-GO
-
-
-CREATE VIEW [dbo].[vwCaja]
- as
-SELECT Caja.*, v.Balance
-FROM Caja inner join vwCajaBalance v on v.Fk_Caja = Pk_Caja
-GO
-
-
-
-alter table TipoPago alter column Descripcion nvarchar(50)
-update TipoPago set Descripcion = TRIM(Descripcion)
-
-ALTER TABLE [dbo].[Caja]  WITH CHECK ADD  CONSTRAINT [Caja_FK_Centro_Centro] FOREIGN KEY([Fk_Centro])
-REFERENCES [dbo].[Centro] ([Pk_Centro])
-  
-GO
-
-ALTER FUNCTION [dbo].[ObtenerOficinasTutelado] 
-(	
-	-- Add the parameters for the function here
-	@pk_tutelado int
-)
-RETURNS @data TABLE(Fk_EntidadFinanciera int, Branch char(4), Fk_Tutelado int) 
-AS
-BEGIN
-
-	insert @data
-	select distinct Fk_EntidadFinanciera, Branch, @pk_tutelado as Fk_Tutelado from 
-	(
-		select Fk_EntidadFinanciera, SUBSTRING(Iban, 9, 4) as Branch from Account 
-		inner join Credencial on Pk_Credencial = Fk_Credencial
-		where Fk_Tutelado=@pk_tutelado and Account.FechaBaja is null 
-		union all
-		select Fk_EntidadFinanciera,  
-			case when LEN(Identificacion)=20 then SUBSTRING(Identificacion, 5, 4) 
-				 when LEN(Identificacion)=24 then SUBSTRING(Identificacion, 9, 4) 
-			end as branch
-		 from (
-		 select Fk_EntidadFinanciera, REPLACE(REPLACE(REPLACE(Identificacion, ' ',''),'-',''),'.','') as Identificacion
-		 from ProductoManual where Fk_TipoProducto=1 and Fk_Tutelado=@pk_tutelado and Baja=0
-		 ) dv where LEN(Identificacion)=20 or LEN(Identificacion)=24
-	) dv
-	
-	RETURN;
-END
-
-GO
 
 alter table EscritoSucursal add Pk_EscritoSucursal int IDENTITY(1,1)
 GO
