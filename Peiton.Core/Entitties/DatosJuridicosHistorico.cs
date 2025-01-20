@@ -42,7 +42,9 @@ public class DatosJuridicosHistorico
 	public bool PresentarLexnet { get; set; }
 	public DateTime? FechaComunicacionBajaJuzgado { get; set; }
 	public bool NoPresentarInventario { get; set; }
+	public string? CodigoLexnet { get; set; } = null!;
 	public virtual Juzgado Juzgado { get; set; } = null!;
+
 	public virtual NivelIntensidad? NivelIntensidad { get; set; }
 	public virtual Nombramiento? Nombramiento { get; set; }
 	public virtual Nombramiento? Nombramiento2 { get; set; }

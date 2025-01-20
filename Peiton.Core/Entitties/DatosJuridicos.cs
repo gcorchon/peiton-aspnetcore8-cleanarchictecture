@@ -44,6 +44,7 @@ public class DatosJuridicos
 	public bool PresentarLexnet { get; set; }
 	public DateTime? FechaComunicacionBajaJuzgado { get; set; }
 	public bool NoPresentarInventario { get; set; }
+	public string? CodigoLexnet { get; set; } = null!;
 	public virtual Archivo? ArchivoDocumentoJura { get; set; }
 	public virtual Archivo? ArchivoResolucionJudicial { get; set; }
 	public virtual Archivo? ArchivoResolucionJudicialAuto { get; set; }

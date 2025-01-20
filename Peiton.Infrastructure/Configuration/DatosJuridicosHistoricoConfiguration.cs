@@ -32,6 +32,7 @@ public class DatosJuridicosHistoricoConfiguration : IEntityTypeConfiguration<Dat
 		builder.Property(p => p.PresentarLexnet).IsRequired();
 		builder.Property(p => p.NoPresentarInventario).IsRequired();
 		builder.Property(p => p.LimiteGastoExtraOrdinario).HasColumnType("money");
+		builder.Property(p => p.CodigoLexnet).HasMaxLength(20);
 		/*builder.HasOne(d => d.Juzgado)
 			.WithMany(p => p.DatosJuridicosHistoricos)
 			.HasForeignKey(d => d.JuzgadoId);*/

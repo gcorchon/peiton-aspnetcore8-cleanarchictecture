@@ -34,6 +34,7 @@ public class DatosJuridicosConfiguration : IEntityTypeConfiguration<DatosJuridic
 		builder.Property(p => p.PresentarLexnet).IsRequired();
 		builder.Property(p => p.NoPresentarInventario).IsRequired();
 		builder.Property(p => p.LimiteGastoExtraOrdinario).HasColumnType("money");
+		builder.Property(p => p.CodigoLexnet).HasMaxLength(20);
 
 		builder.HasOne(d => d.Tutelado)
 			.WithOne(p => p.DatosJuridicos)
