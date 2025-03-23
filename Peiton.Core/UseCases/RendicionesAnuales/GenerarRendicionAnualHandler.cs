@@ -2,26 +2,29 @@ using Microsoft.Extensions.Options;
 using Peiton.Configuration;
 using Peiton.Contracts.Common;
 using Peiton.Contracts.RendicionesAnuales;
+using Peiton.Contracts.InformesPatrimoniales;
 using Peiton.Core.Exceptions;
 using Peiton.Core.Repositories;
 using Peiton.Core.UseCases.AccountTransactions;
 using Peiton.Core.UseCases.Archivos;
+using Peiton.Core.UseCases.InformesPatrimoniales;
 using Peiton.DependencyInjection;
 
 namespace Peiton.Core.UseCases.RendicionesAnuales;
 
 [Injectable]
-public class GenerarRendicionAnualHandler(ITuteladoRepository tuteladoRepository, IDatosEconomicosRepository datosEconomicosRepository, ILoanRepository loanRepository,
-            IAsientoRepository asientoRepository, IInformePersonalRepository informePersonalRepository, IWordService wordService, IZipService zipService,
+public class GenerarRendicionAnualHandler(ITuteladoRepository tuteladoRepository, IDatosEconomicosRepository datosEconomicosRepository, 
+            IInformePersonalRepository informePersonalRepository, IWordService wordService, IZipService zipService,
             ExportWordExtractoBancarioHandler exportWordExtractoBancarioHandler,
+            GenerarInformePatrimonialHandler generarInformePatrimonialHandler,
             DescargarArchivoHandler descargarArchivoHandler, IOptions<AppSettings> options
             )
 {
     public async Task<ArchivoViewModel> HandleAsync(GenerarRendicionAnualRequest request)
     {
         var tutelado = await tuteladoRepository.GetByIdAsync(request.TuteladoId) ?? throw new NotFoundException("Tutelado no encontrado");
-        var datosJuridicos = tutelado.DatosJuridicos ?? throw new NotFoundException("El tutelado no tiene datos jurídicos");
-        var nombramiento = datosJuridicos.Nombramiento ?? throw new NotFoundException("El tutelado no tiene un nombramiento");
+        var datosJuridicos = tutelado.DatosJuridicos ?? throw new BusinessException("El tutelado no tiene datos jurídicos");
+        var nombramiento = datosJuridicos.Nombramiento ?? throw new BusinessException("El tutelado no tiene un nombramiento");
 
         var fechaDesde = datosJuridicos.FechaJura.HasValue && datosJuridicos.FechaJura.Value > request.Desde ? datosJuridicos.FechaJura.Value : request.Desde;
         var fechaHasta = request.Hasta;
@@ -30,35 +33,15 @@ public class GenerarRendicionAnualHandler(ITuteladoRepository tuteladoRepository
 
         if (nombramiento.CargoEconomico)
         {
-            //var sueldosYPensiones = tutelado.SueldosPensiones.Where(s => s.Ano >= fechaDesde.Year && s.Ano <= fechaHasta.Year);
-            var productos = await datosEconomicosRepository.ObtenerProductosRendicionAsync(request.TuteladoId, fechaDesde, fechaHasta);
-            var prestamos = await loanRepository.ObtenerLoansParaRendicionAsync(request.TuteladoId, fechaDesde, fechaHasta);
-            var utilizacionesExcluidas = new int[] { 11, 23 };
-            var inmuebles = tutelado.Inmuebles.Where(inmueble => !utilizacionesExcluidas.Contains(inmueble.UtilizacionId)
-                                    && inmueble.InmueblesTiposTitularidades.FirstOrDefault()?.TipoTitularidad.Descripcion != "Ninguno").ToArray();
-            var arrendamientos = tutelado.Arrendamientos.Where(a => a.FechaInicioArrendamiento.HasValue && a.FechaInicioArrendamiento.Value < fechaHasta && (!a.FechaFinArrendamiento.HasValue || a.FechaFinArrendamiento.Value > fechaDesde));
-            var importeDeudas = (await asientoRepository.ObtenerIngresosYGastosFondoTuteladoAsync(request.TuteladoId, fechaHasta)).Diferencia;
-
             var categoriasExcluidas = new int[] { 41, 43, 97, 106, 143, 144, 152, 154, 174, 156, 148, 151, 107 };
 
             var justificacionIngresosYGastos = (await datosEconomicosRepository.ObtenerJustificaionIngresosYGastosAsync(request.TuteladoId, fechaDesde, fechaHasta)).ToArray();
 
-            var diferenciaIngresosYGastos = (from row in justificacionIngresosYGastos
+            var diferenciaIngresosYGastos = request.SolicitarRetribucion ? (from row in justificacionIngresosYGastos
                                              where !categoriasExcluidas.Contains(row.CategoriaId)
-                                             select row.Total).Sum();
+                                             select row.Total).Sum() : 0;
 
-            bool mostrarRetribucion = request.SolicitarRetribucion && diferenciaIngresosYGastos > 0;
-
-            if (mostrarRetribucion)
-            {
-                foreach (var linea in justificacionIngresosYGastos)
-                {
-                    if (categoriasExcluidas.Contains(linea.CategoriaId))
-                    {
-                        linea.Categoria = "(*) " + linea.Categoria;
-                    }
-                }
-            }
+            bool mostrarRetribucion = diferenciaIngresosYGastos > 0;
 
             string plantilla;
 
@@ -75,18 +58,20 @@ public class GenerarRendicionAnualHandler(ITuteladoRepository tuteladoRepository
                 Tutelado = tutelado,
                 FechaDesde = fechaDesde,
                 FechaHasta = fechaHasta,
-                Productos = productos,
-                Inmuebles = inmuebles,
-                Arrendamientos = arrendamientos,
-                Prestamos = prestamos,
-                ImporteDeudas = importeDeudas,
                 JustificacionIngresosYGastos = justificacionIngresosYGastos,
                 MostrarRetribucion = mostrarRetribucion,
                 Retribucion = diferenciaIngresosYGastos
             };
 
             var portadaDocX = await wordService.RenderRazorAsync(plantilla, model);
-            var informePatrimonialDocx = await wordService.RenderRazorAsync("App_Data\\Plantillas\\Rendiciones\\informe-patrimonial.docx", model);
+            
+            var informePatrimonialDocx = await generarInformePatrimonialHandler.HandleAsync(new GenerarInformePatrimonialRequest(){
+                TuteladoId = request.TuteladoId,
+                Desde = fechaDesde,
+                Hasta = fechaHasta,
+                SolicitarRetribucion = request.SolicitarRetribucion
+            }); 
+
             rendicionDocX = await wordService.ConcatAsync(portadaDocX, informePatrimonialDocx);
         }
         else

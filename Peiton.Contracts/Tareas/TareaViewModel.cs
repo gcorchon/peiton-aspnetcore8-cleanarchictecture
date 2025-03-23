@@ -19,5 +19,5 @@ public class TareaViewModel
     public DateTime? FechaCierre { get; set; }
     public string[] Archivos { get; set; } = null!;
     public Alerta[] AlertasEnviadas { get; set; } = null!;
-
+    public bool? Autorizado { get; set; }
 }

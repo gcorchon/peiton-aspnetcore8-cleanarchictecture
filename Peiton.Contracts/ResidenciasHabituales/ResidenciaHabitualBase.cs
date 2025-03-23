@@ -28,4 +28,5 @@ public class ResidenciaHabitualBase
     public bool? PagaFamiliar { get; set; }
     public double? Latitud { get; set; }
     public double? Longitud { get; set; }
+    public string? Observaciones { get; set; }
 }

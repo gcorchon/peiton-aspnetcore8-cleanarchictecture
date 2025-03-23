@@ -32,6 +32,7 @@ public class ResidenciaHabitual
 	public bool? PagaFamiliar { get; set; }
 	public double? Latitud { get; set; }
 	public double? Longitud { get; set; }
+	public string? Observaciones {get; set; }
 	public virtual Centro? Centro { get; set; }
 	public virtual Distrito? Distrito { get; set; }
 	public virtual Provincia? Provincia { get; set; }

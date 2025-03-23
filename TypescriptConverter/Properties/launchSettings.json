@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TypescriptConverter": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Desarrollo\\peiton-aspnetcore8-cleanarchictecture\\Peiton.Contracts\\bin\\Debug\\net9.0\\Peiton.Contracts.dll c:\\Temp\\PeitonTypescript"
+    }
+  }
+}

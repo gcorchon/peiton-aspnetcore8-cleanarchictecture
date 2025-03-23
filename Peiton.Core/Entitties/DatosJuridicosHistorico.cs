@@ -39,7 +39,7 @@ public class DatosJuridicosHistorico
 	public DateTime? RendicionPeriodica { get; set; }
 	public string? Comentarios { get; set; }
 	public decimal? LimiteGastoExtraOrdinario { get; set; }
-	public bool PresentarLexnet { get; set; }
+	public bool NoIrpf { get; set; }
 	public DateTime? FechaComunicacionBajaJuzgado { get; set; }
 	public bool NoPresentarInventario { get; set; }
 	public string? CodigoLexnet { get; set; } = null!;

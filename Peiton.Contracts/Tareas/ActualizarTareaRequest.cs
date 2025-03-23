@@ -19,4 +19,5 @@ public class ActualizarTareaRequest
     public DateTime? FechaGestion { get; set; }
     public DateTime? FechaCierre { get; set; }
     public string[] Archivos { get; set; } = null!;
+    public bool? Autorizado { get; set; }
 }

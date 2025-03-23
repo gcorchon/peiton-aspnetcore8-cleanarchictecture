@@ -18,7 +18,7 @@ public class ExportWordExtractoBancarioHandler(IMapper mapper, ITuteladoReposito
 
         var datosExtracto = new ExtractoWordViewModel();
         datosExtracto.Tutelado = tutelado.NombreCompleto!;
-        datosExtracto.Intervalo = $"De {desde.ToString("dd 'de' MMMM 'de' yyyy")} a {hasta.ToString("dd 'de' MMMM 'de' yyyy")}";
+        datosExtracto.Intervalo = $"De {desde.ToReadableFormat()} a {hasta.ToReadableFormat()}";
 
         foreach (var entidad in extractoBancario)
         {

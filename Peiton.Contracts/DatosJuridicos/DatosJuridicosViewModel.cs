@@ -47,7 +47,7 @@ public class DatosJuridicosViewModel
     public DateTime? RendicionPeriodica { get; set; }
     public string? Comentarios { get; set; }
     public decimal? LimiteGastoExtraOrdinario { get; set; }
-    public bool PresentarLexnet { get; set; }
+    public bool NoIrpf { get; set; }
     public DateTime? FechaComunicacionBajaJuzgado { get; set; }
     public IEnumerable<ProcedimientoAdicionalViewModel> ProcedimientosAdicionales { get; set; } = null!;
     public IEnumerable<MedidaPenalViewModel> MedidasPenales { get; set; } = null!;

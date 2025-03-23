@@ -20,6 +20,8 @@ public class Tarea
 	public DateTime? FechaCierre { get; set; }
 	public string? Archivos { get; set; }
 	public string? AlertasEnviadas { get; set; }
+
+	public bool? Autorizado {get; set; }
 	public virtual TareaCategoria? TareaCategoria { get; set; }
 	public virtual TareaDepartamento? TareaDepartamento { get; set; }
 	public virtual TareaEntidad? TareaEntidad { get; set; }
